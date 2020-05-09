@@ -4,14 +4,13 @@ const SYS_CONFIG = require('config.system.setting');
 module.exports = sourceId => ({
     // 提取能量矿
     source: creep => {
-        var source = Game.getObjectById(sourceId)
-        if (source.store.getFreeCapacity(RESOURCE_ENERGY) == 0 || source == null) {
+        var source = Game.getObjectById(sourceId);
+        if (source.store.getUsedCapacity(RESOURCE_ENERGY) == 0 || source == null) {
             logger.warn(creep.name + ': 默认取能建筑存量为空或找不到指定的取能建筑！')
             source = null;
         }
-        //长时间停止工作，备用计划
-        if (creep.memory.stopWorkTime > 20 && source == null) {
-            logger.warn(creep.name + "已有" + creep.memory.stopWorkTime + "ticks 无法从默认取能建筑中获取能量，尝试从其他建筑获取");
+        if (source == null) {
+            logger.info("尝试从其他建筑获取");
             source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_LINK || structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
