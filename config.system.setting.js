@@ -10,5 +10,7 @@ module.exports = {
     //日志输出等级
     LOGGER_LEVEL: "INFO",
     //是否打开GUI调试
-    GUIDEBUGMODE: true
+    GUIDEBUGMODE: true,
+    //房间可用能量高于多少时允许向Upgrader分配能力
+    ALLOW_UPGRADER_USE_ENERGY: 0.3
 }

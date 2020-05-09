@@ -20,7 +20,7 @@ function linkTransfer() {
     for (let i = 0; i < CONFIG.LINK.length; i++) {
         let send = Game.getObjectById(CONFIG.LINK[i][0]);
         let receive = Game.getObjectById(CONFIG.LINK[i][1]);
-        if (send.store.getUsedCapacity(RESOURCE_ENERGY) <= receive.store.getFreeCapacity(RESOURCE_ENERGY)) {
+        if (send.store.getUsedCapacity(RESOURCE_ENERGY) <= receive.store.getFreeCapacity(RESOURCE_ENERGY) && send.room.energyAvailable / send.room.energyCapacityAvailable >= SYS_CONFIG.ALLOW_UPGRADER_USE_ENERGY) {
             send.transferEnergy(receive);
         }
     }
