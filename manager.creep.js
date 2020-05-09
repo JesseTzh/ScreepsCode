@@ -18,8 +18,8 @@ function manageCreep(roomName) {
                 }
 
                 var result = Game.spawns[SYS_CONFIG.SPAWN_NAME].spawnCreep(template, name, { memory: { room: roomName } });
-                if (result != 0) {
-                    logger.warn("Reborn creep error! Error Code: " + result)
+                if (result != OK) {
+                    logger.warn("Creep 重生失败！错误代码：" + result)
                 }
             }
             return;
