@@ -8,18 +8,18 @@ function manageCreep(roomName) {
             logger.debug("⚡ Now:" + Game.rooms[roomName].energyAvailable);
             logger.debug("⚡ Max:" + Game.rooms[roomName].energyCapacityAvailable);
             if (Game.rooms[roomName].energyAvailable >= 300) {
-                logger.debug('Reborning a creep : ', name);
-
                 const creepTemplate = require('manager.creep.template').genTemplate(roomName);
-                if(name.search("over") != -1){
+                if (name.search("Mover") != -1) {
                     var template = creepTemplate.getMoverTemplate();
-                }else{
+                } else {
                     var template = creepTemplate.getDefaultTemplate();
                 }
-
+                delete Memory.creeps[name];
                 var result = Game.spawns[SYS_CONFIG.SPAWN_NAME].spawnCreep(template, name, { memory: { room: roomName } });
                 if (result != OK) {
                     logger.warn("Creep 重生失败！错误代码：" + result)
+                } else {
+                    logger.info('正在重生 : ' + name);
                 }
             }
             return;
