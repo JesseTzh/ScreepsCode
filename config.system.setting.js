@@ -3,6 +3,8 @@ module.exports = {
     ALLOW_BUILDE_FROM_SE: true,
     //是否允许搬运工将多余能量存储进 STORAGE/CONTAINER （如有 STORAGE 请谨慎打开）
     ALLOW_MOVER_STORAGE: false,
+    //是否按照已铺好Road的情况生成Creep
+    ROAD_FLAG: true,
     //允许制造Creep的最大能量消耗值
     MAX_CREEP_ENERGY_CONSUM: 1500,
     //默认基地名称

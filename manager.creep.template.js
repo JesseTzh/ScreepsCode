@@ -25,14 +25,14 @@ class Template {
         return template;
     }
 
-    getDefaultTemplate() {
+    getDefaultTemplate(roadFlag) {
         while (this.energyRemain > 0) {
             logger.debug("Now energy remain:" + this.energyRemain);
-            if(this.break){
+            if (this.break) {
                 break;
             }
-            if (this.movePoints >= 2) {
-                this._addWorkPart();
+            if (this.movePoints >= 1) {
+                this._addWorkPart(roadFlag);
             } else {
                 this._addMovePart();
             }
@@ -40,44 +40,53 @@ class Template {
         return this.templateResult;
     }
 
-    getMoverTemplate(){
+    getMoverTemplate(roadFlag) {
         while (this.energyRemain > 0) {
             logger.debug("Now energy remain:" + this.energyRemain);
-            if(this.break){
+            if (this.break) {
                 break;
             }
-            if (this.movePoints >= 2) {
-                this._addCarryPart();
+            if (this.movePoints >= 1) {
+                this._addCarryPart(roadFlag);
             } else {
                 this._addMovePart();
             }
         }
         return this.templateResult;
     }
-    _addWorkPart() {
+
+    _addWorkPart(roadFlag) {
         //已有的WORK部件数
         var workParts = this.templateResult.filter(part => part == WORK);
         //已有的CARRY部件数
         var carryParts = this.templateResult.filter(part => part == CARRY);
         if (workParts.length > carryParts.length) {
-            this._addCarryPart();
+            this._addCarryPart(roadFlag);
         } else if (this.energyRemain >= BODYPART_COST.work) {
             logger.debug("Add a Work part");
             this.templateResult.push(WORK);
             this.energyRemain -= BODYPART_COST.work;
-            this.movePoints -= 2;
-        } else if(this.energyRemain < BODYPART_COST.work){
+            if (roadFlag) {
+                this.movePoints -= 1;
+            } else {
+                this.movePoints -= 2;
+            }
+        } else if (this.energyRemain < BODYPART_COST.work) {
             this.break = true;
         }
     }
 
-    _addCarryPart() {
+    _addCarryPart(roadFlag) {
         if (this.energyRemain >= BODYPART_COST.carry) {
             logger.debug("Add a Carry part");
             this.templateResult.push(CARRY);
             this.energyRemain -= BODYPART_COST.carry;
-            this.movePoints -= 2;
-        }else{
+            if (roadFlag) {
+                this.movePoints -= 1;
+            } else {
+                this.movePoints -= 2;
+            }
+        } else {
             this.break = true;
         }
     }
@@ -88,7 +97,7 @@ class Template {
             this.templateResult.push(MOVE);
             this.energyRemain -= BODYPART_COST.move;
             this.movePoints += 2;
-        }else{
+        } else {
             this.break = true;
         }
     }
