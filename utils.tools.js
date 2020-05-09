@@ -1,23 +1,16 @@
 const logger = require('utils.log').getLogger("util.tool");
+const SYS_CONFIG = require('config.system.setting');
 
-function llll(e){
-    if(e == null){
-        console.log("Test Function");
+function globalEnergyMonitor(roomName){
+    var energySurplus = Game.rooms[roomName].energyAvailable / Game.rooms[roomName].energyCapacityAvailable;
+    Game.rooms[roomName].memory.energySurplus = energySurplus;
+    if(energySurplus >= SYS_CONFIG.ENERGY_ALERT_NUM){
+        Game.rooms[roomName].memory.energyAlert == null ? Game.rooms[roomName].memory.energyAlert = 1 : Game.rooms[roomName].memory.energyAlert -= 1;
     }else{
-        console.log(e);
+        Game.rooms[roomName].memory.energyAlert == null ? Game.rooms[roomName].memory.energyAlert = 1 : Game.rooms[roomName].memory.energyAlert += 1;
     }
 }
 
-function debugRoomBlockBegin(roomName){
-    logger.debug("---------------------------- Room "+ roomName + "----------------------------");
-}
-
-function debugRoomBlockEnd(){
-    logger.debug("------------------------------------------------------------------");
-}
-
 module.exports = {
-    llll:llll,
-    debugRoomBlockBegin:debugRoomBlockBegin,
-    debugRoomBlockEnd:debugRoomBlockEnd
+    globalEnergyMonitor:globalEnergyMonitor
 };
