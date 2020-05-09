@@ -10,11 +10,10 @@ module.exports.loop = function () {
     mount();
 
     for (let roomName in Game.rooms) {
-        tools.debugRoomBlockBegin(roomName);
+        tools.globalEnergyMonitor(roomName);
 
         //Creeps 管理
         creepManager.manageCreep(roomName);
-
 
         //Creeps 工作
         for (var name in Game.creeps) {
@@ -24,8 +23,8 @@ module.exports.loop = function () {
         //建筑管理
         constructionTower.towerWork();
         constructionLink.linkTransfer();
-
-        tools.debugRoomBlockEnd();
     }
+
+    logger.info("----------------------------------------------")
 
 }
