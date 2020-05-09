@@ -10,7 +10,7 @@ module.exports = sourceId => ({
             source = null;
         }
         //长时间停止工作，备用计划
-        if (creep.memory.stopWorkTime > 20) {
+        if (creep.memory.stopWorkTime > 20 && source == null) {
             logger.warn(creep.name + "已有" + creep.memory.stopWorkTime + "ticks 无法从默认取能建筑中获取能量，尝试从其他建筑获取");
             source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -21,6 +21,7 @@ module.exports = sourceId => ({
         }
         if (source) {
             if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.memory.stopWorkTime = 0;
                 creep.guiDebug("🚚");
                 creep.moveTo(source);
             }
