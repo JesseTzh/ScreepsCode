@@ -11,6 +11,7 @@
 */
 const logger = require('utils.log').getLogger("construction.link");
 const CONFIG = require('config')
+const SYS_CONFIG = require('config.system.setting');
 
 function linkTransfer() {
     if(!CONFIG.LINK){
