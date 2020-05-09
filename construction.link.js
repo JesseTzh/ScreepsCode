@@ -14,7 +14,7 @@ const CONFIG = require('config')
 
 function linkTransfer() {
     if(!CONFIG.LINK){
-        logger.info("None link config found!")
+        logger.debug("配置文件中找不到Link的信息！")
         return;
     }
     for (let i = 0; i < CONFIG.LINK.length; i++) {

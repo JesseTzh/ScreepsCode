@@ -21,19 +21,19 @@ module.exports = sourceId => ({
         });
         //如Link已满则存储至最近的 EXTENSION/SPAWN/TOWER
         if (target == null || target.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
-            logger.debug("The closest link is already full!!");
+            logger.debug(creep.name + "距离矿点最近Link不存在/已存满，转存至最近的 EXTENSION/SPAWN/TOWER");
             target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN || structure.structureType == STRUCTURE_TOWER) &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
-            //如所有 EXTENSION/SPAWN 都已放满则存入 STORAGE
+            //如所有 EXTENSION/SPAWN 都已放满则存入 STORAGE/CONTAINER
             if (target == null) {
-                logger.debug("Spawn and extensions are both full,transfer to storage.");
+                logger.debug(creep.name + "其余建筑已满，转存入冗余储能建筑 STORAGE/CONTAINER");
                 target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return structure.structureType == STRUCTURE_STORAGE;
+                        return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_CONTAINER) && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                     }
                 });
             }
@@ -43,8 +43,9 @@ module.exports = sourceId => ({
                 creep.guiDebug("🏭");
                 creep.moveTo(target);
             }
-        }else{
+        } else {
             //所有建筑已满，无法继续存入矿物，一般存在于前期没有冗余能量存储建筑的情况
+            logger.warn(creep.name + "找不到可用的储能设备！")
             creep.guiDebug("🈵");
         }
 

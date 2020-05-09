@@ -4,14 +4,13 @@ const SYS_CONFIG = require('config.system.setting');
 module.exports = sourceId => ({
     // 提取能量矿
     source: creep => {
-        //从最近的Link中提取能量
         var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_LINK && structure.store[RESOURCE_ENERGY] > 0 && structure.id != sourceId);
             }
         });
         if (source == null) {
-            logger.warn("Mover can not find energy in Link!");
+            logger.warn(creep.name + "默认取能建筑存量为空或找不到指定的默认取能建筑！");
             source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_CONTAINER) && structure.store[RESOURCE_ENERGY] > 0;
@@ -50,13 +49,14 @@ module.exports = sourceId => ({
             }
         } else {
             creep.guiDebug("🚬");
+            logger.info(creep.name + "找不到需要存入能量的建筑，尝试去翻新自己")
             //闲着没事做就去翻新自己
             target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return structure.structureType == STRUCTURE_SPAWN && structure.store.getFreeCapacity(RESOURCE_ENERGY) == 0;
                 }
             });
-            if(target.renewCreep(creep) == ERR_NOT_IN_RANGE){
+            if (target.renewCreep(creep) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
         }

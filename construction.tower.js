@@ -3,7 +3,7 @@ const CONFIG = require('config')
 
 function towerWork() {
     if(!CONFIG.TOWER){
-        logger.info("None tower config found!")
+        logger.debug("配置文件中找不到Tower的信息！")
         return;
     }
     for (let i = 0; i < CONFIG.TOWER.length; i++) {
