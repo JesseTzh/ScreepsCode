@@ -6,7 +6,7 @@ module.exports = sourceId => ({
     source: creep => {
         var source = Game.getObjectById(sourceId)
         if (source.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
-            logger.warn("Upgrader source link is empty!")
+            logger.warn("Upgrader source is empty!")
             source = null;
         }
         //长时间停止工作，备用计划
@@ -15,7 +15,7 @@ module.exports = sourceId => ({
             source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_LINK || structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
         }
