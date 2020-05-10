@@ -5,7 +5,7 @@ module.exports = sourceId => ({
     // 提取能量矿
     source: creep => {
         var source = Game.getObjectById(sourceId);
-        if (source.store.getUsedCapacity(RESOURCE_ENERGY) == 0 || source == null) {
+        if (source.store.getUsedCapacity(RESOURCE_ENERGY) > 1 || source == null) {
             logger.warn(creep.name + ': 默认取能建筑存量为空或找不到指定的取能建筑！')
             source = null;
         }
