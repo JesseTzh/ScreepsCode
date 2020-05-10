@@ -6,8 +6,10 @@ function globalEnergyMonitor(roomName){
     Game.rooms[roomName].memory.energySurplus = energySurplus;
     if(energySurplus >= SYS_CONFIG.ENERGY_ALERT_NUM){
         Game.rooms[roomName].memory.energyAlert == null ? Game.rooms[roomName].memory.energyAlert = 1 : Game.rooms[roomName].memory.energyAlert -= 1;
+        //Game.rooms[roomName].memory.energyAlert -= 1;
     }else{
         Game.rooms[roomName].memory.energyAlert == null ? Game.rooms[roomName].memory.energyAlert = 1 : Game.rooms[roomName].memory.energyAlert += 1;
+        //Game.rooms[roomName].memory.energyAlert += 1;
     }
 }
 
