@@ -21,7 +21,7 @@ class Template {
         let template = new Template();
         //在config文件中限制了最高能量消耗值
         template.energyRemain = Game.rooms[roomName].energyAvailable <= SYS_CONFIG.MAX_CREEP_ENERGY_CONSUM ? Game.rooms[roomName].energyAvailable : SYS_CONFIG.MAX_CREEP_ENERGY_CONSUM;
-        template._addMovePart;
+        template._addMovePart();
         return template;
     }
 
