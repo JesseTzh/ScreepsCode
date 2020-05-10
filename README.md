@@ -34,7 +34,14 @@
    SPAWN_NAME: "Home",
    ```
 
-   改为自己的Spawn名称
+   改为自己的Spawn名称，并将
+
+   ```
+   //是否按照已铺好Road的情况生成Creep
+   ROAD_FLAG: true,
+   ```
+
+   修改为false，以保证Creep按照没有铺设Road的情况生成孵化模板
 
 3. 在 [config.creep.js](./config.creep.js) 文件中根据自己房间的情况调配各Creep工种个数
 
