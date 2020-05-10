@@ -10,6 +10,7 @@ module.exports = sourceId => ({
                 return (structure.structureType == STRUCTURE_LINK && structure.store[RESOURCE_ENERGY] > 0 && structure.id != sourceId);
             }
         });
+        //默认取能建筑为空并且 SPAWN/EXTENSION 未满，则从冗余能量储存建筑中提取能量反哺
         if (source == null && creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
             logger.warn(creep.name + "默认取能建筑存量为空或找不到指定的默认取能建筑！");
             source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
