@@ -46,7 +46,7 @@ module.exports = sourceId => ({
             }
         }
         //如果 SPAWN/EXTENSION/TOWER 都已满
-        if (target == null) {
+        if (!target) {
             //根据config文件配置的参数决定是否进一步将能量存入 冗余能量存储建筑
             if (SYS_CONFIG.ALLOW_MOVER_STORAGE) {
                 target = creep.pos.findClosestByRange(FIND_STRUCTURES, {

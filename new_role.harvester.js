@@ -1,5 +1,5 @@
 const logger = require('utils.log').getLogger("new_role.harvester");
-const SYS_CONFIG = require('config.system.setting');
+const CONFIG = require('config')
 
 module.exports = sourceId => ({
     // 采集能量矿
@@ -19,16 +19,27 @@ module.exports = sourceId => ({
                 return structure.structureType == STRUCTURE_LINK;
             }
         });
-        //如Link已满则存储至最近的 EXTENSION/SPAWN/TOWER
-        if (target == null || target.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
-            logger.debug(creep.name + "距离矿点最近Link不存在/已存满，转存至最近的 EXTENSION/SPAWN/TOWER");
+        //如Link已满/不存在则存储至最近的 EXTENSION/SPAWN
+        if (!target || target.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
+            logger.debug(creep.name + "距离矿点最近Link不存在/已存满，转存至最近的 EXTENSION/SPAWN");
             target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN || structure.structureType == STRUCTURE_TOWER) &&
+                    return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
                         structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
                 }
             });
-            //如所有 EXTENSION/SPAWN 都已放满则存入 STORAGE/CONTAINER
+            //如 EXTENSION/SPAWN 已满则存入 TOWER
+            if (!target) {
+                for (let i = 0; i < CONFIG.TOWER.length; i++) {
+                    var tower = Game.getObjectById(CONFIG.TOWER[i]);
+                    if (tower.room == creep.room) {
+                        if (tower.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
+                            target = tower;
+                        }
+                    }
+                }
+            }
+            //如所有 EXTENSION/SPAWN/TOWER 都已放满则存入 STORAGE/CONTAINER
             if (target == null) {
                 logger.debug(creep.name + "其余建筑已满，转存入冗余储能建筑 STORAGE/CONTAINER");
                 target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
