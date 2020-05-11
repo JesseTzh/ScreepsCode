@@ -4,7 +4,21 @@ const CONFIG = require('config')
 module.exports = sourceId => ({
     // 采集能量矿
     source: creep => {
-        const source = Game.getObjectById(sourceId)
+        var source = Game.getObjectById(sourceId)
+        if (!source || source.energy == 0) {
+            //默认采矿点为空或找不到默认采矿点
+            for (let i = 0; i < CONFIG.ENERGY_SOURCE.length; i++) {
+                logger.info(creep.name + "找不到默认采矿点或默认采矿点为空");
+                if(CONFIG.ENERGY_SOURCE[i] != sourceId){
+                    var sourceBak = Game.getObjectById(CONFIG.ENERGY_SOURCE[i]);
+                    if(sourceBak.room == creep.room && sourceBak.energy > 0){
+                        //切换成备用矿源
+                        source = sourceBak;
+                        creep.room.memory.testFlag = true;
+                    }
+                }
+            }
+        }
         if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
             creep.guiDebug("⛏️");
             creep.moveTo(source);
