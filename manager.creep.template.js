@@ -5,8 +5,13 @@ const SYS_CONFIG = require('config.system.setting');
  * 用法：
  *     引入
  *        const creepTemplate = require('manager.creep.template').genTemplate(roomName);
- *     使用默认模板
- *        creepTemplate.getDefaultTemplate()
+ *     参数
+ *        roadFlag: 是否按照已铺好Road的情况生成Creep
+ *        MAX_CREEP_ENERGY_CONSUM: 制造Creep最高能量消耗值
+ *     使用默认模板(WORK与CARRY等量生成)
+ *        creepTemplate.getDefaultTemplate();
+ *     搬运工模板(只有CARRY与MOVE部件)
+ *        creepTemplate.getMoverTemplate();
  */
 class Template {
     constructor() {
