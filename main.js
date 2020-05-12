@@ -18,6 +18,7 @@ module.exports.loop = function () {
         //Creeps 工作
         for (var name in Game.creeps) {
             Game.creeps[name].work();
+            //tools.test(Game.creeps[name]); 
         }
 
         //建筑管理
@@ -25,6 +26,6 @@ module.exports.loop = function () {
         constructionLink.linkTransfer();
     }
 
-    logger.info("----------------------------------------------")
+    logger.info("----------------------------------------------" + Game.time)
 
 }

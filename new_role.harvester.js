@@ -14,7 +14,6 @@ module.exports = sourceId => ({
                     if(sourceBak.room == creep.room && sourceBak.energy > 0){
                         //切换成备用矿源
                         source = sourceBak;
-                        creep.room.memory.testFlag = true;
                     }
                 }
             }
