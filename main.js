@@ -9,6 +9,8 @@ module.exports.loop = function () {
     //挂载原型扩展
     mount();
 
+    tools.energySourceMonitor();
+
     for (let roomName in Game.rooms) {
         tools.globalEnergyMonitor(roomName);
 
@@ -23,7 +25,7 @@ module.exports.loop = function () {
 
         //建筑管理
         constructionTower.towerWork();
-        constructionLink.linkTransfer();
+        //constructionLink.linkTransfer();
     }
 
     logger.info("---------------------------------------------- Game Time: " + Game.time + "----------------------------------------------")
