@@ -29,9 +29,28 @@ function freeJob(creep) {
     }
 }
 
+function cleanBag(creep){
+    for(const resourceType in creep.carry) {
+        if(resourceType != RESOURCE_ENERGY){
+            //此处之后要改成配置文件中的值以适配多房间情况
+            let target = Game.getObjectById(CONFIG.STORAGE[0]);
+            if(creep.transfer(target, resourceType) == ERR_NOT_IN_RANGE){
+                logger.info(creep.name + "正在清理背包");
+                creep.guiDebug("🙌");
+                creep.moveTo(target);
+                return true;
+            };
+        }
+        
+    }
+}
+
 module.exports = sourceId => ({
     // 提取能量矿
     source: creep => {
+        if(SYS_CONFIG.CLEAN_BAG && cleanBag(creep)){
+            return
+        }
         var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
                 return (structure.structureType == STRUCTURE_LINK && structure.store[RESOURCE_ENERGY] > 0 && structure.id != sourceId);
@@ -56,6 +75,9 @@ module.exports = sourceId => ({
     },
     // 转移
     target: creep => {
+        if(SYS_CONFIG.CLEAN_BAG && cleanBag(creep)){
+            return
+        }
         //优先供给 SPAWN/EXTENSION
         var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {

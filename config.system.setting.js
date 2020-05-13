@@ -7,6 +7,8 @@ module.exports = {
     ALLOW_UPGRADER_FROM_SE: false,
     //是否按照已铺好Road的情况生成Creep
     ROAD_FLAG: true,
+    //是否让Mover清理背包
+    CLEAN_BAG: false,
     //允许制造Creep的最大能量消耗值
     MAX_CREEP_ENERGY_CONSUM: 1500,
     //默认基地名称
@@ -20,5 +22,5 @@ module.exports = {
     //能量报警界限
     ENERGY_ALERT_NUM: 0.5,
     //Tower剩余多少能量时允许Mover加进来
-    TOWER_ENERGY_NEED: 0.8
+    TOWER_ENERGY_NEED: 0.9
 }
