@@ -9,9 +9,9 @@ module.exports = {
     //LINK: [['5c217f9ee48c223','58967f82539dd78'],['3c549898f9c6b76','58967f82539dd78']],
 
     //升级 Controller 所用的能量来源
-    UPGRADE_ENERGY_SOURCE: ['5eb569554dac05ff668051db'],
+    UPGRADE_ENERGY_SOURCE: ['5eb7b63dce9d0038facc1aad'],
 
     //Storage ID,一般用作冗余能量缓冲池与建筑建造能量来源
-    //STORAGE: ['e875d5c3fdb26da']
+    STORAGE: ['5eb929deb5f373e902a1d7d7']
 
 }
