@@ -4,7 +4,7 @@ const CONFIG = require('config')
 
 function globalEnergyMonitor(roomName) {
     var energySurplus = Game.rooms[roomName].energyAvailable / Game.rooms[roomName].energyCapacityAvailable;
-    Game.rooms[roomName].memory.energySurplus = energySurplus;
+    Game.rooms[roomName].memory.timeCount == null ? Game.rooms[roomName].memory.timeCount = 1 : Game.rooms[roomName].memory.timeCount += 1;
     if (energySurplus >= SYS_CONFIG.ENERGY_ALERT_NUM) {
         Game.rooms[roomName].memory.energyAlert == null ? Game.rooms[roomName].memory.energyAlert = 1 : Game.rooms[roomName].memory.energyAlert -= 1;
         //Game.rooms[roomName].memory.energyAlert -= 1;
@@ -20,7 +20,7 @@ function energySourceMonitor() {
         let remain = source.energy - (source.ticksToRegeneration * 14);
         if (remain > 0) {
             logger.info(source.id + "挖矿过慢,剩余矿量为：" + remain);
-            if(source.ticksToRegeneration == 1){
+            if (source.ticksToRegeneration == 1) {
                 source.room.memory.EnergyRemain == null ? source.room.memory.EnergyRemain = 0 : source.room.memory.EnergyRemain += remain;
             }
         } else {

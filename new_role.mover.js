@@ -3,52 +3,56 @@ const SYS_CONFIG = require('config.system.setting');
 const CONFIG = require('config')
 
 function freeJob(creep) {
-    creep.guiDebug("🚬");
     if (creep.ticksToLive < 1000) {
-        //闲着没事做就去翻新自己
+        //闲着没事做就去续命
         var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.structureType == STRUCTURE_SPAWN && structure.store[RESOURCE_ENERGY] > 0;
             }
         });
         if (target && target.renewCreep(creep) == ERR_NOT_IN_RANGE) {
+            creep.guiDebug("🐸");
+            logger.info(creep.name + "正在续命...");
             creep.moveTo(target);
             return;
         } else {
-            logger.info(creep.name + "没有足够能量翻新自己");
+            logger.info(creep.name + "续不动了...");
         }
     }
     var target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
     if (target) {
         logger.info(creep.name + "发现遗弃资源！");
         if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
+            creep.guiDebug("🚮");
             creep.moveTo(target);
         }
     } else {
         logger.info(creep.name + "找不到被遗弃的资源！");
+        //有此标志说明没事做
+        creep.guiDebug("🚬");
     }
 }
 
-function cleanBag(creep){
-    for(const resourceType in creep.carry) {
-        if(resourceType != RESOURCE_ENERGY){
+function cleanBag(creep) {
+    for (const resourceType in creep.carry) {
+        if (resourceType != RESOURCE_ENERGY) {
             //此处之后要改成配置文件中的值以适配多房间情况
             let target = Game.getObjectById(CONFIG.STORAGE[0]);
-            if(creep.transfer(target, resourceType) == ERR_NOT_IN_RANGE){
+            if (creep.transfer(target, resourceType) == ERR_NOT_IN_RANGE) {
                 logger.info(creep.name + "正在清理背包");
-                creep.guiDebug("🙌");
+                creep.guiDebug("🧺");
                 creep.moveTo(target);
                 return true;
             };
         }
-        
+
     }
 }
 
 module.exports = sourceId => ({
     // 提取能量矿
     source: creep => {
-        if(SYS_CONFIG.CLEAN_BAG && cleanBag(creep)){
+        if (SYS_CONFIG.CLEAN_BAG && cleanBag(creep)) {
             return
         }
         var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -66,7 +70,7 @@ module.exports = sourceId => ({
             });
         }
         if (source && creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.guiDebug("🚚");
+            creep.guiDebug("🔽");
             creep.moveTo(source);
         } else {
             logger.info(creep.name + "找不到可以提取能量的建筑，切换为自由工作");
@@ -75,7 +79,7 @@ module.exports = sourceId => ({
     },
     // 转移
     target: creep => {
-        if(SYS_CONFIG.CLEAN_BAG && cleanBag(creep)){
+        if (SYS_CONFIG.CLEAN_BAG && cleanBag(creep)) {
             return
         }
         //优先供给 SPAWN/EXTENSION
@@ -112,6 +116,7 @@ module.exports = sourceId => ({
         }
         if (target) {
             if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.guiDebug("🔼");
                 creep.moveTo(target);
             }
         } else {

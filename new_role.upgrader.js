@@ -32,7 +32,7 @@ module.exports = sourceId => ({
         if (source) {
             if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.memory.stopWorkTime = 0;
-                creep.guiDebug("🚚");
+                creep.guiDebug("🔽");
                 creep.moveTo(source);
             }
         } else {

@@ -18,9 +18,12 @@ module.exports = sourceId => ({
                 }
             }
         }
-        if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+        if (source && creep.harvest(source) == ERR_NOT_IN_RANGE) {
             creep.guiDebug("⛏️");
             creep.moveTo(source);
+        }else{
+            creep.guiDebug("🚬");
+            logger.info(creep.name + "找不到可挖掘的矿点！");
         }
     },
     // 存储能量逻辑
@@ -64,7 +67,7 @@ module.exports = sourceId => ({
         }
         if (target) {
             if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.guiDebug("🏭");
+                creep.guiDebug("🔼");
                 creep.moveTo(target);
             }
         } else {
