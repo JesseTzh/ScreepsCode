@@ -12,6 +12,7 @@ module.exports = sourceId => ({
                 if(CONFIG.ENERGY_SOURCE[i] != sourceId){
                     var sourceBak = Game.getObjectById(CONFIG.ENERGY_SOURCE[i]);
                     if(sourceBak.room == creep.room && sourceBak.energy > 0){
+                        logger.info(creep.name + "切换为备用矿源");
                         //切换成备用矿源
                         source = sourceBak;
                     }
