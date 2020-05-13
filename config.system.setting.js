@@ -2,7 +2,7 @@ module.exports = {
     //是否允许建筑工从指定建筑之外提取能量来进行建造
     ALLOW_BUILDE_FROM_SE: false,
     //是否允许搬运工将多余能量存储进 STORAGE/CONTAINER （如有 STORAGE 请谨慎打开）
-    ALLOW_MOVER_STORAGE: false,
+    ALLOW_MOVER_STORAGE: true,
     //是否允许升级工从 EXTENSION/SPAWN 中提取能量，前期不建议打开，容易使Upgrader过度提取能量
     ALLOW_UPGRADER_FROM_SE: false,
     //是否按照已铺好Road的情况生成Creep
