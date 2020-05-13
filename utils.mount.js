@@ -22,10 +22,21 @@ function collectionMemory() {
         Game.rooms[roomName].memory.esArray = esArray;
     }
 }
+
+function clearMemory() {
+    logger.info("正在清除内存数据...")
+    delete Memory.rooms;
+    for (var name in Memory.creeps) {
+        if (!Game.creeps[name]) {
+            delete Memory.creeps[name];
+            logger.debug('删除不存在的Creep记录', name);
+        }
+    }
+}
 module.exports = function (roomName) {
     if (!global.hasExtension) {
-        logger.info("正在清除内存数据...")
-        delete Memory.rooms;
+
+        clearMemory();
 
         mount();
 
