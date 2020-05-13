@@ -2,6 +2,33 @@ const logger = require('utils.log').getLogger("new_role.mover");
 const SYS_CONFIG = require('config.system.setting');
 const CONFIG = require('config')
 
+function freeJob(creep){
+    creep.guiDebug("🚬");
+    if (creep.ticksToLive < 1000) {
+        //闲着没事做就去翻新自己
+        var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_SPAWN && structure.store[RESOURCE_ENERGY] > 0;
+            }
+        });
+        if (target && target.renewCreep(creep) == ERR_NOT_IN_RANGE) {
+            creep.moveTo(target);
+        }else{
+            logger.info(creep.name + "没有足够能量翻新自己");
+        }
+    } else {
+        var target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+        if (target) {
+            logger.info(creep.name + "发现遗弃资源！");
+            if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target);
+            }
+        } else {
+            logger.info(creep.name + "找不到被遗弃的资源！");
+        }
+    }
+}
+
 module.exports = sourceId => ({
     // 提取能量矿
     source: creep => {
@@ -22,6 +49,9 @@ module.exports = sourceId => ({
         if (source && creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.guiDebug("🚚");
             creep.moveTo(source);
+        }else{
+            logger.info(creep.name + "找不到可以提取能量的建筑，切换为自由工作");
+            freeJob(creep);
         }
     },
     // 转移
@@ -63,17 +93,8 @@ module.exports = sourceId => ({
                 creep.moveTo(target);
             }
         } else {
-            creep.guiDebug("🚬");
-            logger.info(creep.name + "找不到需要存入能量的建筑，尝试去翻新自己")
-            //闲着没事做就去翻新自己
-            target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return structure.structureType == STRUCTURE_SPAWN && structure.store.getFreeCapacity(RESOURCE_ENERGY) == 0;
-                }
-            });
-            if (target.renewCreep(creep) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(target);
-            }
+            logger.info(creep.name + "找不到需要存入能量的建筑，切换为自由工作");
+            freeJob(creep);
         }
     },
     // 状态切换条件
