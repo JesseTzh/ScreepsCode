@@ -26,6 +26,6 @@ module.exports.loop = function () {
         constructionLink.linkTransfer();
     }
 
-    logger.info("----------------------------------------------" + Game.time)
+    logger.info("---------------------------------------------- Game Time: " + Game.time + "----------------------------------------------")
 
 }
