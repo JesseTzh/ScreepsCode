@@ -14,16 +14,17 @@ function globalEnergyMonitor(roomName) {
     }
 }
 
-function energySourceMonitor(){
+function energySourceMonitor() {
     for (let i = 0; i < CONFIG.ENERGY_SOURCE.length; i++) {
         let source = Game.getObjectById(CONFIG.ENERGY_SOURCE[i]);
-        if(source.energy / source.ticksToRegeneration > 10){
-            logger.info(source.id + "挖矿过慢")
-        }else{
-            logger.info(source.id + "挖矿正常")
-        }
-        if(source.ticksToRegeneration <= 10){
-            logger.info(source.id + "剩余矿物：" + source.energy)
+        let remain = source.energy - (source.ticksToRegeneration * 14);
+        if (remain > 0) {
+            logger.info(source.id + "挖矿过慢,剩余矿量为：" + remain);
+            if(source.ticksToRegeneration == 1){
+                source.room.memory.EnergyRemain == null ? source.room.memory.EnergyRemain = 0 : source.room.memory.EnergyRemain += remain;
+            }
+        } else {
+            logger.debug(source.id + "挖矿正常")
         }
     }
 }
