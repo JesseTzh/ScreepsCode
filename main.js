@@ -12,6 +12,10 @@ module.exports.loop = function () {
     //矿点余量监测
     tools.energySourceMonitor();
 
+    //建筑管理
+    constructionTower.towerWork();
+    constructionLink.linkTransfer();
+
     for (let roomName in Game.rooms) {
         //房间可用能量监测
         tools.globalEnergyMonitor(roomName);
@@ -22,12 +26,7 @@ module.exports.loop = function () {
         //Creeps 工作
         for (var name in Game.creeps) {
             Game.creeps[name].work();
-            //tools.test(Game.creeps[name]); 
         }
-
-        //建筑管理
-        constructionTower.towerWork();
-        constructionLink.linkTransfer();
     }
 
     logger.info("---------------------------------------------- Game Time: " + Game.time + "----------------------------------------------")
