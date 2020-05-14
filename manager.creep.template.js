@@ -12,6 +12,8 @@ const SYS_CONFIG = require('config.system.setting');
  *        creepTemplate.getDefaultTemplate();
  *     搬运工模板(只有CARRY与MOVE部件)
  *        creepTemplate.getMoverTemplate();
+ *     Worker模板 2 Carry + 10 Work,避免采集溢出
+ *        creepTemplate.getWorkerTemplate();
  */
 class Template {
     constructor() {
@@ -37,6 +39,31 @@ class Template {
                 break;
             }
             if (this.movePoints >= 1) {
+                //已有的WORK部件数
+                var workParts = this.templateResult.filter(part => part == WORK);
+                //已有的CARRY部件数
+                var carryParts = this.templateResult.filter(part => part == CARRY);
+                if (workParts.length > carryParts.length) {
+                    this._addCarryPart(roadFlag);
+                }else{
+                    this._addWorkPart(roadFlag);
+                }
+            } else {
+                this._addMovePart();
+            }
+        }
+        return this.templateResult;
+    }
+
+    getWorkerTemplate(roadFlag) {
+        this._addCarryPart(roadFlag);
+        this._addCarryPart(roadFlag);
+        while (this.energyRemain > 0) {
+            logger.debug("Now energy remain:" + this.energyRemain);
+            if (this.break || this.templateResult.filter(part => part == WORK).length == 10) {
+                break;
+            }
+            if (this.movePoints >= 1) {
                 this._addWorkPart(roadFlag);
             } else {
                 this._addMovePart();
@@ -48,7 +75,7 @@ class Template {
     getMoverTemplate(roadFlag) {
         while (this.energyRemain > 0) {
             logger.debug("Now energy remain:" + this.energyRemain);
-            if (this.break) {
+            if (this.break || this.templateResult.filter(part => part == CARRY) == 10) {
                 break;
             }
             if (this.movePoints >= 1) {
@@ -61,13 +88,7 @@ class Template {
     }
 
     _addWorkPart(roadFlag) {
-        //已有的WORK部件数
-        var workParts = this.templateResult.filter(part => part == WORK);
-        //已有的CARRY部件数
-        var carryParts = this.templateResult.filter(part => part == CARRY);
-        if (workParts.length > carryParts.length) {
-            this._addCarryPart(roadFlag);
-        } else if (this.energyRemain >= BODYPART_COST.work) {
+        if (this.energyRemain >= BODYPART_COST.work) {
             logger.debug("Add a Work part");
             this.templateResult.push(WORK);
             this.energyRemain -= BODYPART_COST.work;
