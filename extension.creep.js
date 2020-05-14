@@ -54,7 +54,7 @@ const creepExtension = {
         }
     },
     selfFix(){
-        if (this.ticksToLive < 1000) {
+        if (this.ticksToLive < 1400) {
             //闲着没事做就去续命
             var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
