@@ -2,10 +2,12 @@
 const creepConfigs = require('config.creep');
 const SYS_CONFIG = require('config.system.setting');
 const logger = require('utils.log').getLogger("extension.creep");
+const creepTemplate = require('config.creep.template')
 
 // 自定义的 Creep 的拓展
 const creepExtension = {
     work() {
+        this.memory.liveTicks == null ? this.memory.liveTicks = 1 : this.memory.liveTicks += 1;
         // 检查 creep 内存中的角色是否存在
         if (!(this.name in creepConfigs)) {
             logger.error(`找不到 ${this.name} 所对应的劳工配置！`);
@@ -13,17 +15,6 @@ const creepExtension = {
         }
         // 获取对应配置项
         const creepConfig = creepConfigs[this.name];
-        // 没准备的时候就执行准备阶段
-        if (!this.memory.ready) {
-            // 有准备阶段配置则执行
-            if (creepConfig.prepare && creepConfig.isReady) {
-                creepConfig.prepare(this)
-                this.memory.ready = creepConfig.isReady(this)
-            }
-            // 没有就直接准备完成
-            else this.memory.ready = true
-            return
-        }
         // 获取是否工作
         const working = creepConfig.switch ? creepConfig.switch(this) : true
         // 执行对应操作
@@ -48,6 +39,36 @@ const creepExtension = {
     guiDebug(word) {
         if (SYS_CONFIG.GUIDEBUGMODE) {
             this.say(word);
+        }
+    },
+    getConfig(key) {
+        if (this.name in creepTemplate) {
+            let templateMap = new Map(creepTemplate[this.name]);
+            if (key == null) {
+                return templateMap;
+            } else {
+                return templateMap.get(key);
+            }
+        } else {
+            logger.error(this.name + "找不到个性化配置文件")
+        }
+    },
+    selfFix(){
+        if (this.ticksToLive < 1000) {
+            //闲着没事做就去续命
+            var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return structure.structureType == STRUCTURE_SPAWN && structure.store[RESOURCE_ENERGY] > 0;
+                }
+            });
+            if (target && target.renewCreep(this) == ERR_NOT_IN_RANGE) {
+                this.guiDebug("🐸");
+                logger.info(this.name + "正在续命...");
+                this.moveTo(target);
+                return;
+            } else {
+                logger.info(this.name + "续不动了...");
+            }
         }
     }
 }
