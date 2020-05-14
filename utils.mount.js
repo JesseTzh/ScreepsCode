@@ -40,6 +40,6 @@ module.exports = function (roomName) {
 
         mount();
 
-        collectionMemory();
+        //collectionMemory();
     }
 }
