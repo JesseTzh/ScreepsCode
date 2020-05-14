@@ -10,7 +10,7 @@ module.exports = {
     //是否按照已铺好Road的情况生成Creep
     ROAD_FLAG: true,
     //是否让Mover清理背包
-    CLEAN_BAG: false,
+    CLEAN_BAG: true,
     //允许制造Creep的最大能量消耗值
     MAX_CREEP_ENERGY_CONSUM: 1500,
     //默认基地名称
