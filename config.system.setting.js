@@ -5,6 +5,8 @@ module.exports = {
     ALLOW_MOVER_STORAGE: true,
     //是否允许升级工从 EXTENSION/SPAWN 中提取能量，前期不建议打开，容易使Upgrader过度提取能量
     ALLOW_UPGRADER_FROM_SE: false,
+    //是否允许矿工采集房间内其他能源点
+    ALLOW_HARVESTER_OTHER: false,
     //是否按照已铺好Road的情况生成Creep
     ROAD_FLAG: true,
     //是否让Mover清理背包
