@@ -3,18 +3,16 @@ const SYS_CONFIG = require('config.system.setting');
 const CONFIG = require('config')
 
 function freeJob(creep) {
-    creep.selfFix();
     var target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
-    if (target) {
+    if (target && creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()) {
         logger.info(creep.name + "发现遗弃资源！");
         if (creep.pickup(target) == ERR_NOT_IN_RANGE) {
             creep.guiDebug("🚮");
             creep.moveTo(target);
         }
     } else {
-        logger.info(creep.name + "找不到被遗弃的资源！");
-        //有此标志说明没事做
-        creep.guiDebug("🚬");
+        logger.info(creep.name + "找不到被遗弃的资源！尝试续命...");
+        creep.selfFix();
     }
 }
 
@@ -56,20 +54,19 @@ module.exports = sourceId => ({
         if (SYS_CONFIG.CLEAN_BAG && cleanBag(creep)) {
             return
         }
-        var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => {
-                return (structure.structureType == STRUCTURE_LINK && structure.store[RESOURCE_ENERGY] > 0 && structure.id != sourceId);
+        //如果未达房间能量上限
+        if (creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
+            //优先从冗余储能建筑提取能量
+            var source = Game.getObjectById(CONFIG.STORAGE)
+            if (!source || source.store[RESOURCE_ENERGY] == 0) {
+                //冗余储能建筑消耗完毕，使用Link中的能量
+                source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_LINK && structure.store[RESOURCE_ENERGY] > 0 && structure.id != sourceId);
+                    }
+                });
             }
-        });
-        //默认取能建筑为空并且 SPAWN/EXTENSION 未满，则从冗余能量储存建筑中提取能量反哺
-        if (!source && creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
-            logger.info(creep.name + "默认取能建筑存量为空或找不到指定的默认取能建筑！");
-            source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_CONTAINER) && structure.store[RESOURCE_ENERGY] > 0;
-                }
-            });
-            //冗余储能建筑没有剩余能量，将能量倾斜至 SPWAN
+            //以上建筑能量均消耗完毕，考虑将能量倾斜至 SPWAN
             if (!source && energyCheck(creep)) {
                 logger.info(creep.name + "尝试将 EXTENSION 中的能量优先转移至 SPAWN 以供续命使用");
                 source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -78,6 +75,13 @@ module.exports = sourceId => ({
                     }
                 });
             }
+        } else if (creep.room.energyAvailable == creep.room.energyCapacityAvailable && SYS_CONFIG.ALLOW_MOVER_STORAGE) {
+            //如果达到房间能量上限，直接从Link中提取
+            var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType == STRUCTURE_LINK && structure.store[RESOURCE_ENERGY] > 0 && structure.id != sourceId);
+                }
+            });
         }
         if (source) {
             if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
