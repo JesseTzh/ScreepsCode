@@ -39,6 +39,7 @@ module.exports = sourceId => ({
             creep.guiDebug("🚬");
             logger.warn(creep.name + "找不到可用的取能设施")
             creep.memory.stopWorkTime == null ? creep.memory.stopWorkTime = 0 : creep.memory.stopWorkTime += 1;
+            creep.selfFix();
         }
 
     },
