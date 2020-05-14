@@ -14,14 +14,16 @@ const CONFIG = require('config')
 const SYS_CONFIG = require('config.system.setting');
 
 function linkTransfer() {
-    if(!CONFIG.LINK){
+    if (!CONFIG.LINK) {
         logger.debug("配置文件中找不到Link的信息！")
         return;
     }
     for (let i = 0; i < CONFIG.LINK.length; i++) {
         let send = Game.getObjectById(CONFIG.LINK[i][0]);
         let receive = Game.getObjectById(CONFIG.LINK[i][1]);
-        if (send.store.getUsedCapacity(RESOURCE_ENERGY) <= receive.store.getFreeCapacity(RESOURCE_ENERGY) && send.room.energyAvailable / send.room.energyCapacityAvailable >= SYS_CONFIG.ALLOW_UPGRADER_USE_ENERGY) {
+        if (send.store.getUsedCapacity(RESOURCE_ENERGY) / LINK_CAPACITY >= 0.5 &&
+            send.store.getUsedCapacity(RESOURCE_ENERGY) <= receive.store.getFreeCapacity(RESOURCE_ENERGY) &&
+            send.room.energyAvailable / send.room.energyCapacityAvailable >= SYS_CONFIG.ALLOW_UPGRADER_USE_ENERGY) {
             send.transferEnergy(receive);
         }
     }
