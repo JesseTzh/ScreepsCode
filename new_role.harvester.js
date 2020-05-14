@@ -10,12 +10,12 @@ module.exports = sourceId => ({
             logger.info(creep.name + "找不到默认采矿点或默认采矿点为空,切换为备用矿源");
             source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
         }
-        if (source) {
+        if ((source && source.energy > 0) || (source && source.ticksToRegeneration <= 5)) {
             if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.guiDebug("⛏️");
                 creep.moveTo(source);
             }
-        } else {
+        } else if (!source || source.energy == 0) {
             creep.guiDebug("🚬");
             logger.info(creep.name + "找不到可挖掘的矿点！");
             creep.selfFix();
@@ -51,7 +51,7 @@ module.exports = sourceId => ({
                 }
             }
             //如所有 EXTENSION/SPAWN/TOWER 都已放满则存入 STORAGE/CONTAINER
-            if (target == null) {
+            if (!target) {
                 logger.debug(creep.name + "其余建筑已满，转存入冗余储能建筑 STORAGE/CONTAINER");
                 target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
