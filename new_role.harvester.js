@@ -1,29 +1,24 @@
 const logger = require('utils.log').getLogger("new_role.harvester");
 const CONFIG = require('config')
+const SYS_CONFIG = require('config.system.setting');
 
 module.exports = sourceId => ({
     // 采集能量矿
     source: creep => {
         var source = Game.getObjectById(sourceId)
-        if (!source || source.energy == 0) {
-            logger.info(creep.name + "找不到默认采矿点或默认采矿点为空");
-            for (let i = 0; i < CONFIG.ENERGY_SOURCE.length; i++) {
-                if (CONFIG.ENERGY_SOURCE[i] != sourceId) {
-                    var sourceBak = Game.getObjectById(CONFIG.ENERGY_SOURCE[i]);
-                    if (sourceBak.room == creep.room && sourceBak.energy > 0) {
-                        logger.info(creep.name + "切换为备用矿源");
-                        //切换成备用矿源
-                        source = sourceBak;
-                    }
-                }
-            }
+        if ((!source || source.energy == 0) && SYS_CONFIG.ALLOW_HARVESTER_OTHER) {
+            logger.info(creep.name + "找不到默认采矿点或默认采矿点为空,切换为备用矿源");
+            source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
         }
-        if (source && creep.harvest(source) == ERR_NOT_IN_RANGE) {
-            creep.guiDebug("⛏️");
-            creep.moveTo(source);
-        }else{
+        if (source) {
+            if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                creep.guiDebug("⛏️");
+                creep.moveTo(source);
+            }
+        } else {
             creep.guiDebug("🚬");
             logger.info(creep.name + "找不到可挖掘的矿点！");
+            creep.selfFix();
         }
     },
     // 存储能量逻辑
@@ -74,6 +69,7 @@ module.exports = sourceId => ({
             //所有建筑已满，无法继续存入矿物，一般存在于前期没有冗余能量存储建筑的情况
             logger.warn(creep.name + "找不到可用的储能设备！")
             creep.guiDebug("🈵");
+            creep.selfFix();
         }
 
     },
