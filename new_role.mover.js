@@ -3,22 +3,7 @@ const SYS_CONFIG = require('config.system.setting');
 const CONFIG = require('config')
 
 function freeJob(creep) {
-    if (creep.ticksToLive < 1000) {
-        //闲着没事做就去续命
-        var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => {
-                return structure.structureType == STRUCTURE_SPAWN && structure.store[RESOURCE_ENERGY] > 0;
-            }
-        });
-        if (target && target.renewCreep(creep) == ERR_NOT_IN_RANGE) {
-            creep.guiDebug("🐸");
-            logger.info(creep.name + "正在续命...");
-            creep.moveTo(target);
-            return;
-        } else {
-            logger.info(creep.name + "续不动了...");
-        }
-    }
+    creep.selfFix();
     var target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
     if (target) {
         logger.info(creep.name + "发现遗弃资源！");
@@ -49,6 +34,22 @@ function cleanBag(creep) {
     }
 }
 
+function energyCheck(creep) {
+    var spawnCheck = creep.room.find(FIND_MY_SPAWNS, {
+        filter: (structure) => {
+            return structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+        }
+    })
+    var extensionCheck = creep.room.find(FIND_MY_STRUCTURES, {
+        filter: (structure) => {
+            return structure.structureType == STRUCTURE_EXTENSION && structure.store[RESOURCE_ENERGY] > 0;
+        }
+    })
+    if (spawnCheck && extensionCheck) {
+        return true;
+    }
+}
+
 module.exports = sourceId => ({
     // 提取能量矿
     source: creep => {
@@ -61,17 +62,28 @@ module.exports = sourceId => ({
             }
         });
         //默认取能建筑为空并且 SPAWN/EXTENSION 未满，则从冗余能量储存建筑中提取能量反哺
-        if (source == null && creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
-            logger.warn(creep.name + "默认取能建筑存量为空或找不到指定的默认取能建筑！");
+        if (!source && creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
+            logger.info(creep.name + "默认取能建筑存量为空或找不到指定的默认取能建筑！");
             source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_CONTAINER) && structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
+            //冗余储能建筑没有剩余能量，将能量倾斜至 SPWAN
+            if (!source && energyCheck(creep)) {
+                logger.info(creep.name + "尝试将 EXTENSION 中的能量优先转移至 SPAWN 以供续命使用");
+                source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return structure.structureType == STRUCTURE_EXTENSION && structure.store[RESOURCE_ENERGY] > 0;
+                    }
+                });
+            }
         }
-        if (source && creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.guiDebug("🔽");
-            creep.moveTo(source);
+        if (source) {
+            if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.guiDebug("🔽");
+                creep.moveTo(source);
+            }
         } else {
             logger.info(creep.name + "找不到可以提取能量的建筑，切换为自由工作");
             freeJob(creep);
@@ -82,15 +94,24 @@ module.exports = sourceId => ({
         if (SYS_CONFIG.CLEAN_BAG && cleanBag(creep)) {
             return
         }
-        //优先供给 SPAWN/EXTENSION
+        //优先供给 SPAWN
         var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
-                return (structure.structureType == STRUCTURE_SPAWN || structure.structureType == STRUCTURE_EXTENSION) &&
+                return structure.structureType == STRUCTURE_SPAWN &&
                     structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
             }
         });
-        //SPAWN/EXTENSION 均满，按照配置文件中的参数为能量低于一定比例的Tower冲能
         if (!target) {
+            //SPAWN 已满，再向EXTENSION供能
+            target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return structure.structureType == STRUCTURE_EXTENSION &&
+                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                }
+            });
+        }
+        if (!target) {
+            //按照配置文件中的参数为能量低于一定比例的Tower冲能
             if (CONFIG.TOWER) {
                 for (let i = 0; i < CONFIG.TOWER.length; i++) {
                     var tower = Game.getObjectById(CONFIG.TOWER[i]);
