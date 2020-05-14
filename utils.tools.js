@@ -21,7 +21,7 @@ function energySourceMonitor() {
         if (remain > 0) {
             logger.info(source.id + "挖矿过慢,剩余矿量为：" + remain);
             if (source.ticksToRegeneration == 1) {
-                source.room.memory.EnergyRemain == null ? source.room.memory.EnergyRemain = 0 : source.room.memory.EnergyRemain += remain;
+                source.room.memory.EnergyRemain == null ? source.room.memory.EnergyRemain = remain : source.room.memory.EnergyRemain += remain;
             }
         } else {
             logger.debug(source.id + "挖矿正常")
