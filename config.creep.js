@@ -3,6 +3,9 @@ const upgrader = require('new_role.upgrader')
 const builder = require('new_role.builder')
 const mover = require('new_role.mover')
 const CONFIG = require('config')
+const outharvester = require('Role_OuterHarvester')
+const outclainer = require('Role_OuterClaimer')
+const outbuilder = require('Role_OuterBuilder')
 
 
 module.exports = {
@@ -33,5 +36,12 @@ module.exports = {
     /**
      *   搬运工配置文件，默认需要传入一个不允许从中提取能量的储能建筑ID，一般为 Controller 默认升级取能建筑
      */
-    Mover_01: mover(CONFIG.UPGRADE_ENERGY_SOURCE[0])
+    Mover_01: mover(CONFIG.UPGRADE_ENERGY_SOURCE[0]),
+
+    OuterHarvester_01: outharvester('5bbcad3a9099fc012e636e4e'),
+    OuterHarvester_02: outharvester('5bbcad3a9099fc012e636e4e'),
+
+    OuterClaimer_01: outclainer(''),
+
+    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], roomName: "E5S22", path: [[48, 21]] })
 }

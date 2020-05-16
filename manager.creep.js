@@ -21,6 +21,8 @@ function manageCreep(roomName) {
                     var template = creepTemplate.getOuterWorkTemplate(false);
                 } else if (name.search("OuterClaimer") != -1) {
                     var template = creepTemplate.getOrderTemplate(false);
+                } else if (name.search("OuterB") != -1) {
+                    return;
                 } else {
                     var template = creepTemplate.getDefaultTemplate(SYS_CONFIG.ROAD_FLAG);
                 }
