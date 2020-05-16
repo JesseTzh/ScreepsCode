@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("new_role.harvester");
+const logger = require('utils.log').getLogger("OuterHarvester");
 const CONFIG = require('config')
 
 function goOtherRoom(creep) {
