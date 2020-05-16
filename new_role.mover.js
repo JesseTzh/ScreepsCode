@@ -76,10 +76,10 @@ module.exports = sourceId => ({
                 });
             }
         } else if (creep.room.energyAvailable == creep.room.energyCapacityAvailable && SYS_CONFIG.ALLOW_MOVER_STORAGE) {
-            //如果达到房间能量上限，直接从Link中提取
+            //如果达到房间能量上限，并且Link当前储量超过一半时，直接从Link中提取
             var source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return (structure.structureType == STRUCTURE_LINK && structure.store[RESOURCE_ENERGY] > 0 && structure.id != sourceId);
+                    return (structure.structureType == STRUCTURE_LINK && (structure.store[RESOURCE_ENERGY] / structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0.5) && structure.id != sourceId);
                 }
             });
         }
