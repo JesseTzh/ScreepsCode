@@ -1,14 +1,26 @@
 const SYS_CONFIG = require('config.system.setting');
 const logger = require('utils.log').getLogger("manager.creep");
 const creepConfigs = require('config.creep');
+const creepTemplate = require('config.creep.template')
 
 function manageCreep(roomName) {
+    if (Game.time % 100 == 0) {
+        //TODO
+    }
     for (name in creepConfigs) {
+        // if(name in creepTemplate){
+        //     let templateMap = new Map(creepTemplate[name]);
+        //     logger.info(templateMap.get("Template"));
+        // }
         if (!Game.creeps[name]) {
             if (Game.rooms[roomName].energyAvailable >= 300) {
                 const creepTemplate = require('manager.creep.template').genTemplate(roomName);
                 if (name.search("Mover") != -1) {
                     var template = creepTemplate.getMoverTemplate(SYS_CONFIG.ROAD_FLAG);
+                } else if (name.search("OuterHarvester") != -1) {
+                    var template = creepTemplate.getOuterWorkTemplate(false);
+                } else if (name.search("OuterClaimer") != -1) {
+                    var template = creepTemplate.getOrderTemplate(false);
                 } else {
                     var template = creepTemplate.getDefaultTemplate(SYS_CONFIG.ROAD_FLAG);
                 }

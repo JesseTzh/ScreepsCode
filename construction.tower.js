@@ -43,6 +43,12 @@ var constructionTower = {
         if (damage) {
             tower.repair(damage);
             return true;
+        }else{
+            for (let name in Game.creeps) {
+                if(Game.creeps[name].hitsMax > Game.creeps[name].hits){
+                    tower.heal(Game.creeps[name]);
+                }
+            }
         }
     }
 }

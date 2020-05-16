@@ -45,12 +45,43 @@ class Template {
                 var carryParts = this.templateResult.filter(part => part == CARRY);
                 if (workParts.length > carryParts.length) {
                     this._addCarryPart(roadFlag);
-                }else{
+                } else {
                     this._addWorkPart(roadFlag);
                 }
             } else {
                 this._addMovePart();
             }
+        }
+        return this.templateResult;
+    }
+
+    getOuterWorkTemplate(roadFlag) {
+        while (this.energyRemain > 0) {
+            logger.debug("Now energy remain:" + this.energyRemain);
+            if (this.break) {
+                break;
+            }
+            if (this.movePoints >= 1) {
+                //已有的WORK部件数
+                var workParts = this.templateResult.filter(part => part == WORK);
+                //已有的CARRY部件数
+                var carryParts = this.templateResult.filter(part => part == CARRY);
+                if (workParts.length > carryParts.length) {
+                    this._addCarryPart(roadFlag);
+                } else {
+                    this._addWorkPart(roadFlag);
+                }
+            } else {
+                this._addMovePart();
+            }
+        }
+        return this.templateResult;
+    }
+
+    getOrderTemplate(roadFlag) {
+        this._addClaimPart(roadFlag);
+        while (this.movePoints < 0) {
+            this._addMovePart();
         }
         return this.templateResult;
     }
@@ -123,6 +154,21 @@ class Template {
             this.templateResult.push(MOVE);
             this.energyRemain -= BODYPART_COST.move;
             this.movePoints += 2;
+        } else {
+            this.break = true;
+        }
+    }
+
+    _addClaimPart(roadFlag) {
+        if (this.energyRemain >= BODYPART_COST.claim) {
+            logger.debug("Add a Claim part");
+            this.templateResult.push(CLAIM);
+            this.energyRemain -= BODYPART_COST.claim;
+            if (roadFlag) {
+                this.movePoints -= 1;
+            } else {
+                this.movePoints -= 2;
+            }
         } else {
             this.break = true;
         }
