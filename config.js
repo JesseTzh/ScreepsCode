@@ -6,7 +6,7 @@ module.exports = {
     TOWER: ['5eb7147d7f3603f6f5b2f2ec','5ebbb74020844551b84bec76'],
 
     //Link ID,二维数组形式储存，LINK_SEND[n][0]为发射端，LINK_SEND[n][1]为接收端
-    LINK: [['5ebb456dc1f3759ef33fa7f0','5ebb4f9dc6a35d97ede0467f']],
+    LINK: [['5ebb456dc1f3759ef33fa7f0','5ebb4f9dc6a35d97ede0467f'],['5ec09e77a937d085837a82f3','5ebb4f9dc6a35d97ede0467f']],
 
     //升级 Controller 所用的能量来源
     UPGRADE_ENERGY_SOURCE: ['5ebb4f9dc6a35d97ede0467f'],

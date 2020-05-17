@@ -28,7 +28,5 @@ module.exports.loop = function () {
             Game.creeps[name].work();
         }
     }
-
     logger.info("---------------------------------------------- Game Time: " + Game.time + "----------------------------------------------")
-
 }
