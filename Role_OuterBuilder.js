@@ -13,7 +13,7 @@ module.exports = config => ({
     },
     // 存储能量逻辑
     target: creep => {
-        if(creep.room.name != config.roomName){
+        if (creep.room.name != config.roomName) {
             creep.moveTo(new RoomPosition(config.path[0][0], config.path[0][1], config.roomName))
             return;
         }
@@ -24,8 +24,17 @@ module.exports = config => ({
                 creep.moveTo(targets[0]);
             }
         } else {
-            logger.warn(creep.name + "找不到可建造的建筑点！")
-            creep.guiDebug("🈳");
+            targets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => structure.hits < structure.hitsMax
+            });
+            if (targets) {
+                if (creep.repair(targets) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(targets);
+                }
+            } else {
+                logger.warn(creep.name + "找不到可建造的建筑点！")
+                creep.guiDebug("🈳");
+            }
         }
     },
     // 状态切换条件，稍后会给出具体实现
