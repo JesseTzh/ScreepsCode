@@ -83,7 +83,7 @@ module.exports = sourceId => ({
                 }
             });
         }
-        if (source) {
+        if (source && source.store[RESOURCE_ENERGY] > 0) {
             if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.guiDebug("🔽");
                 creep.moveTo(source);
