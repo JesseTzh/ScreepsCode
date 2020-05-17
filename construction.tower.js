@@ -2,7 +2,7 @@ const logger = require('utils.log').getLogger("construction.tower");
 const CONFIG = require('config')
 
 function towerWork() {
-    if(!CONFIG.TOWER){
+    if (!CONFIG.TOWER) {
         logger.debug("配置文件中找不到Tower的信息！")
         return;
     }
@@ -37,15 +37,15 @@ var constructionTower = {
     repair: function (tower) {
         //维护函数
         var damage = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => structure.hits < structure.hitsMax - 10
+            filter: (structure) => (structure.hits < structure.hitsMax - 10 && structure.structureType != 'rampart') || (structure.structureType == 'rampart' && Game.time % 100 == 0)
         });
         logger.debug("维护目标：" + damage);
         if (damage) {
             tower.repair(damage);
             return true;
-        }else{
+        } else {
             for (let name in Game.creeps) {
-                if(Game.creeps[name].hitsMax > Game.creeps[name].hits){
+                if (Game.creeps[name].hitsMax > Game.creeps[name].hits) {
                     tower.heal(Game.creeps[name]);
                 }
             }
