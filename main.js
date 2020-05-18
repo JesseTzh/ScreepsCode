@@ -19,14 +19,12 @@ module.exports.loop = function () {
     for (let roomName in Game.rooms) {
         //房间可用能量监测
         tools.globalEnergyMonitor(roomName);
-
         //Creeps 管理
         creepManager.manageCreep(roomName);
-
-        //Creeps 工作
-        for (var name in Game.creeps) {
-            Game.creeps[name].work();
-        }
+    }
+    //Creeps 工作
+    for (var name in Game.creeps) {
+        Game.creeps[name].work();
     }
     logger.info("---------------------------------------------- Game Time: " + Game.time + "----------------------------------------------")
 }

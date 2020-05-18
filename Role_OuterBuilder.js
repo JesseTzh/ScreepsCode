@@ -13,8 +13,8 @@ module.exports = config => ({
     },
     // 存储能量逻辑
     target: creep => {
-        if (creep.room.name != config.roomName) {
-            creep.moveTo(new RoomPosition(config.path[0][0], config.path[0][1], config.roomName))
+        if (creep.room.name != config.targetRoomName) {
+            creep.moveTo(new RoomPosition(config.path[0][0], config.path[0][1], config.targetRoomName))
             return;
         }
         var targets = creep.room.find(FIND_CONSTRUCTION_SITES);

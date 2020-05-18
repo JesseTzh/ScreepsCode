@@ -10,12 +10,12 @@ module.exports = sourceId => ({
             logger.info(creep.name + "找不到默认采矿点或默认采矿点为空,切换为备用矿源");
             source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
         }
-        if ((source && source.energy > 0) || (source && source.ticksToRegeneration <= 5)) {
+        if ((source && source.energy > 0) || (source && source.ticksToRegeneration <= 5 && source.energy == 0)) {
             if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.guiDebug("⛏️");
                 creep.moveTo(source);
             }
-        } else if (!source || source.energy == 0) {
+        } else if (!source || (source.energy == 0 && source.ticksToRegeneration > 5)) {
             creep.guiDebug("🚬");
             logger.info(creep.name + "找不到可挖掘的矿点！");
             creep.selfFix();
