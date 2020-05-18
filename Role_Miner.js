@@ -22,7 +22,7 @@ module.exports = config => ({
             const targets = creep.romm.storage;
         }
         if (target) {
-            if (creep.transfer(target, config.sourceId.mineralType) == ERR_NOT_IN_RANGE) {
+            if (creep.transfer(target, Game.getObjectById(config.sourceId).mineralType) == ERR_NOT_IN_RANGE) {
                 creep.guiDebug("🔼");
                 creep.moveTo(target);
             }
@@ -31,13 +31,13 @@ module.exports = config => ({
     // 状态切换条件 
     switch: creep => {
         // creep 身上没有矿物 && creep 之前的状态为“工作”
-        if (this.store[config.sourceId.mineralType] == 0 && this.memory.working) {
-            this.memory.working = false
+        if (creep.store[Game.getObjectById(config.sourceId).mineralType] == 0 && creep.memory.working) {
+            creep.memory.working = false
         }
         // creep 身上能量满了 && creep 之前的状态为“不工作”
-        if (this.store[config.sourceId.mineralType] == this.store.getCapacity() && !this.memory.working) {
-            this.memory.working = true
+        if (creep.store[config.sourceId.mineralType] == creep.store.getCapacity() && !creep.memory.working) {
+            creep.memory.working = true
         }
-        return this.memory.working
+        return creep.memory.working
     }
 })

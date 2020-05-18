@@ -10,6 +10,8 @@ const miner = require('Role_Miner')
 
 
 module.exports = {
+    
+    Miner_01: miner({ sourceId: CONFIG.MINE[0] }),
 
     /**
      *   矿工配置文件，需传入一个指定Energy ID
@@ -40,8 +42,5 @@ module.exports = {
 
     OuterClaimer_01: outclainer(''),
 
-    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", path: [[48, 21]] }),
-
-    Miner_01: miner({ sourceId: CONFIG.MINE[0] })
-    
+    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", pathFinderPoint: [[48, 21]] }),
 }

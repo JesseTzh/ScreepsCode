@@ -8,7 +8,6 @@ function manageCreep(roomName) {
         //TODO
     }
     for (name in creepConfigs) {
-        logger.info(name)
         if (!Game.creeps[name]) {
             if (Game.rooms[roomName].energyAvailable >= 300) {
                 const creepTemplate = require('manager.creep.template').genTemplate(roomName);
@@ -23,7 +22,6 @@ function manageCreep(roomName) {
                 } else if (name.search("OuterB") != -1) {
                     return;
                 } else if (name.search("Miner_01") != -1　&& Game.rooms[roomName].memory.MinerRebornFlag != false) {
-                    logger.info("test")
                     var template = creepTemplate.getDefaultTemplate(false);
                 } else {
                     var template = creepTemplate.getWorkerTemplate(SYS_CONFIG.ROAD_FLAG);
