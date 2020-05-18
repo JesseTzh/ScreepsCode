@@ -17,9 +17,9 @@ module.exports = config => ({
     // 存储能量逻辑
     target: creep => {
         if(config.targetId){
-            const targets = Game.getObjectById(config.targetId);
+            var target = Game.getObjectById(config.targetId);
         }else{
-            const targets = creep.romm.storage;
+            var target = creep.room.storage;
         }
         if (target) {
             if (creep.transfer(target, Game.getObjectById(config.sourceId).mineralType) == ERR_NOT_IN_RANGE) {
@@ -34,8 +34,8 @@ module.exports = config => ({
         if (creep.store[Game.getObjectById(config.sourceId).mineralType] == 0 && creep.memory.working) {
             creep.memory.working = false
         }
-        // creep 身上能量满了 && creep 之前的状态为“不工作”
-        if (creep.store[config.sourceId.mineralType] == creep.store.getCapacity() && !creep.memory.working) {
+        // creep 身上矿物满了 && creep 之前的状态为“不工作”
+        if (creep.store[Game.getObjectById(config.sourceId).mineralType] == creep.store.getCapacity() && !creep.memory.working) {
             creep.memory.working = true
         }
         return creep.memory.working
