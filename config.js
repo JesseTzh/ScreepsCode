@@ -12,6 +12,9 @@ module.exports = {
     UPGRADE_ENERGY_SOURCE: ['5ebb4f9dc6a35d97ede0467f'],
 
     //Storage ID,一般用作冗余能量缓冲池与建筑建造能量来源
-    STORAGE: ['5eb929deb5f373e902a1d7d7']
+    STORAGE: ['5eb929deb5f373e902a1d7d7'],
+
+    //Mine 
+    MINE: ['5bbcb30440062e4259e93fe8']
 
 }

@@ -6,6 +6,7 @@ const CONFIG = require('config')
 const outharvester = require('Role_OuterHarvester')
 const outclainer = require('Role_OuterClaimer')
 const outbuilder = require('Role_OuterBuilder')
+const miner = require('Role_Miner')
 
 
 module.exports = {
@@ -26,7 +27,7 @@ module.exports = {
     /**
      *   建筑工配置文件，默认需要传入一个冗余能量存储设备作为建造资源提取处，config文件中可配置是否允许进一步从其他建筑提取能量
      */
-    Builder_01: builder(CONFIG.STORAGE[0]),
+    //Builder_01: builder(CONFIG.STORAGE[0]),
     //Builder_02: builder(CONFIG.STORAGE[0]),
 
     /**
@@ -39,5 +40,8 @@ module.exports = {
 
     OuterClaimer_01: outclainer(''),
 
-    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], roomName: "E5S22", path: [[48, 21]] })
+    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", path: [[48, 21]] }),
+
+    Miner_01: miner({ sourceId: CONFIG.MINE[0] })
+    
 }
