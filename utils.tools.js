@@ -6,20 +6,19 @@ function globalEnergyMonitor(roomName) {
     var energySurplus = Game.rooms[roomName].energyAvailable / Game.rooms[roomName].energyCapacityAvailable;
     Game.rooms[roomName].memory.timeCount == null ? Game.rooms[roomName].memory.timeCount = 1 : Game.rooms[roomName].memory.timeCount += 1;
     if (energySurplus >= SYS_CONFIG.ENERGY_ALERT_NUM) {
-        Game.rooms[roomName].memory.energyAlert == null ? Game.rooms[roomName].memory.energyAlert = 1 : Game.rooms[roomName].memory.energyAlert -= 1;
-        //Game.rooms[roomName].memory.energyAlert -= 1;
+        Game.rooms[roomName].memory.EnergyAlert == null ? Game.rooms[roomName].memory.EnergyAlert = 1 : Game.rooms[roomName].memory.EnergyAlert -= 1;
+        //Game.rooms[roomName].memory.EnergyAlert -= 1;
     } else {
-        Game.rooms[roomName].memory.energyAlert == null ? Game.rooms[roomName].memory.energyAlert = 1 : Game.rooms[roomName].memory.energyAlert += 1;
-        //Game.rooms[roomName].memory.energyAlert += 1;
+        Game.rooms[roomName].memory.EnergyAlert == null ? Game.rooms[roomName].memory.EnergyAlert = 1 : Game.rooms[roomName].memory.EnergyAlert += 1;
+        //Game.rooms[roomName].memory.EnergyAlert += 1;
     }
 }
 
 function energySourceMonitor() {
     for (let i = 0; i < CONFIG.ENERGY_SOURCE.length; i++) {
         let source = Game.getObjectById(CONFIG.ENERGY_SOURCE[i]);
-        let remain = source.energy;
-        if (source.ticksToRegeneration == 1 && remain > 0) {
-            source.room.memory.EnergyRemain == null ? source.room.memory.EnergyRemain = remain : source.room.memory.EnergyRemain += remain;
+        if (source.ticksToRegeneration == 1) {
+            source.room.memory.EnergyRemain == null ? source.room.memory.EnergyRemain = source.energy : source.room.memory.EnergyRemain += source.energy;
         } else {
             logger.debug(source.id + "被成功挖光")
         }
