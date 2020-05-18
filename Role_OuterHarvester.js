@@ -39,7 +39,7 @@ module.exports = sourceId => ({
                 creep.guiDebug("🔼");
                 creep.moveTo(target);
             }else if(result == OK){
-                creep.room.memory.outEnergy == null ? creep.room.memory.outEnergy = 300 : creep.room.memory.outEnergy += 300;
+                creep.room.memory.OuterRoomEnergy == null ? creep.room.memory.OuterRoomEnergy = 300 : creep.room.memory.OuterRoomEnergy += 300;
             }
         } 
     },
