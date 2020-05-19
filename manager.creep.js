@@ -1,7 +1,7 @@
 const SYS_CONFIG = require('config.system.setting');
 const logger = require('utils.log').getLogger("manager.creep");
 const creepConfigs = require('config.creep');
-const creepTemplate = require('config.creep.template')
+//const creepTemplate = require('config.creep.template')
 
 function manageCreep(roomName) {
     if (Game.time % 100 == 0) {
@@ -9,6 +9,7 @@ function manageCreep(roomName) {
     }
     for (name in creepConfigs) {
         if (!Game.creeps[name]) {
+            //logger.info(name)
             if (Game.rooms[roomName].energyAvailable >= 300) {
                 const creepTemplate = require('manager.creep.template').genTemplate(roomName);
                 if (name.search("Mover") != -1) {

@@ -47,7 +47,7 @@ module.exports = {
     OuterHarvester_04: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4b', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[32, 49]] }),
     OuterHarvester_05: outerharvester({ sourceId: '5bbcad3a9099fc012e636e49', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[32, 49]] }),
 
-    OuterClaimer_01: claimer({ sourceId: ['5bbcad3a9099fc012e636e4d'], targetRoomName: ["E5S22"], pathFinderPoint: [[49, 21]] }),
+    OuterClaimer_01: claimer({ sourceId: ['5bbcad3a9099fc012e636e4d','5bbcad489099fc012e637091'], targetRoomName: ['E5S22','E6S23'], pathFinderPoint: [[49, 21]] }),
 
-    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", pathFinderPoint: [[49, 21]] }),
+    //OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", pathFinderPoint: [[49, 21]] }),
 }

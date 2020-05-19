@@ -81,9 +81,8 @@ class Template {
     getOrderTemplate(roadFlag) {
         this._addClaimPart(roadFlag);
         this._addClaimPart(roadFlag);
-        while (this.movePoints < 0) {
-            this._addMovePart();
-        }
+        this._addMovePart();
+        this._addMovePart();
         return this.templateResult;
     }
 
