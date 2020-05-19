@@ -19,7 +19,7 @@ module.exports = sourceId => ({
             }
         }
         if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.guiDebug("🚚");
+            creep.emoji("🚚");
             creep.moveTo(source);
         }
     },
@@ -27,13 +27,13 @@ module.exports = sourceId => ({
     target: creep => {
         var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
         if (targets.length) {
-            creep.guiDebug("🌇");
+            creep.emoji("🌇");
             if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targets[0]);
             }
         } else {
             logger.warn(creep.name + "找不到可建造的建筑点！")
-            creep.guiDebug("🈳");
+            creep.emoji("🈳");
         }
     },
     // 状态切换条件

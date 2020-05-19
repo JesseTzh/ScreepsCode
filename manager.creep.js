@@ -20,7 +20,7 @@ function manageCreep(roomName) {
                 } else if (name.search("Builder_") != -1) {
                     var template = creepTemplate.getDefaultTemplate(false);
                 } else if (name.search("OuterB") != -1) {
-                    return;
+                    var template = creepTemplate.getOuterWorkTemplate(SYS_CONFIG.ROAD_FLAG);
                 } else if (name.search("Miner_01") != -1　&& Game.rooms[roomName].memory.MinerRebornFlag != false) {
                     var template = creepTemplate.getDefaultTemplate(false);
                 } else {

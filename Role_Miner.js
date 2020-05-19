@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("OuterBuilder");
+const logger = require('utils.log').getLogger("Miner");
 
 module.exports = config => ({
     // 采集矿物
@@ -6,7 +6,7 @@ module.exports = config => ({
         const source = Game.getObjectById(config.sourceId)
         if (source && source.mineralAmount > 0) {
             if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.guiDebug("⛏️");
+                creep.emoji("⛏️");
                 creep.moveTo(source);
             }
         }else{
@@ -23,7 +23,7 @@ module.exports = config => ({
         }
         if (target) {
             if (creep.transfer(target, Game.getObjectById(config.sourceId).mineralType) == ERR_NOT_IN_RANGE) {
-                creep.guiDebug("🔼");
+                creep.emoji("🔼");
                 creep.moveTo(target);
             }
         }

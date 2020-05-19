@@ -11,6 +11,7 @@ const creepExtension = {
         // 检查 creep 内存中的角色是否存在
         if (!(this.name in creepConfigs)) {
             logger.error(`找不到 ${this.name} 所对应的劳工配置！`);
+            this.selfRecycle();
             return;
         }
         // 获取对应配置项
@@ -36,8 +37,8 @@ const creepExtension = {
         }
         return this.memory.working
     },
-    guiDebug(word) {
-        if (SYS_CONFIG.GUIDEBUGMODE) {
+    emoji(word) {
+        if (SYS_CONFIG.EMOJI_DEGUB_MODE) {
             this.say(word);
         }
     },
@@ -62,13 +63,26 @@ const creepExtension = {
                 }
             });
             if (target && target.renewCreep(this) == ERR_NOT_IN_RANGE) {
-                this.guiDebug("🐸");
+                this.emoji("🐸");
                 logger.info(this.name + "正在续命...");
                 this.moveTo(target);
                 return;
             } else {
                 logger.info(this.name + "续不动了...");
             }
+        }
+    },
+    selfRecycle(){
+        const target = this.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: (structure) => {
+                return structure.structureType == STRUCTURE_SPAWN;
+            }
+        });
+        if (target && target.recycleCreep(this) == ERR_NOT_IN_RANGE) {
+            this.emoji("🌍");
+            logger.info(this.name + "回收自己...");
+            this.moveTo(target);
+            return;
         }
     }
 }

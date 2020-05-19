@@ -10,7 +10,7 @@ const SYS_CONFIG = require('config.system.setting');
  *        MAX_CREEP_ENERGY_CONSUM: 制造Creep最高能量消耗值
  *     使用默认模板(WORK与CARRY等量生成)
  *        creepTemplate.getDefaultTemplate();
- *     搬运工模板(只有CARRY与MOVE部件)
+ *     Mover模板(只有CARRY与MOVE部件)
  *        creepTemplate.getMoverTemplate();
  *     Worker模板 2 Carry + 10 Work,避免采集溢出
  *        creepTemplate.getWorkerTemplate();
@@ -79,6 +79,7 @@ class Template {
     }
 
     getOrderTemplate(roadFlag) {
+        this._addClaimPart(roadFlag);
         this._addClaimPart(roadFlag);
         while (this.movePoints < 0) {
             this._addMovePart();

@@ -5,7 +5,7 @@ const CONFIG = require('config')
 function globalEnergyMonitor(roomName) {
     var energySurplus = Game.rooms[roomName].energyAvailable / Game.rooms[roomName].energyCapacityAvailable;
     Game.rooms[roomName].memory.timeCount == null ? Game.rooms[roomName].memory.timeCount = 1 : Game.rooms[roomName].memory.timeCount += 1;
-    if (energySurplus >= SYS_CONFIG.ENERGY_ALERT_NUM) {
+    if (energySurplus >= SYS_CONFIG.ENERGY_ALERT_RATIO) {
         Game.rooms[roomName].memory.EnergyAlert == null ? Game.rooms[roomName].memory.EnergyAlert = 1 : Game.rooms[roomName].memory.EnergyAlert -= 1;
         //Game.rooms[roomName].memory.EnergyAlert -= 1;
     } else {
