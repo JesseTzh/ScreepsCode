@@ -34,7 +34,6 @@ class Template {
 
     getDefaultTemplate(roadFlag) {
         while (this.energyRemain > 0) {
-            logger.debug("Now energy remain:" + this.energyRemain);
             if (this.break) {
                 break;
             }
@@ -56,25 +55,9 @@ class Template {
     }
 
     getOuterWorkTemplate(roadFlag) {
-        while (this.energyRemain > 0) {
-            logger.debug("Now energy remain:" + this.energyRemain);
-            if (this.break) {
-                break;
-            }
-            if (this.movePoints >= 1) {
-                //已有的WORK部件数
-                var workParts = this.templateResult.filter(part => part == WORK);
-                //已有的CARRY部件数
-                var carryParts = this.templateResult.filter(part => part == CARRY);
-                if (workParts.length > carryParts.length) {
-                    this._addCarryPart(roadFlag);
-                } else {
-                    this._addWorkPart(roadFlag);
-                }
-            } else {
-                this._addMovePart();
-            }
-        }
+        this._addCarryPart(roadFlag);
+        this._addCarryPart(roadFlag);
+        this._addWorkPart(roadFlag);
         return this.templateResult;
     }
 
@@ -103,7 +86,26 @@ class Template {
         return this.templateResult;
     }
 
+    getUpgraderTemplate(roadFlag) {
+        this.energyRemain = 2000;
+        this._addCarryPart(roadFlag);
+        this._addCarryPart(roadFlag);
+        while (this.energyRemain > 0) {
+            logger.debug("Now energy remain:" + this.energyRemain);
+            if (this.break || this.templateResult.filter(part => part == WORK).length == 15) {
+                break;
+            }
+            if (this.movePoints >= 1) {
+                this._addWorkPart(roadFlag);
+            } else {
+                this._addMovePart();
+            }
+        }
+        return this.templateResult;
+    }
+
     getMoverTemplate(roadFlag) {
+        this.energyRemain = 1000;
         while (this.energyRemain > 0) {
             logger.debug("Now energy remain:" + this.energyRemain);
             if (this.break || this.templateResult.filter(part => part == CARRY) == 10) {

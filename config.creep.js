@@ -7,6 +7,7 @@ const outerharvester = require('Role_OuterHarvester')
 const claimer = require('Role_OuterClaimer')
 const outbuilder = require('Role_OuterBuilder')
 const miner = require('Role_Miner')
+const outmover = require('Role_OuterMover')
 
 
 module.exports = {
@@ -41,13 +42,15 @@ module.exports = {
      */
     Mover_01: mover(CONFIG.UPGRADE_ENERGY_SOURCE[0]),
 
-    OuterHarvester_01: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[49, 21]] }),
-    OuterHarvester_02: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[49, 21]] }),
+    OuterHarvester_01: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: '5ec3b0b2504f48fa334fe4ea', pathFinderPoint: [[49, 21]] }),
+    //OuterHarvester_02: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[49, 21]] }),
     OuterHarvester_03: outerharvester({ sourceId: '5bbcad489099fc012e637092', targetRoomName: "E6S23", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[38, 0]] }),
     OuterHarvester_04: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4b', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[32, 49]] }),
     OuterHarvester_05: outerharvester({ sourceId: '5bbcad3a9099fc012e636e49', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[32, 49]] }),
 
     OuterClaimer_01: claimer({ sourceId: ['5bbcad3a9099fc012e636e4d','5bbcad489099fc012e637091'], targetRoomName: ['E5S22','E6S23'], pathFinderPoint: [[49, 21]] }),
 
-    //OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", pathFinderPoint: [[49, 21]] }),
+    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", pathFinderPoint: [[49, 21]] }),
+
+    OuterMover: outmover({ sourceId: '5ec3b0b2504f48fa334fe4ea', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0]})
 }
