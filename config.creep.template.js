@@ -50,7 +50,9 @@ module.exports = {
 
     OuterClaimer_01: ({ genMode: "Config", partsSet: [[MOVE, 3], [CLAIM, 3]], spawnName: "Home", roomName: "E6S22" }),
 
-    OuterBuilder: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 12], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
+    OuterBuilder: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
 
     OuterMover: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 8], [CARRY, 16]], spawnName: "Home", roomName: "E6S22" }),
+
+    Tank_01: ({ genMode: "Config", partsSet: [[TOUGH, 10], [MOVE, 15], [HEAL, 5]], spawnName: "Home", roomName: "E6S22" })
 }

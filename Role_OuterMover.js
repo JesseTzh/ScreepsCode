@@ -29,6 +29,7 @@ module.exports = config => ({
             if (creep.repair(target) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
+            return;
         }
         target = Game.getObjectById(config.targetId);
         if (target) {

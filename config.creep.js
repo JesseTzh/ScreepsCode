@@ -8,6 +8,7 @@ const claimer = require('Role_OuterClaimer')
 const outbuilder = require('Role_OuterBuilder')
 const miner = require('Role_Miner')
 const outmover = require('Role_OuterMover')
+const tank = require('Role_Tank')
 
 
 module.exports = {
@@ -44,7 +45,7 @@ module.exports = {
      *          sourceId:数组形式存储允许Mover提取能量的建筑ID
      *          storageId:冗余资源存放建筑
      */
-    Mover_01: mover({ sourceId: [CONFIG.LINK[0][0],CONFIG.LINK[1][0]], storageId: CONFIG.STORAGE[0] }),
+    Mover_01: mover({ sourceId: [CONFIG.LINK[0][0], CONFIG.LINK[1][0]], storageId: CONFIG.STORAGE[0] }),
 
     /**
      *   Miner配置文件
@@ -63,7 +64,7 @@ module.exports = {
      *          targetId:能量储存点
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterHarvester_01: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: '5ec3b0b2504f48fa334fe4ea', pathFinderPoint: [[49, 21]] }),
+    OuterHarvester_01: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: '5ec4ff193cbdd7055e454d74', pathFinderPoint: [[49, 21]] }),
     OuterHarvester_02: outerharvester({ sourceId: '5bbcad489099fc012e637092', targetRoomName: "E6S23", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[38, 0]] }),
     OuterHarvester_03: outerharvester({ sourceId: '5bbcad489099fc012e637092', targetRoomName: "E6S23", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[38, 0]] }),
     //OuterHarvester_04: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4b', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[32, 49]] }),
@@ -85,7 +86,7 @@ module.exports = {
      *          targetRoomName:所要去的房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", pathFinderPoint: [[49, 21]] }),
+    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E6S23", pathFinderPoint: [[49, 21]] }),
 
     /**
      *   OuterMover配置文件
@@ -94,5 +95,14 @@ module.exports = {
      *          targetRoomName:所要去的外矿房间名称
      *          targetId:能量存储目标建筑
      */
-    OuterMover: outmover({ sourceId: '5ec3b0b2504f48fa334fe4ea', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0] })
+    OuterMover: outmover({ sourceId: '5ec4ff193cbdd7055e454d74', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0] }),
+
+    /**
+     *   Tank配置文件
+     *      参数：
+     *          sourceId:默认取能建筑
+     *          targetRoomName:所要去的外矿房间名称
+     *          targetId:能量存储目标建筑
+     */
+    //Tank_01: tank({ safeRoomName: 'E7S20', targetRoomName: "E7S21", pathFinderPoint: [[12, 48], [12, 2]] })
 }
