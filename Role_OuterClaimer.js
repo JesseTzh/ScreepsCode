@@ -1,5 +1,4 @@
 const logger = require('utils.log').getLogger("OuterClaimer");
-const CONFIG = require('config')
 
 module.exports = config => ({
     // 预订Controller
@@ -17,18 +16,19 @@ module.exports = config => ({
         }
         var source = Game.getObjectById(config.sourceId[creep.memory.claimTargetNum])
         if (source) {
-            if (!source.reservation || source.reservation.ticksToEnd < 5000) {
+            if (!source.reservation || source.reservation.ticksToEnd < CONTROLLER_RESERVE_MAX) {
                 if (creep.reserveController(source) == ERR_NOT_IN_RANGE) {
                     creep.emoji("🔔");
                     creep.moveTo(source);
                 }
-            } else if (source.reservation && source.reservation.ticksToEnd == 5000) {
-                //当前控制器预定时间已满，换下一个
-                creep.memory.claimTargetNum += 1;
             }
         } else {
             //没有更多控制器了，从第一个控制器开始重新预订
             creep.memory.claimTargetNum = 0;
+        }
+        if (source.reservation && source.reservation.ticksToEnd == CONTROLLER_RESERVE_MAX - 1) {
+            //当前控制器预定时间已满，换下一个
+            creep.memory.claimTargetNum += 1;
         }
     },
     // 存储能量逻辑
