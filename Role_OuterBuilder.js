@@ -32,7 +32,7 @@ module.exports = config => ({
                     creep.moveTo(targets);
                 }
             } else {
-                logger.warn(creep.name + "找不到可建造的建筑点！")
+                logger.warn(creep.name + "找不到可建造的建筑点！");
                 creep.emoji("🈳");
             }
         }

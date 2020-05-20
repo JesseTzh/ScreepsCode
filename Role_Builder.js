@@ -1,12 +1,11 @@
-const logger = require('utils.log').getLogger("new_role.builder");
+const logger = require('utils.log').getLogger("Role_Builder");
 const SYS_CONFIG = require('config.system.setting');
 
-module.exports = sourceId => ({
+module.exports = config => ({
     // 提取能量矿
     source: creep => {
-        var source = Game.getObjectById(sourceId)
+        var source = Game.getObjectById(config.sourceId)
         if (source.store.getUsedCapacity(RESOURCE_ENERGY) < 1) {
-            // || source.store.getUsedCapacity(RESOURCE_ENERGY) < creep.store.getCapacity()
             logger.info(creep.name + "默认取能建筑存量为空！")
             //根据config文件的参数看是否允许从默认能量提取建筑之外的建筑提取能量
             if (SYS_CONFIG.ALLOW_BUILDE_FROM_SE) {
@@ -18,10 +17,16 @@ module.exports = sourceId => ({
                 });
             }
         }
-        if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.emoji("🚚");
-            creep.moveTo(source);
+        if (source && source.store.getUsedCapacity(RESOURCE_ENERGY) > 0) {
+            if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.emoji("🚚");
+                creep.moveTo(source);
+            }
+        } else {
+            logger.info(creep.name + "找不到可用的取能建筑！");
+            creep.emoji("🈳");
         }
+
     },
     // 建造
     target: creep => {

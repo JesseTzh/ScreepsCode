@@ -9,16 +9,16 @@ module.exports = config => ({
                 creep.emoji("⛏️");
                 creep.moveTo(source);
             }
-        }else{
+        } else if (source.mineralAmount == 0) {
             //矿物挖光，禁止重生
             creep.room.memory.MinerRebornFlag = false;
         }
     },
-    // 存储能量逻辑
+    // 存储矿物逻辑
     target: creep => {
-        if(config.targetId){
+        if (config.targetId) {
             var target = Game.getObjectById(config.targetId);
-        }else{
+        } else {
             var target = creep.room.storage;
         }
         if (target) {
@@ -26,6 +26,8 @@ module.exports = config => ({
                 creep.emoji("🔼");
                 creep.moveTo(target);
             }
+        }else{
+            logger.info(creep.name + "找不到可以储存矿物的建筑！");
         }
     },
     // 状态切换条件 

@@ -11,9 +11,13 @@ module.exports = config => ({
             return;
         }
         var source = Game.getObjectById(config.sourceId)
-        if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.emoji("🔽");
-            creep.moveTo(source);
+        if(source){
+            if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.emoji("🔽");
+                creep.moveTo(source);
+            }
+        }else{
+            logger.warn(creep.name + "找不到对应的取能建筑！");
         }
     },
     // 存储能量逻辑
