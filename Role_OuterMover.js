@@ -18,7 +18,15 @@ module.exports = config => ({
     },
     // 存储能量逻辑
     target: creep => {
-        const target = Game.getObjectById(config.targetId);
+        var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            filter: (structure) => structure.hits < structure.hitsMax
+        });
+        if (target) {
+            if (creep.repair(target) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target);
+            }
+        }
+        target = Game.getObjectById(config.targetId);
         if (target) {
             if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.emoji("🔼");
