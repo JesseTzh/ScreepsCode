@@ -1,0 +1,35 @@
+const logger = require('utils.log').getLogger("manager.creep");
+const creepConfigs = require('config.creep');
+const creepTemplateConfigs = require('config.creep.template')
+
+function creepManager() {
+    for (name in creepConfigs) {
+        if (!Game.creeps[name]) {
+            if (name in creepTemplateConfigs) {
+                //获取对应模板文件
+                const creepTemplateConfig = creepTemplateConfigs[name];
+                if (Game.rooms[creepTemplateConfig.roomName].energyAvailable >= 300) {
+                    //初始化模板
+                    const creepTemplate = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName);
+                    var template = creepTemplate.getTemplateByConfig(creepTemplateConfig);
+                }
+                //删除之前Creep记忆
+                delete Memory.creeps[name];
+                var result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name);
+                if (result != OK) {
+                    logger.warn(name + " 重生失败！错误代码：" + result)
+                } else {
+                    logger.info('正在重生 : ' + name);
+                }
+            }
+            else {
+                logger.error(this.name + "找不到模板文件")
+            }
+            return;
+        }
+    }
+}
+
+module.exports = {
+    creepManager: creepManager
+};

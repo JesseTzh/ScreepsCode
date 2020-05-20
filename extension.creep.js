@@ -2,7 +2,7 @@
 const creepConfigs = require('config.creep');
 const SYS_CONFIG = require('config.system.setting');
 const logger = require('utils.log').getLogger("extension.creep");
-const creepTemplate = require('config.creep.template')
+const creepTemplateConfigs = require('config.creep.template')
 
 // 自定义的 Creep 的拓展
 const creepExtension = {
@@ -42,18 +42,6 @@ const creepExtension = {
             this.say(word);
         }
     },
-    getConfig(key) {
-        if (this.name in creepTemplate) {
-            let templateMap = new Map(creepTemplate[this.name]);
-            if (key == null) {
-                return templateMap;
-            } else {
-                return templateMap.get(key);
-            }
-        } else {
-            logger.error(this.name + "找不到个性化配置文件")
-        }
-    },
     selfFix(){
         if (this.ticksToLive < 1400) {
             //闲着没事做就去续命
@@ -73,16 +61,22 @@ const creepExtension = {
         }
     },
     selfRecycle(){
-        const target = this.pos.findClosestByRange(FIND_STRUCTURES, {
+        var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.structureType == STRUCTURE_SPAWN;
             }
         });
+        if(!target){
+            const creepTemplateConfig = creepTemplateConfigs[name];
+            target = Game.spawns[creepTemplateConfig.spawnName];
+        }
         if (target && target.recycleCreep(this) == ERR_NOT_IN_RANGE) {
             this.emoji("🌍");
-            logger.info(this.name + "回收自己...");
+            logger.info(this.name + "正在将自己回收再利用...");
             this.moveTo(target);
             return;
+        } else{
+            logger.info(this.name + "无法回收自己");
         }
     }
 }

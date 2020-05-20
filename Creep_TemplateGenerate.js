@@ -5,15 +5,6 @@ const SYS_CONFIG = require('config.system.setting');
  * 用法：
  *     引入
  *        const creepTemplate = require('manager.creep.template').genTemplate(roomName);
- *     参数
- *        roadFlag: 是否按照已铺好Road的情况生成Creep
- *        MAX_CREEP_ENERGY_CONSUM: 制造Creep最高能量消耗值
- *     使用默认模板(WORK与CARRY等量生成)
- *        creepTemplate.getDefaultTemplate();
- *     Mover模板(只有CARRY与MOVE部件)
- *        creepTemplate.getMoverTemplate();
- *     Worker模板 2 Carry + 10 Work,避免采集溢出
- *        creepTemplate.getWorkerTemplate();
  */
 class Template {
     constructor() {
@@ -26,13 +17,15 @@ class Template {
 
     static genTemplate(roomName) {
         let template = new Template();
-        //在config文件中限制了最高能量消耗值
+        //在config文件中限制了全局最高能量消耗值（较config中传入的值优先级更低）
         template.energyRemain = Game.rooms[roomName].energyAvailable <= SYS_CONFIG.MAX_CREEP_ENERGY_CONSUM ? Game.rooms[roomName].energyAvailable : SYS_CONFIG.MAX_CREEP_ENERGY_CONSUM;
-        template._addMovePart();
         return template;
     }
 
-    getDefaultTemplate(roadFlag) {
+    getSelfAdaptionTemplate(config) {
+        if (config.energyMax) {
+            this.energyRemain = config.energyMax;
+        }
         while (this.energyRemain > 0) {
             if (this.break) {
                 break;
@@ -43,9 +36,9 @@ class Template {
                 //已有的CARRY部件数
                 var carryParts = this.templateResult.filter(part => part == CARRY);
                 if (workParts.length > carryParts.length) {
-                    this._addCarryPart(roadFlag);
+                    this._addCarryPart(config.roadFlag);
                 } else {
-                    this._addWorkPart(roadFlag);
+                    this._addWorkPart(config.roadFlag);
                 }
             } else {
                 this._addMovePart();
@@ -54,67 +47,13 @@ class Template {
         return this.templateResult;
     }
 
-    getOuterWorkTemplate(roadFlag) {
-        this._addCarryPart(roadFlag);
-        this._addCarryPart(roadFlag);
-        this._addWorkPart(roadFlag);
-        return this.templateResult;
-    }
-
-    getOrderTemplate(roadFlag) {
-        this._addClaimPart(roadFlag);
-        this._addClaimPart(roadFlag);
-        this._addMovePart();
-        this._addMovePart();
-        return this.templateResult;
-    }
-
-    getWorkerTemplate(roadFlag) {
-        this._addCarryPart(roadFlag);
-        this._addCarryPart(roadFlag);
-        while (this.energyRemain > 0) {
-            logger.debug("Now energy remain:" + this.energyRemain);
-            if (this.break || this.templateResult.filter(part => part == WORK).length == 10) {
-                break;
-            }
-            if (this.movePoints >= 1) {
-                this._addWorkPart(roadFlag);
-            } else {
-                this._addMovePart();
-            }
+    getTemplateByConfig(config) {
+        if (config.genMode == "Auto") {
+            return getSelfAdaptionTemplate(config);
         }
-        return this.templateResult;
-    }
-
-    getUpgraderTemplate(roadFlag) {
-        this.energyRemain = 2000;
-        this._addCarryPart(roadFlag);
-        this._addCarryPart(roadFlag);
-        while (this.energyRemain > 0) {
-            logger.debug("Now energy remain:" + this.energyRemain);
-            if (this.break || this.templateResult.filter(part => part == WORK).length == 15) {
-                break;
-            }
-            if (this.movePoints >= 1) {
-                this._addWorkPart(roadFlag);
-            } else {
-                this._addMovePart();
-            }
-        }
-        return this.templateResult;
-    }
-
-    getMoverTemplate(roadFlag) {
-        this.energyRemain = 1000;
-        while (this.energyRemain > 0) {
-            logger.debug("Now energy remain:" + this.energyRemain);
-            if (this.break || this.templateResult.filter(part => part == CARRY) == 10) {
-                break;
-            }
-            if (this.movePoints >= 1) {
-                this._addCarryPart(roadFlag);
-            } else {
-                this._addMovePart();
+        for (let i = 0; i < config.partsSet.length; i++) {
+            for (let j = 0; j < config.partsSet[i][1]; j++) {
+                this.templateResult.push(config.partsSet[i][0]);
             }
         }
         return this.templateResult;
