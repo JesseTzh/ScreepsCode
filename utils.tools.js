@@ -44,10 +44,14 @@ function test(creep) {
 }
 
 function detectRoomInvaderCore() {
-    for (let i = 0; i > CONFIG.OUTSIDEROOM.length; i++) {
-        var target = Game.rooms[CONFIG.OUTSIDEROOM[i]].controller.pos.find[FIND_HOSTILE_STRUCTURES];
-        if(target){
-            Memory.creeps["Dps_01"].RebornFlag == true;
+    for (let i = 0; i < CONFIG.OUTSIDEROOM.length; i++) {
+        if (!Game.rooms[CONFIG.OUTSIDEROOM[i]]) {
+            return
+        }
+        let target = Game.rooms[CONFIG.OUTSIDEROOM[i]].find(FIND_HOSTILE_STRUCTURES);
+        if (target && target.length) {
+            logger.info("发现敌人核心！")
+            Memory.creeps["Dps_01"].RebornFlag == "Yes";
             Memory.creeps["Dps_01"].TargetRoom = CONFIG.OUTSIDEROOM[i];
         }
     }
