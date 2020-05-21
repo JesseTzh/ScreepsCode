@@ -42,8 +42,19 @@ function test(creep) {
     logger.info("filter测试结果：" + testWithFilter);
     //测试结果：0.03CPU左右
 }
+
+function detectRoomInvaderCore() {
+    for (let i = 0; i > CONFIG.OUTSIDEROOM.length; i++) {
+        var target = Game.rooms[CONFIG.OUTSIDEROOM[i]].controller.pos.find[FIND_HOSTILE_STRUCTURES];
+        if(target){
+            Memory.creeps["Dps_01"].RebornFlag == true;
+            Memory.creeps["Dps_01"].TargetRoom = CONFIG.OUTSIDEROOM[i];
+        }
+    }
+}
 module.exports = {
     globalEnergyMonitor: globalEnergyMonitor,
     test: test,
-    energySourceMonitor: energySourceMonitor
+    energySourceMonitor: energySourceMonitor,
+    detectRoomInvaderCore: detectRoomInvaderCore
 };
