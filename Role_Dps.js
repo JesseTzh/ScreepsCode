@@ -3,29 +3,36 @@ const logger = require('utils.log').getLogger("Dps");
 module.exports = config => ({
     // 前往要作战的房间
     source: creep => {
-        logger.info(creep.name + "正在前往目标房间")
-        creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoomName))
+        if(!creep.memory.TargetRoom){
+            creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoomName))
+        }else{
+            creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], creep.memory.TargetRoom))
+        }
     },
-    // 去挨揍
+    // 去打架
     target: creep => {
-        const target = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES);
+        var target = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES);
+        if (!target) {
+            target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
+        }
         if (target) {
             logger.info(creep.name + " ：骑兵连，进攻！！！")
             if (creep.attack(target) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
-        }else{
+        } else {
             logger.info(creep.name + "找不到要攻击的对象")
+            creep.memory.RebornFlag = false;
         }
     },
-    // 状态切换条件，稍后会给出具体实现
+    // 状态切换条件
     switch: creep => {
-        // creep 身上没有矿物 && creep 之前的状态为“工作”
-        if (creep.room.name !=  config.targetRoomName && creep.memory.working) {
+        // creep 没有抵达目标房间 && creep 之前的状态为“工作”
+        if (creep.room.name != config.targetRoomName && creep.memory.working) {
             creep.memory.working = false
         }
-        // creep 身上矿物满了 && creep 之前的状态为“不工作”
-        if (creep.room.name ==  config.targetRoomName && !creep.memory.working) {
+        // creep 抵达目标房间 && creep 之前的状态为“不工作”
+        if (creep.room.name == config.targetRoomName && !creep.memory.working) {
             creep.memory.working = true
         }
         return creep.memory.working

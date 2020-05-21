@@ -1,5 +1,4 @@
 const logger = require('utils.log').getLogger("OuterHarvester");
-const CONFIG = require('config')
 
 module.exports = config => ({
     // 采集能量矿
@@ -41,6 +40,6 @@ module.exports = config => ({
             }
         }
     },
-    // 状态切换条件，稍后会给出具体实现
+    // 状态切换条件
     switch: creep => creep.updateState()
 })

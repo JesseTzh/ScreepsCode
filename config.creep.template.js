@@ -25,7 +25,7 @@ module.exports = {
     /**
      *   Upgrader模板文件
      */
-    Upgrader_01: ({ genMode: "Config", partsSet: [[WORK, 15], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
+    Upgrader_01: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
     Upgrader_02: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
 
     /**
@@ -43,8 +43,8 @@ module.exports = {
      *   OuterHarvester模板文件
      */
     OuterHarvester_01: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
-    OuterHarvester_02: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
-    OuterHarvester_03: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 12], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
+    OuterHarvester_02: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
+    OuterHarvester_03: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
     //OuterHarvester_04: ({ genMode: "Config", partsSet: [[WORK, 0], [MOVE, 7], [CARRY, 15]], spawnName: "Home", roomName: "E6S22" }),
     //OuterHarvester_05: ({ genMode: "Config", partsSet: [[WORK, 0], [MOVE, 7], [CARRY, 15]], spawnName: "Home", roomName: "E6S22" }),
 
@@ -56,5 +56,5 @@ module.exports = {
 
     Tank_01: ({ genMode: "Config", partsSet: [[TOUGH, 10], [MOVE, 15], [HEAL, 5]], spawnName: "Home", roomName: "E6S22" }),
 
-    Dps_01: ({ genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "Home", roomName: "E6S22" })
+    Dps_01: ({ genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 5]], spawnName: "Home", roomName: "E6S22" })
 }

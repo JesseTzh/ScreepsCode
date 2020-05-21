@@ -25,7 +25,7 @@ module.exports = config => ({
             logger.info(creep.name + "找不到要攻击的对象")
         }
     },
-    // 状态切换条件，稍后会给出具体实现
+    // 状态切换条件
     switch: creep => {
         // creep 身上没有矿物 && creep 之前的状态为“工作”
         if (creep.room.name !=  config.targetRoomName && creep.memory.working) {

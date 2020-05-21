@@ -1,7 +1,7 @@
 const logger = require('utils.log').getLogger("OuterBuilder");
 
 module.exports = config => ({
-    // 采集能量矿
+    // 从出生点拿去矿物或者去目标房间就地取材
     source: creep => {
         if (creep.room.name != config.targetRoomName) {
             var source = Game.getObjectById(config.sourceId)
@@ -11,7 +11,7 @@ module.exports = config => ({
                     creep.moveTo(source);
                 }
             }
-        } else if (creep.room.name == config.targetRoomName) {
+        } else if (creep.room.name == config.targetRoomName || source.store[RESOURCE_ENERGY] == 0) {
             //如果在其他房间，直接就地采矿
             const target = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
             if (target) {
@@ -22,7 +22,7 @@ module.exports = config => ({
             }
         }
     },
-    // 存储能量逻辑
+    // 建造或维修
     target: creep => {
         if (creep.room.name != config.targetRoomName) {
             creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoomName))
@@ -44,10 +44,11 @@ module.exports = config => ({
                 } else {
                     logger.warn(creep.name + "找不到可建造的建筑点！");
                     creep.emoji("🈳");
+                    creep.memory.RebornFlag = false;
                 }
             }
         }
     },
-    // 状态切换条件，稍后会给出具体实现
+    // 状态切换条件
     switch: creep => creep.updateState()
 })

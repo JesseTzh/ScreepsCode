@@ -16,12 +16,12 @@ function creepManager() {
                 var result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name);
                 if (result != OK) {
                     logger.warn(name + " 重生失败！错误代码：" + result)
-                }else if(result == ERR_NOT_ENOUGH_ENERGY){
+                } else if (result == ERR_NOT_ENOUGH_ENERGY) {
                     Memory.creeps[name].RebornFailTimes ? Memory.creeps[name].RebornFailTimes += 1 : Memory.creeps[name].RebornFailTimes = 1;
                 } else {
                     logger.info('正在重生 : ' + name);
                     //删除之前Creep记忆
-                    delete Memory.creeps[name];
+                    //delete Memory.creeps[name];
                 }
             }
             else {

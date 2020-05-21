@@ -20,6 +20,6 @@ module.exports = {
     //Mine 
     MINE: ['5bbcb30440062e4259e93fe8'],
 
-    //EXTENSION ID
-    //EXTENSION:
+    //OutsideRoom 外矿房间列表
+    OUTSIDEROOM: [["E6S23","E5S22"]]
 }

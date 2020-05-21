@@ -42,6 +42,6 @@ module.exports = config => ({
             }
         }
     },
-    // 状态切换条件，稍后会给出具体实现
+    // 状态切换条件
     switch: creep => creep.updateState()
 })

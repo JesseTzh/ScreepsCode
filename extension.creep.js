@@ -55,7 +55,7 @@ const creepExtension = {
                 logger.info(this.name + "正在续命...");
                 this.moveTo(target);
                 return;
-            } else {
+            } else if(!target){
                 logger.info(this.name + "续不动了...");
             }
         }

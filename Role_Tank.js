@@ -32,7 +32,7 @@ module.exports = config => ({
             creep.emoji("🤕");
         }
     },
-    // 状态切换条件，稍后会给出具体实现
+    // 状态切换条件
     switch: creep => {
         // creep 身上没有矿物 && creep 之前的状态为“工作”
         if (creep.hits / creep.hitsMax < 0.5 && creep.memory.working) {
