@@ -42,7 +42,7 @@ const creepExtension = {
             this.say(word);
         }
     },
-    selfFix(){
+    selfFix() {
         if (this.ticksToLive < 1400) {
             //闲着没事做就去续命
             var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -60,22 +60,15 @@ const creepExtension = {
             }
         }
     },
-    selfRecycle(){
-        var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => {
-                return structure.structureType == STRUCTURE_SPAWN;
-            }
-        });
-        if(!target){
-            const creepTemplateConfig = creepTemplateConfigs[name];
-            target = Game.spawns[creepTemplateConfig.spawnName];
-        }
+    selfRecycle() {
+        const creepTemplateConfig = creepTemplateConfigs[name];
+        const target = Game.spawns[creepTemplateConfig.spawnName];
         if (target && target.recycleCreep(this) == ERR_NOT_IN_RANGE) {
             this.emoji("🌍");
             logger.info(this.name + "正在将自己回收再利用...");
             this.moveTo(target);
             return;
-        } else{
+        } else {
             logger.info(this.name + "无法回收自己");
         }
     }
