@@ -23,8 +23,9 @@ module.exports = config => ({
     // 存储能量逻辑
     target: creep => {
         if (creep.room.name == config.targetRoomName) {
+            //在外房间沿途修理Road
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => structure.hits < structure.hitsMax
+                filter: (structure) => structure.hits < structure.hitsMax && structure.structureType == STRUCTURE_ROAD
             });
             if (target) {
                 if (creep.repair(target) == ERR_NOT_IN_RANGE) {
