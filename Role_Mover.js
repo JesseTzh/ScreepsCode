@@ -4,7 +4,7 @@ const CONFIG = require('config')
 
 function freeJob(creep) {
     //寻找遗弃资源
-    const target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+    var target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
     if (target && creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()) {
         logger.info(creep.name + "发现遗弃资源！");
         var result = creep.pickup(target)
@@ -15,7 +15,17 @@ function freeJob(creep) {
             //如果捡到了除了能量之外的资源要去清理背包
             creep.memory.NeedCleanBag = true;
         }
-    } else {
+    } else if(!target){
+        //尝试提取墓碑中的资源
+        target = creep.pos.findClosestByRange(FIND_TOMBSTONES);
+        if(target && target.store[RESOURCE_ENERGY] > 0 && creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()){
+            logger.info(creep.name + "发现墓碑资源！");
+            if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(storage);
+            }
+        }
+    }
+    else {
         logger.info(creep.name + "找不到被遗弃的资源！尝试续命...");
         creep.selfFix();
     }
