@@ -25,7 +25,7 @@ module.exports = config => ({
     target: creep => {
         var target = Game.getObjectById(config.targetId);
         //如默认储能建筑已满/不存在则存储至最近的 EXTENSION/SPAWN
-        if (!target || target.store.getFreeCapacity(RESOURCE_ENERGY) == 0) {
+        if (!target || target.store.getFreeCapacity(RESOURCE_ENERGY) < 2) {
             logger.debug(creep.name + "距离矿点最近Link不存在/已存满，转存至最近的 EXTENSION/SPAWN");
             target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
@@ -64,6 +64,6 @@ module.exports = config => ({
         }
 
     },
-    // 状态切换条件，稍后会给出具体实现
+    // 状态切换条件
     switch: creep => creep.updateState()
 })
