@@ -21,5 +21,5 @@ module.exports = {
     MINE: ['5bbcb30440062e4259e93fe8'],
 
     //OutsideRoom 外矿房间列表
-    OUTSIDEROOM: [["E6S23","E5S22"]]
+    OUTSIDEROOM: ["E6S23","E5S22"]
 }

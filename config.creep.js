@@ -65,11 +65,11 @@ module.exports = {
      *          targetId:能量储存点
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    //OuterHarvester_01: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: '5ec4ff193cbdd7055e454d74', pathFinderPoint: [[49, 21]] }),
+    OuterHarvester_01: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: '5ec4ff193cbdd7055e454d74', pathFinderPoint: [[49, 21]] }),
     //OuterHarvester_02: outerharvester({ sourceId: '5bbcad489099fc012e637092', targetRoomName: "E6S23", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[38, 0]] }),
     //OuterHarvester_03: outerharvester({ sourceId: '5bbcad489099fc012e637092', targetRoomName: "E6S23", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[38, 0]] }),
-    //OuterHarvester_04: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4b', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[32, 49]] }),
-    //OuterHarvester_05: outerharvester({ sourceId: '5bbcad3a9099fc012e636e49', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[32, 49]] }),
+    OuterHarvester_04: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4b', targetRoomName: "E5S21", targetId: '5ec6641c44d03cd960f7370e', pathFinderPoint: [[32, 49]] }),
+    OuterHarvester_05: outerharvester({ sourceId: '5bbcad3a9099fc012e636e49', targetRoomName: "E5S21", targetId: '5ec66bfdeb43912369bc0e6b', pathFinderPoint: [[32, 49]] }),
 
     /**
      *   OuterClaimer配置文件
@@ -78,7 +78,7 @@ module.exports = {
      *          targetRoomName:Controller所对应房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    //OuterClaimer_01: claimer({ sourceId: ['5bbcad3a9099fc012e636e4d','5bbcad489099fc012e637091'], targetRoomName: ['E5S22','E6S23'], pathFinderPoint: [[49, 21]] }),
+    OuterClaimer_01: claimer({ sourceId: ['5bbcad3a9099fc012e636e4d','5bbcad3a9099fc012e636e4a'], targetRoomName: ['E5S22','E5S21'], pathFinderPoint: [[49, 21]] }),
 
     /**
      *   OuterBuilder配置文件
@@ -87,7 +87,7 @@ module.exports = {
      *          targetRoomName:所要去的房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    //OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", pathFinderPoint: [[23, 48]] }),
+    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", pathFinderPoint: [[23, 48]] }),
 
     /**
      *   OuterMover配置文件
@@ -96,7 +96,9 @@ module.exports = {
      *          targetRoomName:所要去的外矿房间名称
      *          targetId:能量存储目标建筑
      */
-    //OuterMover_01: outmover({ sourceId: '5ec4ff193cbdd7055e454d74', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0] }),
+    OuterMover_01: outmover({ sourceId: '5ec4ff193cbdd7055e454d74', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0] }),
+    OuterMover_02: outmover({ sourceId: '5ec6641c44d03cd960f7370e', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0] }),
+    OuterMover_03: outmover({ sourceId: '5ec66bfdeb43912369bc0e6b', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0] }),
 
     /**
      *   Tank配置文件
@@ -114,5 +116,5 @@ module.exports = {
      *          targetRoomName:所要去挨揍的房间名称
      *          pathFinderPoint:辅助寻路点位，pathFinderPoint[0][n]是安全房的坐标，pathFinderPoint[1][n]是挨揍房的坐标
      */
-    //Dps_01: dps({ targetRoomName: "E6S23", pathFinderPoint: [[38, 1]] })
+    Dps_01: dps({ targetRoomName: "E6S23", pathFinderPoint: [[38, 1]] })
 }

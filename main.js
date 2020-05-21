@@ -11,9 +11,10 @@ module.exports.loop = function () {
 
     //矿点余量监测
     tools.energySourceMonitor();
+
     //是否有AI占领者
     tools.detectRoomInvaderCore();
-
+    
     //建筑管理
     constructionTower.towerWork();
     constructionLink.linkTransfer();

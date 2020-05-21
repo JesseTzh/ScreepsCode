@@ -38,6 +38,7 @@ module.exports = {
      *   Mover模板文件
      */
     Mover_01: ({ genMode: "Config", partsSet: [[WORK, 0], [MOVE, 7], [CARRY, 15]], spawnName: "Home", roomName: "E6S22" }),
+    Mover_02: ({ genMode: "Config", partsSet: [[WORK, 0], [MOVE, 7], [CARRY, 15]], spawnName: "Home", roomName: "E6S22" }),
 
     /**
      *   OuterHarvester模板文件
@@ -45,14 +46,16 @@ module.exports = {
     OuterHarvester_01: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
     OuterHarvester_02: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
     OuterHarvester_03: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
-    //OuterHarvester_04: ({ genMode: "Config", partsSet: [[WORK, 0], [MOVE, 7], [CARRY, 15]], spawnName: "Home", roomName: "E6S22" }),
-    //OuterHarvester_05: ({ genMode: "Config", partsSet: [[WORK, 0], [MOVE, 7], [CARRY, 15]], spawnName: "Home", roomName: "E6S22" }),
+    OuterHarvester_04: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
+    OuterHarvester_05: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
 
     OuterClaimer_01: ({ genMode: "Config", partsSet: [[MOVE, 3], [CLAIM, 3]], spawnName: "Home", roomName: "E6S22" }),
 
     OuterBuilder: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
 
-    OuterMover_01: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 8], [CARRY, 16]], spawnName: "Home", roomName: "E6S22" }),
+    OuterMover_01: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 10], [CARRY, 20]], spawnName: "Home", roomName: "E6S22" }),
+    OuterMover_02: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 10], [CARRY, 20]], spawnName: "Home", roomName: "E6S22" }),
+    OuterMover_03: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 10], [CARRY, 20]], spawnName: "Home", roomName: "E6S22" }),
 
     Tank_01: ({ genMode: "Config", partsSet: [[TOUGH, 10], [MOVE, 15], [HEAL, 5]], spawnName: "Home", roomName: "E6S22" }),
 

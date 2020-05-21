@@ -28,8 +28,8 @@ function freeJob(creep) {
             if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
+            return;
         }
-        return;
     }
     if (!target) {
         logger.info(creep.name + "找不到被遗弃的资源！尝试续命...");
