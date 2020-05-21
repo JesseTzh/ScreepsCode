@@ -46,7 +46,7 @@ module.exports = config => ({
                 }
             }
             //如所有 EXTENSION/SPAWN/TOWER 都已放满则存入 STORAGE/CONTAINER
-            if (!target && backUpTargetId) {
+            if (!target && config.backUpTargetId) {
                 logger.debug(creep.name + "其余建筑已满，转存入冗余储能建筑 STORAGE/CONTAINER");
                 target = Game.getObjectById(config.backUpTargetId);
             }

@@ -67,7 +67,7 @@ module.exports = config => ({
         //如果未达房间能量上限
         if (creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
             //优先从冗余储能建筑提取能量：只有未达房间能量上限时才从 STORAGE 中提取能量，只有达到房间能量上限才向 STORAGE 储存能量，避免原地举重现象
-            var source = Game.getObjectById(CONFIG.STORAGE)
+            var source = Game.getObjectById(config.storageId)
             if (!source || source.store[RESOURCE_ENERGY] == 0) {
                 //冗余储能建筑消耗完毕，使用Link中的能量
                 for (let i = 0; i < config.sourceId.length; i++) {

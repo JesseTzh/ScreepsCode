@@ -19,7 +19,18 @@ module.exports = config => ({
     },
     // 存储能量逻辑
     target: creep => {
-        const target = Game.getObjectById(config.targetId);
+        if (creep.room.name == config.targetRoomName) {
+            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => structure.hits < structure.hitsMax && structure.structureType == STRUCTURE_CONTAINER
+            });
+            if (target) {
+                if (creep.repair(target) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                }
+                return;
+            }
+        }
+        var target = Game.getObjectById(config.targetId);
         if (target) {
             var result = creep.transfer(target, RESOURCE_ENERGY)
             if (result == ERR_NOT_IN_RANGE) {
