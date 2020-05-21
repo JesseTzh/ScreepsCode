@@ -25,14 +25,14 @@ module.exports = {
     /**
      *   Upgrader模板文件
      */
-    Upgrader_01: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
+    Upgrader_01: ({ genMode: "Config", partsSet: [[WORK, 15], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
     Upgrader_02: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
 
     /**
      *   Builder模板文件
      */
-    //Builder_01: ({ genMode: "Config", partsSet: [[WORK, 5], [MOVE, 15], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
-    //Builder_02: ({ genMode: "Config", partsSet: [[WORK, 5], [MOVE, 15], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
+    Builder_01: ({ genMode: "Config", partsSet: [[WORK, 5], [MOVE, 15], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
+    Builder_02: ({ genMode: "Config", partsSet: [[WORK, 5], [MOVE, 15], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
 
     /**
      *   Mover模板文件
@@ -52,7 +52,9 @@ module.exports = {
 
     OuterBuilder: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
 
-    OuterMover: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 8], [CARRY, 16]], spawnName: "Home", roomName: "E6S22" }),
+    OuterMover_01: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 8], [CARRY, 16]], spawnName: "Home", roomName: "E6S22" }),
 
-    Tank_01: ({ genMode: "Config", partsSet: [[TOUGH, 10], [MOVE, 15], [HEAL, 5]], spawnName: "Home", roomName: "E6S22" })
+    Tank_01: ({ genMode: "Config", partsSet: [[TOUGH, 10], [MOVE, 15], [HEAL, 5]], spawnName: "Home", roomName: "E6S22" }),
+
+    Dps_01: ({ genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "Home", roomName: "E6S22" })
 }
