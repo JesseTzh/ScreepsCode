@@ -22,17 +22,16 @@ module.exports = config => ({
     },
     // 存储能量逻辑
     target: creep => {
-        if (creep.room.name == config.targetRoomName) {
-            //在外房间沿途修理Road
-            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => structure.hits < structure.hitsMax && structure.structureType == STRUCTURE_ROAD
-            });
-            if (target) {
-                if (creep.repair(target) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
-                }
-                return;
+        //在外房间沿途修理Road
+        var target = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+            filter: (structure) => structure.hits / structure.hitsMax <= 0.5 && structure.structureType == STRUCTURE_ROAD
+        });
+        if (target.length) {
+            logger.info(creep.name + "发现待维修道路！");
+            if (creep.repair(target[0]) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target[0]);
             }
+            return;
         }
         var target = Game.getObjectById(config.targetId);
         if (target) {
