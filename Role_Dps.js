@@ -22,7 +22,7 @@ module.exports = config => ({
             }
         } else {
             logger.info(creep.name + "找不到要攻击的对象")
-            creep.memory.RebornFlag = false;
+            creep.memory.RebornFlag = "No";
         }
     },
     // 状态切换条件

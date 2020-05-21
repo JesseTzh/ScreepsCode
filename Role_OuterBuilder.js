@@ -1,23 +1,30 @@
 const logger = require('utils.log').getLogger("OuterBuilder");
 
+function getEnergyFromStorage(creep,sourceId){
+    var source = Game.getObjectById(sourceId)
+    if (source && source.store[RESOURCE_ENERGY] > 0) {
+        if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            creep.emoji("🔽");
+            creep.moveTo(source);
+        }
+    }
+}
+
 module.exports = config => ({
     // 从出生点拿去矿物或者去目标房间就地取材
     source: creep => {
         if (creep.room.name != config.targetRoomName) {
-            var source = Game.getObjectById(config.sourceId)
-            if (source && source.store[RESOURCE_ENERGY] > 0) {
-                if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.emoji("🔽");
-                    creep.moveTo(source);
-                }
-            }
+            getEnergyFromStorage(creep,config.sourceId);
         } else if (creep.room.name == config.targetRoomName || source.store[RESOURCE_ENERGY] == 0) {
             //如果在其他房间，直接就地采矿
             const target = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
             if (target) {
-                logger.info(creep.name + "就地取材");
-                if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
+                logger.info(creep.name + "尝试就地取材");
+                var result = creep.harvest(target);
+                if (result == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
+                }else if(result != OK){
+                    getEnergyFromStorage(creep,config.sourceId);
                 }
             }
         }
@@ -34,17 +41,17 @@ module.exports = config => ({
                     creep.moveTo(targets[0]);
                 }
             } else {
-                targets = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => structure.hits < structure.hitsMax
                 });
-                if (targets) {
-                    if (creep.repair(targets) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(targets);
+                if (targets.length) {
+                    if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(targets[0]);
                     }
                 } else {
                     logger.warn(creep.name + "找不到可建造的建筑点！");
                     creep.emoji("🈳");
-                    creep.memory.RebornFlag = false;
+                    creep.memory.RebornFlag = "No";
                 }
             }
         }
