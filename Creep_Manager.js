@@ -13,17 +13,19 @@ function creepManager() {
                     const creepTemplate = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName);
                     var template = creepTemplate.getTemplateByConfig(creepTemplateConfig);
                 }
-                //删除之前Creep记忆
-                delete Memory.creeps[name];
                 var result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name);
                 if (result != OK) {
                     logger.warn(name + " 重生失败！错误代码：" + result)
+                }else if(result == ERR_NOT_ENOUGH_ENERGY){
+                    Memory.creeps[name].RebornFailTimes ? Memory.creeps[name].RebornFailTimes += 1 : Memory.creeps[name].RebornFailTimes = 1;
                 } else {
                     logger.info('正在重生 : ' + name);
+                    //删除之前Creep记忆
+                    delete Memory.creeps[name];
                 }
             }
             else {
-                logger.error(this.name + "找不到模板文件")
+                logger.error(name + "找不到模板文件")
             }
             return;
         }
