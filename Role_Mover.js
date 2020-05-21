@@ -15,17 +15,23 @@ function freeJob(creep) {
             //如果捡到了除了能量之外的资源要去清理背包
             creep.memory.NeedCleanBag = true;
         }
-    } else if(!target){
+        return;
+    } else if (!target) {
         //尝试提取墓碑中的资源
-        target = creep.pos.findClosestByRange(FIND_TOMBSTONES);
-        if(target && target.store[RESOURCE_ENERGY] > 0 && creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()){
+        target = creep.pos.findClosestByRange(FIND_TOMBSTONES, {
+            filter: (structure) => {
+                return structure.store[RESOURCE_ENERGY] > 0;
+            }
+        });
+        if (target && creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()) {
             logger.info(creep.name + "发现墓碑资源！");
-            if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(storage);
+            if (creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(target);
             }
         }
+        return;
     }
-    else {
+    if (!target) {
         logger.info(creep.name + "找不到被遗弃的资源！尝试续命...");
         creep.selfFix();
     }
@@ -82,7 +88,7 @@ module.exports = config => ({
                 //冗余储能建筑消耗完毕，使用Link中的能量
                 for (let i = 0; i < config.sourceId.length; i++) {
                     source = Game.getObjectById(config.sourceId[i]);
-                    if (source.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
+                    if (source.store[RESOURCE_ENERGY] > 0) {
                         break;
                     }
                 }
@@ -101,7 +107,7 @@ module.exports = config => ({
             var source;
             for (let i = 0; i < config.sourceId.length; i++) {
                 source = Game.getObjectById(config.sourceId[i]);
-                if (source.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
+                if (source.store[RESOURCE_ENERGY] > 0) {
                     break;
                 }
             }
