@@ -5,7 +5,7 @@ const creepTemplateConfigs = require('config.creep.template')
 function creepManager() {
     for (name in creepConfigs) {
         if (!Game.creeps[name]) {
-            if(Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag == "No"){
+            if(Memory.creeps[name] && Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag == "No"){
                 logger.info('取消重生：' + name);
                 continue;
             }
