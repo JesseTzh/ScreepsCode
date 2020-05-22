@@ -31,6 +31,7 @@ function freeJob(creep) {
             return;
         }
     }
+    logger.info(creep.name + ":" + target);
     if (!target) {
         logger.info(creep.name + "找不到被遗弃的资源！尝试续命...");
         creep.selfFix();
@@ -155,6 +156,13 @@ module.exports = config => ({
                         }
                     }
                 }
+            }
+        }
+        //如果升级Controller所用Link能量断供则向其运输能量
+        if(config.upgradeId){
+            var upgradeId = Game.getObjectById(config.upgradeId);
+            if(upgradeId.store.getFreeCapacity(RESOURCE_ENERGY) == 0){
+                target = upgradeId
             }
         }
         //如果 SPAWN/EXTENSION/TOWER 都已满,根据config文件配置的参数决定是否进一步将能量存入 冗余能量存储建筑
