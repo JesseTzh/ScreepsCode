@@ -39,7 +39,7 @@ module.exports = {
      *          backUpSourceId:备用取能建筑，一般为Storage，初期可不填写
      */
     Upgrader_01: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[0], backUpSourceId: CONFIG.STORAGE[0] }),
-    //Upgrader_02: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[0], backUpSourceId: CONFIG.STORAGE[0] }),
+    Upgrader_02: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[0], backUpSourceId: CONFIG.STORAGE[0] }),
 
     /**
      *   Builder配置文件
@@ -78,7 +78,8 @@ module.exports = {
      *          targetRoomName:Controller所对应房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterClaimer_01: claimer({ sourceId: ['5bbcad3a9099fc012e636e4d','5bbcad3a9099fc012e636e4a'], targetRoomName: ['E5S22','E5S21'], pathFinderPoint: [[49, 21]] }),
+    OuterClaimer_01: claimer({ sourceId: ['5bbcad3a9099fc012e636e4d', '5bbcad3a9099fc012e636e4a', '5bbcad489099fc012e637091'], targetRoomName: ['E5S22', 'E5S21', 'E6S23'], pathFinderPoint: [[49, 21]] }),
+    OuterClaimer_02: claimer({ sourceId: ['5bbcad3a9099fc012e636e4d', '5bbcad489099fc012e637091'], targetRoomName: ['E5S22', 'E6S23'], pathFinderPoint: [[49, 21]] }),
 
     /**
      *   OuterBuilder配置文件
@@ -87,7 +88,7 @@ module.exports = {
      *          targetRoomName:所要去的房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22", pathFinderPoint: [[23, 48]] }),
+    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E6S23", pathFinderPoint: [[23, 48]] }),
 
     /**
      *   OuterMover配置文件

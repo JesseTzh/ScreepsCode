@@ -27,7 +27,7 @@ module.exports = config => ({
             filter: (structure) => structure.hits / structure.hitsMax <= 0.5 && structure.structureType == STRUCTURE_ROAD
         });
         if (target.length) {
-            logger.info(creep.name + "发现待维修道路！");
+            logger.info(creep.name + "尝试维护沿途道路！");
             if (creep.repair(target[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target[0]);
             }

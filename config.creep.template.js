@@ -49,11 +49,12 @@ module.exports = {
     OuterHarvester_04: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
     OuterHarvester_05: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
 
-    OuterClaimer_01: ({ genMode: "Config", partsSet: [[MOVE, 3], [CLAIM, 3]], spawnName: "Home", roomName: "E6S22" }),
+    OuterClaimer_01: ({ genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 2]], spawnName: "Home", roomName: "E6S22" }),
+    OuterClaimer_02: ({ genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 2]], spawnName: "Home", roomName: "E6S22" }),
 
     OuterBuilder: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
 
-    OuterMover_01: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 10], [CARRY, 20]], spawnName: "Home", roomName: "E6S22" }),
+    OuterMover_01: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 8], [CARRY, 16]], spawnName: "Home", roomName: "E6S22" }),
     OuterMover_02: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 10], [CARRY, 20]], spawnName: "Home", roomName: "E6S22" }),
     OuterMover_03: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 10], [CARRY, 20]], spawnName: "Home", roomName: "E6S22" }),
 
