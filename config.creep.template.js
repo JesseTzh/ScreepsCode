@@ -44,7 +44,7 @@ module.exports = {
      *   OuterHarvester模板文件
      */
     OuterHarvester_01: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
-    OuterHarvester_02: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
+    OuterHarvester_02: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
     OuterHarvester_03: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
     OuterHarvester_04: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
     OuterHarvester_05: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
@@ -55,10 +55,13 @@ module.exports = {
     OuterBuilder: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
 
     OuterMover_01: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 8], [CARRY, 16]], spawnName: "Home", roomName: "E6S22" }),
-    OuterMover_02: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 10], [CARRY, 20]], spawnName: "Home", roomName: "E6S22" }),
-    OuterMover_03: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 10], [CARRY, 20]], spawnName: "Home", roomName: "E6S22" }),
+    OuterMover_02: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 22]], spawnName: "Home", roomName: "E6S22" }),
+    OuterMover_03: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 22]], spawnName: "Home", roomName: "E6S22" }),
+    OuterMover_04: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 8], [CARRY, 16]], spawnName: "Home", roomName: "E6S22" }),
 
     Tank_01: ({ genMode: "Config", partsSet: [[TOUGH, 10], [MOVE, 15], [HEAL, 5]], spawnName: "Home", roomName: "E6S22" }),
 
-    Dps_01: ({ genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 5]], spawnName: "Home", roomName: "E6S22" })
+    Dps_01: ({ genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 5]], spawnName: "Home", roomName: "E6S22" }),
+
+    Colonist: ({ genMode: "Config", partsSet: [[MOVE, 1], [CLAIM, 1]], spawnName: "Home", roomName: "E6S22" }),
 }
