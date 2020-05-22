@@ -4,24 +4,37 @@ const SYS_CONFIG = require('config.system.setting');
 module.exports = config => ({
     // 提取能量矿
     source: creep => {
-        var source = Game.getObjectById(config.sourceId);
-        if (!source || source.store.getUsedCapacity(RESOURCE_ENERGY) < 1) {
-            logger.warn(creep.name + ': 默认取能建筑存量为空或找不到指定的取能建筑！')
-            source = null;
-        }
-        if (!source) {
-            //默认取能建筑为空，尝试从其他冗余储能建筑提取能量
-            logger.info(creep.name + "尝试从冗余建筑获取");
-            source = Game.getObjectById(config.backUpSourceId);
-            //冗余储能建筑也为空，若在配置文件中允许，则从 EXTENSION/SPAWN 提取能量
-            if (!source && SYS_CONFIG.ALLOW_UPGRADER_FROM_SE) {
-                logger.info(creep.name + "尝试从 EXTENSION/SPAWN 获取");
-                source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+        if (config.pickEnergy) {
+            if (!source) {
+                source = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
+                        return (structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_LINK || structure.structureType == STRUCTURE_STORAGE) &&
                             structure.store[RESOURCE_ENERGY] > 0;
                     }
                 });
+            }
+        }
+
+        if (!source || !config.pickEnergy) {
+            var source = Game.getObjectById(config.sourceId);
+            if (!source || source.store.getUsedCapacity(RESOURCE_ENERGY) < 1) {
+                logger.warn(creep.name + ': 默认取能建筑存量为空或找不到指定的取能建筑！')
+                source = null;
+            }
+            if (!source) {
+                //默认取能建筑为空，尝试从其他冗余储能建筑提取能量
+                logger.info(creep.name + "尝试从冗余建筑获取");
+                source = Game.getObjectById(config.backUpSourceId);
+                //冗余储能建筑也为空，若在配置文件中允许，则从 EXTENSION/SPAWN 提取能量
+                if (!source && SYS_CONFIG.ALLOW_UPGRADER_FROM_SE) {
+                    logger.info(creep.name + "尝试从 EXTENSION/SPAWN 获取");
+                    source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
+                                structure.store[RESOURCE_ENERGY] > 0;
+                        }
+                    });
+                }
             }
         }
         if (source) {

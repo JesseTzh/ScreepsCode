@@ -11,6 +11,7 @@ const outmover = require('Role_OuterMover')
 const tank = require('Role_Tank')
 const dps = require('Role_Dps')
 const colonist = require('Role_Colonists')
+const dismantler = require('Role_Dismantler')
 
 
 module.exports = {
@@ -24,6 +25,10 @@ module.exports = {
      */
     Harvester_01: harvester({ sourceId: CONFIG.ENERGY_SOURCE[0], targetId: CONFIG.LINK[0][0], backUpTargetId: CONFIG.STORAGE[0] }),
     Harvester_02: harvester({ sourceId: CONFIG.ENERGY_SOURCE[1], targetId: CONFIG.LINK[1][0], backUpTargetId: CONFIG.STORAGE[0] }),
+    Harvester_03: harvester({ sourceId: CONFIG.ENERGY_SOURCE[2], targetId: '5ec7953511de04afe91a376c', backUpTargetId: '5ec7a7741d4c766da8d5c3e8'}),
+    Harvester_04: harvester({ sourceId: CONFIG.ENERGY_SOURCE[2], targetId: '5ec7953511de04afe91a376c', backUpTargetId: '5ec7a7741d4c766da8d5c3e8' }),
+    //Harvester_05: harvester({ sourceId: CONFIG.ENERGY_SOURCE[2], targetId: '5ec7953511de04afe91a376c', backUpTargetId: '5ec7a7741d4c766da8d5c3e8' }),
+    Harvester_06: harvester({ sourceId: CONFIG.ENERGY_SOURCE[3], targetId: '5ec7953511de04afe91a376c', backUpTargetId: '5ec7a7741d4c766da8d5c3e8' }),
 
     /**
      *   Mover配置文件
@@ -31,7 +36,7 @@ module.exports = {
      *          sourceId:数组形式存储允许Mover提取能量的建筑ID
      *          storageId:冗余资源存放建筑
      */
-    Mover_01: mover({ sourceId: [CONFIG.LINK[0][0], CONFIG.LINK[1][0]], storageId: CONFIG.STORAGE[0] }),
+    Mover_01: mover({ sourceId: [CONFIG.LINK[0][0], CONFIG.LINK[1][0]], storageId: CONFIG.STORAGE[0], upgradeId: CONFIG.LINK[0][1] }),
 
     /**
      *   Upgrader配置文件
@@ -41,6 +46,14 @@ module.exports = {
      */
     Upgrader_01: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[0], backUpSourceId: CONFIG.STORAGE[0] }),
     Upgrader_02: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[0], backUpSourceId: CONFIG.STORAGE[0] }),
+    Upgrader_03: upgrader({ sourceId: '5ec7953511de04afe91a376c', pickEnergy: true}),
+    Upgrader_04: upgrader({ sourceId: '5ec7953511de04afe91a376c', pickEnergy: false }),
+    Upgrader_05: upgrader({ sourceId: '5ec7953511de04afe91a376c', pickEnergy: true }),
+    Upgrader_06: upgrader({ sourceId: '5ec7953511de04afe91a376c', pickEnergy: true }),
+    Upgrader_07: upgrader({ sourceId: '5ec7953511de04afe91a376c', pickEnergy: true }),
+    Upgrader_08: upgrader({ sourceId: '5ec7953511de04afe91a376c', pickEnergy: true }),
+    Upgrader_09: upgrader({ sourceId: '5ec7953511de04afe91a376c', pickEnergy: true }),
+    Upgrader_10: upgrader({ sourceId: '5ec7953511de04afe91a376c', pickEnergy: true }),
 
     /**
      *   Builder配置文件
@@ -48,6 +61,12 @@ module.exports = {
      *          sourceId:默认取能建筑
      */
     //Builder_01: builder({sourceId: CONFIG.STORAGE[0]}),
+    //Builder_02: builder({sourceId: '5ec7953511de04afe91a376c'}),
+
+    //Dismantler_01: dismantler({targetId: '5ec7953511de04afe91a376c'}),
+    // Dismantler_02: dismantler({targetId: '5ec7a7741d4c766da8d5c3e8'}),
+    // Dismantler_03: dismantler({targetId: '5ec7a7741d4c766da8d5c3e8'}),
+    // Dismantler_04: dismantler({targetId: '5ec7a7741d4c766da8d5c3e8'}),
 
     /**
      *   Miner配置文件
@@ -88,8 +107,10 @@ module.exports = {
      *          sourceId:默认取能建筑
      *          targetRoomName:所要去的房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
-     */
-    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E9S21", pathFinderPoint: [[23, 48]] }),
+     */                                                                     //E8S20
+    //OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E9S21", pathFinderPoint: [[23, 48]], transferRoom: "E8S20" }),
+    //OuterBuilder_1: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E9S21", pathFinderPoint: [[23, 48]], transferRoom: "E8S20" }),
+    OuterBuilder_2: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E9S21", pathFinderPoint: [[23, 48]], transferRoom: "E8S20" }),
 
     /**
      *   OuterMover配置文件

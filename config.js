@@ -3,7 +3,7 @@ module.exports = {
     SPAWN: ['5eb569554dac05ff668051db'],
 
     //能量矿点 ID
-    ENERGY_SOURCE: ['5bbcad489099fc012e63708d','5bbcad489099fc012e63708f'],
+    ENERGY_SOURCE: ['5bbcad489099fc012e63708d','5bbcad489099fc012e63708f','5bbcad7a9099fc012e637574','5bbcad7a9099fc012e637576'],
 
     //Tower ID
     TOWER: ['5eb7147d7f3603f6f5b2f2ec','5ebbb74020844551b84bec76'],

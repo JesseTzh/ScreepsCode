@@ -3,15 +3,18 @@ const logger = require('utils.log').getLogger("Dps");
 module.exports = config => ({
     // 前往中转房间
     source: creep => {
-        if (config.transferRoom && creep.room.name != config.transferRoom) {
-            creep.emoji("🚩");
-            creep.moveTo(new RoomPosition(16, 14, config.transferRoom))
-        } else {
+        if(!creep.memory.transferFlag && config.transferRoom){
+            if (config.transferRoom && creep.room.name != config.transferRoom) {
+                creep.emoji("🏴");
+                creep.moveTo(new RoomPosition(16, 14, config.transferRoom))
+            } else if(creep.room.name == config.transferRoom){
+                creep.memory.transferFlag = true;
+            }
+        }else{
             if (creep.room.name != config.targetRoomName){
                 creep.emoji("🚩");
                 creep.moveTo(new RoomPosition(16, 14, config.targetRoomName))
-            }
-            if (creep.room.controller && creep.room.name == config.targetRoomName) {
+            }else if (creep.room.name == config.targetRoomName && creep.room.controller ) {
                 if (creep.claimController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.controller);
                 }

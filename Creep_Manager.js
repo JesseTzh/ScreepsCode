@@ -18,23 +18,24 @@ function creepManager() {
                     var template = creepTemplate.getTemplateByConfig(creepTemplateConfig);
                 }
                 var result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name);
-                if (result != OK) {
-                    logger.warn(name + " 重生失败！错误代码：" + result)
-                } else if (result == ERR_NOT_ENOUGH_ENERGY) {
+                if (result == ERR_NOT_ENOUGH_ENERGY) {
                     Memory.creeps[name].RebornFailTimes ? Memory.creeps[name].RebornFailTimes += 1 : Memory.creeps[name].RebornFailTimes = 1;
                     if (Memory.creeps[name].RebornFailTimes > 1000) {
                         Game.notify('Creep ' + name + '长达1000ticks复活失败！');
                     }
-                } else {
+                } else if (result == OK) {
                     logger.info('正在重生 : ' + name);
                     //删除之前Creep记忆
                     //delete Memory.creeps[name];
+                    return;
+                } else if(result != OK) {
+                    logger.warn(name + " 重生失败！错误代码：" + result);
                 }
             }
             else {
                 logger.error(name + "找不到模板文件")
             }
-            return;
+
         }
     }
 }
