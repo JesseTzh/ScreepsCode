@@ -12,7 +12,7 @@ module.exports = config => ({
         });
         if(source) {
             if(creep.withdraw(source) == ERR_NOT_IN_RANGE) {
-                creep.emoji("🔽")
+                creep.say("🔽")
                 creep.moveTo(source);
             }
         }
@@ -22,7 +22,7 @@ module.exports = config => ({
         var target = Game.getObjectById(config.targetId)
         if (target && target.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
             if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.emoji("🔼");
+                creep.say("🔼");
                 creep.moveTo(target);
             }
         }

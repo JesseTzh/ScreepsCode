@@ -5,13 +5,18 @@ module.exports = config => ({
     // 提取能量矿
     source: creep => {
         if (config.pickEnergy) {
-            if (!source) {
-                source = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {
+                var source = creep.pos.findClosestByRange(FIND_RUINS, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_LINK || structure.structureType == STRUCTURE_STORAGE) &&
-                            structure.store[RESOURCE_ENERGY] > 0;
+                        return structure.store[RESOURCE_ENERGY] > 0;
                     }
                 });
+            if(!source){
+                source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+                var result = creep.pickup(source)
+                if (result == ERR_NOT_IN_RANGE) {
+                    creep.say("🚮");
+                    creep.moveTo(source);
+                }
             }
         }
 
@@ -39,11 +44,11 @@ module.exports = config => ({
         }
         if (source) {
             if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.emoji("🔽");
+                creep.say("🔽");
                 creep.moveTo(source);
             }
         } else {
-            creep.emoji("🚬");
+            creep.say("🚬");
             logger.warn(creep.name + "找不到可用的取能设施")
             creep.selfFix();
         }
@@ -53,7 +58,7 @@ module.exports = config => ({
     target: creep => {
         const controller = creep.room.controller
         if (creep.upgradeController(controller) == ERR_NOT_IN_RANGE) {
-            creep.emoji("💡");
+            creep.say("💡");
             creep.moveTo(controller);
         }
     },

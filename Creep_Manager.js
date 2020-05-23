@@ -6,7 +6,7 @@ function creepManager() {
     for (name in creepConfigs) {
         if (!Game.creeps[name]) {
             if (Memory.creeps[name] && Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag == "No") {
-                logger.info('取消重生：' + name);
+                logger.info(name + '已停止重生');
                 continue;
             }
             if (name in creepTemplateConfigs) {
@@ -19,17 +19,26 @@ function creepManager() {
                 }
                 var result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name);
                 if (result == ERR_NOT_ENOUGH_ENERGY) {
-                    Memory.creeps[name].RebornFailTimes ? Memory.creeps[name].RebornFailTimes += 1 : Memory.creeps[name].RebornFailTimes = 1;
-                    if (Memory.creeps[name].RebornFailTimes > 1000) {
-                        Game.notify('Creep ' + name + '长达1000ticks复活失败！');
-                    }
+                    logger.info(name + "没有足够资源重生");
+                    return;
+                    // !Memory.creeps[name].RebornFailTimes ? Memory.creeps[name].RebornFailTimes = 1 : Memory.creeps[name].RebornFailTimes += 1;
+                    // if (Memory.creeps[name].RebornFailTimes > 1000) {
+                    //     Game.notify('Creep ' + name + '长达1000ticks复活失败！');
+                    // }
                 } else if (result == OK) {
                     logger.info('正在重生 : ' + name);
+                    if (Memory.creeps[name].RebornFailTimes) {
+                        Memory.creeps[name].RebornFailTimes = 0;
+                    }
+                    return;
                     //删除之前Creep记忆
                     //delete Memory.creeps[name];
+                } else if (result == ERR_BUSY) {
+                    logger.info(name + "重生失败，Spawn正忙！");
                     return;
-                } else if(result != OK) {
+                } else if (result != OK) {
                     logger.warn(name + " 重生失败！错误代码：" + result);
+                    continue;
                 }
             }
             else {

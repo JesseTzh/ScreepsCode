@@ -6,7 +6,7 @@ module.exports = config => ({
         var source = Game.getObjectById(config.storageId)
         if (source && source.store[RESOURCE_ENERGY] > 0) {
             if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.emoji("🔽");
+                creep.say("🔽");
                 creep.moveTo(source);
             }
         }else{

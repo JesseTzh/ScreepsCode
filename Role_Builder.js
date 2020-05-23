@@ -19,12 +19,12 @@ module.exports = config => ({
         }
         if (source && source.store.getUsedCapacity(RESOURCE_ENERGY) > 0) {
             if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.emoji("🚚");
+                creep.say("🚚");
                 creep.moveTo(source);
             }
         } else {
             logger.info(creep.name + "找不到可用的取能建筑！");
-            creep.emoji("🈳");
+            creep.say("🈳");
         }
 
     },
@@ -32,13 +32,13 @@ module.exports = config => ({
     target: creep => {
         var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
         if (targets.length) {
-            creep.emoji("🌇");
+            creep.say("🌇");
             if (creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(targets[0]);
             }
         } else {
             logger.warn(creep.name + "找不到可建造的建筑点！")
-            creep.emoji("🈳");
+            creep.say("🈳");
         }
     },
     // 状态切换条件

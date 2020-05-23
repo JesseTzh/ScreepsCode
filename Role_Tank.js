@@ -29,7 +29,7 @@ module.exports = config => ({
         } else {
             var result = creep.heal(creep);
             logger.info("治疗结果：" + result)
-            creep.emoji("🤕");
+            creep.say("🤕");
         }
     },
     // 状态切换条件

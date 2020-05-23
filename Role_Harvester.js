@@ -12,11 +12,11 @@ module.exports = config => ({
         }
         if ((source && source.energy > 0) || (source && source.ticksToRegeneration <= 5 && source.energy == 0)) {
             if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.emoji("⛏️");
+                creep.say("⛏️");
                 creep.moveTo(source);
             }
         } else if (!source || (source.energy == 0 && source.ticksToRegeneration > 5)) {
-            creep.emoji("🚬");
+            creep.say("🚬");
             logger.info(creep.name + "找不到可挖掘的矿点！");
             creep.selfFix();
         }
@@ -48,18 +48,23 @@ module.exports = config => ({
             //如所有 EXTENSION/SPAWN/TOWER 都已放满则存入 STORAGE/CONTAINER
             if (!target && config.backUpTargetId) {
                 logger.debug(creep.name + "其余建筑已满，转存入冗余储能建筑 STORAGE/CONTAINER");
-                target = Game.getObjectById(config.backUpTargetId);
+                target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_TOWER) &&
+                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    }
+                });
             }
         }
         if (target) {
             if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.emoji("🔼");
+                creep.say("🔼");
                 creep.moveTo(target);
             }
         } else {
             //所有建筑已满，无法继续存入矿物，一般存在于前期没有冗余能量存储建筑的情况
             logger.warn(creep.name + "找不到可用的储能设备！")
-            creep.emoji("🈵");
+            creep.say("🈵");
             creep.selfFix();
         }
 

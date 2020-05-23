@@ -36,7 +36,7 @@ var constructionTower = {
     repair: function (tower) {
         //维护函数
         var damage = tower.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => (structure.hits < structure.hitsMax - 200 && structure.structureType != 'rampart') || (structure.structureType == 'rampart' && Game.time % 100 == 0)
+            filter: (structure) => (structure.hits < structure.hitsMax - 200 && structure.structureType != STRUCTURE_RAMPART && structure.structureType != STRUCTURE_WALL) || (structure.structureType == 'rampart' && Game.time % 100 == 0)
         });
         logger.debug("维护目标：" + damage);
         if (damage) {

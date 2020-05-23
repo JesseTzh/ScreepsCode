@@ -5,14 +5,14 @@ module.exports = config => ({
     source: creep => {
         if(!creep.memory.transferFlag && config.transferRoom){
             if (config.transferRoom && creep.room.name != config.transferRoom) {
-                creep.emoji("🏴");
+                creep.say("🏴");
                 creep.moveTo(new RoomPosition(16, 14, config.transferRoom))
             } else if(creep.room.name == config.transferRoom){
                 creep.memory.transferFlag = true;
             }
         }else{
             if (creep.room.name != config.targetRoomName){
-                creep.emoji("🚩");
+                creep.say("🚩");
                 creep.moveTo(new RoomPosition(16, 14, config.targetRoomName))
             }else if (creep.room.name == config.targetRoomName && creep.room.controller ) {
                 if (creep.claimController(creep.room.controller) == ERR_NOT_IN_RANGE) {

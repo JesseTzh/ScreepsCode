@@ -6,7 +6,7 @@ module.exports = {
     ENERGY_SOURCE: ['5bbcad489099fc012e63708d','5bbcad489099fc012e63708f','5bbcad7a9099fc012e637574','5bbcad7a9099fc012e637576'],
 
     //Tower ID
-    TOWER: ['5eb7147d7f3603f6f5b2f2ec','5ebbb74020844551b84bec76'],
+    TOWER: ['5eb7147d7f3603f6f5b2f2ec','5ebbb74020844551b84bec76','5ec890adf62e3fe3d3b86e9c'],
 
     //Link ID,二维数组形式储存，LINK[n][0]为发射端，LINK[n][1]为接收端
     LINK: [['5ebb456dc1f3759ef33fa7f0','5ebb4f9dc6a35d97ede0467f'],['5ec09e77a937d085837a82f3','5ebb4f9dc6a35d97ede0467f']],

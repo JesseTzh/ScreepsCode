@@ -1,6 +1,6 @@
 const mountCreep = require('extension.creep');
 const logger = require('utils.log').getLogger("main");
-const creepTemplateConfigs = require('config.creep.template')
+const creepConfigs = require('config.creep');
 
 // 挂载所有的额外属性和方法
 function mount() {
@@ -31,7 +31,7 @@ function clearMemory() {
         if (!Game.creeps[name] && Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag != "No") {
             delete Memory.creeps[name];
             logger.debug('删除不存在的Creep记录', name);
-        }else if (!(name in creepTemplateConfigs)){
+        }else if (!(name in creepConfigs)){
             delete Memory.creeps[name];
             logger.debug('删除不存在的Creep记录', name);
         }

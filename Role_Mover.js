@@ -9,7 +9,7 @@ function freeJob(creep) {
         logger.info(creep.name + "发现遗弃资源！");
         var result = creep.pickup(target)
         if (result == ERR_NOT_IN_RANGE) {
-            creep.emoji("🚮");
+            creep.say("🚮");
             creep.moveTo(target);
         } else if (result == OK && target.resourceType != RESOURCE_ENERGY) {
             //如果捡到了除了能量之外的资源要去清理背包
@@ -38,7 +38,7 @@ function freeJob(creep) {
     }
 }
 
-function cleanBag(storageId) {
+function cleanBag(storageId,creep) {
     var bagFlag = true;
     for (let resourceType in creep.carry) {
         if (resourceType != RESOURCE_ENERGY) {
@@ -46,7 +46,7 @@ function cleanBag(storageId) {
             let target = Game.getObjectById(storageId);
             if (creep.transfer(target, resourceType) == ERR_NOT_IN_RANGE) {
                 logger.info(creep.name + "正在清理背包");
-                creep.emoji("🧺");
+                creep.say("🧺");
                 creep.moveTo(target);
             };
         }
@@ -78,7 +78,7 @@ module.exports = config => ({
     // 提取能量矿
     source: creep => {
         if (creep.memory.NeedCleanBag) {
-            cleanBag(config.storageId);
+            cleanBag(config.storageId,creep);
             return;
         }
         //如果未达房间能量上限
@@ -115,7 +115,7 @@ module.exports = config => ({
         }
         if (source && source.store[RESOURCE_ENERGY] > 0) {
             if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.emoji("🔽");
+                creep.say("🔽");
                 creep.moveTo(source);
             }
         } else {
@@ -126,7 +126,7 @@ module.exports = config => ({
     // 转移
     target: creep => {
         if (creep.memory.NeedCleanBag) {
-            cleanBag(config.storageId);
+            cleanBag(config.storageId,creep);
             return;
         }
         //优先供给 SPAWN
@@ -181,7 +181,7 @@ module.exports = config => ({
         }
         if (target && target.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
             if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.emoji("🔼");
+                creep.say("🔼");
                 creep.moveTo(target);
             }
         } else {

@@ -6,7 +6,7 @@ module.exports = config => ({
         const source = Game.getObjectById(config.sourceId)
         if (source && source.mineralAmount > 0) {
             if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-                creep.emoji("⛏️");
+                creep.say("⛏️");
                 creep.moveTo(source);
             }
         } else if (source.mineralAmount == 0) {
@@ -23,7 +23,7 @@ module.exports = config => ({
         }
         if (target) {
             if (creep.transfer(target, Game.getObjectById(config.sourceId).mineralType) == ERR_NOT_IN_RANGE) {
-                creep.emoji("🔼");
+                creep.say("🔼");
                 creep.moveTo(target);
             }
         }else{

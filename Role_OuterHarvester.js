@@ -12,7 +12,7 @@ module.exports = config => ({
         }
         var source = Game.getObjectById(config.sourceId)
         if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-            creep.emoji("⛏️");
+            creep.say("⛏️");
             creep.moveTo(source);
         }
     },
@@ -29,7 +29,7 @@ module.exports = config => ({
             }
             var result = creep.transfer(target, RESOURCE_ENERGY)
             if (result == ERR_NOT_IN_RANGE) {
-                creep.emoji("🔼");
+                creep.say("🔼");
                 creep.moveTo(target);
             } else if (result == OK) {
                 creep.room.memory.OuterRoomEnergy == null ? creep.room.memory.OuterRoomEnergy = 300 : creep.room.memory.OuterRoomEnergy += 300;

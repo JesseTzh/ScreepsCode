@@ -37,11 +37,6 @@ const creepExtension = {
         }
         return this.memory.working
     },
-    emoji(word) {
-        if (SYS_CONFIG.EMOJI_DEGUB_MODE) {
-            this.say(word);
-        }
-    },
     selfFix() {
         if (this.ticksToLive < 1400) {
             //闲着没事做就去续命
@@ -51,7 +46,7 @@ const creepExtension = {
                 }
             });
             if (target && target.renewCreep(this) == ERR_NOT_IN_RANGE) {
-                this.emoji("🐸");
+                this.say("🐸");
                 logger.info(this.name + "正在续命...");
                 this.moveTo(target);
                 return;
@@ -61,10 +56,10 @@ const creepExtension = {
         }
     },
     selfRecycle() {
-        const creepTemplateConfig = creepTemplateConfigs[name];
+        const creepTemplateConfig = creepTemplateConfigs[this.name];
         const target = Game.spawns[creepTemplateConfig.spawnName];
         if (target && target.recycleCreep(this) == ERR_NOT_IN_RANGE) {
-            this.emoji("🌍");
+            this.say("🌍");
             logger.info(this.name + "正在将自己回收再利用...");
             this.moveTo(target);
             return;

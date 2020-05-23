@@ -23,11 +23,8 @@ module.exports = {
     //日志输出等级
     LOGGER_LEVEL: "INFO",
 
-    //是否打开EMOJI调试
-    EMOJI_DEGUB_MODE: true,
-
     //房间可用能量高于多少时允许将Link中的能量传输给Upgrader
-    ALLOW_UPGRADER_USE_ENERGY: 0.3,
+    ALLOW_UPGRADER_USE_ENERGY: 0.9,
 
     //房间可用能量低于多少时会被监测函数记录
     ENERGY_ALERT_RATIO: 0.5,

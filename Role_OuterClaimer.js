@@ -21,8 +21,10 @@ module.exports = config => ({
         if (source) {
             if (!source.reservation || source.reservation.ticksToEnd < CONTROLLER_RESERVE_MAX) {
                 if (creep.reserveController(source) == ERR_NOT_IN_RANGE) {
-                    creep.emoji("🔔");
+                    creep.say("🔔");
                     creep.moveTo(source);
+                }else if(creep.reserveController(source) == ERR_INVALID_TARGET){
+                    creep.attackController(source)
                 }
             }
         }
@@ -33,7 +35,7 @@ module.exports = config => ({
     },
     // 存储能量逻辑
     target: creep => {
-        creep.emoji("🚫");
+        creep.say("🚫");
     },
     // 状态切换条件
     switch: creep => creep.updateState()
