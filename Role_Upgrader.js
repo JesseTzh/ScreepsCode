@@ -4,22 +4,35 @@ const SYS_CONFIG = require('config.system.setting');
 module.exports = config => ({
     // 提取能量矿
     source: creep => {
+        //新房间利用遗产迅速发展
         if (config.pickEnergy) {
-                var source = creep.pos.findClosestByRange(FIND_RUINS, {
+            //首先检查有没有丢弃在地上的资源
+            var source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+            if (!source) {
+                //如果没有则检查有没有建筑废墟
+                source = creep.pos.findClosestByRange(FIND_RUINS, {
                     filter: (structure) => {
                         return structure.store[RESOURCE_ENERGY] > 0;
                     }
                 });
-            if(!source){
-                source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
-                var result = creep.pickup(source)
-                if (result == ERR_NOT_IN_RANGE) {
+            } else {
+                if (creep.pickup(source) == ERR_NOT_IN_RANGE) {
                     creep.say("🚮");
                     creep.moveTo(source);
                 }
+                return;
+            }
+            //再没有则检查建筑
+            if (!source) {
+                source = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_TERMINAL) &&
+                            structure.store[RESOURCE_ENERGY] > 0;
+                    }
+                });
             }
         }
-
+        //正常状态从指定建筑拿去能量
         if (!source || !config.pickEnergy) {
             var source = Game.getObjectById(config.sourceId);
             if (!source || source.store.getUsedCapacity(RESOURCE_ENERGY) < 1) {
