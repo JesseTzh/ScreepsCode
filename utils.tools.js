@@ -25,33 +25,24 @@ function energySourceMonitor() {
     }
 }
 
-function test(creep) {
-    var testWithFilter = 0;
-    for (let i = 0; i < 10; i++) {
-        let before = Game.cpu.getUsed();
-        var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: (structure) => {
-                return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
-                    structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
-            }
-        });
-        let after = Game.cpu.getUsed() - before;
-        testWithFilter += after;
-    }
-    testWithFilter = testWithFilter / 10;
-    logger.info("filter测试结果：" + testWithFilter);
-    //测试结果：0.03CPU左右
-}
-
 function detectRoomInvaderCore() {
+    if (!CONFIG.OUTSIDEROOM) {
+        return
+    }
     for (let i = 0; i < CONFIG.OUTSIDEROOM.length; i++) {
-        if (!Game.rooms[CONFIG.OUTSIDEROOM[i]]) {
-            return
-        }
-        if(Memory.creeps["Dps_01"].RebornFlag && Memory.creeps["Dps_01"].RebornFlag != "Yes"){
-            let target = Game.rooms[CONFIG.OUTSIDEROOM[i]].find(FIND_HOSTILE_STRUCTURES);
+        if (Memory.creeps["Dps_01"] && Memory.creeps["Dps_01"].RebornFlag && Memory.creeps["Dps_01"].RebornFlag != "Yes") {
+            var room = Game.rooms[CONFIG.OUTSIDEROOM[i]]
+            if(!room){
+                //缺失对应房间视野
+                Game.notify('丢失房间 ' + CONFIG.OUTSIDEROOM[i] + '的视野，请注意！');
+                continue
+            }
+            let target = room.find(FIND_HOSTILE_STRUCTURES);
+            if (!target.length) {
+                target = Game.rooms[CONFIG.OUTSIDEROOM[i]].find(FIND_HOSTILE_CREEPS);
+            }
             if (target && target.length) {
-                logger.info("发现敌人核心！")
+                logger.info("发现敌人！")
                 Memory.creeps["Dps_01"].RebornFlag = "Yes";
                 Memory.creeps["Dps_01"].TargetRoom = CONFIG.OUTSIDEROOM[i];
             }
@@ -60,7 +51,6 @@ function detectRoomInvaderCore() {
 }
 module.exports = {
     globalEnergyMonitor: globalEnergyMonitor,
-    test: test,
     energySourceMonitor: energySourceMonitor,
     detectRoomInvaderCore: detectRoomInvaderCore
 };
