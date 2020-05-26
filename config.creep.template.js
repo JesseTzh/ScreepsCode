@@ -19,32 +19,38 @@ module.exports = {
     /**
      *   Harvester模板文件
      */
-    Harvester_01: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
+    // Room 1
+    Harvester_01: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
     Harvester_02: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
-    Harvester_03: ({ genMode: "Config", partsSet: [[WORK, 4], [MOVE, 4], [CARRY, 4]], spawnName: "NewLand", roomName: "E9S21" }),
-    Harvester_04: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
-    Harvester_05: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
-    Harvester_06: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
+    // Room 2
+    Harvester_03: ({ genMode: "Config", partsSet: [[WORK, 8], [MOVE, 9], [CARRY, 10]], spawnName: "NewLand", roomName: "E9S21" }),
+    Harvester_04: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "NewLand", roomName: "E9S21" }),
+    // Room 3
+    Harvester_05: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "NewLand", roomName: "E9S21" }),
+    Harvester_06: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "NewLand", roomName: "E9S21" }),
 
     /**
      *   Upgrader模板文件
      */
+    // Room 1
     Upgrader_01: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
     Upgrader_02: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
-    Upgrader_03: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
-    Upgrader_04: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
-    Upgrader_05: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
-    Upgrader_06: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
-    Upgrader_07: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
-    Upgrader_08: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
-    Upgrader_09: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
-    Upgrader_10: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
+    Upgrader_03: ({ genMode: "Config", partsSet: [[WORK, 8], [MOVE, 9], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
+    // Room 2
+    Upgrader_04: ({ genMode: "Config", partsSet: [[WORK, 8], [MOVE, 9], [CARRY, 10]], spawnName: "NewLand", roomName: "E9S21" }),
+    Upgrader_05: ({ genMode: "Config", partsSet: [[WORK, 8], [MOVE, 9], [CARRY, 10]], spawnName: "NewLand", roomName: "E9S21" }),
+    Upgrader_06: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "NewLand", roomName: "E9S21" }),
+    // Room 3
+    Upgrader_07: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 2], [CARRY, 1]], spawnName: "TheThirdWorld", roomName: "E8S23" }),
+    Upgrader_08: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "TheThirdWorld", roomName: "E8S23" }),
+    Upgrader_09: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "TheThirdWorld", roomName: "E8S23" }),
+    Upgrader_10: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "TheThirdWorld", roomName: "E8S23" }),
 
     /**
      *   Builder模板文件
      */
     Builder_01: ({ genMode: "Config", partsSet: [[WORK, 5], [MOVE, 15], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
-    Builder_02: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 3], [CARRY, 3]], spawnName: "NewLand", roomName: "E9S21" }),
+    Builder_02: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "NewLand", roomName: "E9S21" }),
 
     Dismantler_01: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 2], [CARRY, 1]], spawnName: "NewLand", roomName: "E9S21" }),
     Dismantler_02: ({ genMode: "Config", partsSet: [[WORK, 1], [MOVE, 2], [CARRY, 1]], spawnName: "NewLand", roomName: "E9S21" }),
@@ -56,7 +62,7 @@ module.exports = {
      *   Mover模板文件
      */
     Mover_01: ({ genMode: "Config", partsSet: [[WORK, 0], [MOVE, 10], [CARRY, 21]], spawnName: "Home", roomName: "E6S22" }),
-    Mover_02: ({ genMode: "Config", partsSet: [[WORK, 0], [MOVE, 7], [CARRY, 15]], spawnName: "Home", roomName: "E6S22" }),
+    Mover_02: ({ genMode: "Config", partsSet: [[WORK, 0], [MOVE, 10], [CARRY, 21]], spawnName: "NewLand", roomName: "E9S21" }),
 
     /**
      *   OuterHarvester模板文件
@@ -67,8 +73,8 @@ module.exports = {
     OuterHarvester_04: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
     OuterHarvester_05: ({ genMode: "Config", partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]], spawnName: "Home", roomName: "E6S22" }),
 
-    OuterClaimer_01: ({ genMode: "Config", partsSet: [[MOVE, 3], [CLAIM, 3]], spawnName: "Home", roomName: "E6S22" }),
-    OuterClaimer_02: ({ genMode: "Config", partsSet: [[MOVE, 3], [CLAIM, 3]], spawnName: "Home", roomName: "E6S22" }),
+    OuterClaimer_01: ({ genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 2]], spawnName: "Home", roomName: "E6S22" }),
+    OuterClaimer_02: ({ genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 2]], spawnName: "Home", roomName: "E6S22" }),
 
     OuterBuilder: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
     OuterBuilder_1: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
@@ -81,9 +87,9 @@ module.exports = {
 
     Tank_01: ({ genMode: "Config", partsSet: [[TOUGH, 10], [MOVE, 15], [HEAL, 5]], spawnName: "Home", roomName: "E6S22" }),
 
-    Dps_01: ({ genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 5]], spawnName: "Home", roomName: "E6S22" }),
+    Dps_01: ({ genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "Home", roomName: "E6S22" }),
 
-    Colonist: ({ genMode: "Config", partsSet: [[MOVE, 1], [CLAIM, 1]], spawnName: "Home", roomName: "E6S22" }),
+    Colonist: ({ genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "NewLand", roomName: "E9S21" }),
 
-    Miner_01: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]], spawnName: "Home", roomName: "E6S22" }),
+    Miner_01: ({ genMode: "Config", partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]], spawnName: "Home", roomName: "E6S22" }),
 }

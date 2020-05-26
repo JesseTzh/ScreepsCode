@@ -25,10 +25,10 @@ module.exports = {
      */
     Harvester_01: harvester({ sourceId: CONFIG.ENERGY_SOURCE[0], targetId: CONFIG.LINK[0][0], backUpTargetId: CONFIG.STORAGE[0] }),
     Harvester_02: harvester({ sourceId: CONFIG.ENERGY_SOURCE[1], targetId: CONFIG.LINK[1][0], backUpTargetId: CONFIG.STORAGE[0] }),
-    Harvester_03: harvester({ sourceId: CONFIG.ENERGY_SOURCE[2], targetId: '5ec7953511de04afe91a376c', backUpTargetId: '5ec7a7741d4c766da8d5c3e8'}),
-    Harvester_04: harvester({ sourceId: CONFIG.ENERGY_SOURCE[2], targetId: '5ec7953511de04afe91a376c', backUpTargetId: '5ec7a7741d4c766da8d5c3e8' }),
-    Harvester_05: harvester({ sourceId: CONFIG.ENERGY_SOURCE[3], targetId: '5ec7953511de04afe91a376c', backUpTargetId: '5ec7a7741d4c766da8d5c3e8' }),
-    Harvester_06: harvester({ sourceId: CONFIG.ENERGY_SOURCE[3], targetId: '5ec7953511de04afe91a376c', backUpTargetId: '5ec7a7741d4c766da8d5c3e8' }),
+    Harvester_03: harvester({ sourceId: CONFIG.ENERGY_SOURCE[2], targetId: '5ec7953511de04afe91a376c', backUpTargetId: '5ecb7790b025b52113eef9a2' }),
+    Harvester_04: harvester({ sourceId: CONFIG.ENERGY_SOURCE[3], targetId: CONFIG.LINK[2][0], backUpTargetId: '5ecb7790b025b52113eef9a2' }),
+    //Harvester_05: harvester({ sourceId: CONFIG.ENERGY_SOURCE[3], targetId: '5ecba12b9eaa953a1bc89164', backUpTargetId: '5ecb7790b025b52113eef9a2' }),
+    //Harvester_06: harvester({ sourceId: CONFIG.ENERGY_SOURCE[3], targetId: '5ecba12b9eaa953a1bc89164', backUpTargetId: '5ecb7790b025b52113eef9a2' }),
 
     /**
      *   Mover配置文件
@@ -37,6 +37,7 @@ module.exports = {
      *          storageId:冗余资源存放建筑
      */
     Mover_01: mover({ sourceId: [CONFIG.LINK[0][0], CONFIG.LINK[1][0]], storageId: CONFIG.STORAGE[0], upgradeId: CONFIG.LINK[0][1] }),
+    Mover_02: mover({ sourceId: [CONFIG.LINK[2][0]], storageId: CONFIG.STORAGE[1], upgradeId: CONFIG.LINK[2][1] }),
 
     /**
      *   Upgrader配置文件
@@ -46,13 +47,15 @@ module.exports = {
      */
     Upgrader_01: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[0], backUpSourceId: CONFIG.STORAGE[0] }),
     Upgrader_02: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[0], backUpSourceId: CONFIG.STORAGE[0] }),
-    Upgrader_03: upgrader({ sourceId: '5ec7e2b1b912d7863bc4c3c3', pickEnergy: true}),
-    Upgrader_04: upgrader({ sourceId: '5ec7b4c55e62f63c3b592fdc', pickEnergy: false }),
-    //Upgrader_05: upgrader({ sourceId: '5ec7b4c55e62f63c3b592fdc', pickEnergy: true }),
-    //Upgrader_06: upgrader({ sourceId: '5ec7b4c55e62f63c3b592fdc', pickEnergy: true }),
-    Upgrader_07: upgrader({ sourceId: '5ec7b4c55e62f63c3b592fdc', pickEnergy: true }),
-    Upgrader_08: upgrader({ sourceId: '5ec7e2b1b912d7863bc4c3c3', pickEnergy: true }),
-    //Upgrader_09: upgrader({ sourceId: '5ec7e2b1b912d7863bc4c3c3', pickEnergy: true }),
+    //Upgrader_03: upgrader({ sourceId: CONFIG.STORAGE[0], pickEnergy: false}),
+
+    Upgrader_04: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[1], backUpSourceId: CONFIG.STORAGE[1], pickEnergy: false }),
+    Upgrader_05: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[1], backUpSourceId: CONFIG.STORAGE[1], pickEnergy: false }),
+    Upgrader_06: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[1], backUpSourceId: CONFIG.STORAGE[1], pickEnergy: false }),
+
+    Upgrader_07: upgrader({ sourceId: '5e7566b6b89bce0502f335b3', pickEnergy: true }),
+    //Upgrader_08: upgrader({ sourceId: '5ec7e2b1b912d7863bc4c3c3', pickEnergy: true }),
+    //Upgrader_09: upgrader({ sourceId: '5ec7e2b1b912d7863bc4c3c3', pickEnergy: false }),
     //Upgrader_10: upgrader({ sourceId: '5ec7e2b1b912d7863bc4c3c3', pickEnergy: true }),
 
     /**
@@ -86,11 +89,11 @@ module.exports = {
      *          targetId:能量储存点
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterHarvester_01: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: '5ec4ff193cbdd7055e454d74', pathFinderPoint: [[49, 21]] }),
-    OuterHarvester_02: outerharvester({ sourceId: '5bbcad489099fc012e637092', targetRoomName: "E6S23", targetId: '5ec7269d4de9cc3762c50611', pathFinderPoint: [[38, 0]] }),
+    //OuterHarvester_01: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4e', targetRoomName: "E5S22", targetId: '5ec4ff193cbdd7055e454d74', pathFinderPoint: [[49, 21]] }),
+    //OuterHarvester_02: outerharvester({ sourceId: '5bbcad489099fc012e637092', targetRoomName: "E6S23", targetId: '5ec7269d4de9cc3762c50611', pathFinderPoint: [[38, 0]] }),
     //OuterHarvester_03: outerharvester({ sourceId: '5bbcad489099fc012e637092', targetRoomName: "E6S23", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[38, 0]] }),
-    OuterHarvester_04: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4b', targetRoomName: "E5S21", targetId: '5ec6641c44d03cd960f7370e', pathFinderPoint: [[32, 49]] }),
-    OuterHarvester_05: outerharvester({ sourceId: '5bbcad3a9099fc012e636e49', targetRoomName: "E5S21", targetId: '5ec66bfdeb43912369bc0e6b', pathFinderPoint: [[32, 49]] }),
+    //OuterHarvester_04: outerharvester({ sourceId: '5bbcad3a9099fc012e636e4b', targetRoomName: "E5S21", targetId: '5ec6641c44d03cd960f7370e', pathFinderPoint: [[32, 49]] }),
+    //OuterHarvester_05: outerharvester({ sourceId: '5bbcad3a9099fc012e636e49', targetRoomName: "E5S21", targetId: '5ec66bfdeb43912369bc0e6b', pathFinderPoint: [[32, 49]] }),
 
     /**
      *   OuterBuilder配置文件
@@ -99,8 +102,8 @@ module.exports = {
      *          targetRoomName:所要去的房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */                                                                     //E8S20
-    //OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E9S21", pathFinderPoint: [[23, 48]], transferRoom: "E8S20" }),
-    //OuterBuilder_1: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E9S21", pathFinderPoint: [[23, 48]], transferRoom: "E8S20" }),
+    OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22" }),
+    //OuterBuilder_1: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S21" }),
     //OuterBuilder_2: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E9S21", pathFinderPoint: [[23, 48]], transferRoom: "E8S20" }),
 
     /**
@@ -110,10 +113,10 @@ module.exports = {
      *          targetRoomName:所要去的外矿房间名称
      *          targetId:能量存储目标建筑
      */
-    OuterMover_01: outmover({ sourceId: '5ec4ff193cbdd7055e454d74', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0] }),
-    OuterMover_02: outmover({ sourceId: '5ec6641c44d03cd960f7370e', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0] }),
-    OuterMover_03: outmover({ sourceId: '5ec66bfdeb43912369bc0e6b', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0] }),
-    OuterMover_04: outmover({ sourceId: '5ec7269d4de9cc3762c50611', targetRoomName: "E6S23", targetId: CONFIG.STORAGE[0] }),
+    //OuterMover_01: outmover({ sourceId: '5ec4ff193cbdd7055e454d74', targetRoomName: "E5S22", targetId: CONFIG.STORAGE[0] }),
+    //OuterMover_02: outmover({ sourceId: '5ec6641c44d03cd960f7370e', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0] }),
+    //OuterMover_03: outmover({ sourceId: '5ec66bfdeb43912369bc0e6b', targetRoomName: "E5S21", targetId: CONFIG.STORAGE[0] }),
+    //OuterMover_04: outmover({ sourceId: '5ec7269d4de9cc3762c50611', targetRoomName: "E6S23", targetId: CONFIG.STORAGE[0] }),
 
     /**
      *   Tank配置文件
@@ -130,14 +133,14 @@ module.exports = {
      *          targetRoomName:所要去攻击的房间名称
      *          pathFinderPoint:辅助寻路点位
      */
-    Dps_01: dps({ targetRoomName: "E6S23", pathFinderPoint: [[38, 1]] }),
+    Dps_01: dps({ targetRoomName: "E5S22", pathFinderPoint: [[38, 1]] }),
 
     /**
-     *   Dps配置文件
+     *   Colonist配置文件
      *      参数：
      *          targetRoomName:所要去占领的房间名称
      */
-    //Colonist: colonist({ targetRoomName: "E9S21",transferRoom: "E8S20"})
+    //Colonist: colonist({ targetRoomName: "E8S23",transferRoom: "E9S23"}),
 
     /**
      *   Miner配置文件
@@ -146,5 +149,5 @@ module.exports = {
      *          targetId:默认矿物储存点，如果为空则会自动设置为当前房间的Storage
      *          backUpTargetId:备用能量储存点，一般为Storage，初期可不填写
      */
-    Miner_01: miner({ sourceId: CONFIG.MINE[0], targetId: '5ec894626cfcf42a53807c7c'}),
+    Miner_01: miner({ sourceId: CONFIG.MINE[0], targetId: '5ec894626cfcf42a53807c7c' }),
 }
