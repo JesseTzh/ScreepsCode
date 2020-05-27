@@ -50,7 +50,7 @@ const creepExtension = {
                 logger.info(this.name + "正在续命...");
                 this.moveTo(target);
                 return;
-            } else if(!target){
+            } else if (!target) {
                 logger.info(this.name + "续不动了...");
             }
         }
@@ -66,6 +66,25 @@ const creepExtension = {
         } else {
             logger.info(this.name + "无法回收自己");
         }
+    },
+    //避免Creep在房间边界处进进出出
+    avoidGobackRoom() {
+        var flag = false;
+        if (this.pos.x == 0) {
+            this.moveTo(this.pos.x + 1, this.pos.y)
+            flag = true;
+        } else if (this.pos.x == 49) {
+            this.moveTo(this.pos.x - 1, this.pos.y)
+            flag = true;
+        }
+        if (this.pos.y == 0) {
+            this.moveTo(this.pos.x, this.pos.y + 1)
+            flag = true;
+        } else if (this.pos.y == 49) {
+            this.moveTo(this.pos.x, this.pos.y - 1)
+            flag = true;
+        }
+        return flag;
     }
 }
 
