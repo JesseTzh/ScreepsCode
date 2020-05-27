@@ -6,7 +6,7 @@ module.exports = config => ({
     source: creep => {
         const creepTemplateConfig = creepTemplateConfigs[creep.name];
         if (creep.room.name == creepTemplateConfig.roomName) {
-            var source = Game.getObjectById(sourceId);
+            var source = Game.getObjectById(config.sourceId);
         } else {
             //首先检查有没有丢弃在地上的资源
             var source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
@@ -42,7 +42,17 @@ module.exports = config => ({
                         creep.moveTo(target);
                     } 
                     return;
+                }else{
+                    logger.info(creep.name + "找不到可以采的能量矿");
                 }
+            }
+            if (!source) {
+                source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType == STRUCTURE_CONTAINER) &&
+                            structure.store[RESOURCE_ENERGY] > 0;
+                    }
+                });
             }
         }
         if (source) {
@@ -57,6 +67,9 @@ module.exports = config => ({
     },
     // 建造或维修
     target: creep => {
+        if(creep.avoidGobackRoom()){
+            return;
+        }
         if (config.transferRoom && !creep.memory.transferFlag) {
             if (creep.room.name != config.transferRoom) {
                 creep.say("🏴");
@@ -67,7 +80,6 @@ module.exports = config => ({
             }
         } else if (creep.memory.transferFlag || !config.transferRoom) {
             if (creep.room.name != config.targetRoomName) {
-                logger.info(creep.name + "test4")
                 creep.say("🚩");
                 creep.moveTo(new RoomPosition(25, 25, config.targetRoomName))
                 return;
@@ -80,7 +92,6 @@ module.exports = config => ({
                 var r = creep.build(targets[0])
                 if (r == ERR_NOT_IN_RANGE) {
                     var r = creep.moveTo(targets[0])
-                    logger.info(creep.name + ":" + r)
                 }
 
             } else {
