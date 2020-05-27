@@ -24,7 +24,7 @@ module.exports = config => ({
     target: creep => {
         //在外房间沿途修理Road
         var target = creep.pos.findInRange(FIND_STRUCTURES, 1, {
-            filter: (structure) => structure.hits / structure.hitsMax <= 0.5 && structure.structureType == STRUCTURE_ROAD
+            filter: (structure) => structure.hits / structure.hitsMax <= 0.9 && structure.structureType == STRUCTURE_ROAD
         });
         if (target.length) {
             logger.info(creep.name + "尝试维护沿途道路！");
