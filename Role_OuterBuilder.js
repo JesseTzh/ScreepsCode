@@ -5,9 +5,8 @@ module.exports = config => ({
     // 从出生点拿去矿物或者去目标房间就地取材
     source: creep => {
         const creepTemplateConfig = creepTemplateConfigs[creep.name];
-        if (creep.room.name == creepTemplateConfig.roomName) {
-            var source = Game.getObjectById(config.sourceId);
-        } else {
+        var source = Game.getObjectById(config.sourceId);
+        if (!(creep.room.name == creepTemplateConfig.roomName) || !source || source.store[RESOURCE_ENERGY] == 0) {
             //首先检查有没有丢弃在地上的资源
             var source = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
             if (!source) {
@@ -40,9 +39,9 @@ module.exports = config => ({
                     logger.info(creep.name + "尝试就地取材");
                     if (creep.harvest(target) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target);
-                    } 
+                    }
                     return;
-                }else{
+                } else {
                     logger.info(creep.name + "找不到可以采的能量矿");
                 }
             }
@@ -67,7 +66,7 @@ module.exports = config => ({
     },
     // 建造或维修
     target: creep => {
-        if(creep.avoidGobackRoom()){
+        if (creep.avoidGobackRoom()) {
             return;
         }
         if (config.transferRoom && !creep.memory.transferFlag) {
