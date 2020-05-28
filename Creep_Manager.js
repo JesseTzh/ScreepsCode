@@ -30,7 +30,7 @@ function creepManager() {
                         } else if (Memory.creeps[name] && Memory.creeps[name].RebornFailTimes) {
                             Memory.creeps[name].RebornFailTimes += 1;
                         }
-                        // 100ticks重生失败则采用自适应模板
+                        // 100ticks 重生失败则采用自适应模板
                         if(Memory.creeps[name].RebornFailTimes > 100){
                             var temp =  require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName)
                             var tempTemplate = temp.getSelfAdaptionTemplate();
@@ -44,6 +44,7 @@ function creepManager() {
                                 logger.info(message);
                                 Game.notify(message);
                             }
+                            spawnBusyList.add(creepTemplateConfig.spawnName);
                         }else{
                             spawnBusyList.add(creepTemplateConfig.spawnName);
                         }
