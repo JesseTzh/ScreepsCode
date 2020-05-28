@@ -12,24 +12,41 @@ function creepManager() {
             }
             if (name in creepTemplateConfigs) {
                 //获取对应模板文件
-                const creepTemplateConfig = creepTemplateConfigs[name];
+                var creepTemplateConfig = creepTemplateConfigs[name];
                 if (spawnBusyList.has(creepTemplateConfig.spawnName)) {
+                    logger.info(creepTemplateConfig.spawnName + "无法执行当前任务，暂停重生: " + name)
                     //Creep所用Spawn正忙
                     continue;
                 }
                 if (Game.rooms[creepTemplateConfig.roomName].energyAvailable >= 300) {
                     //初始化模板
-                    const creepTemplate = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName);
+                    var creepTemplate = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName);
                     var template = creepTemplate.getTemplateByConfig(creepTemplateConfig);
                     var result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name);
                     if (result == ERR_NOT_ENOUGH_ENERGY) {
-                        logger.info(name + "没有足够资源重生,房间" + creepTemplateConfig.roomName + "可用能量：" + Game.rooms[creepTemplateConfig.roomName].energyAvailable);
-                        spawnBusyList.add(creepTemplateConfig.spawnName);
-                        //return;
-                        // !Memory.creeps[name].RebornFailTimes ? Memory.creeps[name].RebornFailTimes = 1 : Memory.creeps[name].RebornFailTimes += 1;
-                        // if (Memory.creeps[name].RebornFailTimes > 1000) {
-                        //     Game.notify('Creep ' + name + '长达1000ticks复活失败！');
-                        // }
+                        logger.info(name + "没有足够资源重生,房间" + creepTemplateConfig.roomName + "当前可用能量：" + Game.rooms[creepTemplateConfig.roomName].energyAvailable);
+                        if (Memory.creeps[name] && !Memory.creeps[name].RebornFailTimes) {
+                            Memory.creeps[name].RebornFailTimes = 1;
+                        } else if (Memory.creeps[name] && Memory.creeps[name].RebornFailTimes) {
+                            Memory.creeps[name].RebornFailTimes += 1;
+                        }
+                        // 100ticks重生失败则采用自适应模板
+                        if(Memory.creeps[name].RebornFailTimes > 100){
+                            var temp =  require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName)
+                            var tempTemplate = temp.getSelfAdaptionTemplate();
+                            result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(tempTemplate, name);
+                            if(result == OK){
+                                let message = name + "长时间重生失败，使用自适应模板......";
+                                logger.info(message);
+                                Game.notify(message);
+                            }else if(result != OK && result != ERR_BUSY){
+                                let message = name + "自适应模板出错，请检查！"
+                                logger.info(message);
+                                Game.notify(message);
+                            }
+                        }else{
+                            spawnBusyList.add(creepTemplateConfig.spawnName);
+                        }
                     } else if (result == OK) {
                         logger.info('正在重生 : ' + name);
                         if (Memory.creeps[name].RebornFailTimes) {
