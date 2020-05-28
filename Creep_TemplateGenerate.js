@@ -23,8 +23,12 @@ class Template {
     }
 
     getSelfAdaptionTemplate(config) {
-        if (config.energyMax) {
+        logger.info(this.templateResult)
+        if (config && config.energyMax) {
             this.energyRemain = config.energyMax;
+        }else if(!config){
+            var config = new Map();
+            config.roadFlag = false
         }
         while (this.energyRemain > 0) {
             if (this.break) {
