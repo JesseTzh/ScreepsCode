@@ -10,29 +10,27 @@ module.exports = config => ({
             creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoomName))
             return;
         }
-        var source = Game.getObjectById(config.sourceId)
-        if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
-            creep.say("⛏️");
+        const source = Game.getObjectById(config.sourceId);
+        if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
+            creep.say("⛏");
             creep.moveTo(source);
         }
     },
     // 存储能量逻辑
     target: creep => {
-        var target = Game.getObjectById(config.targetId);
+        const target = Game.getObjectById(config.targetId);
         if (target) {
             if(target.hits < target.hitsMax){
                 //挖矿之余捎带维护自己的Container
-                if (creep.repair(target) == ERR_NOT_IN_RANGE) {
+                if (creep.repair(target) === ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
                 }
                 return;
             }
             var result = creep.transfer(target, RESOURCE_ENERGY)
-            if (result == ERR_NOT_IN_RANGE) {
+            if (result === ERR_NOT_IN_RANGE) {
                 creep.say("🔼");
                 creep.moveTo(target);
-            } else if (result == OK) {
-                creep.room.memory.OuterRoomEnergy == null ? creep.room.memory.OuterRoomEnergy = 300 : creep.room.memory.OuterRoomEnergy += 300;
             }
         }
     },

@@ -6,12 +6,12 @@ module.exports = config => ({
     source: creep => {
         var source = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {
             filter: (structure) => {
-                return (structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_LINK || structure.structureType == STRUCTURE_STORAGE) &&
+                return (structure.structureType === STRUCTURE_TOWER || structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_LINK || structure.structureType === STRUCTURE_STORAGE) &&
                     structure.store[RESOURCE_ENERGY] > 0;
             }
         });
         if(source) {
-            if(creep.withdraw(source) == ERR_NOT_IN_RANGE) {
+            if(creep.withdraw(source) === ERR_NOT_IN_RANGE) {
                 creep.say("🔽")
                 creep.moveTo(source);
             }
@@ -21,7 +21,7 @@ module.exports = config => ({
     target: creep => {
         var target = Game.getObjectById(config.targetId)
         if (target && target.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
-            if (creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 creep.say("🔼");
                 creep.moveTo(target);
             }

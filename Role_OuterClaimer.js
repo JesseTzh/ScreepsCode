@@ -4,9 +4,9 @@ module.exports = config => ({
     // 预订Controller
     source: creep => {
         if (!creep.memory.claimTargetNum) {
-            //保存当前要预订的控制器编号，直到当前控制器预定值满
+            //从配置文件中的第一个房间控制器开始
             creep.memory.claimTargetNum = 0;
-        } else if (config.sourceId[creep.memory.claimTargetNum] == null) {
+        } else if (!config.sourceId[creep.memory.claimTargetNum]) {
             //没有更多控制器了，从第一个控制器开始重新预订
             creep.memory.claimTargetNum = 0;
         }
@@ -17,18 +17,18 @@ module.exports = config => ({
             creep.moveTo(new RoomPosition(25, 25, config.targetRoomName[creep.memory.claimTargetNum]))
             return;
         }
-        var source = Game.getObjectById(config.sourceId[creep.memory.claimTargetNum])
+        const source = Game.getObjectById(config.sourceId[creep.memory.claimTargetNum]);
         if (source) {
             if (!source.reservation || source.reservation.ticksToEnd < CONTROLLER_RESERVE_MAX) {
-                if (creep.reserveController(source) == ERR_NOT_IN_RANGE) {
+                if (creep.reserveController(source) === ERR_NOT_IN_RANGE) {
                     creep.say("🔔");
                     creep.moveTo(source);
-                }else if(creep.reserveController(source) == ERR_INVALID_TARGET){
+                }else if(creep.reserveController(source) === ERR_INVALID_TARGET){
                     creep.attackController(source)
                 }
             }
         }
-        if (source.reservation && source.reservation.ticksToEnd == CONTROLLER_RESERVE_MAX - 1) {
+        if (source.reservation && source.reservation.ticksToEnd === CONTROLLER_RESERVE_MAX - 1) {
             //当前控制器预定时间已满，换下一个
             creep.memory.claimTargetNum += 1;
         }

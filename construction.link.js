@@ -21,8 +21,8 @@ function linkTransfer() {
     for (let i = 0; i < CONFIG.LINK.length; i++) {
         let send = Game.getObjectById(CONFIG.LINK[i][0]);
         let receive = Game.getObjectById(CONFIG.LINK[i][1]);
-        if (send.store.getUsedCapacity(RESOURCE_ENERGY) / LINK_CAPACITY >= 0.5 &&
-            send.room.energyAvailable / send.room.energyCapacityAvailable >= SYS_CONFIG.ALLOW_UPGRADER_USE_ENERGY) {
+        if ((send.store.getUsedCapacity(RESOURCE_ENERGY) / LINK_CAPACITY >= 0.5 && send.room.energyAvailable / send.room.energyCapacityAvailable >= SYS_CONFIG.ALLOW_UPGRADER_USE_ENERGY) ||
+            (send.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && receive.store.getUsedCapacity(RESOURCE_ENERGY) === 0)) {
             send.transferEnergy(receive);
         }
     }

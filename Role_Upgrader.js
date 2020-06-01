@@ -26,7 +26,7 @@ module.exports = config => ({
             if (!source) {
                 source = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_TERMINAL) &&
+                        return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_TOWER || structure.structureType == STRUCTURE_STORAGE || structure.structureType == STRUCTURE_TERMINAL || structure.structureType == STRUCTURE_LAB) &&
                             structure.store[RESOURCE_ENERGY] > 0;
                     }
                 });

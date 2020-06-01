@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("manager.creep.template");
+const logger = require('utils.log').getLogger("Creep_TemplateGenerate");
 const SYS_CONFIG = require('config.system.setting');
 /**
  * Creep创建模板生成类
@@ -26,7 +26,7 @@ class Template {
         if (config && config.energyMax) {
             this.energyRemain = config.energyMax;
         }else if(!config){
-            var config = new Map();
+            let config = new Map();
             config.roadFlag = false
         }
         while (this.energyRemain > 0) {
@@ -35,9 +35,9 @@ class Template {
             }
             if (this.movePoints >= 1) {
                 //已有的WORK部件数
-                var workParts = this.templateResult.filter(part => part == WORK);
+                let workParts = this.templateResult.filter(part => part === WORK);
                 //已有的CARRY部件数
-                var carryParts = this.templateResult.filter(part => part == CARRY);
+                let carryParts = this.templateResult.filter(part => part === CARRY);
                 if (workParts.length > carryParts.length) {
                     this._addCarryPart(config.roadFlag);
                 } else {
@@ -51,8 +51,8 @@ class Template {
     }
 
     getTemplateByConfig(config) {
-        if (config.genMode == "Auto") {
-            return getSelfAdaptionTemplate(config);
+        if (config.genMode === "Auto") {
+            return this.getSelfAdaptionTemplate(config);
         }
         for (let i = 0; i < config.partsSet.length; i++) {
             for (let j = 0; j < config.partsSet[i][1]; j++) {

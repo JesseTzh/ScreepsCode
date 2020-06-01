@@ -5,24 +5,25 @@ module.exports = config => ({
     source: creep => {
         if (!creep.memory.TargetRoom) {
             //creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoomName))
-            logger.info("Dps缺失目标房间记忆")
+            logger.info(creep.name + "缺失攻击目标")
         } else {
             creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], creep.memory.TargetRoom))
         }
     },
     // 去打架
     target: creep => {
-        var target = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES);
+        let target = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES);
         if (!target) {
             target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         }
         if (target) {
             logger.info(creep.name + " ：骑兵连，进攻！！！")
-            if (creep.attack(target) == ERR_NOT_IN_RANGE) {
+            if (creep.attack(target) === ERR_NOT_IN_RANGE) {
+                creep.say("🗡️")
                 creep.moveTo(target);
             }
         } else {
-            logger.info(creep.name + "找不到要攻击的对象")
+            logger.info(creep.name + "：目标房间已肃清！")
             creep.memory.RebornFlag = "No";
         }
     },

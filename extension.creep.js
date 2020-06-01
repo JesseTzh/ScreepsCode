@@ -7,8 +7,8 @@ const creepTemplateConfigs = require('config.creep.template')
 // 自定义的 Creep 的拓展
 const creepExtension = {
     work() {
-        this.memory.liveTicks == null ? this.memory.liveTicks = 1 : this.memory.liveTicks += 1;
-        // 检查 creep 内存中的角色是否存在
+        //this.memory.liveTicks == null ? this.memory.liveTicks = 1 : this.memory.liveTicks += 1;
+        // 检查 creep 内存中的角色是否存在,如不存在则自动回收
         if (!(this.name in creepConfigs)) {
             logger.error(`找不到 ${this.name} 所对应的劳工配置！`);
             this.selfRecycle();
@@ -28,11 +28,11 @@ const creepExtension = {
     },
     updateState() {
         // creep 身上没有能量 && creep 之前的状态为“工作”
-        if (this.store[RESOURCE_ENERGY] == 0 && this.memory.working) {
+        if (this.store[RESOURCE_ENERGY] === 0 && this.memory.working) {
             this.memory.working = false
         }
         // creep 身上能量满了 && creep 之前的状态为“不工作”
-        if (this.store[RESOURCE_ENERGY] == this.store.getCapacity() && !this.memory.working) {
+        if (this.store[RESOURCE_ENERGY] === this.store.getCapacity() && !this.memory.working) {
             this.memory.working = true
         }
         return this.memory.working
@@ -42,14 +42,13 @@ const creepExtension = {
             //闲着没事做就去续命
             var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return structure.structureType == STRUCTURE_SPAWN && structure.store[RESOURCE_ENERGY] > 0;
+                    return structure.structureType === STRUCTURE_SPAWN && structure.store[RESOURCE_ENERGY] > 0;
                 }
             });
-            if (target && target.renewCreep(this) == ERR_NOT_IN_RANGE) {
+            if (target && target.renewCreep(this) === ERR_NOT_IN_RANGE) {
                 this.say("🐸");
                 logger.info(this.name + "正在续命...");
                 this.moveTo(target);
-                return;
             } else if (!target) {
                 logger.info(this.name + "续不动了...");
             }
@@ -58,29 +57,28 @@ const creepExtension = {
     selfRecycle() {
         const creepTemplateConfig = creepTemplateConfigs[this.name];
         const target = Game.spawns[creepTemplateConfig.spawnName];
-        if (target && target.recycleCreep(this) == ERR_NOT_IN_RANGE) {
+        if (target && target.recycleCreep(this) === ERR_NOT_IN_RANGE) {
             this.say("🌍");
             logger.info(this.name + "正在将自己回收再利用...");
             this.moveTo(target);
-            return;
         } else {
             logger.info(this.name + "无法回收自己");
         }
     },
     //避免Creep在房间边界处进进出出
-    avoidGobackRoom() {
-        var flag = false;
-        if (this.pos.x == 0) {
+    avoidGoBackRoom() {
+        let flag = false;
+        if (this.pos.x === 0) {
             this.moveTo(this.pos.x + 1, this.pos.y)
             flag = true;
-        } else if (this.pos.x == 49) {
+        } else if (this.pos.x === 49) {
             this.moveTo(this.pos.x - 1, this.pos.y)
             flag = true;
         }
-        if (this.pos.y == 0) {
+        if (this.pos.y === 0) {
             this.moveTo(this.pos.x, this.pos.y + 1)
             flag = true;
-        } else if (this.pos.y == 49) {
+        } else if (this.pos.y === 49) {
             this.moveTo(this.pos.x, this.pos.y - 1)
             flag = true;
         }

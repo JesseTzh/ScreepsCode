@@ -3,6 +3,8 @@ const mount = require('utils.mount');
 const logger = require('utils.log').getLogger("main");
 const constructionLink = require('construction.link');
 const constructionTower = require('construction.tower');
+const constructionFactory = require('Construction_Factory')
+const constructionTerminal = require('Construction_Terminal')
 const creepManager = require('Creep_Manager');
 
 module.exports.loop = function () {
@@ -20,15 +22,16 @@ module.exports.loop = function () {
     //建筑管理
     constructionTower.towerWork();
     constructionLink.linkTransfer();
+    //constructionFactory.factoryWork();
+    //constructionTerminal.terminalWork();
 
-    //Creep管理
-    creepManager.creepManager();
-
-    
     //Creeps 工作
     for (var name in Game.creeps) {
         Game.creeps[name].work();
     }
+
+    //Creep管理
+    creepManager.creepManager();
 
     //是否有AI占领者
     tools.detectRoomInvaderCore();
