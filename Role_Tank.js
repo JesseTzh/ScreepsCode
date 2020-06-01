@@ -18,16 +18,8 @@ module.exports = config => ({
             return;
         }
         logger.info(creep.name + "去挨揍")
-        if (creep.room.name !== config.targetRoomName) {
-            creep.moveTo(new RoomPosition(config.pathFinderPoint[1][0], config.pathFinderPoint[1][1], config.targetRoomName), {
-                reusePath: 10, visualizePathStyle: {
-                    fill: 'transparent',
-                    stroke: '#fff',
-                    lineStyle: 'dashed',
-                    strokeWidth: .15,
-                    opacity: .1
-                }
-            })
+        if (creep.room.name !== config.targetRoomName || creep.pos !== new RoomPosition(config.pathFinderPoint[1][0], config.pathFinderPoint[1][1], config.targetRoomName)) {
+            creep.moveTo(new RoomPosition(config.pathFinderPoint[1][0], config.pathFinderPoint[1][1], config.targetRoomName))
         }
         creep.heal(creep);
         creep.say("🤕");
