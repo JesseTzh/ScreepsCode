@@ -125,19 +125,19 @@ module.exports = {
     // Room 3
     Upgrader_07: ({
         genMode: "Config",
-        partsSet: [[WORK, 4], [MOVE, 4], [CARRY, 8]],
+        partsSet: [[WORK, 4], [MOVE, 6], [CARRY, 8]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     Upgrader_08: ({
         genMode: "Config",
-        partsSet: [[WORK, 4], [MOVE, 4], [CARRY, 8]],
+        partsSet: [[WORK, 4], [MOVE, 6], [CARRY, 8]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     Upgrader_09: ({
         genMode: "Config",
-        partsSet: [[WORK, 3], [MOVE, 6], [CARRY, 3]],
+        partsSet: [[WORK, 4], [MOVE, 6], [CARRY, 8]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
@@ -245,7 +245,7 @@ module.exports = {
     }),
     OuterBuilder_2: ({
         genMode: "Config",
-        partsSet: [[WORK, 6], [MOVE, 12], [CARRY, 6]],
+        partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),

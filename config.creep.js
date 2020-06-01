@@ -107,7 +107,7 @@ module.exports = {
 
     Upgrader_07: upgrader({sourceId: CONFIG.STORAGE[2], pickEnergy: false}),
     Upgrader_08: upgrader({sourceId: CONFIG.STORAGE[2], pickEnergy: false}),
-    //Upgrader_09: upgrader({ sourceId: '5e7566b6b89bce0502f335b3', pickEnergy: true }),
+    Upgrader_09: upgrader({sourceId: CONFIG.STORAGE[2], pickEnergy: false}),
     //Upgrader_10: upgrader({ sourceId: '5e7566b6b89bce0502f335b3', pickEnergy: true }),
 
     /**
@@ -119,7 +119,7 @@ module.exports = {
     //Builder_02: builder({sourceId: CONFIG.STORAGE[1]}),
     //Builder_03: builder({sourceId: CONFIG.STORAGE[2]}),
 
-    Dismantler_01: dismantler({targetId: '5e03302a1aeb2bbc557741b2', targetRoom: 'E7S24', pathFinderPoint: [[1, 11]]}),
+    //Dismantler_01: dismantler({targetId: '5e03302a1aeb2bbc557741b2', targetRoom: 'E7S24', pathFinderPoint: [[1, 11]]}),
 
     /**
      *   OuterClaimer配置文件
@@ -184,10 +184,10 @@ module.exports = {
      *          sourceId:默认取能建筑
      *          targetRoomName:所要去的房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
-     */                                                                     //E8S20
+     */
     //OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22" }),
     //OuterBuilder_1: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S21" }),
-    //OuterBuilder_2: outbuilder({ sourceId: CONFIG.STORAGE[1], targetRoomName: "E8S23" }),
+    OuterBuilder_2: outbuilder({ sourceId: CONFIG.STORAGE[1], targetRoomName: "E9S22" }),
 
     /**
      *   OuterMover配置文件
