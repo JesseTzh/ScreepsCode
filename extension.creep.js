@@ -40,7 +40,7 @@ const creepExtension = {
     selfFix() {
         if (this.ticksToLive < 1400) {
             //闲着没事做就去续命
-            var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
+            const target = this.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
                     return structure.structureType === STRUCTURE_SPAWN && structure.store[RESOURCE_ENERGY] > 0;
                 }
@@ -50,7 +50,7 @@ const creepExtension = {
                 logger.info(this.name + "正在续命...");
                 this.moveTo(target);
             } else if (!target) {
-                logger.info(this.name + "续不动了...");
+                logger.info(this.name + "找不到可以续命的地方...");
             }
         }
     },
