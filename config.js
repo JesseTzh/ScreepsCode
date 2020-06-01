@@ -1,13 +1,24 @@
 module.exports = {
-    // Spawn ID
-    SPAWN: ['5eb569554dac05ff668051db'],
+    // Spawn ID 
+    SPAWN: ({
+        E6S22: ['5eb569554dac05ff668051db', '5ece9d3da4273f33938ce488'],
+        E9S21: ['5ec7953511de04afe91a376c'],
+        E8S23: ['5ecb8fa0b61e17c73bb11aa8']
+    }),
 
     // 能量矿点 ID
-    ENERGY_SOURCE: ['5bbcad489099fc012e63708d', '5bbcad489099fc012e63708f', '5bbcad7a9099fc012e637574', '5bbcad7a9099fc012e637576', '5bbcad6c9099fc012e6373ee', '5bbcad6c9099fc012e6373f0'],
+    ENERGY_SOURCE: ({
+        E6S22: ['5bbcad489099fc012e63708d', '5bbcad489099fc012e63708f'],
+        E9S21: ['5bbcad7a9099fc012e637574', '5bbcad7a9099fc012e637576'],
+        E8S23: ['5bbcad6c9099fc012e6373ee', '5bbcad6c9099fc012e6373f0']
+    }),
 
     // Tower ID
-    TOWER: ['5eb7147d7f3603f6f5b2f2ec', '5ebbb74020844551b84bec76', '5ec890adf62e3fe3d3b86e9c', '5ecb7fb8128a03381e973a45', '5ed04d90ca6db6205d72ee36', '5ed23a4b3cc45f63d3f43729'],
-
+    TOWER: ({
+        E6S22: ['5eb7147d7f3603f6f5b2f2ec', '5ebbb74020844551b84bec76', '5ed23a4b3cc45f63d3f43729'],
+        E9S21: ['5ec890adf62e3fe3d3b86e9c', '5ecb7fb8128a03381e973a45'],
+        E8S23: ['5ed04d90ca6db6205d72ee36']
+    }),
     // Link ID,二维数组形式储存，LINK[n][0]为发射端，LINK[n][1]为接收端
     LINK: [['5ebb456dc1f3759ef33fa7f0', '5ebb4f9dc6a35d97ede0467f'], ['5ec09e77a937d085837a82f3', '5ebb4f9dc6a35d97ede0467f'], ['5ecba12b9eaa953a1bc89164', '5ecb8901ea5a98a5a982daa5'], ['5ed33bf970adb459fb616d55', '5ecb8901ea5a98a5a982daa5']],
 

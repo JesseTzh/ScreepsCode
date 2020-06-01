@@ -23,51 +23,60 @@ module.exports = {
      *          sourceId:默认能量采集点
      *          targetId:默认能量储存点，一般为紧邻Source的Link，初期可设置为Spawn
      *          backUpTargetId:备用能量储存点，一般为Storage，初期可不填写
+     *          towerList:所在房间 Tower 列表
      */
     Harvester_01: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE[0],
+        sourceId: CONFIG.ENERGY_SOURCE.E6S22[0],
         targetId: CONFIG.LINK[0][0],
-        backUpTargetId: CONFIG.STORAGE[0]
+        backUpTargetId: CONFIG.STORAGE[0],
+        towerList: CONFIG.TOWER.E6S22
     }),
     Harvester_02: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE[1],
+        sourceId: CONFIG.ENERGY_SOURCE.E6S22[1],
         targetId: CONFIG.LINK[1][0],
-        backUpTargetId: CONFIG.STORAGE[0]
+        backUpTargetId: CONFIG.STORAGE[0],
+        towerList: CONFIG.TOWER.E6S22
     }),
 
     Harvester_03: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE[2],
+        sourceId: CONFIG.ENERGY_SOURCE.E9S21[0],
         targetId: CONFIG.LINK[3][0],
-        backUpTargetId: CONFIG.STORAGE[1]
+        backUpTargetId: CONFIG.STORAGE[1],
+        towerList: CONFIG.TOWER.E9S21
     }),
     Harvester_04: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE[3],
+        sourceId: CONFIG.ENERGY_SOURCE.E9S21[1],
         targetId: CONFIG.LINK[2][0],
-        backUpTargetId: CONFIG.STORAGE[1]
+        backUpTargetId: CONFIG.STORAGE[1],
+        towerList: CONFIG.TOWER.E9S21
     }),
 
-    Harvester_05: harvester({sourceId: CONFIG.ENERGY_SOURCE[4], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
+    Harvester_05: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S23[0], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
     //Harvester_06: harvester({sourceId: CONFIG.ENERGY_SOURCE[4], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
     //Harvester_07: harvester({sourceId: CONFIG.ENERGY_SOURCE[4], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
-    Harvester_08: harvester({sourceId: CONFIG.ENERGY_SOURCE[5], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
-    Harvester_09: harvester({sourceId: CONFIG.ENERGY_SOURCE[5], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
-    Harvester_10: harvester({sourceId: CONFIG.ENERGY_SOURCE[5], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
+    Harvester_08: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S23[1], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
+    Harvester_09: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S23[1], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
+    Harvester_10: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S23[1], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
 
     /**
      *   Mover配置文件
      *      参数：
      *          sourceId:数组形式存储允许Mover提取能量的建筑ID
      *          storageId:冗余资源存放建筑
+     *          upgradeId:房间内升级 Controller 所用 Link id，初期没有可不填写
+     *          towerList:所在房间 Tower 列表
      */
     Mover_01: mover({
         sourceId: [CONFIG.LINK[0][0], CONFIG.LINK[1][0]],
         storageId: CONFIG.STORAGE[0],
-        upgradeId: CONFIG.LINK[0][1]
+        upgradeId: CONFIG.LINK[0][1],
+        towerList: CONFIG.TOWER.E6S22
     }),
     Mover_02: mover({
         sourceId: [CONFIG.LINK[2][0], CONFIG.LINK[3][0]],
         storageId: CONFIG.STORAGE[1],
-        upgradeId: CONFIG.LINK[2][1]
+        upgradeId: CONFIG.LINK[2][1],
+        towerList: CONFIG.TOWER.E9S21
     }),
 
     /**
@@ -85,15 +94,19 @@ module.exports = {
         backUpSourceId: CONFIG.STORAGE[1],
         pickEnergy: false
     }),
-    Upgrader_05: upgrader({
-        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[1],
-        backUpSourceId: CONFIG.STORAGE[1],
-        pickEnergy: false
-    }),
-    //Upgrader_06: upgrader({ sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[1], backUpSourceId: CONFIG.STORAGE[1], pickEnergy: false }),
+    // Upgrader_05: upgrader({
+    //     sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[1],
+    //     backUpSourceId: CONFIG.STORAGE[1],
+    //     pickEnergy: false
+    // }),
+    // Upgrader_06: upgrader({
+    //     sourceId: CONFIG.UPGRADE_ENERGY_SOURCE[1],
+    //     backUpSourceId: CONFIG.STORAGE[1],
+    //     pickEnergy: false
+    // }),
 
     Upgrader_07: upgrader({sourceId: CONFIG.STORAGE[2], pickEnergy: false}),
-    //Upgrader_08: upgrader({ sourceId: '5e7566b6b89bce0502f335b3', pickEnergy: true }),
+    Upgrader_08: upgrader({sourceId: CONFIG.STORAGE[2], pickEnergy: false}),
     //Upgrader_09: upgrader({ sourceId: '5e7566b6b89bce0502f335b3', pickEnergy: true }),
     //Upgrader_10: upgrader({ sourceId: '5e7566b6b89bce0502f335b3', pickEnergy: true }),
 

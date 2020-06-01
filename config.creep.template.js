@@ -48,37 +48,37 @@ module.exports = {
     // Room 3
     Harvester_05: ({
         genMode: "Config",
-        partsSet: [[WORK, 3], [MOVE, 6], [CARRY, 3]],
+        partsSet: [[WORK, 4], [MOVE, 8], [CARRY, 4]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     Harvester_06: ({
         genMode: "Config",
-        partsSet: [[WORK, 3], [MOVE, 6], [CARRY, 3]],
+        partsSet: [[WORK, 4], [MOVE, 8], [CARRY, 4]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     Harvester_07: ({
         genMode: "Config",
-        partsSet: [[WORK, 3], [MOVE, 6], [CARRY, 3]],
+        partsSet: [[WORK, 4], [MOVE, 8], [CARRY, 4]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     Harvester_08: ({
         genMode: "Config",
-        partsSet: [[WORK, 3], [MOVE, 6], [CARRY, 3]],
+        partsSet: [[WORK, 4], [MOVE, 8], [CARRY, 4]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     Harvester_09: ({
         genMode: "Config",
-        partsSet: [[WORK, 3], [MOVE, 6], [CARRY, 3]],
+        partsSet: [[WORK, 4], [MOVE, 8], [CARRY, 4]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     Harvester_10: ({
         genMode: "Config",
-        partsSet: [[WORK, 3], [MOVE, 6], [CARRY, 3]],
+        partsSet: [[WORK, 4], [MOVE, 8], [CARRY, 4]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
@@ -127,13 +127,13 @@ module.exports = {
     // Room 3
     Upgrader_07: ({
         genMode: "Config",
-        partsSet: [[WORK, 4], [MOVE, 8], [CARRY, 4]],
+        partsSet: [[WORK, 4], [MOVE, 4], [CARRY, 8]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     Upgrader_08: ({
         genMode: "Config",
-        partsSet: [[WORK, 3], [MOVE, 6], [CARRY, 3]],
+        partsSet: [[WORK, 4], [MOVE, 4], [CARRY, 8]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
