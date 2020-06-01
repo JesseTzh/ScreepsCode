@@ -31,8 +31,8 @@ function creepManager() {
                             Memory.creeps[name].RebornFailTimes += 1;
                         }
                         // 100ticks 重生失败则采用自适应模板
-                        if(Memory.creeps[name].RebornFailTimes && Memory.creeps[name].RebornFailTimes > 200){
-                            if(name.search("Claimer") !== -1){
+                        if (Memory.creeps[name].RebornFailTimes && Memory.creeps[name].RebornFailTimes > 200) {
+                            if (name.search("Claimer") !== -1) {
                                 //不能使用自适应模板生成的Creep
                                 logger.warn(name + "不能使用自适应模板生成，跳过重生！")
                                 continue;
@@ -40,17 +40,17 @@ function creepManager() {
                             const temp = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName);
                             const tempTemplate = temp.getSelfAdaptionTemplate();
                             result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(tempTemplate, name);
-                            if(result === OK){
+                            if (result === OK) {
                                 let message = name + "长时间重生失败，使用自适应模板......";
                                 logger.info(message);
                                 Game.notify(message);
                                 spawnBusyList.add(creepTemplateConfig.spawnName);
-                            }else if(result !== OK && result !== ERR_BUSY){
+                            } else if (result !== OK && result !== ERR_BUSY) {
                                 let message = name + "自适应模板出错，请检查！"
                                 logger.info(message);
                                 Game.notify(message);
                             }
-                        }else{
+                        } else {
                             spawnBusyList.add(creepTemplateConfig.spawnName);
                         }
                     } else if (result === OK) {
@@ -66,8 +66,7 @@ function creepManager() {
                         logger.warn(name + " 重生失败！错误代码：" + result);
                     }
                 }
-            }
-            else {
+            } else {
                 logger.error(name + "找不到模板文件")
             }
         }
