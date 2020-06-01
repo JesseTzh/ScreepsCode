@@ -25,6 +25,7 @@ module.exports = config => ({
         } else {
             logger.info(creep.name + "：目标房间已肃清！")
             creep.memory.RebornFlag = "No";
+            creep.selfRecycle();
         }
     },
     // 状态切换条件
