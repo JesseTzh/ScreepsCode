@@ -37,7 +37,7 @@ function freeJob(creep) {
     }
 }
 
-function cleanBag(storageId,creep) {
+function cleanBag(storageId, creep) {
     let bagFlag = true;
     for (let resourceType in creep.carry) {
         if (resourceType !== RESOURCE_ENERGY) {
@@ -78,7 +78,7 @@ module.exports = config => ({
     source: creep => {
         let source;
         if (creep.memory.NeedCleanBag) {
-            cleanBag(config.storageId,creep);
+            cleanBag(config.storageId, creep);
             return;
         }
         //如果未达房间能量上限
@@ -126,7 +126,7 @@ module.exports = config => ({
     // 转移
     target: creep => {
         if (creep.memory.NeedCleanBag) {
-            cleanBag(config.storageId,creep);
+            cleanBag(config.storageId, creep);
             return;
         }
         //优先供给 SPAWN
@@ -147,21 +147,19 @@ module.exports = config => ({
         }
         if (!target) {
             //按照配置文件中的参数为能量低于一定比例的Tower冲能
-            if (CONFIG.TOWER) {
-                for (let i = 0; i < CONFIG.TOWER.length; i++) {
-                    var tower = Game.getObjectById(CONFIG.TOWER[i]);
-                    if (tower.room === creep.room) {
-                        if (tower.store[RESOURCE_ENERGY] / TOWER_CAPACITY <= SYS_CONFIG.TOWER_ENERGY_NEED) {
-                            target = tower;
-                        }
+            if (config.towerList) {
+                for (let i = 0; i < config.towerList.length; i++) {
+                    let tower = Game.getObjectById(config.towerList[i]);
+                    if (tower.store[RESOURCE_ENERGY] / TOWER_CAPACITY <= SYS_CONFIG.TOWER_ENERGY_NEED) {
+                        target = tower;
                     }
                 }
             }
         }
         //如果升级Controller所用Link能量断供则向其运输能量
-        if(config.upgradeId){
+        if (config.upgradeId) {
             const upgradeId = Game.getObjectById(config.upgradeId);
-            if(upgradeId.store.getFreeCapacity(RESOURCE_ENERGY) === 0){
+            if (upgradeId.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
                 target = upgradeId
             }
         }

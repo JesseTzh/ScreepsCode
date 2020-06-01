@@ -12,7 +12,7 @@ module.exports = config => ({
         }
         if ((source && source.energy > 0) || (source && source.ticksToRegeneration <= 5 && source.energy === 0)) {
             if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                creep.say("⛏️");
+                creep.say("⛏");
                 creep.moveTo(source);
             }
         } else if (!source || (source.energy === 0 && source.ticksToRegeneration > 5)) {
@@ -35,12 +35,11 @@ module.exports = config => ({
             });
             //如 EXTENSION/SPAWN 已满则存入 TOWER
             if (!target) {
-                for (let i = 0; i < CONFIG.TOWER.length; i++) {
-                    let tower = Game.getObjectById(CONFIG.TOWER[i]);
-                    if (tower.room === creep.room) {
-                        if (tower.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
+                if (config.towerList) {
+                    for (let i = 0; i < config.towerList.length; i++) {
+                        let tower = Game.getObjectById(config.towerList[i]);
+                        if (tower.store[RESOURCE_ENERGY] / TOWER_CAPACITY <= SYS_CONFIG.TOWER_ENERGY_NEED) {
                             target = tower;
-                            break;
                         }
                     }
                 }
