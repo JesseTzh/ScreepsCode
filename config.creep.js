@@ -73,7 +73,7 @@ module.exports = {
         towerList: CONFIG.TOWER.E6S22
     }),
     Mover_02: mover({
-        sourceId: [CONFIG.LINK[2][0], CONFIG.LINK[3][0]],
+        sourceId: [CONFIG.LINK[3][0], CONFIG.LINK[2][0]],
         storageId: CONFIG.STORAGE[1],
         upgradeId: CONFIG.LINK[2][1],
         towerList: CONFIG.TOWER.E9S21
@@ -164,7 +164,12 @@ module.exports = {
         targetId: '5ecde80240d0a7281605c524',
         pathFinderPoint: [[38, 0]]
     }),
-    //OuterHarvester_03: outerharvester({ sourceId: '5bbcad489099fc012e637092', targetRoomName: "E6S23", targetId: CONFIG.STORAGE[0], pathFinderPoint: [[38, 0]] }),
+    OuterHarvester_03: outerharvester({
+        sourceId: '5bbcad7a9099fc012e637578',
+        targetRoomName: "E9S22",
+        targetId: '5ed513cae3bede2668821ec6',
+        pathFinderPoint: [[33, 1]]
+    }),
     OuterHarvester_04: outerharvester({
         sourceId: '5bbcad3a9099fc012e636e4b',
         targetRoomName: "E5S21",
@@ -187,7 +192,7 @@ module.exports = {
      */
     //OuterBuilder: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S22" }),
     //OuterBuilder_1: outbuilder({ sourceId: CONFIG.STORAGE[0], targetRoomName: "E5S21" }),
-    OuterBuilder_2: outbuilder({ sourceId: CONFIG.STORAGE[1], targetRoomName: "E9S22" }),
+    OuterBuilder_2: outbuilder({sourceId: CONFIG.STORAGE[1], targetRoomName: "E9S22"}),
 
     /**
      *   OuterMover配置文件
@@ -215,6 +220,11 @@ module.exports = {
         sourceId: '5ecde80240d0a7281605c524',
         targetRoomName: "E6S23",
         targetId: CONFIG.STORAGE[0]
+    }),
+    OuterMover_05: outmover({
+        sourceId: '5ed513cae3bede2668821ec6',
+        targetRoomName: "E9S22",
+        targetId: CONFIG.STORAGE[1]
     }),
 
     /**

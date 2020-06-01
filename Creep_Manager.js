@@ -31,7 +31,7 @@ function creepManager() {
                             Memory.creeps[name].RebornFailTimes += 1;
                         }
                         // 100ticks 重生失败则采用自适应模板
-                        if (Memory.creeps[name].RebornFailTimes && Memory.creeps[name].RebornFailTimes > 200) {
+                        if (Memory.creeps[name] && Memory.creeps[name].RebornFailTimes && Memory.creeps[name].RebornFailTimes > 200) {
                             if (name.search("Claimer") !== -1) {
                                 //不能使用自适应模板生成的Creep
                                 logger.warn(name + "不能使用自适应模板生成，跳过重生！")

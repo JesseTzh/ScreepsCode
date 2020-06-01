@@ -210,9 +210,9 @@ module.exports = {
     }),
     OuterHarvester_03: ({
         genMode: "Config",
-        partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]],
-        spawnName: "Home",
-        roomName: "E6S22"
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "NewLand",
+        roomName: "E9S21"
     }),
     OuterHarvester_04: ({
         genMode: "Config",
@@ -273,6 +273,12 @@ module.exports = {
         partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
         spawnName: "Home",
         roomName: "E6S22"
+    }),
+    OuterMover_05: ({
+        genMode: "Config",
+        partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
+        spawnName: "NewLand",
+        roomName: "E9S21"
     }),
 
     Tank_01: ({
