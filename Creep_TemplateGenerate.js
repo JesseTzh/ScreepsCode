@@ -26,8 +26,7 @@ class Template {
         if (config && config.energyMax) {
             this.energyRemain = config.energyMax;
         }else if(!config){
-            let config = new Map();
-            config.roadFlag = false
+            const config = ({roadFlag: false})
         }
         while (this.energyRemain > 0) {
             if (this.break) {
