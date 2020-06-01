@@ -27,16 +27,24 @@ function collectionMemory() {
 function clearMemory() {
     logger.info("正在清除内存数据...")
     delete Memory.rooms;
-    for (var name in Memory.creeps) {
-        if (!Game.creeps[name] && Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag != "No") {
-            delete Memory.creeps[name];
-            logger.debug('删除不存在的Creep记录', name);
-        }else if (!(name in creepConfigs)){
+    for (let name in Memory.creeps) {
+        if (!(name in creepConfigs)){
             delete Memory.creeps[name];
             logger.debug('删除不存在的Creep记录', name);
         }
     }
 }
+
+function createOrder(){
+    Game.market.createOrder({
+        type: ORDER_SELL,
+        resourceType: RESOURCE_BATTERY,
+        price: 1.00,
+        totalAmount: 4500,
+        roomName: "E6S22"
+    });
+}
+
 module.exports = function (roomName) {
     if (!global.hasExtension) {
 
@@ -45,5 +53,7 @@ module.exports = function (roomName) {
         mount();
 
         //collectionMemory();
+
+        //createOrder();
     }
 }
