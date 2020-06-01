@@ -10,7 +10,8 @@ module.exports = config => ({
     target: creep => {
         const target = Game.getObjectById(config.targetId);
         if (target) {
-            if (creep.dismantle(target) === ERR_NOT_IN_RANGE) {
+            let re = creep.dismantle(target)
+            if (re === ERR_NOT_IN_RANGE) {
                 creep.say("80!80!");
                 creep.moveTo(target);
             }
@@ -19,11 +20,11 @@ module.exports = config => ({
     // 状态切换条件
     switch: creep => {
         // creep 没有抵达目标房间 && creep 之前的状态为“工作”
-        if (creep.room.name !== creep.memory.TargetRoom && creep.memory.working) {
+        if (creep.room.name !== config.targetRoom && creep.memory.working) {
             creep.memory.working = false
         }
         // creep 抵达目标房间 && creep 之前的状态为“不工作”
-        if ((creep.room.name === creep.memory.TargetRoom && !creep.memory.working)) {
+        if ((creep.room.name === config.targetRoom && !creep.memory.working)) {
             creep.memory.working = true
         }
         return creep.memory.working
