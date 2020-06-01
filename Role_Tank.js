@@ -4,7 +4,7 @@ const creepTemplateConfigs = require('config.creep.template')
 module.exports = config => ({
     // 自我治疗
     source: creep => {
-        logger.info(creep.name + "去治疗")
+        logger.info(creep.name + "血量过低，退回治疗")
         creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.safeRoomName))
         //TODO 移动至另外的房间
         if (creep.hits < creep.hitsMax) {
@@ -13,16 +13,6 @@ module.exports = config => ({
     },
     // 去挨揍
     target: creep => {
-        // 出生后先拿去能量再出发
-        // const creepTemplateConfig = creepTemplateConfigs[creep.name];
-        // if (creep.store[RESOURCE_ENERGY] != creep.store.getCapacity() && creep.room.name == creepTemplateConfig.roomName) {
-        //     const source = Game.getObjectById(config.sourceId);
-        //     if (creep.withdraw(source, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-        //         creep.say("🔽");
-        //         creep.moveTo(source);
-        //     }
-        //     return;
-        // }
         //防止在地图边缘进进出出
         if (creep.avoidGoBackRoom()) {
             return;
@@ -41,17 +31,6 @@ module.exports = config => ({
         }
         creep.heal(creep);
         creep.say("🤕");
-        // if (creep.pos == new RoomPosition(config.pathFinderPoint[1][0], config.pathFinderPoint[1][1], config.targetRoomName) && creep.hits == creep.hitsMax) {
-        //     var target = creep.pos.findClosestByRange(FIND_HOSTILE_STRUCTURES, {
-        //         filter: (structure) => {
-        //             return structure.structureType == STRUCTURE_WALL
-        //         }
-        //     });
-        //     if (target) {
-        //         var re = creep.dismantle(target)
-        //         logger.info(re)
-        //     }
-        // }
     },
     // 状态切换条件
     switch: creep => {

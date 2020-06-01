@@ -251,7 +251,7 @@ module.exports = {
      *          targetId:默认矿物储存点，如果为空则会自动设置为当前房间的Storage
      *          backUpTargetId:备用能量储存点，一般为Storage，初期可不填写
      */
-    //Miner_01: miner({ sourceId: CONFIG.MINE[0], targetId: '5ecf025a177943db1cb47e1e' }),
+    Miner_01: miner({sourceId: CONFIG.MINE[0], targetId: '5ecf025a177943db1cb47e1e'}),
 
     // SpecialMover_01: specialMover({
     //     sourceId: '5e7566b6b89bce0502f335b3',
