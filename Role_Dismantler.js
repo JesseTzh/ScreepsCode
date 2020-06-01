@@ -4,7 +4,7 @@ const SYS_CONFIG = require('config.system.setting');
 module.exports = config => ({
     // 前往目标房间
     source: creep => {
-        //creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoom))
+        creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoom))
     },
     // 拆迁
     target: creep => {

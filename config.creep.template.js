@@ -11,8 +11,6 @@
  *      roomName:Creep所归属的房间名称
  *
  */
-const CONFIG = require('config')
-
 
 module.exports = {
 
@@ -35,13 +33,13 @@ module.exports = {
     // Room 2
     Harvester_03: ({
         genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        partsSet: [[WORK, 10], [MOVE, 7], [CARRY, 4]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
     Harvester_04: ({
         genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        partsSet: [[WORK, 10], [MOVE, 7], [CARRY, 4]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
@@ -174,29 +172,10 @@ module.exports = {
 
     Dismantler_01: ({
         genMode: "Config",
-        partsSet: [[TOUGH, 30], [WORK, 10], [MOVE, 40]],
+        partsSet: [[WORK, 25], [MOVE, 25]],
         spawnName: "Home-Top",
         roomName: "E6S22"
     }),
-    Dismantler_02: ({
-        genMode: "Config",
-        partsSet: [[WORK, 1], [MOVE, 2], [CARRY, 1]],
-        spawnName: "NewLand",
-        roomName: "E9S21"
-    }),
-    Dismantler_03: ({
-        genMode: "Config",
-        partsSet: [[WORK, 1], [MOVE, 2], [CARRY, 1]],
-        spawnName: "NewLand",
-        roomName: "E9S21"
-    }),
-    Dismantler_04: ({
-        genMode: "Config",
-        partsSet: [[WORK, 1], [MOVE, 2], [CARRY, 1]],
-        spawnName: "NewLand",
-        roomName: "E9S21"
-    }),
-
 
     /**
      *   Mover模板文件
@@ -298,7 +277,7 @@ module.exports = {
 
     Tank_01: ({
         genMode: "Config",
-        partsSet: [[TOUGH, 10], [MOVE, 23], [HEAL, 13], [WORK, 1]],
+        partsSet: [[MOVE, 15], [HEAL, 15]],
         spawnName: "Home-Top",
         roomName: "E6S22"
     }),

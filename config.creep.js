@@ -119,10 +119,7 @@ module.exports = {
     //Builder_02: builder({sourceId: CONFIG.STORAGE[1]}),
     //Builder_03: builder({sourceId: CONFIG.STORAGE[2]}),
 
-    //Dismantler_01: dismantler({targetId: '5ec7953511de04afe91a376c'}),
-    // Dismantler_02: dismantler({targetId: '5ec7a7741d4c766da8d5c3e8'}),
-    // Dismantler_03: dismantler({targetId: '5ec7a7741d4c766da8d5c3e8'}),
-    // Dismantler_04: dismantler({targetId: '5ec7a7741d4c766da8d5c3e8'}),
+    Dismantler_01: dismantler({targetId: '5e03302a1aeb2bbc557741b2', targetRoom: 'E7S24', pathFinderPoint: [[1, 11]]}),
 
     /**
      *   OuterClaimer配置文件
@@ -227,7 +224,11 @@ module.exports = {
      *          targetRoomName:所要去挨揍的房间名称
      *          pathFinderPoint:辅助寻路点位，pathFinderPoint[0][n]是安全房的坐标，pathFinderPoint[1][n]是挨揍房的坐标
      */
-    //Tank_01: tank({ safeRoomName: 'E7S20', targetRoomName: "E7S21", pathFinderPoint: [[12, 48], [23, 36]], sourceId: CONFIG.STORAGE[0]}),
+    // Tank_01: tank({
+    //     safeRoomName: 'E7S20',
+    //     targetRoomName: "E7S21",
+    //     pathFinderPoint: [[12, 48], [13, 2]]
+    // }),
 
     /**
      *   Dps配置文件
