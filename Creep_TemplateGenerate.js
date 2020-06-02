@@ -23,10 +23,10 @@ class Template {
     }
 
     getSelfAdaptionTemplate(config) {
+        let roadFlag = false;
         if (config && config.energyMax) {
             this.energyRemain = config.energyMax;
-        }else if(!config){
-            const config = ({roadFlag: false})
+            roadFlag = config.roadFlag
         }
         while (this.energyRemain > 0) {
             if (this.break) {
@@ -38,9 +38,9 @@ class Template {
                 //已有的CARRY部件数
                 let carryParts = this.templateResult.filter(part => part === CARRY);
                 if (workParts.length > carryParts.length) {
-                    this._addCarryPart(config.roadFlag);
+                    this._addCarryPart(roadFlag);
                 } else {
-                    this._addWorkPart(config.roadFlag);
+                    this._addWorkPart(roadFlag);
                 }
             } else {
                 this._addMovePart();
