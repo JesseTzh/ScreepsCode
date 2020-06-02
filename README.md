@@ -5,48 +5,41 @@
 ### 功能实现
 
 - [x] Creep工作配置文件化
-- [x] Creep模板自适应生成
+- [x] Creep模板可通过Config或自适应生成
 - [x] 基础的Log功能
-- [ ] 能量平衡系统（还在优化）
+- [x] 能量平衡系统初步完善
+- [x] 外矿功能初步实现
+- [x] Ai入侵监测并自动攻击
+- [x] 商品生产、交易初步实现
 
 ### 使用说明
 
-1. 打开[config.js](./config.js)文件，并将其中的
+1. 修改 [config.js](./config.js) 文件中为自己的建筑、矿点ID，请注意同时填入自己的房间名。例如
 
    ```
    //能量矿点 ID
-   ENERGY_SOURCE: ['5bbcad489099fc012e63708d','5bbcad489099fc012e63708f'],
+   ENERGY_SOURCE: ({
+           房间名: ['矿点ID', '矿点ID']
+       }),
    ```
+   如是开局状态，仅修改 ENERGY_SOURCE 、SPAWN 、 UPGRADE_ENERGY_SOURCE 即可
 
-   修改为自己的矿点ID，以及将
-
-   ```
-   //升级 Controller 所用的能量来源
-   UPGRADE_ENERGY_SOURCE: ['5eb569554dac05ff668051db'],
-   ```
-
-   修改为自己Spawn的ID
-
-2. 将 [config.system.setting.js](./config.system.setting.js) 中的
+2. 在 [config.creep.template.js](./config.creep.template.js) 中将Creep模板配置为适合当前Rcl等级的模板，如刚开局可配置为：
 
    ```
-   //默认基地名称
-   SPAWN_NAME: "Home",
+   Harvester_01: ({
+           genMode: "Config", 
+           partsSet: [[WORK, 1], [MOVE, 2], [CARRY, 1]],
+           spawnName: "首个基地名称",
+           roomName: "房间名"
+       }),
    ```
+    开局状态下仅配置 Harvester 以及 Upgrader 即可，Mover 一般在 RCL 4级有 Link 之后再行配置
 
-   改为自己的Spawn名称，并将
-
-   ```
-   //是否按照已铺好Road的情况生成Creep
-   ROAD_FLAG: true,
-   ```
-
-   修改为false，以保证Creep按照没有铺设Road的情况生成孵化模板
-
-3. 在 [config.creep.js](./config.creep.js) 文件中根据自己房间的情况调配各Creep工种个数
+3. 在 [config.creep.js](./config.creep.js) 文件中根据自己房间的情况调配各Creep工种与工作目标
 
 4. 即刻开始！
 
 ### 最后
 
-[Log](https://github.com/zhpjy/screeps) 模块来自 [PY](https://github.com/zhpjy)
+[Log](./utils.log.js) 模块来自 [PY](https://github.com/zhpjy/screeps)
