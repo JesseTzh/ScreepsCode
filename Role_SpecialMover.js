@@ -3,7 +3,8 @@ const logger = require('utils.log').getLogger("SpecialMover");
 module.exports = config => ({
     // 拿去货物逻辑
     source: creep => {
-        for (const resourceType in creep.carry) {
+        // 将身上与当前任务不符的物品类型丢弃
+        for (let resourceType in creep.carry) {
             if (resourceType !== config.resourceType) {
                 creep.drop(resourceType)
             }
