@@ -18,14 +18,16 @@ function linkTransfer() {
         logger.debug("配置文件中找不到Link的信息！")
         return;
     }
-    for (let i = 0; i < CONFIG.LINK.length; i++) {
-        let send = Game.getObjectById(CONFIG.LINK[i][0]);
-        let receive = Game.getObjectById(CONFIG.LINK[i][1]);
-        // ①如果接收端能量为零则立即传输
-        // ②如果发送端能量大于50%并且房间可用能量大于 ALLOW_UPGRADER_USE_ENERGY 参数值，则传输
-        if ((send.store.getUsedCapacity(RESOURCE_ENERGY) / LINK_CAPACITY >= 0.5 && send.room.energyAvailable / send.room.energyCapacityAvailable >= SYS_CONFIG.ALLOW_UPGRADER_USE_ENERGY) ||
-            (send.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && receive.store.getUsedCapacity(RESOURCE_ENERGY) === 0)) {
-            send.transferEnergy(receive);
+    for (let room in CONFIG.LINK) {
+        for (let i = 0; i < CONFIG.LINK[room].length; i++) {
+            let send = Game.getObjectById(CONFIG.LINK[room][i][0]);
+            let receive = Game.getObjectById(CONFIG.LINK[room][i][1]);
+            // ①如果接收端能量为零则立即传输
+            // ②如果发送端能量大于50%并且房间可用能量大于 ALLOW_UPGRADER_USE_ENERGY 参数值，则传输
+            if ((send.store.getUsedCapacity(RESOURCE_ENERGY) / LINK_CAPACITY >= 0.5 && send.room.energyAvailable / send.room.energyCapacityAvailable >= SYS_CONFIG.ALLOW_UPGRADER_USE_ENERGY) ||
+                (send.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && receive.store.getUsedCapacity(RESOURCE_ENERGY) === 0)) {
+                send.transferEnergy(receive);
+            }
         }
     }
 }
