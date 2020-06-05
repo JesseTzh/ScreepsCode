@@ -12,7 +12,8 @@ function towerWork() {
             towerAttack(room, enemas);
         } else {
             const repairTargets = Game.rooms[room].find(FIND_STRUCTURES, {
-                filter: (structure) => (structure.hits < structure.hitsMax - 200 && structure.structureType !== STRUCTURE_RAMPART && structure.structureType !== STRUCTURE_WALL) || (structure.structureType === 'rampart' && Game.time % 100 === 0)
+                filter: (structure) => (structure.hits < structure.hitsMax - 200 && structure.structureType !== STRUCTURE_RAMPART && structure.structureType !== STRUCTURE_WALL) || (structure.structureType === STRUCTURE_RAMPART &&
+                    structure.hits / structure.hitsMax <= 0.001)
             });
             if (repairTargets.length) {
                 towerRepair(room, repairTargets)
