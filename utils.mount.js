@@ -21,16 +21,17 @@ function clearMemory() {
 }
 
 function createOrder() {
+    logger.info("正在创建订单...")
     Game.market.createOrder({
         type: ORDER_SELL,
-        resourceType: RESOURCE_BATTERY,
-        price: 1.00,
-        totalAmount: 4500,
+        resourceType: RESOURCE_ZYNTHIUM_BAR,
+        price: 0.53,
+        totalAmount: 13268,
         roomName: "E6S22"
     });
 }
 
-module.exports = function (roomName) {
+module.exports = function () {
     if (!global.hasExtension) {
         clearMemory();
 
