@@ -21,8 +21,7 @@ const creepExtension = {
         // 执行对应操作
         if (working) {
             if (creepConfig.target) creepConfig.target(this)
-        }
-        else {
+        } else {
             if (creepConfig.source) creepConfig.source(this)
         }
     },
@@ -83,6 +82,15 @@ const creepExtension = {
             flag = true;
         }
         return flag;
+    },
+    //躲避外矿房间中刷出的AI
+    avoidAi() {
+        const targets = this.room.find(FIND_HOSTILE_CREEPS);
+        if (!targets.length) {
+            return true;
+        } else {
+
+        }
     }
 }
 

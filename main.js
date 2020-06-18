@@ -6,6 +6,7 @@ const constructionTower = require('Construction_Tower');
 const constructionFactory = require('Construction_Factory')
 const constructionTerminal = require('Construction_Terminal')
 const creepManager = require('Creep_Manager');
+const watcher = require('Watcher')
 
 module.exports.loop = function () {
     //挂载原型扩展
@@ -14,7 +15,7 @@ module.exports.loop = function () {
     //建筑管理
     constructionTower.towerWork();
     constructionLink.linkTransfer();
-    //constructionFactory.factoryWork();
+    constructionFactory.factoryWork();
     //constructionTerminal.terminalWork();
 
     //Creeps 工作
@@ -28,5 +29,7 @@ module.exports.loop = function () {
     //是否有AI占领者
     tools.detectRoomInvaderCore();
 
-    logger.info("---------------------------------------------- 游戏时间: " + Game.time + "----------------------------------------------")
+    watcher.detectOuterRoom();
+
+    logger.error("---------------------------------------------- 游戏时间: " + Game.time + "----------------------------------------------")
 }

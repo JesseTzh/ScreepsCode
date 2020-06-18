@@ -27,7 +27,7 @@ module.exports = config => ({
                 }
                 return;
             }
-            var result = creep.transfer(target, RESOURCE_ENERGY)
+            const result = creep.transfer(target, RESOURCE_ENERGY);
             if (result === ERR_NOT_IN_RANGE) {
                 creep.say("🔼");
                 creep.moveTo(target);

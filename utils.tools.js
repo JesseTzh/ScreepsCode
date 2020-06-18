@@ -2,6 +2,7 @@ const logger = require('utils.log').getLogger("util.tool");
 const SYS_CONFIG = require('config.system.setting');
 const CONFIG = require('config')
 
+// 此函数可检测房间可用能量是否低于 ENERGY_ALERT_RATIO 警报值
 function globalEnergyMonitor(roomName) {
     var energySurplus = Game.rooms[roomName].energyAvailable / Game.rooms[roomName].energyCapacityAvailable;
     Game.rooms[roomName].memory.timeCount == null ? Game.rooms[roomName].memory.timeCount = 1 : Game.rooms[roomName].memory.timeCount += 1;
@@ -14,6 +15,7 @@ function globalEnergyMonitor(roomName) {
     }
 }
 
+// 此函数可监测房间能量矿每轮刷新是否未挖完
 function energySourceMonitor() {
     for (let i = 0; i < CONFIG.ENERGY_SOURCE.length; i++) {
         let source = Game.getObjectById(CONFIG.ENERGY_SOURCE[i]);
@@ -56,6 +58,7 @@ function detectRoomInvaderCore() {
     }
 }
 
+// 此函数可返回传入对象的具体类型
 function getType(obj) {
     var type = Object.prototype.toString.call(obj).match(/^\[object (.*)\]$/)[1].toLowerCase();
     if(type === 'string' && typeof obj === 'object') return 'object'; // Let "new String('')" return 'object'

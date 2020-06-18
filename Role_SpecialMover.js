@@ -18,6 +18,10 @@ module.exports = config => ({
         }
         const source = Game.getObjectById(config.sourceId);
         if (source) {
+            if (source.store[config.resourceType] === 0) {
+                creep.memory.working = true;
+                return;
+            }
             if (creep.withdraw(source, config.resourceType) === ERR_NOT_IN_RANGE) {
                 creep.say("🔽");
                 creep.moveTo(source);
@@ -30,11 +34,11 @@ module.exports = config => ({
     target: creep => {
         const target = Game.getObjectById(config.targetId);
         if (target) {
-                if (creep.transfer(target, config.resourceType) === ERR_NOT_IN_RANGE) {
-                    creep.say("🔼");
-                    creep.moveTo(target);
-                }
+            if (creep.transfer(target, config.resourceType) === ERR_NOT_IN_RANGE) {
+                creep.say("🔼");
+                creep.moveTo(target);
             }
+        }
     },
     // 状态切换条件
     switch: creep => {

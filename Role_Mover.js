@@ -47,7 +47,8 @@ function cleanBag(storageId, creep) {
                 logger.info(creep.name + "正在清理背包");
                 creep.say("🧺");
                 creep.moveTo(target);
-            };
+            }
+            ;
         }
     }
     if (bagFlag) {
@@ -76,13 +77,14 @@ function energyCheck(creep) {
 module.exports = config => ({
     // 提取能量矿
     source: creep => {
+        creep.say("🔽");
         let source;
         if (creep.memory.NeedCleanBag) {
             cleanBag(config.storageId, creep);
             return;
         }
         //如果未达房间能量上限
-        if (creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
+        if (creep.room.energyAvailable / creep.room.energyCapacityAvailable < 0.9) {
             //优先从冗余储能建筑提取能量：只有未达房间能量上限时才从 STORAGE 中提取能量，只有达到房间能量上限才向 STORAGE 储存能量，避免原地举重现象
             source = Game.getObjectById(config.storageId)
             if (!source || source.store[RESOURCE_ENERGY] === 0) {
@@ -104,10 +106,10 @@ module.exports = config => ({
                 });
             }
             //如果达到房间能量上限，并且 Link 当前储量超过一半时，直接从 Link 中提取
-        } else if (creep.room.energyAvailable === creep.room.energyCapacityAvailable && SYS_CONFIG.ALLOW_STORE_ENERGY) {
+        } else if (creep.room.energyAvailable / creep.room.energyCapacityAvailable >= 0.9 && SYS_CONFIG.ALLOW_STORE_ENERGY) {
             for (let i = 0; i < config.sourceId.length; i++) {
-                let source = Game.getObjectById(config.sourceId[i]);
-                if (source.store[RESOURCE_ENERGY] > 0 && source.store[RESOURCE_ENERGY] / LINK_CAPACITY >= 0.5) {
+                source = Game.getObjectById(config.sourceId[i]);
+                if (source.store[RESOURCE_ENERGY] / LINK_CAPACITY >= 0.5) {
                     break;
                 }
             }
@@ -118,13 +120,13 @@ module.exports = config => ({
 
         } else {
             if (creep.withdraw(source, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                creep.say("🔽");
                 creep.moveTo(source);
             }
         }
     },
     // 转移
     target: creep => {
+        creep.say("🔼");
         if (creep.memory.NeedCleanBag) {
             cleanBag(config.storageId, creep);
             return;
@@ -179,7 +181,6 @@ module.exports = config => ({
         }
         if (target && target.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
             if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                creep.say("🔼");
                 creep.moveTo(target);
             }
         } else {

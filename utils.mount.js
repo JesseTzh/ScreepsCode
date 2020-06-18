@@ -25,10 +25,14 @@ function createOrder() {
     Game.market.createOrder({
         type: ORDER_SELL,
         resourceType: RESOURCE_ZYNTHIUM_BAR,
-        price: 0.53,
-        totalAmount: 13268,
+        price: 0.55,
+        totalAmount: 11600,
         roomName: "E6S22"
     });
+}
+
+function sendJob(){
+    Game.rooms['E6S22'].terminal.send(RESOURCE_ENERGY, 100000, 'E9S21');
 }
 
 module.exports = function () {
@@ -38,5 +42,7 @@ module.exports = function () {
         mount();
 
         //createOrder();
+
+        //sendJob();
     }
 }
