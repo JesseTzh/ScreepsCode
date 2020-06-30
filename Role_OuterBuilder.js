@@ -32,19 +32,6 @@ module.exports = config => ({
                     }
                 });
             }
-            //都没有，则就地采矿
-            if (!source) {
-                const target = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
-                if (target) {
-                    logger.info(creep.name + "尝试就地取材");
-                    if (creep.harvest(target) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target);
-                    }
-                    return;
-                } else {
-                    logger.info(creep.name + "找不到可以采集的能量矿");
-                }
-            }
         }
         if (source) {
             if (creep.withdraw(source, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
@@ -52,8 +39,17 @@ module.exports = config => ({
                 creep.moveTo(source);
             }
         } else {
-            creep.say("🚬");
-            logger.warn(creep.name + "找不到可用的取能设施")
+            //都没有，则就地采矿
+            const target = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
+            if (target) {
+                logger.debug(creep.name + "尝试就地取材");
+                if (creep.harvest(target) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                }
+                return;
+            } else {
+                logger.info(creep.name + "在本房间内没有获取能量的方法！");
+            }
         }
     },
     // 建造或维修
