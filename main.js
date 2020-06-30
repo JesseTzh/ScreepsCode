@@ -15,7 +15,7 @@ module.exports.loop = function () {
     //建筑管理
     constructionTower.towerWork();
     constructionLink.linkTransfer();
-    constructionFactory.factoryWork();
+    //constructionFactory.factoryWork();
     //constructionTerminal.terminalWork();
 
     //Creeps 工作
@@ -26,10 +26,8 @@ module.exports.loop = function () {
     //Creep管理
     creepManager.creepManager();
 
-    //是否有AI占领者
-    tools.detectRoomInvaderCore();
-
-    watcher.detectOuterRoom();
+    // 长夜将至，我从今开始守望
+    watcher.beginWatch();
 
     logger.error("---------------------------------------------- 游戏时间: " + Game.time + "----------------------------------------------")
 }

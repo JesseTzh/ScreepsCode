@@ -1,13 +1,13 @@
-const logger = require('utils.log').getLogger("Dps");
+const logger = require('utils.log').getLogger("ResidentDefender");
 
 module.exports = config => ({
     // 前往要作战的房间
     source: creep => {
         if (!creep.memory.TargetRoom) {
-            //creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoomName))
-            logger.info(creep.name + "缺失攻击目标")
+            // 守望者
+            creep.moveTo(new RoomPosition(25, 25, config.targetRoomName));
         } else {
-            creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], creep.memory.TargetRoom))
+            creep.moveTo(new RoomPosition(25, 25, creep.memory.TargetRoom));
         }
     },
     // 去打架
@@ -23,9 +23,7 @@ module.exports = config => ({
                 creep.moveTo(target);
             }
         } else {
-            logger.info(creep.name + "：目标房间已肃清！")
-            creep.memory.RebornFlag = "No";
-            creep.selfRecycle();
+            logger.info(creep.name + "：目标房间[" + creep.room.name + "]已肃清！")
         }
     },
     // 状态切换条件

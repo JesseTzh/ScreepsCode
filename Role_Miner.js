@@ -4,14 +4,9 @@ module.exports = config => ({
     // 采集矿物
     source: creep => {
         const source = Game.getObjectById(config.sourceId)
-        if (source && source.mineralAmount > 0) {
-            if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                creep.say("⛏");
-                creep.moveTo(source);
-            }
-        } else if (source.mineralAmount === 0) {
-            //矿物挖光，禁止重生
-            creep.room.memory.MinerRebornFlag = false;
+        if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
+            creep.say("⛏");
+            creep.moveTo(source);
         }
     },
     // 存储矿物逻辑
@@ -27,7 +22,7 @@ module.exports = config => ({
                 creep.say("🔼");
                 creep.moveTo(target);
             }
-        }else{
+        } else {
             logger.info(creep.name + "找不到可以储存矿物的建筑！");
         }
     },
