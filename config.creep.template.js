@@ -151,21 +151,21 @@ module.exports = {
     /**
      *   Builder模板文件
      */
-    Builder_01: ({
+    Builder_E6S22: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "Home",
         roomName: "E6S22"
     }),
-    Builder_02: ({
+    Builder_E9S21: ({
         genMode: "Config",
-        partsSet: [[WORK, 8], [MOVE, 16], [CARRY, 8]],
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
-    Builder_03: ({
+    Builder_E8S23: ({
         genMode: "Config",
-        partsSet: [[WORK, 8], [MOVE, 16], [CARRY, 8]],
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
@@ -173,8 +173,8 @@ module.exports = {
     Dismantler_01: ({
         genMode: "Config",
         partsSet: [[WORK, 25], [MOVE, 25]],
-        spawnName: "Home-Top",
-        roomName: "E6S22"
+        spawnName: "ThirdCenter",
+        roomName: "E8S23"
     }),
 
     /**
@@ -244,56 +244,83 @@ module.exports = {
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
-    OuterHarvester_07: ({
+    OuterHarvester_E9S23_1: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
-        spawnName: "TheThirdWorld",
+        spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
-    OuterHarvester_08: ({
+    OuterHarvester_E9S23_2: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
-        spawnName: "TheThirdWorld",
+        spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
-    OuterHarvester_09: ({
+    OuterHarvester_E8S24: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
-        spawnName: "TheThirdWorld",
+        spawnName: "ThirdCenter",
+        roomName: "E8S23"
+    }),
+    OuterHarvester_E7S23: ({
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
 
-    OuterClaimer_01: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 2]], spawnName: "Home-Top", roomName: "E6S22"}),
-    OuterClaimer_02: ({genMode: "Config", partsSet: [[MOVE, 3], [CLAIM, 3]], spawnName: "Home-Top", roomName: "E6S22"}),
+    OuterClaimer_E6S22_1: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 2], [CLAIM, 2]],
+        spawnName: "Home-Top",
+        roomName: "E6S22"
+    }),
+    OuterClaimer_E6S22_2: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 3], [CLAIM, 3]],
+        spawnName: "Home-Top",
+        roomName: "E6S22"
+    }),
     OuterClaimer_03: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 2]], spawnName: "NewLand", roomName: "E9S21"}),
-    OuterClaimer_04: ({genMode: "Config", partsSet: [[MOVE, 3], [CLAIM, 3]], spawnName: "TheThirdWorld", roomName: "E8S23"}),
+    OuterClaimer_E8S23_1: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 3], [CLAIM, 3]],
+        spawnName: "ThirdCenter",
+        roomName: "E8S23"
+    }),
+    OuterClaimer_E8S23_2: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 2], [CLAIM, 2]],
+        spawnName: "ThirdCenter",
+        roomName: "E8S23"
+    }),
 
-    OuterBuilder: ({
+    OuterBuilder_E6S22_1: ({
         genMode: "Config",
         partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]],
         spawnName: "Home",
         roomName: "E6S22"
     }),
-    OuterBuilder_1: ({
+    OuterBuilder_E9S21_1: ({
         genMode: "Config",
         partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
-    OuterBuilder_2: ({
+    OuterBuilder_E8S23_1: ({
         genMode: "Config",
         partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]],
-        spawnName: "TheThirdWorld",
+        spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
 
-    OuterMover_01: ({
+    OuterMover_E5S21_1: ({
         genMode: "Config",
         partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
         spawnName: "Home-Top",
         roomName: "E6S22"
     }),
-    OuterMover_02: ({
+    OuterMover_E5S21_2: ({
         genMode: "Config",
         partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
         spawnName: "Home-Top",
@@ -341,6 +368,12 @@ module.exports = {
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
+    OuterMover_E7S23: ({
+        genMode: "Config",
+        partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
+        spawnName: "ThirdCenter",
+        roomName: "E8S23"
+    }),
 
     Tank_01: ({
         genMode: "Config",
@@ -349,11 +382,26 @@ module.exports = {
         roomName: "E6S22"
     }),
 
-    ResidentDefender_E6S22: ({genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "Home-Top", roomName: "E6S22"}),
-    ResidentDefender_E8S23: ({genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "ThirdCenter", roomName: "E8S23"}),
-    ResidentDefender_E9S21: ({genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "NewLandCenter", roomName: "E9S21"}),
+    ResidentDefender_E6S22: ({
+        genMode: "Config",
+        partsSet: [[ATTACK, 10], [MOVE, 10]],
+        spawnName: "Home-Top",
+        roomName: "E6S22"
+    }),
+    ResidentDefender_E8S23: ({
+        genMode: "Config",
+        partsSet: [[ATTACK, 10], [MOVE, 10]],
+        spawnName: "ThirdCenter",
+        roomName: "E8S23"
+    }),
+    ResidentDefender_E9S21: ({
+        genMode: "Config",
+        partsSet: [[ATTACK, 10], [MOVE, 10]],
+        spawnName: "NewLandCenter",
+        roomName: "E9S21"
+    }),
 
-    Colonist: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "NewLand", roomName: "E9S21"}),
+    Colonist: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "ThirdCenter", roomName: "E8S23"}),
 
     Miner_01: ({
         genMode: "Config",
@@ -390,6 +438,13 @@ module.exports = {
         genMode: "Config",
         partsSet: [[MOVE, 5], [CARRY, 10]],
         spawnName: "TheThirdWorld",
+        roomName: "E8S23"
+    }),
+
+    RemoteUpgrader_E8S25: ({
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
 }
