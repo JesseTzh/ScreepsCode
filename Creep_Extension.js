@@ -55,6 +55,9 @@ const creepExtension = {
     },
     selfRecycle() {
         const creepTemplateConfig = creepTemplateConfigs[this.name];
+        if(!creepTemplateConfig){
+            return;
+        }
         const target = Game.spawns[creepTemplateConfig.spawnName];
         if (creepTemplateConfig && target && target.recycleCreep(this) === ERR_NOT_IN_RANGE) {
             this.say("🌍");
