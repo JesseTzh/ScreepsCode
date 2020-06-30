@@ -7,7 +7,7 @@ module.exports = config => ({
         const room = Game.rooms[config.targetRoomName];
         // 如果该房间不存在就先往房间走
         if (!room) {
-            creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoomName))
+            creep.moveTo(new RoomPosition(25, 25, config.targetRoomName))
             return;
         }
         const source = Game.getObjectById(config.sourceId);
