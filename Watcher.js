@@ -8,6 +8,8 @@ function beginWatch() {
     storageMonitor();
     // 监测Mine是否刷新
     mineMonitor();
+    // 监测领地房间是否有建筑工地
+    constructionSiteMonitor();
 }
 
 function defenseOuterRoom() {
@@ -39,7 +41,9 @@ function defenseOuterRoom() {
             }
             if (target && target.length) {
                 logger.info("侦测到[" + externalRoomName + "]有敌人入侵！")
-                Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].TargetRoom = externalRoomName;
+                if (Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]) {
+                    Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].TargetRoom = externalRoomName;
+                }
             }
         }
     }
@@ -72,6 +76,17 @@ function mineMonitor() {
             Memory.creeps[CONFIG.MINE[roomName][1]].RebornFlag = "Yes";
         } else {
             Memory.creeps[CONFIG.MINE[roomName][1]].RebornFlag = "No";
+        }
+    }
+}
+
+function constructionSiteMonitor() {
+    for (let roomName in CONFIG.ROOMS_BUILDER) {
+        const constructionSite = Game.rooms[roomName].find(FIND_MY_CONSTRUCTION_SITES);
+        if (constructionSite.length > 0) {
+            Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = "Yes";
+        } else {
+            Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = "No";
         }
     }
 }

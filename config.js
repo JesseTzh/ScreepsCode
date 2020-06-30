@@ -1,4 +1,10 @@
 module.exports = {
+    ROOMS_BUILDER: ({
+        E6S22: ['Builder_E6S22'],
+        E9S21: ['Builder_E9S21'],
+        E8S23: ['Builder_E8S23']
+    }),
+
     // Spawn ID 
     SPAWN: ({
         E6S22: ['5eb569554dac05ff668051db', '5ece9d3da4273f33938ce488'],
@@ -42,9 +48,9 @@ module.exports = {
 
     // Mine 矿物 ID
     MINE: ({
-        E6S22: [['5bbcb30440062e4259e93fe8'],['Miner_01']],
-        E9S21: [['5bbcb32440062e4259e9411f'],['Miner_02']],
-        E8S23: [['5bbcb31940062e4259e940b5'],['Miner_03']]
+        E6S22: [['5bbcb30440062e4259e93fe8'], ['Miner_01']],
+        E9S21: [['5bbcb32440062e4259e9411f'], ['Miner_02']],
+        E8S23: [['5bbcb31940062e4259e940b5'], ['Miner_03']]
     }),
 
     // Factory
@@ -65,6 +71,6 @@ module.exports = {
     EXTERNAL_ROOMS: ({
         E6S22: [["E6S23", "E5S22", "E5S21"], ["ResidentDefender_E6S22"]],
         E9S21: [["E8S21", "E9S22"], ["ResidentDefender_E9S21"]],
-        E8S23: [["E9S23", "E8S24"], ["ResidentDefender_E8S23"]]
+        E8S23: [["E9S23", "E8S24", "E7S23"], ["ResidentDefender_E8S23"]]
     }),
 }
