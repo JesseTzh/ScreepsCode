@@ -86,7 +86,7 @@ const creepExtension = {
         }
         return flag;
     },
-    //躲避外矿房间中刷出的AI
+    //躲避外矿房间中刷出的AI (暂废弃，改为使用常驻军)
     avoidAi() {
         const targets = this.room.find(FIND_HOSTILE_CREEPS);
         if (!targets.length) {

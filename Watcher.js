@@ -10,6 +10,8 @@ function beginWatch() {
     mineMonitor();
     // 监测领地房间是否有建筑工地
     constructionSiteMonitor();
+    // 监测外矿房间是否需要OuterBuilder,但考虑CPU消耗等问题，暂放弃
+    //outerRoomConstructionSiteMonitor();
 }
 
 function defenseOuterRoom() {
@@ -81,6 +83,10 @@ function mineMonitor() {
 }
 
 function constructionSiteMonitor() {
+    // 检测是否有对应的配置文件
+    if (!CONFIG.ROOMS_BUILDER) {
+        return
+    }
     for (let roomName in CONFIG.ROOMS_BUILDER) {
         const constructionSite = Game.rooms[roomName].find(FIND_MY_CONSTRUCTION_SITES);
         if (constructionSite.length > 0) {
@@ -88,6 +94,17 @@ function constructionSiteMonitor() {
         } else {
             Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = "No";
         }
+    }
+}
+
+function outerRoomConstructionSiteMonitor(){
+    // 检测是否有对应的配置文件
+    if (!CONFIG.OUTER_ROOMS_BUILDER) {
+        return
+    }
+    // 遍历控制的房间列表（非外矿房间）
+    for (let roomName in CONFIG.OUTER_ROOMS_BUILDER) {
+
     }
 }
 
