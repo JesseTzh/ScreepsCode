@@ -41,11 +41,11 @@ module.exports = config => ({
             }
             if (!source) {
                 //默认取能建筑为空，尝试从其他冗余储能建筑提取能量
-                logger.info(creep.name + "尝试从冗余建筑获取");
+                logger.debug(creep.name + "尝试从冗余建筑获取");
                 source = Game.getObjectById(config.backUpSourceId);
                 //冗余储能建筑也为空，若在配置文件中允许，则从 EXTENSION/SPAWN 提取能量
                 if (!source && SYS_CONFIG.ALLOW_UPGRADER_FROM_SE) {
-                    logger.info(creep.name + "尝试从 EXTENSION/SPAWN 获取");
+                    logger.debug(creep.name + "尝试从 EXTENSION/SPAWN 获取");
                     source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) &&
@@ -65,7 +65,6 @@ module.exports = config => ({
             logger.warn(creep.name + "找不到可用的取能设施")
             creep.selfFix();
         }
-
     },
     // 升级Controller
     target: creep => {

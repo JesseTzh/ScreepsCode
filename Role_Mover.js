@@ -6,7 +6,7 @@ function freeJob(creep) {
     //寻找遗弃资源
     let target = creep.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
     if (target && creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()) {
-        logger.info(creep.name + "发现遗弃资源！");
+        logger.debug(creep.name + "发现遗弃资源！");
         const result = creep.pickup(target);
         if (result === ERR_NOT_IN_RANGE) {
             creep.say("🚮");
@@ -24,7 +24,7 @@ function freeJob(creep) {
             }
         });
         if (target && creep.store[RESOURCE_ENERGY] < creep.store.getCapacity()) {
-            logger.info(creep.name + "发现墓碑资源！");
+            logger.debug(creep.name + "发现墓碑资源！");
             if (creep.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
@@ -32,7 +32,7 @@ function freeJob(creep) {
         }
     }
     if (!target) {
-        logger.info(creep.name + "找不到被遗弃的资源！尝试续命...");
+        logger.debug(creep.name + "找不到被遗弃的资源！尝试续命...");
         creep.selfFix();
     }
 }
@@ -44,7 +44,7 @@ function cleanBag(storageId, creep) {
             bagFlag = false;
             let target = Game.getObjectById(storageId);
             if (creep.transfer(target, resourceType) === ERR_NOT_IN_RANGE) {
-                logger.info(creep.name + "正在清理背包");
+                logger.debug(creep.name + "正在清理背包");
                 creep.say("🧺");
                 creep.moveTo(target);
             }
@@ -91,7 +91,8 @@ module.exports = config => ({
                 //冗余储能建筑消耗完毕，使用Link中的能量
                 for (let i = 0; i < config.sourceId.length; i++) {
                     source = Game.getObjectById(config.sourceId[i]);
-                    if (source.store[RESOURCE_ENERGY] > 0) {
+                    //为避免反复去同一Link提取刚刚挖出的那一点能量，故设置为Link能量大于400时再提取，以使Mover优先去能量较多的Link中提取
+                    if (source.store[RESOURCE_ENERGY] > 400) {
                         break;
                     }
                 }

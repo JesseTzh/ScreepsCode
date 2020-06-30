@@ -7,7 +7,7 @@ function creepManager() {
     for (let name in creepConfigs) {
         if (!Game.creeps[name]) {
             if (Memory.creeps[name] && Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag === "No") {
-                logger.info(name + '已停止重生');
+                logger.info("[" + name + ']已被暂停重生');
                 continue;
             }
             if (name in creepTemplateConfigs) {
@@ -15,7 +15,7 @@ function creepManager() {
                 let creepTemplateConfig = creepTemplateConfigs[name];
                 //判断 Creep所用Spawn正忙
                 if (spawnBusyList.has(creepTemplateConfig.spawnName)) {
-                    logger.info(creepTemplateConfig.spawnName + "暂时无法执行当前任务，暂停重生: " + name)
+                    logger.info("[" + creepTemplateConfig.spawnName + "]暂时无法执行当前任务，暂停重生: [" + name + "]");
                     continue;
                 }
                 if (Game.rooms[creepTemplateConfig.roomName].energyAvailable >= 300) {
@@ -24,7 +24,7 @@ function creepManager() {
                     const template = creepTemplate.getTemplateByConfig(creepTemplateConfig);
                     let result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name);
                     if (result === ERR_NOT_ENOUGH_ENERGY) {
-                        logger.info(name + "没有足够资源重生,房间" + creepTemplateConfig.roomName + "当前可用能量：" + Game.rooms[creepTemplateConfig.roomName].energyAvailable);
+                        logger.info("[" + name + "]没有足够资源重生,房间[" + creepTemplateConfig.roomName + "]当前可用能量：" + Game.rooms[creepTemplateConfig.roomName].energyAvailable);
                         if (Memory.creeps[name] && !Memory.creeps[name].RebornFailTimes) {
                             Memory.creeps[name].RebornFailTimes = 1;
                         } else if (Memory.creeps[name] && Memory.creeps[name].RebornFailTimes) {
@@ -60,10 +60,10 @@ function creepManager() {
                         }
                         spawnBusyList.add(creepTemplateConfig.spawnName);
                     } else if (result === ERR_BUSY) {
-                        logger.info(name + "重生失败，Spawn " + creepTemplateConfig.spawnName + " 正忙！");
+                        logger.info("[" + name + "]重生失败，Spawn[" + creepTemplateConfig.spawnName + "]正忙！");
                         spawnBusyList.add(creepTemplateConfig.spawnName);
                     } else {
-                        logger.warn(name + " 重生失败！错误代码：" + result);
+                        logger.warn("[" + name + "]重生失败！错误代码：" + result);
                     }
                 }
             } else {

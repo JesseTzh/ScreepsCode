@@ -30,5 +30,8 @@ module.exports = {
     ENERGY_ALERT_RATIO: 0.5,
 
     // Tower 剩余多少能量时允许 Mover 加进来
-    TOWER_ENERGY_NEED: 0.9
+    TOWER_ENERGY_NEED: 0.9,
+
+    // Tower 修理 Wall/Rampart 上限
+    DEFENSE_CONSTRUCTION_HITS_LIMITS: 0.001
 }

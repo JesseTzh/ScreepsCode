@@ -112,14 +112,14 @@ module.exports = {
     }),
     Upgrader_05: ({
         genMode: "Config",
-        partsSet: [[WORK, 8], [MOVE, 5], [CARRY, 2]],
-        spawnName: "NewLand",
+        partsSet: [[WORK, 10], [MOVE, 5], [CARRY, 2]],
+        spawnName: "NewLandCenter",
         roomName: "E9S21"
     }),
     Upgrader_06: ({
         genMode: "Config",
-        partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]],
-        spawnName: "NewLand",
+        partsSet: [[WORK, 10], [MOVE, 10], [CARRY, 10]],
+        spawnName: "NewLandCenter",
         roomName: "E9S21"
     }),
     // Room 3
@@ -186,6 +186,12 @@ module.exports = {
         spawnName: "Home",
         roomName: "E6S22"
     }),
+    Mover_E6S22_2: ({
+        genMode: "Config",
+        partsSet: [[WORK, 0], [MOVE, 15], [CARRY, 30]],
+        spawnName: "Home",
+        roomName: "E6S22"
+    }),
     Mover_02: ({
         genMode: "Config",
         partsSet: [[WORK, 0], [MOVE, 10], [CARRY, 20]],
@@ -202,16 +208,16 @@ module.exports = {
     /**
      *   OuterHarvester模板文件
      */
-    OuterHarvester_01: ({
+    OuterHarvester_E5S21_01: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
         spawnName: "Home-Top",
         roomName: "E6S22"
     }),
-    OuterHarvester_02: ({
+    OuterHarvester_E5S21_02: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
-        spawnName: "Home",
+        spawnName: "Home-Top",
         roomName: "E6S22"
     }),
     OuterHarvester_03: ({
@@ -343,8 +349,9 @@ module.exports = {
         roomName: "E6S22"
     }),
 
-    Dps_01: ({genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "Home-Top", roomName: "E6S22"}),
-    Dps_02: ({genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "NewLand", roomName: "E9S21"}),
+    ResidentDefender_E6S22: ({genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "Home-Top", roomName: "E6S22"}),
+    ResidentDefender_E8S23: ({genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "ThirdCenter", roomName: "E8S23"}),
+    ResidentDefender_E9S21: ({genMode: "Config", partsSet: [[ATTACK, 10], [MOVE, 10]], spawnName: "NewLandCenter", roomName: "E9S21"}),
 
     Colonist: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "NewLand", roomName: "E9S21"}),
 

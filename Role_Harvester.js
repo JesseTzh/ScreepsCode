@@ -17,7 +17,7 @@ module.exports = config => ({
             }
         } else if (!source || (source.energy === 0 && source.ticksToRegeneration > 5)) {
             creep.say("🚬");
-            logger.info(creep.name + "找不到可挖掘的矿点！");
+            logger.debug(creep.name + "找不到可挖掘的矿点！");
             creep.selfFix();
         }
     },

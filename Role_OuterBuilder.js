@@ -42,16 +42,8 @@ module.exports = config => ({
                     }
                     return;
                 } else {
-                    logger.info(creep.name + "找不到可以采的能量矿");
+                    logger.info(creep.name + "找不到可以采集的能量矿");
                 }
-            }
-            if (!source) {
-                source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType === STRUCTURE_CONTAINER) &&
-                            structure.store[RESOURCE_ENERGY] > 0;
-                    }
-                });
             }
         }
         if (source) {

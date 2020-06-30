@@ -2,7 +2,7 @@ const logger = require('utils.log').getLogger("Construction.Factory");
 const CONFIG = require('config');
 
 // 工厂工作间隔时间
-const interval = 21
+const interval = 11
 // 工厂生产产品
 const production = RESOURCE_ZYNTHIUM_BAR
 

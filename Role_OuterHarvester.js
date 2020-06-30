@@ -4,7 +4,7 @@ module.exports = config => ({
     // 采集能量矿
     source: creep => {
         // 要去的房间
-        const room = Game.rooms[config.targetRoomName]
+        const room = Game.rooms[config.targetRoomName];
         // 如果该房间不存在就先往房间走
         if (!room) {
             creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoomName))

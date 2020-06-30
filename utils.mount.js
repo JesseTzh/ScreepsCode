@@ -24,9 +24,9 @@ function createOrder() {
     logger.info("正在创建订单...")
     Game.market.createOrder({
         type: ORDER_SELL,
-        resourceType: RESOURCE_ZYNTHIUM_BAR,
-        price: 0.55,
-        totalAmount: 11600,
+        resourceType: RESOURCE_BATTERY,
+        price: 2.00,
+        totalAmount: 34159,
         roomName: "E6S22"
     });
 }

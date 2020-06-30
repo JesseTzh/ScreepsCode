@@ -46,7 +46,7 @@ const creepExtension = {
             });
             if (target && target.renewCreep(this) === ERR_NOT_IN_RANGE) {
                 this.say("🐸");
-                logger.info(this.name + "正在续命...");
+                logger.debug(this.name + "正在续命...");
                 this.moveTo(target);
             } else if (!target) {
                 logger.info(this.name + "找不到可以续命的地方...");
@@ -56,7 +56,7 @@ const creepExtension = {
     selfRecycle() {
         const creepTemplateConfig = creepTemplateConfigs[this.name];
         const target = Game.spawns[creepTemplateConfig.spawnName];
-        if (target && target.recycleCreep(this) === ERR_NOT_IN_RANGE) {
+        if (creepTemplateConfig && target && target.recycleCreep(this) === ERR_NOT_IN_RANGE) {
             this.say("🌍");
             logger.info(this.name + "正在将自己回收再利用...");
             this.moveTo(target);
