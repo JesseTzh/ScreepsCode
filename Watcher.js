@@ -2,6 +2,7 @@ const CONFIG = require('config');
 const logger = require('utils.log').getLogger("Watcher");
 
 function beginWatch() {
+    //const cpuUsedBefore = Game.cpu.getUsed();
     // 监测外矿房间敌人
     defenseOuterRoom();
     // 监测Storage剩余容量
@@ -12,6 +13,8 @@ function beginWatch() {
     constructionSiteMonitor();
     // 监测外矿房间是否需要OuterBuilder,但考虑CPU消耗等问题，暂放弃
     //outerRoomConstructionSiteMonitor();
+    //const cpuUsed = Game.cpu.getUsed() - cpuUsedBefore;
+    //logger.info("守望者CPU用量：" + cpuUsed)
 }
 
 function defenseOuterRoom() {
@@ -42,9 +45,11 @@ function defenseOuterRoom() {
                 target = room.find(FIND_HOSTILE_STRUCTURES);
             }
             if (target && target.length) {
-                logger.info("侦测到[" + externalRoomName + "]有敌人入侵！")
+                logger.info("侦测到[" + externalRoomName + "]有敌人入侵！");
                 if (Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]) {
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].TargetRoom = externalRoomName;
+                } else {
+                    logger.info("没有检测到[" + CONFIG.EXTERNAL_ROOMS[roomName][1][0] + "]");
                 }
             }
         }
@@ -88,16 +93,20 @@ function constructionSiteMonitor() {
         return
     }
     for (let roomName in CONFIG.ROOMS_BUILDER) {
-        const constructionSite = Game.rooms[roomName].find(FIND_MY_CONSTRUCTION_SITES);
-        if (constructionSite.length > 0) {
-            Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = "Yes";
-        } else {
-            Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = "No";
+        // 内存中是否有对应建造者记录（起码出生过一次）
+        if (Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]]) {
+            const constructionSite = Game.rooms[roomName].find(FIND_MY_CONSTRUCTION_SITES);
+            // 房间内有建筑工地，则允许建造者重生
+            if (constructionSite.length > 0) {
+                Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = "Yes";
+            } else {
+                Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = "No";
+            }
         }
     }
 }
 
-function outerRoomConstructionSiteMonitor(){
+function outerRoomConstructionSiteMonitor() {
     // 检测是否有对应的配置文件
     if (!CONFIG.OUTER_ROOMS_BUILDER) {
         return
