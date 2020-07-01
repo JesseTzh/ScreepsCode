@@ -187,7 +187,6 @@ module.exports = {
     OuterClaimer_E6S22_1: claimer({
         sourceId: ['5bbcad3a9099fc012e636e4a', '5bbcad3a9099fc012e636e4d'],
         targetRoomName: ['E5S21', 'E5S22'],
-<<<<<<< HEAD
         pathFinderPoint: [[25, 25]]
     }),
     OuterClaimer_E6S22_2: claimer({
@@ -200,20 +199,11 @@ module.exports = {
         targetRoomName: ['E9S22', 'E8S21'],
         pathFinderPoint: [[25, 25]]
     }),
-=======
-        pathFinderPoint: [[25, 25]]
-    }),
     OuterClaimer_E6S22_2: claimer({
         sourceId: ['5bbcad489099fc012e637091', '5bbcad3a9099fc012e636e4d'],
         targetRoomName: ['E6S23', 'E5S22'],
         pathFinderPoint: [[25, 25]]
     }),
-    // OuterClaimer_03: claimer({
-    //     sourceId: ['5bbcad7a9099fc012e637579', '5bbcad6c9099fc012e6373e8'],
-    //     targetRoomName: ['E9S22', 'E8S21'],
-    //     pathFinderPoint: [[25, 25]]
-    // }),
->>>>>>> 9defc0fbda19abe6debe9fb0a147f71326aebbe1
     OuterClaimer_E8S23_1: claimer({
         sourceId: ['5bbcad7b9099fc012e63757c', '5bbcad6c9099fc012e6373f2'],
         targetRoomName: ['E9S23', 'E8S24'],
@@ -303,11 +293,7 @@ module.exports = {
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
     OuterBuilder_E6S22_1: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
-<<<<<<< HEAD
     OuterBuilder_E9S21_1: outbuilder({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E8S21"}),
-=======
-    //OuterBuilder_E9S21_1: outbuilder({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E9S22"}),
->>>>>>> 9defc0fbda19abe6debe9fb0a147f71326aebbe1
     OuterBuilder_E8S23_1: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
 
     /**
@@ -419,8 +405,5 @@ module.exports = {
     // }),
 
     RemoteUpgrader_E8S25: remoteupgrader({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
-<<<<<<< HEAD
     RemoteUpgrader_E8S25_1: remoteupgrader({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
-=======
->>>>>>> 9defc0fbda19abe6debe9fb0a147f71326aebbe1
 }
