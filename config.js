@@ -2,28 +2,37 @@ module.exports = {
     ROOMS_BUILDER: ({
         E6S22: ['Builder_E6S22'],
         E9S21: ['Builder_E9S21'],
-        E8S23: ['Builder_E8S23']
+        E8S23: ['Builder_E8S23'],
+        E8S25: ['Builder_E8S25']
+    }),
+    OUTER_ROOMS_BUILDER: ({
+        E6S22: [["E6S23", "E5S22", "E5S21"], ["ResidentDefender_E6S22"]],
+        E9S21: [["E8S21", "E9S22"], ["ResidentDefender_E9S21"]],
+        E8S23: [["E9S23", "E8S24", "E7S23"], ["ResidentDefender_E8S23"]]
     }),
 
     // Spawn ID 
     SPAWN: ({
         E6S22: ['5eb569554dac05ff668051db', '5ece9d3da4273f33938ce488'],
         E9S21: ['5ec7953511de04afe91a376c'],
-        E8S23: ['5ecb8fa0b61e17c73bb11aa8']
+        E8S23: ['5ecb8fa0b61e17c73bb11aa8'],
+        E8S25: ['5efb1ab4429aea09ccd7f88a']
     }),
 
     // 能量矿点 ID
     ENERGY_SOURCE: ({
         E6S22: ['5bbcad489099fc012e63708d', '5bbcad489099fc012e63708f'],
         E9S21: ['5bbcad7a9099fc012e637574', '5bbcad7a9099fc012e637576'],
-        E8S23: ['5bbcad6c9099fc012e6373ee', '5bbcad6c9099fc012e6373f0']
+        E8S23: ['5bbcad6c9099fc012e6373ee', '5bbcad6c9099fc012e6373f0'],
+        E8S25: ['5bbcad6d9099fc012e6373f6', '5bbcad6d9099fc012e6373f7']
     }),
 
     // Tower ID
     TOWER: ({
-        E6S22: ['5eb7147d7f3603f6f5b2f2ec', '5ebbb74020844551b84bec76', '5ed23a4b3cc45f63d3f43729'],
-        E9S21: ['5ec890adf62e3fe3d3b86e9c', '5ecb7fb8128a03381e973a45'],
-        E8S23: ['5ed04d90ca6db6205d72ee36', '5ed621afb311b9a6046c2f82']
+        E6S22: ['5eb7147d7f3603f6f5b2f2ec', '5ebbb74020844551b84bec76', '5ed23a4b3cc45f63d3f43729', '5efb8c6e40f838898cd2b860', '5efb98ea7ad516525f10533c', '5efbad806a61d60a51708e13'],
+        E9S21: ['5ec890adf62e3fe3d3b86e9c', '5ecb7fb8128a03381e973a45', '5ee71adf670478e67209cb83'],
+        E8S23: ['5ed04d90ca6db6205d72ee36', '5ed621afb311b9a6046c2f82', '5efaee44d4e9e0a8bb2e5da6'],
+        E8S25: ['']
     }),
     // Link ID,二维数组形式储存，LINK[n][0]为发射端，LINK[n][1]为接收端 
     LINK: ({

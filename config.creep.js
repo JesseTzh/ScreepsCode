@@ -64,9 +64,10 @@ module.exports = {
         backUpTargetId: CONFIG.STORAGE.E8S23,
     }),
     //Harvester_07: harvester({sourceId: CONFIG.ENERGY_SOURCE[4], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
-    // Harvester_08: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S23[1], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
-    // Harvester_09: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S23[1], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
-    // Harvester_10: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S23[1], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
+    Harvester_E8S25_1: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S25[0], targetId: CONFIG.SPAWN.E8S25}),
+    Harvester_E8S25_2: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S25[0], targetId: CONFIG.SPAWN.E8S25}),
+    Harvester_E8S25_3: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S25[1], targetId: CONFIG.SPAWN.E8S25}),
+    Harvester_E8S25_4: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S25[1], targetId: CONFIG.SPAWN.E8S25}),
 
     /**
      *   Mover配置文件
@@ -140,21 +141,22 @@ module.exports = {
         pickEnergy: false,
         backUpSourceId: CONFIG.STORAGE.E8S23
     }),
-    // Upgrader_08: upgrader({
-    //     sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S23,
-    //     pickEnergy: false,
-    //     backUpSourceId: CONFIG.STORAGE.E8S23
-    // }),
-    // Upgrader_09: upgrader({
-    //     sourceId: CONFIG.STORAGE.E8S23,
-    //     pickEnergy: false,
-    //     backUpSourceId: CONFIG.STORAGE.E8S23
-    // }),
-    // Upgrader_10: upgrader({
-    //     sourceId: CONFIG.STORAGE.E8S23,
-    //     pickEnergy: false,
-    //     backUpSourceId: CONFIG.STORAGE.E8S23
-    // }),
+    Upgrader_E8S25_1: upgrader({
+        sourceId: CONFIG.SPAWN.E8S25,
+        pickEnergy: true,
+        backUpSourceId: CONFIG.SPAWN.E8S25,
+    }),
+    Upgrader_E8S25_2: upgrader({
+        sourceId: CONFIG.SPAWN.E8S25,
+        pickEnergy: true,
+        backUpSourceId: CONFIG.SPAWN.E8S25,
+    }),
+    Upgrader_E8S25_3: upgrader({
+        sourceId: CONFIG.SPAWN.E8S25,
+        pickEnergy: true,
+        backUpSourceId: CONFIG.SPAWN.E8S25,
+    }),
+
 
     /**
      *   Builder配置文件
@@ -175,7 +177,7 @@ module.exports = {
      */
     ResidentDefender_E6S22: residentDefender({targetRoomName: "E5S21", pathFinderPoint: [[38, 1]]}),
     ResidentDefender_E8S23: residentDefender({targetRoomName: "E9S23", pathFinderPoint: [[38, 1]]}),
-    //ResidentDefender_E9S21: residentDefender({targetRoomName: "E9S22", pathFinderPoint: [[38, 1]]}),
+    ResidentDefender_E9S21: residentDefender({targetRoomName: "E9S22", pathFinderPoint: [[38, 1]]}),
 
     /**
      *   OuterClaimer配置文件
@@ -292,7 +294,7 @@ module.exports = {
      *          targetRoomName:所要去的房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterBuilder_E6S22_1: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
+    OuterBuilder_E6S22_1: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S22"}),
     OuterBuilder_E9S21_1: outbuilder({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E8S21"}),
     OuterBuilder_E8S23_1: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
 
