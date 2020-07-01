@@ -26,7 +26,9 @@ class Template {
         let roadFlag = false;
         if (config && config.energyMax) {
             this.energyRemain = config.energyMax;
-            roadFlag = config.roadFlag
+            if (config.roadFlag){
+                roadFlag = config.roadFlag
+            }
         }
         while (this.energyRemain > 0) {
             if (this.break) {
