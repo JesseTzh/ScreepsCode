@@ -48,7 +48,7 @@ module.exports = config => ({
                 }
                 return;
             } else {
-                logger.info(creep.name + "在本房间内没有获取能量的方法！");
+                logger.info("[" + creep.name + "]在房间" + creep.room.name + "内没有获取能量的方法！");
             }
         }
     },
