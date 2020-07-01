@@ -31,8 +31,7 @@ module.exports = {
     TOWER: ({
         E6S22: ['5eb7147d7f3603f6f5b2f2ec', '5ebbb74020844551b84bec76', '5ed23a4b3cc45f63d3f43729', '5efb8c6e40f838898cd2b860', '5efb98ea7ad516525f10533c', '5efbad806a61d60a51708e13'],
         E9S21: ['5ec890adf62e3fe3d3b86e9c', '5ecb7fb8128a03381e973a45', '5ee71adf670478e67209cb83'],
-        E8S23: ['5ed04d90ca6db6205d72ee36', '5ed621afb311b9a6046c2f82', '5efaee44d4e9e0a8bb2e5da6'],
-        E8S25: ['']
+        E8S23: ['5ed04d90ca6db6205d72ee36', '5ed621afb311b9a6046c2f82', '5efaee44d4e9e0a8bb2e5da6']
     }),
     // Link ID,二维数组形式储存，LINK[n][0]为发射端，LINK[n][1]为接收端 
     LINK: ({

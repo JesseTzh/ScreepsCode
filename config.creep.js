@@ -108,35 +108,22 @@ module.exports = {
      *          sourceId:默认取能建筑
      *          backUpSourceId:备用取能建筑，一般为Storage，初期可不填写
      */
-    // Upgrader_01: upgrader({
-    //     sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
-    //     backUpSourceId: CONFIG.STORAGE.E6S22,
-    //     pickEnergy: false
-    // }),
-    // Upgrader_02: upgrader({
-    //     sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
-    //     backUpSourceId: CONFIG.STORAGE.E6S22,
-    //     pickEnergy: false
-    // }),
-    //Upgrader_03: upgrader({sourceId: CONFIG.STORAGE.E6S22, pickEnergy: false}),
-
-    Upgrader_04: upgrader({
+    Upgrader_E6S22_1: upgrader({
+        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
+        backUpSourceId: CONFIG.STORAGE.E6S22,
+        pickEnergy: false
+    }),
+    Upgrader_E9S21_1: upgrader({
         sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E9S21,
         backUpSourceId: CONFIG.STORAGE.E9S21,
         pickEnergy: false
     }),
-    // Upgrader_05: upgrader({
-    //     sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E9S21,
-    //     backUpSourceId: CONFIG.STORAGE.E9S21,
-    //     pickEnergy: false
-    // }),
-    // Upgrader_06: upgrader({
-    //     sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E9S21,
-    //     backUpSourceId: CONFIG.STORAGE.E9S21,
-    //     pickEnergy: false
-    // }),
-
-    Upgrader_07: upgrader({
+    Upgrader_E8S23_1: upgrader({
+        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S23,
+        pickEnergy: false,
+        backUpSourceId: CONFIG.STORAGE.E8S23
+    }),
+    Upgrader_E8S23_2: upgrader({
         sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S23,
         pickEnergy: false,
         backUpSourceId: CONFIG.STORAGE.E8S23
@@ -166,6 +153,7 @@ module.exports = {
     Builder_E6S22: builder({sourceId: CONFIG.STORAGE.E6S22}),
     Builder_E9S21: builder({sourceId: CONFIG.STORAGE.E9S21}),
     Builder_E8S23: builder({sourceId: CONFIG.STORAGE.E8S23}),
+    Builder_E8S25: builder({sourceId: CONFIG.SPAWN.E8S25}),
 
     //Dismantler_01: dismantler({targetId: '5eaec9da0d4bd50b5e5bf8b8', targetRoom: 'E8S25', pathFinderPoint: [[48, 16]]}),
 
@@ -217,7 +205,6 @@ module.exports = {
         pathFinderPoint: [[25, 25]]
     }),
 
-
     /**
      *   OuterHarvester配置文件
      *      参数：
@@ -238,30 +225,12 @@ module.exports = {
         targetId: OUTERWORLD_CONFIG.E5S21[1][1],
         pathFinderPoint: [[38, 0]]
     }),
-    // OuterHarvester_03: outerharvester({
-    //     sourceId: '5bbcad7a9099fc012e637578',
-    //     targetRoomName: "E9S22",
-    //     targetId: '5ee70e457f28be70f7201908',
-    //     pathFinderPoint: [[33, 1]]
-    // }),
-    // OuterHarvester_04: outerharvester({
-    //     sourceId: '5bbcad3a9099fc012e636e4b',
-    //     targetRoomName: "E5S21",
-    //     targetId: '5ef8326d892531028bb766f6',
-    //     pathFinderPoint: [[32, 49]]
-    // }),
-    // OuterHarvester_05: outerharvester({
-    //     sourceId: '5bbcad3a9099fc012e636e49',
-    //     targetRoomName: "E5S21",
-    //     targetId: '5ecd3a5309a32af5bf13a261',
-    //     pathFinderPoint: [[32, 49]]
-    // }),
-    // OuterHarvester_06: outerharvester({
-    //     sourceId: '5bbcad7a9099fc012e63757a',
-    //     targetRoomName: "E9S22",
-    //     targetId: '5ee71c20b2cc5836ea2aa57e',
-    //     pathFinderPoint: [[33, 1]]
-    // }),
+    OuterHarvester_E5S22: outerharvester({
+        sourceId: OUTERWORLD_CONFIG.E5S22[0][0],
+        targetRoomName: "E5S22",
+        targetId: OUTERWORLD_CONFIG.E5S22[0][1],
+        pathFinderPoint: [[38, 0]]
+    }),
     OuterHarvester_E9S23_1: outerharvester({
         sourceId: OUTERWORLD_CONFIG.E9S23[0][0],
         targetRoomName: "E9S23",
@@ -286,6 +255,12 @@ module.exports = {
         targetId: OUTERWORLD_CONFIG.E7S23[0][1],
         pathFinderPoint: [[32, 49]]
     }),
+    OuterHarvester_E8S21: outerharvester({
+        sourceId: OUTERWORLD_CONFIG.E8S21[0][0],
+        targetRoomName: "E8S21",
+        targetId: OUTERWORLD_CONFIG.E8S21[0][1],
+        pathFinderPoint: [[32, 49]]
+    }),
 
     /**
      *   OuterBuilder配置文件
@@ -294,7 +269,7 @@ module.exports = {
      *          targetRoomName:所要去的房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterBuilder_E6S22_1: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S22"}),
+    OuterBuilder_E6S22_1: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E6S23"}),
     OuterBuilder_E9S21_1: outbuilder({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E8S21"}),
     OuterBuilder_E8S23_1: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
 
@@ -315,26 +290,11 @@ module.exports = {
         targetRoomName: "E5S21",
         targetId: CONFIG.STORAGE.E6S22
     }),
-    // OuterMover_03: outmover({
-    //     sourceId: '5ef96777e9119e1680d20eeb',
-    //     targetRoomName: "E5S21",
-    //     targetId: CONFIG.STORAGE.E6S22
-    // }),
-    // OuterMover_04: outmover({
-    //     sourceId: '5ecde80240d0a7281605c524',
-    //     targetRoomName: "E6S23",
-    //     targetId: CONFIG.STORAGE.E6S22
-    // }),
-    // OuterMover_05: outmover({
-    //     sourceId: '5ee70e457f28be70f7201908',
-    //     targetRoomName: "E9S22",
-    //     targetId: CONFIG.STORAGE.E9S21
-    // }),
-    // OuterMover_06: outmover({
-    //     sourceId: '5ee71c20b2cc5836ea2aa57e',
-    //     targetRoomName: "E9S22",
-    //     targetId: CONFIG.STORAGE.E9S21
-    // }),
+    OuterMover_E5S22: outmover({
+        sourceId: OUTERWORLD_CONFIG.E5S22[0][1],
+        targetRoomName: "E5S22",
+        targetId: CONFIG.STORAGE.E6S22
+    }),
     OuterMover_07: outmover({
         sourceId: OUTERWORLD_CONFIG.E9S23[0][1],
         targetRoomName: "E9S23",
@@ -354,6 +314,11 @@ module.exports = {
         sourceId: OUTERWORLD_CONFIG.E7S23[0][1],
         targetRoomName: "E7S23",
         targetId: CONFIG.STORAGE.E8S23
+    }),
+    OuterMover_E8S21: outmover({
+        sourceId: OUTERWORLD_CONFIG.E8S21[0][1],
+        targetRoomName: "E8S21",
+        targetId: CONFIG.STORAGE.E9S21
     }),
 
     /**
