@@ -281,12 +281,16 @@ module.exports = {
         spawnName: "Home-Top",
         roomName: "E6S22"
     }),
+<<<<<<< HEAD
     OuterClaimer_E9S21_1: ({
         genMode: "Config",
         partsSet: [[MOVE, 3], [CLAIM, 3]],
         spawnName: "NewLandCenter",
         roomName: "E9S21"
     }),
+=======
+    OuterClaimer_03: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 2]], spawnName: "NewLand", roomName: "E9S21"}),
+>>>>>>> 9defc0fbda19abe6debe9fb0a147f71326aebbe1
     OuterClaimer_E8S23_1: ({
         genMode: "Config",
         partsSet: [[MOVE, 3], [CLAIM, 3]],
@@ -452,10 +456,13 @@ module.exports = {
         spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
+<<<<<<< HEAD
     RemoteUpgrader_E8S25_1: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
+=======
+>>>>>>> 9defc0fbda19abe6debe9fb0a147f71326aebbe1
 }
