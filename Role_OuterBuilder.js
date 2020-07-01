@@ -74,7 +74,7 @@ module.exports = config => ({
             }
         }
         if (creep.room.name === config.targetRoomName) {
-            targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+            targets = creep.room.find(FIND_MY_CONSTRUCTION_SITES);
             if (targets.length) {
                 creep.say("🌇");
                 let r = creep.build(targets[0]);
@@ -83,7 +83,7 @@ module.exports = config => ({
                 }
 
             } else {
-                targets = creep.room.find(FIND_STRUCTURES, {
+                targets = creep.room.find(FIND_MY_STRUCTURES, {
                     filter: (structure) => structure.hits < structure.hitsMax && structure.structureType !== STRUCTURE_WALL
                 });
                 if (targets.length) {
