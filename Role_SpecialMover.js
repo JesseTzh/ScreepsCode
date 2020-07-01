@@ -33,6 +33,10 @@ module.exports = config => ({
     // 存储货物逻辑
     target: creep => {
         const target = Game.getObjectById(config.targetId);
+        if (config.targetAmount && target.store[config.resourceType] >= config.targetAmount) {
+            logger.info("[" + creep.name + "]目标完成！");
+            return;
+        }
         if (target) {
             if (creep.transfer(target, config.resourceType) === ERR_NOT_IN_RANGE) {
                 creep.say("🔼");
