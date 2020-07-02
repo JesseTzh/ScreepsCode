@@ -1,7 +1,7 @@
 // 引入 creep 配置项
 const creepConfigs = require('config.creep');
 const SYS_CONFIG = require('config.system.setting');
-const logger = require('utils.log').getLogger("extension.creep");
+const logger = require('utils.log').getLogger("Creep_Extension");
 const creepTemplateConfigs = require('config.creep.template')
 
 // 自定义的 Creep 的拓展

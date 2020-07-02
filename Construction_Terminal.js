@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("Construction.Terminal");
+const logger = require('utils.log').getLogger("Terminal");
 const CONFIG = require('config')
 
 function terminalWork() {

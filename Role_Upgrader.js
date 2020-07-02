@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("new_role.upgrader");
+const logger = require('utils.log').getLogger("Upgrader");
 const SYS_CONFIG = require('config.system.setting');
 
 module.exports = config => ({

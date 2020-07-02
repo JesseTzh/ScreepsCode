@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("manager.creep");
+const logger = require('utils.log').getLogger("Creep_Manager");
 const creepConfigs = require('config.creep');
 const creepTemplateConfigs = require('config.creep.template')
 

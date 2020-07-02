@@ -9,7 +9,7 @@
         1. 引入 var link = require('construction.link');
         2. 调用 link.linkTransfer();
 */
-const logger = require('utils.log').getLogger("construction.link");
+const logger = require('utils.log').getLogger("Link");
 const CONFIG = require('config')
 const SYS_CONFIG = require('config.system.setting');
 

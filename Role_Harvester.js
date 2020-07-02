@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("Role_Harvester");
+const logger = require('utils.log').getLogger("Harvester");
 const CONFIG = require('config')
 const SYS_CONFIG = require('config.system.setting');
 

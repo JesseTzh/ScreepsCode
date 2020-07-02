@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("Role_Builder");
+const logger = require('utils.log').getLogger("Builder");
 const SYS_CONFIG = require('config.system.setting');
 
 module.exports = config => ({

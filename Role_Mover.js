@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("Role_Mover");
+const logger = require('utils.log').getLogger("Mover");
 const SYS_CONFIG = require('config.system.setting');
 const CONFIG = require('config')
 
