@@ -1,26 +1,25 @@
 const logger = require('utils.log').getLogger("Construction.Factory");
 const CONFIG = require('config');
-
-// 工厂工作间隔时间
-const interval = 11
-// 工厂生产产品
-const production = RESOURCE_ZYNTHIUM_BAR
+const CONFIG_FACTORY = require('config.construction.factory')
 
 function factoryWork() {
-    if (!CONFIG.FACTORY) {
+    if (!CONFIG.FACTORY || !CONFIG_FACTORY) {
         logger.warn("配置文件中找不到FACTORY的信息！")
         return;
     }
-    if (Game.time % interval === 0) {
-        const factory = Game.getObjectById(CONFIG.FACTORY.E6S22);
-        //调用
-        const result = factory.produce(production);
-        if (result === ERR_NOT_ENOUGH_RESOURCES) {
-            logger.info("工厂原料消耗完毕")
-        } else if (result === OK) {
-            logger.debug("工厂开始生产")
+    for (let roomName in CONFIG_FACTORY) {
+        if (!CONFIG_FACTORY[roomName].WorkFlag || !Game.time % CONFIG_FACTORY[roomName].Interval === 0) {
+            // 工厂停止工作
+            continue;
+        }
+        let factory = Game.getObjectById(CONFIG.FACTORY[roomName]);
+        let produceResult = factory.produce(CONFIG_FACTORY[roomName].Production);
+        if (produceResult === ERR_NOT_ENOUGH_RESOURCES) {
+            logger.info("房间[" + roomName + "]工厂原料消耗完毕");
+        } else if (produceResult === OK) {
+            logger.debug("房间[" + roomName + "]工厂开始生产");
         } else {
-            logger.info("工厂生产出现其他错误，错误代码：" + result)
+            logger.error("房间[" + roomName + "]工厂生产出现其他错误，错误代码：" + produceResult);
         }
     }
 }
