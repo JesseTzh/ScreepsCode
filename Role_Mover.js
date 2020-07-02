@@ -84,7 +84,7 @@ module.exports = config => ({
             return;
         }
         //如果未达房间能量上限
-        if (creep.room.energyAvailable / creep.room.energyCapacityAvailable < 0.9) {
+        if (creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
             //优先从冗余储能建筑提取能量：只有未达房间能量上限时才从 STORAGE 中提取能量，只有达到房间能量上限才向 STORAGE 储存能量，避免原地举重现象
             source = Game.getObjectById(config.storageId)
             if (!source || source.store[RESOURCE_ENERGY] === 0) {
