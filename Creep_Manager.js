@@ -7,7 +7,7 @@ function creepManager() {
     for (let name in creepConfigs) {
         if (!Game.creeps[name]) {
             if (Memory.creeps[name] && Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag === "No") {
-                logger.info("[" + name + ']已被暂停重生');
+                logger.debug("[" + name + ']已被暂停重生');
                 continue;
             }
             if (name in creepTemplateConfigs) {

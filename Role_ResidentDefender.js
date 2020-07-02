@@ -23,7 +23,7 @@ module.exports = config => ({
                 creep.moveTo(target);
             }
         } else {
-            logger.info(creep.name + "：目标房间[" + creep.room.name + "]已肃清！")
+            logger.debug(creep.name + "：目标房间[" + creep.room.name + "]已肃清！")
         }
     },
     // 状态切换条件
