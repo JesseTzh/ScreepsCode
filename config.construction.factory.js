@@ -8,7 +8,7 @@
  */
 module.exports = {
     E6S22:({
-        WorkFlag: false,
+        WorkFlag: true,
         Production: RESOURCE_ZYNTHIUM_BAR,
         Interval: 21
     }),
