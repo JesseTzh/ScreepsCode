@@ -35,7 +35,7 @@ function defenseOuterRoom() {
                 let message = '丢失房间[' + externalRoomName + ']的视野，请注意！';
                 logger.info(message);
                 //发送邮件通知外矿视野丢失
-                //Game.notify(message);
+                Game.notify(message);
                 continue;
             }
             // 首先检测是否有敌对 Creep
