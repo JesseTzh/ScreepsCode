@@ -160,7 +160,7 @@ module.exports = config => ({
             }
         }
         //如果升级Controller所用Link能量断供则向其运输能量
-        if (config.upgradeId) {
+        if (!target && config.upgradeId) {
             const upgradeId = Game.getObjectById(config.upgradeId);
             if (upgradeId.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
                 target = upgradeId
