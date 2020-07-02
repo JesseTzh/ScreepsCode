@@ -55,7 +55,7 @@ const creepExtension = {
     },
     selfRecycle() {
         const creepTemplateConfig = creepTemplateConfigs[this.name];
-        if(!creepTemplateConfig){
+        if (!creepTemplateConfig) {
             return;
         }
         const target = Game.spawns[creepTemplateConfig.spawnName];
@@ -86,13 +86,81 @@ const creepExtension = {
         }
         return flag;
     },
-    //躲避外矿房间中刷出的AI (暂废弃，改为使用常驻军)
-    avoidAi() {
-        const targets = this.room.find(FIND_HOSTILE_CREEPS);
-        if (!targets.length) {
+    // 在房间内尽可能获取资源，获取到返回 true,否则返回 false
+    pickEnergy() {
+        //首先检查有没有丢弃在地上的资源
+        let source = this.pos.findClosestByRange(FIND_DROPPED_RESOURCES);
+        if (source && source.resourceType === RESOURCE_ENERGY) {
+            if (this.pickup(source) === ERR_NOT_IN_RANGE) {
+                this.say("🚮");
+                this.moveTo(source);
+            }
             return true;
         } else {
-
+            //如果没有则检查有没有建筑废墟
+            source = this.pos.findClosestByRange(FIND_RUINS, {
+                filter: (structure) => {
+                    return structure.store[RESOURCE_ENERGY] > 0;
+                }
+            });
+        }
+        //再没有则检查建筑
+        if (!source) {
+            source = this.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_TOWER || structure.structureType === STRUCTURE_STORAGE || structure.structureType === STRUCTURE_TERMINAL) &&
+                        structure.store[RESOURCE_ENERGY] > 0;
+                }
+            });
+        }
+        if (source) {
+            if (this.withdraw(source, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                this.say("🔽");
+                this.moveTo(source);
+            }
+            return true;
+        } else {
+            //都没有，则就地采矿
+            const target = this.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
+            if (target) {
+                logger.debug(this.name + "尝试就地取材");
+                if (this.harvest(target) === ERR_NOT_IN_RANGE) {
+                    this.moveTo(target);
+                }
+                return true;
+            } else {
+                logger.info(this.name + "在本房间内没有获取能量的方法！");
+                return false;
+            }
+        }
+    },
+    //转移至其他房间,支持中转房间以防止路过被占领房间挨打，抵达目标返回 true,否则返回 false
+    moveToOtherRoom(transferRoom, targetRoomName) {
+        if (this.avoidGoBackRoom()) {
+            return false;
+        }
+        // 存在中转房间且未抵达过
+        if (transferRoom && !this.memory.transferFlag) {
+            // 前往中转房间
+            if (this.room.name !== transferRoom) {
+                this.say("🏴");
+                this.moveTo(new RoomPosition(25, 25, transferRoom))
+                return false;
+                // 抵达中转房间并记录在内存中
+            } else if (this.room.name === transferRoom) {
+                this.memory.transferFlag = true;
+            }
+            // 没有中转房间或已抵达
+        } else if (this.memory.transferFlag || !transferRoom) {
+            // 前往目标房间
+            if (this.room.name !== targetRoomName) {
+                this.say("🚩");
+                this.moveTo(new RoomPosition(25, 25, targetRoomName))
+                return false;
+            } else {
+                //抵达目标房间
+                return true;
+            }
         }
     }
 }
