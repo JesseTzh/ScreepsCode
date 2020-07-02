@@ -15,7 +15,7 @@ module.exports.loop = function () {
     //建筑管理
     constructionTower.towerWork();
     constructionLink.linkTransfer();
-    //constructionFactory.factoryWork();
+    constructionFactory.factoryWork();
     //constructionTerminal.terminalWork();
 
     //Creeps 工作
@@ -28,5 +28,5 @@ module.exports.loop = function () {
 
     // 长夜将至，我从今开始守望
     watcher.beginWatch();
-    logger.error("---------------------------------------------- 游戏时间: " + Game.time + " | 所用CPU: " + Game.cpu.getUsed().toFixed(2) + "----------------------------------------------")
+    logger.info("---------------------------------------------- 游戏时间: " + Game.time + " | 所用CPU: " + Game.cpu.getUsed().toFixed(2) + "----------------------------------------------")
 }
