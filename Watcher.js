@@ -3,6 +3,9 @@ const logger = require('utils.log').getLogger("Watcher");
 const Observer = require('Construction_Observer');
 
 function beginWatch() {
+
+    // const cpuUsedBefore = Game.cpu.getUsed();
+
     // 监测外矿房间敌人
     defenseOuterRoom();
     // 监测Storage剩余容量
@@ -14,7 +17,7 @@ function beginWatch() {
 
     // 监测外矿房间是否需要OuterBuilder,但考虑CPU消耗等问题，暂放弃
     //outerRoomConstructionSiteMonitor();
-    //const cpuUsedBefore = Game.cpu.getUsed();
+
     //监测者探测外界房间
     observer();
     // const cpuUsed = Game.cpu.getUsed() - cpuUsedBefore;
