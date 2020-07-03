@@ -50,17 +50,19 @@ const creepExtension = {
                         return object.spawning === null && object.store[RESOURCE_ENERGY] > 0;
                     }
                 });
-                const result = reNewSpawn[0].renewCreep(this);
-                if (result === ERR_NOT_IN_RANGE) {
-                    logger.info("[" + this.name + "]正在赶往续命地点...");
-                    this.moveTo(reNewSpawn[0]);
-                } else if (result === OK) {
-                    logger.info("[" + this.name + "]正在续命...");
+                if(reNewSpawn.length){
+                    const result = reNewSpawn[0].renewCreep(this);
+                    if (result === ERR_NOT_IN_RANGE) {
+                        logger.info("[" + this.name + "]正在赶往续命地点...");
+                        this.moveTo(reNewSpawn[0]);
+                    } else if (result === OK) {
+                        logger.info("[" + this.name + "]正在续命...");
+                    } else {
+                        logger.info("[" + this.name + "]续命失败，错误代码：" + result);
+                    }
                 } else {
-                    logger.info("[" + this.name + "]续命失败，错误代码：" + result);
+                    logger.info("[" + this.name + "]暂无可用Spawn!");
                 }
-            } else {
-                logger.info(this.name + "找不到续命地点!");
             }
         }
     },
