@@ -38,18 +38,29 @@ const creepExtension = {
     },
     selfFix() {
         if (this.ticksToLive < 1400) {
-            //闲着没事做就去续命
-            const target = this.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => {
-                    return structure.structureType === STRUCTURE_SPAWN && structure.store[RESOURCE_ENERGY] > 0;
-                }
-            });
-            if (target && target.renewCreep(this) === ERR_NOT_IN_RANGE) {
+            const creepTemplateConfig = creepTemplateConfigs[this.name];
+            if (!creepTemplateConfig) {
+                return;
+            }
+            const reNewRoom = Game.rooms[creepTemplateConfig.roomName];
+            if (reNewRoom) {
                 this.say("🐸");
-                logger.debug(this.name + "正在续命...");
-                this.moveTo(target);
-            } else if (!target) {
-                logger.info(this.name + "找不到可以续命的地方...");
+                const reNewSpawn = reNewRoom.find(FIND_MY_SPAWNS, {
+                    filter: function (object) {
+                        return object.spawning === null && object.store[RESOURCE_ENERGY] > 0;
+                    }
+                });
+                const result = reNewSpawn[0].renewCreep(this);
+                if (result === ERR_NOT_IN_RANGE) {
+                    logger.info("[" + this.name + "]正在赶往续命地点...");
+                    this.moveTo(reNewSpawn[0]);
+                } else if (result === OK) {
+                    logger.info("[" + this.name + "]正在续命...");
+                } else {
+                    logger.info("[" + this.name + "]续命失败，错误代码：" + result);
+                }
+            } else {
+                logger.info(this.name + "找不到续命地点!");
             }
         }
     },
