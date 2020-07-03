@@ -53,6 +53,7 @@ function defenseOuterRoom() {
             }
             if (target && target.length) {
                 logger.info("侦测到[" + externalRoomName + "]有敌人入侵！");
+                Game.notify("侦测到[" + externalRoomName + "]有敌人入侵！");
                 if (Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]) {
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].TargetRoom = externalRoomName;
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].Target = "Yes";

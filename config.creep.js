@@ -138,6 +138,11 @@ module.exports = {
         pickEnergy: false,
         backUpSourceId: CONFIG.SPAWN.E8S25,
     }),
+    Upgrader_E8S25_3: upgrader({
+        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S25,
+        pickEnergy: false,
+        backUpSourceId: CONFIG.SPAWN.E8S25,
+    }),
 
 
     /**
@@ -154,13 +159,13 @@ module.exports = {
 
     /**
      *   ResidentDefender配置文件
-     *      参数：
-     *          targetRoomName:默认驻守的房间名称
-     *          pathFinderPoint:辅助寻路点位
+     *
+     *   已实现无参数化
+     *
      */
-    ResidentDefender_E6S22: residentDefender({targetRoomName: "E5S21", pathFinderPoint: [[38, 1]]}),
-    ResidentDefender_E8S23: residentDefender({targetRoomName: "E9S23", pathFinderPoint: [[38, 1]]}),
-    ResidentDefender_E9S21: residentDefender({targetRoomName: "E9S22", pathFinderPoint: [[38, 1]]}),
+    ResidentDefender_E6S22: residentDefender(),
+    ResidentDefender_E8S23: residentDefender(),
+    ResidentDefender_E9S21: residentDefender(),
 
     /**
      *   OuterClaimer配置文件
@@ -400,6 +405,6 @@ module.exports = {
         resourceType: RESOURCE_LEMERGIUM
     }),
 
-    RemoteUpgrader_E8S25: remoteupgrader({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
-    RemoteUpgrader_E8S25_1: remoteupgrader({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
+    //RemoteUpgrader_E8S25: remoteupgrader({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
+    //RemoteUpgrader_E8S25_1: remoteupgrader({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
 }
