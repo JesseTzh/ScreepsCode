@@ -83,4 +83,9 @@ module.exports = {
         E9S21: [["E8S21", "E9S22"], ["ResidentDefender_E9S21"]],
         E8S23: [["E9S23", "E8S24", "E7S23"], ["ResidentDefender_E8S23"]]
     }),
+
+    //需要远程监控的房间
+    OBSERVER_ROOMS: ({
+        E6S22: [["E3S20", "E4S20", "E5S20", "E6S20"], ["5efb821797bdc7f2446bd95e"]]
+    }),
 }
