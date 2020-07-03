@@ -1,8 +1,8 @@
 const CONFIG = require('config');
 const logger = require('utils.log').getLogger("Watcher");
+const Observer = require('Construction_Observer');
 
 function beginWatch() {
-    //const cpuUsedBefore = Game.cpu.getUsed();
     // 监测外矿房间敌人
     defenseOuterRoom();
     // 监测Storage剩余容量
@@ -11,10 +11,14 @@ function beginWatch() {
     mineMonitor();
     // 监测领地房间是否有建筑工地
     constructionSiteMonitor();
+
     // 监测外矿房间是否需要OuterBuilder,但考虑CPU消耗等问题，暂放弃
     //outerRoomConstructionSiteMonitor();
-    //const cpuUsed = Game.cpu.getUsed() - cpuUsedBefore;
-    //logger.info("守望者CPU用量：" + cpuUsed)
+    //const cpuUsedBefore = Game.cpu.getUsed();
+    //监测者探测外界房间
+    observer();
+    // const cpuUsed = Game.cpu.getUsed() - cpuUsedBefore;
+    // logger.info("守望者CPU用量：" + cpuUsed)
 }
 
 function defenseOuterRoom() {
@@ -48,6 +52,7 @@ function defenseOuterRoom() {
                 logger.info("侦测到[" + externalRoomName + "]有敌人入侵！");
                 if (Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]) {
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].TargetRoom = externalRoomName;
+                    Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].Target = "Yes";
                 } else {
                     logger.info("没有检测到[" + CONFIG.EXTERNAL_ROOMS[roomName][1][0] + "]");
                 }
@@ -114,6 +119,34 @@ function outerRoomConstructionSiteMonitor() {
     // 遍历控制的房间列表（非外矿房间）
     for (let roomName in CONFIG.OUTER_ROOMS_BUILDER) {
 
+    }
+}
+
+function observer() {
+    // 检测是否有对应的配置文件
+    if (!CONFIG.OBSERVER_ROOMS) {
+        return
+    }
+    for (let roomName in CONFIG.OBSERVER_ROOMS) {
+        let roomNum = Game.time % CONFIG.OBSERVER_ROOMS[roomName][0].length;
+        Observer.observerWork(CONFIG.OBSERVER_ROOMS[roomName][0][roomNum], CONFIG.OBSERVER_ROOMS[roomName][1]);
+        if (roomNum === 0) {
+            roomNum = CONFIG.OBSERVER_ROOMS[roomName][0].length;
+        }
+        // 上一 tick 探测的房间这一 tick 才是可见
+        let room = Game.rooms[CONFIG.OBSERVER_ROOMS[roomName][0][roomNum - 1]];
+        if(!room){
+            logger.warn("房间[" + CONFIG.OBSERVER_ROOMS[roomName][0][roomNum] + "]未能成功侦测！");
+            continue;
+        }
+        const target = room.find(FIND_STRUCTURES, {
+            filter: { structureType: STRUCTURE_POWER_BANK }
+        });
+        if(target.length){
+            const message = "房间[" + CONFIG.OBSERVER_ROOMS[roomName][0][roomNum] + "]发现超能！";
+            logger.info(message)
+            //Game.notify(message);
+        }
     }
 }
 
