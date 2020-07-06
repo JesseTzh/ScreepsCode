@@ -46,7 +46,6 @@ module.exports = config => ({
         if (!targets) {
             logger.warn(creep.name + "找不到可建造的建筑点！");
             creep.say("🈳");
-            creep.memory.RebornFlag = "No";
         }
     },
     // 状态切换条件

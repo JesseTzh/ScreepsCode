@@ -77,12 +77,12 @@ module.exports = {
      *          upgradeId:房间内升级 Controller 所用 Link id，初期没有可不填写
      *          towerList:所在房间 Tower 列表
      */
-    Mover_01: mover({
-        sourceId: [CONFIG.LINK.E6S22[0][0], CONFIG.LINK.E6S22[1][0]],
-        storageId: CONFIG.STORAGE.E6S22,
-        upgradeId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
-        towerList: CONFIG.TOWER.E6S22
-    }),
+    // Mover_01: mover({
+    //     sourceId: [CONFIG.LINK.E6S22[0][0], CONFIG.LINK.E6S22[1][0]],
+    //     storageId: CONFIG.STORAGE.E6S22,
+    //     upgradeId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
+    //     towerList: CONFIG.TOWER.E6S22
+    // }),
     Mover_E6S22_2: mover({
         sourceId: [CONFIG.LINK.E6S22[0][0], CONFIG.LINK.E6S22[1][0]],
         storageId: CONFIG.STORAGE.E6S22,
@@ -113,11 +113,21 @@ module.exports = {
         backUpSourceId: CONFIG.STORAGE.E6S22,
         pickEnergy: false
     }),
+    Upgrader_E6S22_2: upgrader({
+        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
+        backUpSourceId: CONFIG.STORAGE.E6S22,
+        pickEnergy: false
+    }),
     Upgrader_E9S21_1: upgrader({
         sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E9S21,
         backUpSourceId: CONFIG.STORAGE.E9S21,
         pickEnergy: false
     }),
+    // Upgrader_E9S21_2: upgrader({
+    //     sourceId: CONFIG.STORAGE.E9S21,
+    //     backUpSourceId: CONFIG.STORAGE.E9S21,
+    //     pickEnergy: false
+    // }),
     Upgrader_E8S23_1: upgrader({
         sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S23,
         pickEnergy: false,
@@ -130,19 +140,24 @@ module.exports = {
     }),
     Upgrader_E8S25_1: upgrader({
         sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S25,
-        pickEnergy: false,
+        pickEnergy: true,
         backUpSourceId: CONFIG.SPAWN.E8S25,
     }),
     Upgrader_E8S25_2: upgrader({
         sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S25,
-        pickEnergy: false,
+        pickEnergy: true,
         backUpSourceId: CONFIG.SPAWN.E8S25,
     }),
     Upgrader_E8S25_3: upgrader({
         sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S25,
-        pickEnergy: false,
+        pickEnergy: true,
         backUpSourceId: CONFIG.SPAWN.E8S25,
     }),
+    // Upgrader_E8S25_4: upgrader({
+    //     sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S25,
+    //     pickEnergy: true,
+    //     backUpSourceId: CONFIG.SPAWN.E8S25,
+    // }),
 
 
     /**
@@ -153,7 +168,7 @@ module.exports = {
     Builder_E6S22: builder({sourceId: CONFIG.STORAGE.E6S22}),
     Builder_E9S21: builder({sourceId: CONFIG.STORAGE.E9S21}),
     Builder_E8S23: builder({sourceId: CONFIG.STORAGE.E8S23}),
-    Builder_E8S25: builder({sourceId: CONFIG.SPAWN.E8S25}),
+    Builder_E8S25: builder({sourceId: '5ead1b29f90795131096919c'}),
 
     //Dismantler_01: dismantler({targetId: '5eaec9da0d4bd50b5e5bf8b8', targetRoom: 'E8S25', pathFinderPoint: [[48, 16]]}),
 
@@ -195,8 +210,8 @@ module.exports = {
         pathFinderPoint: [[25, 25]]
     }),
     OuterClaimer_E8S23_1: claimer({
-        sourceId: ['5bbcad7b9099fc012e63757c', '5bbcad6c9099fc012e6373f2'],
-        targetRoomName: ['E9S23', 'E8S24'],
+        sourceId: ['5bbcad7b9099fc012e63757c', '5bbcad6c9099fc012e6373f2', '5bbcad7b9099fc012e637581'],
+        targetRoomName: ['E9S23', 'E8S24', 'E9S24'],
         pathFinderPoint: [[25, 25]]
     }),
     OuterClaimer_E8S23_2: claimer({
@@ -279,6 +294,12 @@ module.exports = {
         targetId: OUTERWORLD_CONFIG.E9S22[1][1],
         pathFinderPoint: [[32, 49]]
     }),
+    OuterHarvester_E9S24: outerharvester({
+        sourceId: OUTERWORLD_CONFIG.E9S24[0][0],
+        targetRoomName: "E9S24",
+        targetId: OUTERWORLD_CONFIG.E9S24[0][1],
+        pathFinderPoint: [[32, 49]]
+    }),
 
     /**
      *   OuterBuilder配置文件
@@ -289,7 +310,7 @@ module.exports = {
      */
     //OuterBuilder_E6S22_1: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E6S23"}),
     //OuterBuilder_E9S21_1: outbuilder({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E9S22"}),
-    //OuterBuilder_E8S23_1: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S25"}),
+    //OuterBuilder_E8S23_1: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E9S24"}),
 
     /**
      *   OuterMover配置文件
@@ -323,7 +344,7 @@ module.exports = {
         targetRoomName: "E9S23",
         targetId: CONFIG.STORAGE.E8S23
     }),
-    OuterMover_E9S23_1: outmover({
+    OuterMover_E9S23_2: outmover({
         sourceId: OUTERWORLD_CONFIG.E9S23[1][1],
         targetRoomName: "E9S23",
         targetId: CONFIG.STORAGE.E8S23
@@ -331,6 +352,11 @@ module.exports = {
     OuterMover_E8S24: outmover({
         sourceId: OUTERWORLD_CONFIG.E8S24[0][1],
         targetRoomName: "E8S24",
+        targetId: CONFIG.STORAGE.E8S23
+    }),
+    OuterMover_E9S24: outmover({
+        sourceId: OUTERWORLD_CONFIG.E9S24[0][1],
+        targetRoomName: "E9S24",
         targetId: CONFIG.STORAGE.E8S23
     }),
     OuterMover_E7S23: outmover({
@@ -385,21 +411,22 @@ module.exports = {
     Miner_02: miner({sourceId: CONFIG.MINE.E9S21[0], targetId: CONFIG.TERMINAL.E9S21}),
     Miner_03: miner({sourceId: CONFIG.MINE.E8S23[0], targetId: CONFIG.TERMINAL.E8S23}),
 
-    SpecialMover_E9S21: specialMover({
-        sourceId: CONFIG.STORAGE.E9S21,
-        targetRoomName: "E9S21",
-        targetId: CONFIG.FACTORY.E9S21,
-        resourceType: RESOURCE_ENERGY,
-        targetAmount: 20000
-    }),
+    // SpecialMover_E9S21: specialMover({
+    //     sourceId: CONFIG.FACTORY.E9S21,
+    //     targetRoomName: "E9S21",
+    //     targetId: CONFIG.TERMINAL.E9S21,
+    //     resourceType: RESOURCE_OXIDANT,
+    //     targetAmount: 200000
+    // }),
     SpecialMover_E6S22: specialMover({
-        sourceId: CONFIG.STORAGE.E6S22,
+        sourceId: CONFIG.FACTORY.E6S22,
         targetRoomName: "E6S22",
-        targetId: "5efd2c410e8b880928227657",
-        resourceType: RESOURCE_ENERGY
+        targetId: CONFIG.TERMINAL.E6S22,
+        resourceType: RESOURCE_BATTERY,
+        targetAmount: 200000
     }),
     SpecialMover_E8S23: specialMover({
-        sourceId: "5ead1b29f90795131096919c",
+        sourceId: "5eb0822b0ae7b647e5b31eac",
         targetRoomName: "E8S25",
         targetId: CONFIG.STORAGE.E8S23,
         resourceType: RESOURCE_LEMERGIUM

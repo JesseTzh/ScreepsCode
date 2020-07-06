@@ -8,5 +8,6 @@ module.exports = {
     E9S22: [['5bbcad7a9099fc012e637578', '5efc97da8d54b262e821777f'], ['5bbcad7a9099fc012e63757a', '5efc91c98d54b2a402217578']],
     E9S23: [['5bbcad7b9099fc012e63757d', '5ef83746c1b8855715d312f6'], ['5bbcad7b9099fc012e63757e', '5ef8412473c213159115edc6']],
     E8S24: [['5bbcad6c9099fc012e6373f3', '5ef94d37323f2fbb2458472d']],
-    E7S23: [['5bbcad579099fc012e637262', '5efae5edf67ab850ffd08de7']]
+    E7S23: [['5bbcad579099fc012e637262', '5efae5edf67ab850ffd08de7']],
+    E9S24: [['5bbcad7b9099fc012e637580', '5f00556eec4cd1ed9448c7cc']]
 }
