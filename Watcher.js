@@ -33,33 +33,34 @@ function defenseOuterRoom() {
     for (let roomName in CONFIG.EXTERNAL_ROOMS) {
         // 控制房间所对应的外矿房间遍历
         for (let i = 0; i < CONFIG.EXTERNAL_ROOMS[roomName][0].length; i++) {
-            // 外矿房间名称
-            let externalRoomName = CONFIG.EXTERNAL_ROOMS[roomName][0][i];
-            // 外矿房间对象
-            let room = Game.rooms[externalRoomName];
-            // 丢失此外矿房间视野
-            if (!room) {
-                let message = '丢失房间[' + externalRoomName + ']的视野，请注意！';
-                logger.info(message);
-                //发送邮件通知外矿视野丢失
-                Game.notify(message);
-                continue;
-            }
-            // 首先检测是否有敌对 Creep
-            let target = room.find(FIND_HOSTILE_CREEPS);
-            if (!target.length) {
-                // 再检测是否有要塞核心刷出
-                target = room.find(FIND_HOSTILE_STRUCTURES);
-            }
-            if (target && target.length) {
-                logger.info("侦测到[" + externalRoomName + "]有敌人入侵！");
-                Game.notify("侦测到[" + externalRoomName + "]有敌人入侵！");
-                if (Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]) {
+            //检测对应守卫是否已经是战时状态
+            if (Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]] && Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].Target != "Yes") {
+                // 外矿房间名称
+                let externalRoomName = CONFIG.EXTERNAL_ROOMS[roomName][0][i];
+                // 外矿房间对象
+                let room = Game.rooms[externalRoomName];
+                // 丢失此外矿房间视野
+                if (!room) {
+                    let message = '丢失房间[' + externalRoomName + ']的视野，请注意！';
+                    logger.info(message);
+                    //发送邮件通知外矿视野丢失
+                    //Game.notify(message);
+                    continue;
+                }
+                // 首先检测是否有敌对 Creep
+                let target = room.find(FIND_HOSTILE_CREEPS);
+                if (!target.length) {
+                    // 再检测是否有要塞核心刷出
+                    target = room.find(FIND_HOSTILE_STRUCTURES);
+                }
+                if (target && target.length) {
+                    logger.info("侦测到[" + externalRoomName + "]有敌人入侵！");
+                    Game.notify("侦测到[" + externalRoomName + "]有敌人入侵！");
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].TargetRoom = externalRoomName;
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].Target = "Yes";
-                } else {
-                    logger.info("没有检测到[" + CONFIG.EXTERNAL_ROOMS[roomName][1][0] + "]");
                 }
+            } else if(!Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]){
+                logger.info("没有检测到[" + externalRoomName + "]房间对应守卫[" + CONFIG.EXTERNAL_ROOMS[roomName][1][0] + "]");
             }
         }
     }
@@ -139,14 +140,14 @@ function observer() {
         }
         // 上一 tick 探测的房间这一 tick 才是可见
         let room = Game.rooms[CONFIG.OBSERVER_ROOMS[roomName][0][roomNum - 1]];
-        if(!room){
+        if (!room) {
             logger.warn("房间[" + CONFIG.OBSERVER_ROOMS[roomName][0][roomNum] + "]未能成功侦测！");
             continue;
         }
         const target = room.find(FIND_STRUCTURES, {
-            filter: { structureType: STRUCTURE_POWER_BANK }
+            filter: {structureType: STRUCTURE_POWER_BANK}
         });
-        if(target.length){
+        if (target.length) {
             const message = "房间[" + CONFIG.OBSERVER_ROOMS[roomName][0][roomNum] + "]发现超能！";
             logger.info(message)
             //Game.notify(message);
