@@ -26,7 +26,11 @@ module.exports.loop = function () {
     //Creep管理
     creepManager.creepManager();
 
-    // 长夜将至，我从今开始守望
+    //长夜将至，我从今开始守望
     watcher.beginWatch();
+
+    //清理内存
+    tools.cleanMemory();
+
     logger.info("---------------------------------------------- 游戏时间: " + Game.time + " | 所用CPU: " + Game.cpu.getUsed().toFixed(2) + "----------------------------------------------")
 }
