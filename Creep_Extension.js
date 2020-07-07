@@ -7,7 +7,6 @@ const creepTemplateConfigs = require('config.creep.template')
 // 自定义的 Creep 的拓展
 const creepExtension = {
     work() {
-        //this.memory.liveTicks == null ? this.memory.liveTicks = 1 : this.memory.liveTicks += 1;
         // 检查 creep 内存中的角色是否存在,如不存在则自动回收
         if (!(this.name in creepConfigs)) {
             logger.error(`找不到 ${this.name} 所对应的劳工配置！`);
