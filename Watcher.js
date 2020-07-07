@@ -59,7 +59,7 @@ function defenseOuterRoom() {
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].TargetRoom = externalRoomName;
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].Target = "Yes";
                 }
-            } else if(!Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]){
+            } else if (!Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]) {
                 logger.info("没有检测到[" + externalRoomName + "]房间对应守卫[" + CONFIG.EXTERNAL_ROOMS[roomName][1][0] + "]");
             }
         }
@@ -139,8 +139,9 @@ function observer() {
             roomNum = CONFIG.OBSERVER_ROOMS[roomName][0].length;
         }
         // 上一 tick 探测的房间这一 tick 才是可见
-        let room = Game.rooms[CONFIG.OBSERVER_ROOMS[roomName][0][roomNum - 1]];
-        if (!room) {
+        roomNum--;
+        let room = Game.rooms[CONFIG.OBSERVER_ROOMS[roomName][0][roomNum]];
+        if (!CONFIG.OBSERVER_ROOMS[roomName][0][roomNum] || !room) {
             logger.warn("房间[" + CONFIG.OBSERVER_ROOMS[roomName][0][roomNum] + "]未能成功侦测！");
             continue;
         }
