@@ -36,8 +36,15 @@ function getType(obj) {
     return type;
 }
 
+function cleanMemory(){
+    for (let name in Memory.rooms) {
+        delete Memory.rooms[name].Harvester;
+    }
+}
+
 module.exports = {
     globalEnergyMonitor: globalEnergyMonitor,
     energySourceMonitor: energySourceMonitor,
-    getType: getType
+    getType: getType,
+    cleanMemory: cleanMemory
 };
