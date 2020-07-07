@@ -125,7 +125,7 @@ module.exports = {
     }),
     Upgrader_E8S23_2: ({
         genMode: "Config",
-        partsSet: [[WORK, 20], [MOVE, 15], [CARRY, 10]],
+        partsSet: [[WORK, 10], [MOVE, 15], [CARRY, 10]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),

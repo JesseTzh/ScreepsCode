@@ -114,8 +114,8 @@ module.exports = {
         pickEnergy: false
     }),
     Upgrader_E6S22_2: upgrader({
-        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
-        backUpSourceId: CONFIG.STORAGE.E6S22,
+        sourceId: CONFIG.STORAGE.E6S22,
+        backUpSourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
         pickEnergy: false
     }),
     Upgrader_E9S21_1: upgrader({
@@ -419,11 +419,11 @@ module.exports = {
     //     targetAmount: 200000
     // }),
     SpecialMover_E6S22: specialMover({
-        sourceId: CONFIG.FACTORY.E6S22,
+        sourceId: CONFIG.STORAGE.E6S22,
         targetRoomName: "E6S22",
-        targetId: CONFIG.TERMINAL.E6S22,
-        resourceType: RESOURCE_BATTERY,
-        targetAmount: 200000
+        targetId: CONFIG.FACTORY.E6S22,
+        resourceType: RESOURCE_ENERGY,
+        targetAmount: 20000
     }),
     SpecialMover_E8S23: specialMover({
         sourceId: "5eb0822b0ae7b647e5b31eac",
