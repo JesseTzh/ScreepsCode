@@ -8,7 +8,7 @@ module.exports = {
     //是否允许 Upgrader 从 EXTENSION/SPAWN 中提取能量，前期不建议打开，容易使 Upgrader 过度提取能量
     ALLOW_UPGRADER_FROM_SE: false,
 
-    //是否允许矿工采集房间内其他能源点
+    //是否允许矿工采集房间内其他能源点,初期Creep分配不均时建议打开
     ALLOW_HARVESTER_OTHER: false,
 
     //是否按照已铺好 Road 的情况生成 Creep
