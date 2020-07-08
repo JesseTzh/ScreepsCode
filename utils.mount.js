@@ -1,13 +1,15 @@
-const mountCreep = require('Creep_Extension');
+const mountCreepExtension = require('Creep_Extension');
+const mountRoomExtension  = require('Room_Extension');
 const logger = require('utils.log').getLogger("mount");
 const creepConfigs = require('config.creep');
-const Database = require('Database')
+const Database = require('Database');
 
 // 挂载所有的额外属性和方法
 function mount() {
     logger.info("重新挂载原型扩展...");
     global.hasExtension = true
-    mountCreep();
+    mountCreepExtension();
+    mountRoomExtension();
 }
 
 function clearMemory() {
