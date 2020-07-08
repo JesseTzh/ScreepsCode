@@ -1,4 +1,3 @@
-const test = require('Test');
 const creep = require('config.creep');
 const tool = require('utils.tools');
 const logger = require('utils.log').getLogger("Database");
