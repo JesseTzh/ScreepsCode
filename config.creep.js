@@ -10,7 +10,7 @@ const outbuilder = require('Role_OuterBuilder')
 const miner = require('Role_Miner')
 const outmover = require('Role_OuterMover')
 const tank = require('Role_Tank')
-const residentDefender = require('Role_ResidentDefender')
+const guard = require('Role_Guard')
 const colonist = require('Role_Colonists')
 const dismantler = require('Role_Dismantler')
 const specialMover = require('Role_SpecialMover')
@@ -27,47 +27,19 @@ module.exports = {
      *          backUpTargetId:备用能量储存点，一般为Storage，初期可不填写
      *          towerList:所在房间 Tower 列表
      */
-    Harvester_01: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE.E6S22[0],
-        targetId: CONFIG.LINK.E6S22[0][0],
-        backUpTargetId: CONFIG.STORAGE.E6S22,
-        towerList: CONFIG.TOWER.E6S22
-    }),
-    Harvester_02: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE.E6S22[1],
-        targetId: CONFIG.LINK.E6S22[1][0],
-        backUpTargetId: CONFIG.STORAGE.E6S22,
-        towerList: CONFIG.TOWER.E6S22
-    }),
+    Harvester_E6S22_0: harvester,
+    Harvester_E6S22_1: harvester,
 
-    Harvester_03: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE.E9S21[0],
-        targetId: CONFIG.LINK.E9S21[1][0],
-        backUpTargetId: CONFIG.STORAGE.E9S21,
-        towerList: CONFIG.TOWER.E9S21
-    }),
-    Harvester_04: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE.E9S21[1],
-        targetId: CONFIG.LINK.E9S21[0][0],
-        backUpTargetId: CONFIG.STORAGE.E9S21,
-        towerList: CONFIG.TOWER.E9S21
-    }),
+    Harvester_E9S21_0: harvester,
+    Harvester_E9S21_1: harvester,
 
-    Harvester_05: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE.E8S23[0],
-        targetId: CONFIG.LINK.E8S23[0][0],
-        backUpTargetId: CONFIG.STORAGE.E8S23,
-    }),
-    Harvester_06: harvester({
-        sourceId: CONFIG.ENERGY_SOURCE.E8S23[1],
-        targetId: CONFIG.LINK.E8S23[1][0],
-        backUpTargetId: CONFIG.STORAGE.E8S23,
-    }),
-    //Harvester_07: harvester({sourceId: CONFIG.ENERGY_SOURCE[4], targetId: '5ecb8fa0b61e17c73bb11aa8'}),
-    Harvester_E8S25_1: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S25[0], targetId: CONFIG.SPAWN.E8S25}),
-    Harvester_E8S25_2: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S25[0], targetId: CONFIG.SPAWN.E8S25}),
-    Harvester_E8S25_3: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S25[1], targetId: CONFIG.SPAWN.E8S25}),
-    Harvester_E8S25_4: harvester({sourceId: CONFIG.ENERGY_SOURCE.E8S25[1], targetId: CONFIG.SPAWN.E8S25}),
+    Harvester_E8S23_0: harvester,
+    Harvester_E8S23_1: harvester,
+
+    Harvester_E8S25_1: harvester,
+    Harvester_E8S25_2: harvester,
+    Harvester_E8S25_3: harvester,
+    Harvester_E8S25_4: harvester,
 
     /**
      *   Mover配置文件
@@ -77,30 +49,10 @@ module.exports = {
      *          upgradeId:房间内升级 Controller 所用 Link id，初期没有可不填写
      *          towerList:所在房间 Tower 列表
      */
-    // Mover_01: mover({
-    //     sourceId: [CONFIG.LINK.E6S22[0][0], CONFIG.LINK.E6S22[1][0]],
-    //     storageId: CONFIG.STORAGE.E6S22,
-    //     upgradeId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
-    //     towerList: CONFIG.TOWER.E6S22
-    // }),
-    Mover_E6S22_2: mover({
-        sourceId: [CONFIG.LINK.E6S22[0][0], CONFIG.LINK.E6S22[1][0]],
-        storageId: CONFIG.STORAGE.E6S22,
-        upgradeId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
-        towerList: CONFIG.TOWER.E6S22
-    }),
-    Mover_02: mover({
-        sourceId: [CONFIG.LINK.E9S21[1][0], CONFIG.LINK.E9S21[0][0]],
-        storageId: CONFIG.STORAGE.E9S21,
-        upgradeId: CONFIG.UPGRADE_ENERGY_SOURCE.E9S21,
-        towerList: CONFIG.TOWER.E9S21
-    }),
-    Mover_03: mover({
-        sourceId: [CONFIG.LINK.E8S23[0][0], CONFIG.LINK.E8S23[1][0]],
-        storageId: CONFIG.STORAGE.E8S23,
-        upgradeId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S23,
-        towerList: CONFIG.TOWER.E8S23
-    }),
+    // Mover_01: mover,
+    Mover_E6S22_2: mover,
+    Mover_02: mover,
+    Mover_03: mover,
 
     /**
      *   Upgrader配置文件
@@ -108,56 +60,13 @@ module.exports = {
      *          sourceId:默认取能建筑
      *          backUpSourceId:备用取能建筑，一般为Storage，初期可不填写
      */
-    Upgrader_E6S22_1: upgrader({
-        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
-        backUpSourceId: CONFIG.STORAGE.E6S22,
-        pickEnergy: false
-    }),
-    Upgrader_E6S22_2: upgrader({
-        sourceId: CONFIG.STORAGE.E6S22,
-        backUpSourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E6S22,
-        pickEnergy: false
-    }),
-    Upgrader_E9S21_1: upgrader({
-        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E9S21,
-        backUpSourceId: CONFIG.STORAGE.E9S21,
-        pickEnergy: false
-    }),
-    // Upgrader_E9S21_2: upgrader({
-    //     sourceId: CONFIG.STORAGE.E9S21,
-    //     backUpSourceId: CONFIG.STORAGE.E9S21,
-    //     pickEnergy: false
-    // }),
-    Upgrader_E8S23_1: upgrader({
-        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S23,
-        pickEnergy: false,
-        backUpSourceId: CONFIG.STORAGE.E8S23
-    }),
-    Upgrader_E8S23_2: upgrader({
-        sourceId: CONFIG.STORAGE.E8S23,
-        pickEnergy: false,
-        backUpSourceId: CONFIG.STORAGE.E8S23
-    }),
-    Upgrader_E8S25_1: upgrader({
-        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S25,
-        pickEnergy: true,
-        backUpSourceId: CONFIG.SPAWN.E8S25,
-    }),
-    Upgrader_E8S25_2: upgrader({
-        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S25,
-        pickEnergy: true,
-        backUpSourceId: CONFIG.SPAWN.E8S25,
-    }),
-    Upgrader_E8S25_3: upgrader({
-        sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S25,
-        pickEnergy: true,
-        backUpSourceId: CONFIG.SPAWN.E8S25,
-    }),
-    // Upgrader_E8S25_4: upgrader({
-    //     sourceId: CONFIG.UPGRADE_ENERGY_SOURCE.E8S25,
-    //     pickEnergy: true,
-    //     backUpSourceId: CONFIG.SPAWN.E8S25,
-    // }),
+    Upgrader_E6S22_1: upgrader,
+    Upgrader_E9S21_1: upgrader,
+    // Upgrader_E9S21_2: upgrader,
+    Upgrader_E8S23_1: upgrader,
+    // Upgrader_E8S23_2: upgrader,
+    Upgrader_E8S25_1: upgrader,
+    // Upgrader_E8S25_2: upgrader,
 
 
     /**
@@ -165,10 +74,10 @@ module.exports = {
      *      参数：
      *          sourceId:默认取能建筑
      */
-    Builder_E6S22: builder({sourceId: CONFIG.STORAGE.E6S22}),
-    Builder_E9S21: builder({sourceId: CONFIG.STORAGE.E9S21}),
-    Builder_E8S23: builder({sourceId: CONFIG.STORAGE.E8S23}),
-    Builder_E8S25: builder({sourceId: '5ead1b29f90795131096919c'}),
+    Builder_E6S22: builder,
+    Builder_E9S21: builder,
+    Builder_E8S23: builder,
+    Builder_E8S25: builder,
 
     //Dismantler_01: dismantler({targetId: '5eaec9da0d4bd50b5e5bf8b8', targetRoom: 'E8S25', pathFinderPoint: [[48, 16]]}),
 
@@ -178,9 +87,9 @@ module.exports = {
      *   已实现无参数化
      *
      */
-    ResidentDefender_E6S22: residentDefender(),
-    ResidentDefender_E8S23: residentDefender(),
-    ResidentDefender_E9S21: residentDefender(),
+    ResidentDefender_E6S22: guard,
+    ResidentDefender_E8S23: guard,
+    ResidentDefender_E9S21: guard,
 
     /**
      *   OuterClaimer配置文件
@@ -419,11 +328,11 @@ module.exports = {
     //     targetAmount: 200000
     // }),
     SpecialMover_E6S22: specialMover({
-        sourceId: CONFIG.STORAGE.E6S22,
+        sourceId: CONFIG.FACTORY.E6S22,
         targetRoomName: "E6S22",
-        targetId: CONFIG.FACTORY.E6S22,
-        resourceType: RESOURCE_ENERGY,
-        targetAmount: 20000
+        targetId: CONFIG.TERMINAL.E6S22,
+        resourceType: RESOURCE_ZYNTHIUM_BAR,
+        targetAmount: 200000
     }),
     SpecialMover_E8S23: specialMover({
         sourceId: "5eb0822b0ae7b647e5b31eac",

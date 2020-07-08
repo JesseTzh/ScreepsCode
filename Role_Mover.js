@@ -1,6 +1,5 @@
 const logger = require('utils.log').getLogger("Mover");
 const SYS_CONFIG = require('config.system.setting');
-const CONFIG = require('config')
 
 function freeJob(creep) {
     //寻找遗弃资源
@@ -74,23 +73,24 @@ function energyCheck(creep) {
     }
 }
 
-module.exports = config => ({
+module.exports = ({
     // 提取能量矿
     source: creep => {
         creep.say("🔽");
         let source;
         if (creep.memory.NeedCleanBag) {
-            cleanBag(config.storageId, creep);
+            cleanBag(creep.room.storage.id, creep);
             return;
         }
+        const sourceLinkList = creep.room.getSourceLinkList();
         //如果未达房间能量上限
         if (creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
             //优先从冗余储能建筑提取能量：只有未达房间能量上限时才从 STORAGE 中提取能量，只有达到房间能量上限才向 STORAGE 储存能量，避免原地举重现象
-            source = Game.getObjectById(config.storageId)
+            source = creep.room.storage;
             if (!source || source.store[RESOURCE_ENERGY] === 0) {
                 //冗余储能建筑消耗完毕，使用Link中的能量
-                for (let i = 0; i < config.sourceId.length; i++) {
-                    source = Game.getObjectById(config.sourceId[i]);
+                for (let i = 0; i < sourceLinkList.length; i++) {
+                    source = Game.getObjectById(sourceLinkList[i]);
                     //为避免反复去同一Link提取刚刚挖出的那一点能量，故设置为Link能量大于400时再提取，以使Mover优先去能量较多的Link中提取
                     if (source.store[RESOURCE_ENERGY] > 400) {
                         break;
@@ -108,8 +108,8 @@ module.exports = config => ({
             }
             //如果达到房间能量上限，并且 Link 当前储量超过一半时，直接从 Link 中提取
         } else if (creep.room.energyAvailable / creep.room.energyCapacityAvailable >= 0.9 && SYS_CONFIG.ALLOW_STORE_ENERGY) {
-            for (let i = 0; i < config.sourceId.length; i++) {
-                source = Game.getObjectById(config.sourceId[i]);
+            for (let i = 0; i < sourceLinkList.length; i++) {
+                source = Game.getObjectById(sourceLinkList[i]);
                 if (source.store[RESOURCE_ENERGY] / LINK_CAPACITY >= 0.5) {
                     break;
                 }
@@ -129,7 +129,7 @@ module.exports = config => ({
     target: creep => {
         creep.say("🔼");
         if (creep.memory.NeedCleanBag) {
-            cleanBag(config.storageId, creep);
+            cleanBag(creep.room.storage.id, creep);
             return;
         }
         //优先供给 SPAWN
@@ -150,9 +150,10 @@ module.exports = config => ({
         }
         if (!target) {
             //按照配置文件中的参数为能量低于一定比例的Tower冲能
-            if (config.towerList) {
-                for (let i = 0; i < config.towerList.length; i++) {
-                    let tower = Game.getObjectById(config.towerList[i]);
+            const towerList = creep.room.getTowerList();
+            if (towerList) {
+                for (let i = 0; i < towerList.length; i++) {
+                    let tower = Game.getObjectById(towerList[i]);
                     if (tower.store[RESOURCE_ENERGY] / TOWER_CAPACITY <= SYS_CONFIG.TOWER_ENERGY_NEED) {
                         target = tower;
                     }
@@ -160,24 +161,23 @@ module.exports = config => ({
             }
         }
         //如果升级Controller所用Link能量断供则向其运输能量
-        if (!target && config.upgradeId) {
-            const upgradeId = Game.getObjectById(config.upgradeId);
+        if (!target && creep.room.getControllerLink()) {
+            const upgradeId = Game.getObjectById(creep.room.getControllerLink());
             if (upgradeId.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
                 target = upgradeId
             }
         }
-        //如果 SPAWN/EXTENSION/TOWER 都已满,根据config文件配置的参数决定是否进一步将能量存入 冗余能量存储建筑
+        //如果 SPAWN/EXTENSION/TOWER 都已满,根据config文件配置的参数决定是否进一步将能量存入冗余能量存储建筑
         if (!target && SYS_CONFIG.ALLOW_STORE_ENERGY) {
-            //如果没有设置默认冗余资源存放建筑，则搜寻距离最近的 STORAGE/ CONTAINER
-            if (!config.storageId) {
+            target = creep.room.storage;
+            //如果房间内没有Storage或已满，则搜寻其他可以储能的建筑
+            if (!target || target.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
                 target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return ((structure.structureType === STRUCTURE_STORAGE || structure.structureType === STRUCTURE_CONTAINER) &&
+                        return ((structure.structureType === STRUCTURE_TERMINAL|| structure.structureType === STRUCTURE_FACTORY || structure.structureType === STRUCTURE_CONTAINER) &&
                             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
                     }
                 });
-            } else {
-                target = Game.getObjectById(config.storageId);
             }
         }
         if (target && target.store.getFreeCapacity(RESOURCE_ENERGY) > 0) {
@@ -185,7 +185,7 @@ module.exports = config => ({
                 creep.moveTo(target);
             }
         } else {
-            logger.info(creep.name + "找不到需要存入能量的建筑，切换为自由工作");
+            logger.info(`[${creep.name}]找不到需要存入能量的建筑，切换为自由工作`);
             freeJob(creep);
         }
     },

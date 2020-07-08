@@ -1,21 +1,21 @@
 const logger = require('utils.log').getLogger("Harvester");
-const CONFIG = require('config')
 const SYS_CONFIG = require('config.system.setting');
 
-module.exports = config => ({
+module.exports = ({
     // 采集能量矿
     source: creep => {
-        let source = Game.getObjectById(config.sourceId);
+        creep.room.memory.Harvester != 0 ? creep.room.memory.Harvester = 0 : creep.room.memory.Harvester = 1;
+        let source = Game.getObjectById(creep.room.getSourceList()[creep.room.memory.Harvester]);
         if ((!source || source.energy === 0) && SYS_CONFIG.ALLOW_HARVESTER_OTHER) {
             logger.info(creep.name + "找不到默认采矿点或默认采矿点为空,切换为备用矿源");
             source = creep.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
         }
-        if ((source && source.energy > 0) || (source && source.ticksToRegeneration <= 5 && source.energy === 0)) {
+        if ((source && source.energy > 0)) {
             if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
                 creep.say("⛏");
                 creep.moveTo(source);
             }
-        } else if (!source || (source.energy === 0 && source.ticksToRegeneration > 5)) {
+        } else if (!source || source.energy === 0) {
             creep.say("🚬");
             logger.debug(creep.name + "找不到可挖掘的矿点！");
             creep.selfFix();
@@ -23,7 +23,8 @@ module.exports = config => ({
     },
     // 存储能量逻辑
     target: creep => {
-        let target = Game.getObjectById(config.targetId);
+        creep.room.memory.Harvester != 0 ? creep.room.memory.Harvester = 0 : creep.room.memory.Harvester = 1;
+        let target = Game.getObjectById(creep.room.getSourceLinkList()[creep.room.memory.Harvester]);
         //如默认储能建筑已满/不存在则存储至最近的 EXTENSION/SPAWN
         if (!target || target.store.getFreeCapacity(RESOURCE_ENERGY) < 2) {
             logger.debug(creep.name + "距离矿点最近Link不存在/已存满，转存至最近的 EXTENSION/SPAWN");
@@ -35,9 +36,10 @@ module.exports = config => ({
             });
             //如 EXTENSION/SPAWN 已满则存入 TOWER
             if (!target) {
-                if (config.towerList) {
-                    for (let i = 0; i < config.towerList.length; i++) {
-                        let tower = Game.getObjectById(config.towerList[i]);
+                const towerList = creep.room.getTowerList();
+                if (towerList) {
+                    for (let i = 0; i < towerList.length; i++) {
+                        let tower = Game.getObjectById(towerList[i]);
                         if (tower.store[RESOURCE_ENERGY] / TOWER_CAPACITY <= SYS_CONFIG.TOWER_ENERGY_NEED) {
                             target = tower;
                         }
@@ -66,7 +68,6 @@ module.exports = config => ({
             creep.say("🈵");
             creep.selfFix();
         }
-
     },
     // 状态切换条件
     switch: creep => creep.updateState()
