@@ -150,7 +150,7 @@ function observer() {
         });
         if (target.length) {
             const message = "房间[" + CONFIG.OBSERVER_ROOMS[roomName][0][roomNum] + "]发现超能！";
-            logger.info(message)
+            logger.info(message);
             //Game.notify(message);
         }
     }
