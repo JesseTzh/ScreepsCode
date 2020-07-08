@@ -1,6 +1,6 @@
 const logger = require('utils.log').getLogger("ResidentDefender");
 
-module.exports = config => ({
+module.exports = ({
     //战备状态
     source: creep => {
         const roomName = creep.getTemplateConfig("roomName")
