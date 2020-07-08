@@ -1,8 +1,7 @@
 // 引入 creep 配置项
 const creepConfigs = require('config.creep');
-const SYS_CONFIG = require('config.system.setting');
 const logger = require('utils.log').getLogger("Creep_Extension");
-const creepTemplateConfigs = require('config.creep.template')
+const creepTemplateConfigs = require('config.creep.template');
 
 // 自定义的 Creep 的拓展
 const creepExtension = {
@@ -16,12 +15,12 @@ const creepExtension = {
         // 获取对应配置项
         const creepConfig = creepConfigs[this.name];
         // 获取是否工作
-        const working = creepConfig.switch ? creepConfig.switch(this) : true
+        const working = creepConfig.switch ? creepConfig.switch(this) : true;
         // 执行对应操作
         if (working) {
-            if (creepConfig.target) creepConfig.target(this)
+            if (creepConfig.target) creepConfig.target(this);
         } else {
-            if (creepConfig.source) creepConfig.source(this)
+            if (creepConfig.source) creepConfig.source(this);
         }
     },
     updateState() {
@@ -69,7 +68,7 @@ const creepExtension = {
                         logger.info("[" + this.name + "]续命失败，错误代码：" + result);
                     }
                 } else {
-                    logger.info("[" + this.name + "]续命失败，暂无可用Spawn!");
+                    logger.debug("[" + this.name + "]暂无可用Spawn以拱续命!");
                 }
             }
         } else {
