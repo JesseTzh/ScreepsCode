@@ -84,7 +84,7 @@ module.exports = ({
         }
         const sourceLinkList = creep.room.getSourceLinkList();
         //如果未达房间能量上限
-        if (creep.room.energyAvailable < creep.room.energyCapacityAvailable) {
+        if (creep.room.energyAvailable / creep.room.energyCapacityAvailable < 0.9 ) {
             //优先从冗余储能建筑提取能量：只有未达房间能量上限时才从 STORAGE 中提取能量，只有达到房间能量上限才向 STORAGE 储存能量，避免原地举重现象
             source = creep.room.storage;
             if (!source || source.store[RESOURCE_ENERGY] === 0) {
@@ -136,7 +136,7 @@ module.exports = ({
         let target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
                 return structure.structureType === STRUCTURE_SPAWN &&
-                    structure.store.getUsedCapacity() / structure.store.getCapacity() < 0.9;
+                    structure.store.getUsedCapacity(RESOURCE_ENERGY) / structure.store.getCapacity(RESOURCE_ENERGY) < 0.9;
             }
         });
         if (!target) {
