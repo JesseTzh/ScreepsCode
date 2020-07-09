@@ -35,6 +35,14 @@ module.exports = config => ({
                 targets = creep.room.find(FIND_MY_STRUCTURES, {
                     filter: (structure) => structure.hits < structure.hitsMax && structure.structureType != STRUCTURE_WALL
                 });
+                if(!targets.length){
+                    targets = creep.room.find(FIND_STRUCTURES, {
+                        filter: (structure) => {
+                            return (structure.structureType === STRUCTURE_WALL || structure.structureType === STRUCTURE_RAMPART) &&
+                                structure.hits / structure.hitsMax <= 0.01;
+                        }
+                    })
+                }
                 if (targets.length) {
                     if (creep.repair(targets[0]) === ERR_NOT_IN_RANGE) {
                         creep.moveTo(targets[0]);
