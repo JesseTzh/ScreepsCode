@@ -32,5 +32,8 @@ module.exports.loop = function () {
     //清理内存
     tools.cleanMemory();
 
+    const result = Game.cpu.generatePixel();
+    logger.debug(result);
+
     logger.info("---------------------------------------------- 游戏时间: " + Game.time + " | 所用CPU: " + Game.cpu.getUsed().toFixed(2) + "----------------------------------------------")
 }
