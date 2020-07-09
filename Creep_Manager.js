@@ -6,8 +6,7 @@ function creepManager() {
     let spawnBusyList = new Set();
     for (let name in creepConfigs) {
         if (!Game.creeps[name]) {
-            if (Memory.creeps[name] && Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag === "No") {
-                logger.debug("[" + name + ']已被暂停重生');
+            if (checkCreepRebornFlag(name)) {
                 continue;
             }
             if (name in creepTemplateConfigs) {
@@ -15,7 +14,7 @@ function creepManager() {
                 let creepTemplateConfig = creepTemplateConfigs[name];
                 //判断 Creep所用Spawn正忙
                 if (spawnBusyList.has(creepTemplateConfig.spawnName)) {
-                    logger.info("[" + creepTemplateConfig.spawnName + "]暂时无法执行当前任务，暂停重生: [" + name + "]");
+                    logger.info("[" + creepTemplateConfig.spawnName + "]正忙，无法重生 [" + name + "]");
                     continue;
                 }
                 if (Game.rooms[creepTemplateConfig.roomName].energyAvailable >= 300) {
@@ -34,7 +33,7 @@ function creepManager() {
                         if (Memory.creeps[name] && Memory.creeps[name].RebornFailTimes && Memory.creeps[name].RebornFailTimes > 200) {
                             if (name.search("Claimer") !== -1) {
                                 //不能使用自适应模板生成的Creep
-                                logger.warn(name + "不能使用自适应模板生成，跳过重生！")
+                                logger.warn(name + "不能使用自适应模板生成，跳过重生！");
                                 continue;
                             }
                             const temp = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName);
@@ -70,6 +69,15 @@ function creepManager() {
                 logger.error(name + "找不到模板文件")
             }
         }
+    }
+}
+
+function checkCreepRebornFlag(name) {
+    if (Memory.creeps[name] && Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag === "No") {
+        logger.debug("[" + name + ']已被暂停重生');
+        return true;
+    } else {
+        return false;
     }
 }
 
