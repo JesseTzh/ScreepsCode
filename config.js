@@ -32,7 +32,7 @@ module.exports = {
     // Tower ID
     TOWER: ({
         E6S22: ['5eb7147d7f3603f6f5b2f2ec', '5ebbb74020844551b84bec76', '5ed23a4b3cc45f63d3f43729', '5efb8c6e40f838898cd2b860', '5efb98ea7ad516525f10533c', '5efbad806a61d60a51708e13'],
-        E9S21: ['5ec890adf62e3fe3d3b86e9c', '5ecb7fb8128a03381e973a45', '5ee71adf670478e67209cb83'],
+        E9S21: ['5ecb7fb8128a03381e973a45', '5ee71adf670478e67209cb83'],
         E8S23: ['5ed04d90ca6db6205d72ee36', '5ed621afb311b9a6046c2f82', '5efaee44d4e9e0a8bb2e5da6'],
         E8S25: ['5efc46b61db76d09b102e7f4', '5efddb2a5b2a265debed2103']
     }),
@@ -40,7 +40,8 @@ module.exports = {
     LINK: ({
         E6S22: [['5ebb456dc1f3759ef33fa7f0', '5ebb4f9dc6a35d97ede0467f'], ['5ec09e77a937d085837a82f3', '5ebb4f9dc6a35d97ede0467f']],
         E9S21: [['5ecba12b9eaa953a1bc89164', '5ecb8901ea5a98a5a982daa5'], ['5ed33bf970adb459fb616d55', '5ecb8901ea5a98a5a982daa5']],
-        E8S23: [['5ed6288add8bd256838b9422', '5ed63d3287603b660d4ffc39'], ['5edfddc8501aa4c3dbb1272c', '5ed63d3287603b660d4ffc39']]
+        E8S23: [['5ed6288add8bd256838b9422', '5ed63d3287603b660d4ffc39'], ['5edfddc8501aa4c3dbb1272c', '5ed63d3287603b660d4ffc39']],
+        E8S25: [['5efde10ecbf160e9834d241b', '5f045af940c8972393458998'], ['5efde7f7d4aecd88ff156de5', '5f045af940c8972393458998']]
     }),
 
     // 升级 Controller 所用的能量来源
@@ -55,14 +56,16 @@ module.exports = {
     STORAGE: ({
         E6S22: '5eb929deb5f373e902a1d7d7',
         E9S21: '5ecb7790b025b52113eef9a2',
-        E8S23: '5ed350c046178209ed85ec18'
+        E8S23: '5ed350c046178209ed85ec18',
+        E8S25: '5f06846679f58420cb17ed04'
     }),
 
     // Mine 矿物 ID
     MINE: ({
         E6S22: [['5bbcb30440062e4259e93fe8'], ['Miner_01']],
         E9S21: [['5bbcb32440062e4259e9411f'], ['Miner_02']],
-        E8S23: [['5bbcb31940062e4259e940b5'], ['Miner_03']]
+        E8S23: [['5bbcb31940062e4259e940b5'], ['Miner_03']],
+        E8S25: [['5bbcb31940062e4259e940b7'], ['Miner_04']]
     }),
 
     // Factory

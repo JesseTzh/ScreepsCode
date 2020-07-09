@@ -13,12 +13,12 @@ module.exports = {
         Interval: 11
     }),
     E9S21:({
-        WorkFlag: false,
+        WorkFlag: true,
         Production: RESOURCE_OXIDANT,
         Interval: 21
     }),
     E8S23:({
-        WorkFlag: false,
+        WorkFlag: true,
         Production: RESOURCE_REDUCTANT,
         Interval: 21
     })

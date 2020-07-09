@@ -1,6 +1,6 @@
 module.exports = {
     //是否允许 Builder 从指定建筑之外提取能量来进行建造
-    ALLOW_BUILDE_FROM_SE: false,
+    ALLOW_BUILDE_FROM_SE: true,
 
     //是否允许 Mover 将多余能量存储进 STORAGE/CONTAINER （如有 STORAGE 请谨慎打开）
     ALLOW_STORE_ENERGY: true,
