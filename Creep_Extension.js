@@ -49,6 +49,9 @@ const creepExtension = {
     selfFix() {
         if (this.ticksToLive < 1400) {
             const reNewRoom = Game.rooms[this.getTemplateConfig("roomName")];
+            if(reNewRoom.energyAvailable / reNewRoom.energyCapacityAvailable < 0.1){
+                logger.warn(`房间[${reNewRoom.name}]能量不足，已停止Renew[${this.name}]`)
+            }
             if (reNewRoom) {
                 this.say("🐸");
                 const reNewSpawn = reNewRoom.find(FIND_MY_SPAWNS, {
