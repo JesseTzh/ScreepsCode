@@ -22,6 +22,10 @@ class RoomData {
         this.spawnList = new Array();
         //房间内Extenstion列表
         this.extensionList = new Array();
+        //房间内的Mineral
+        this.mineral = "";
+        //房间内的Factory
+        this.factory = "";
     }
 
     initData(roomName) {
@@ -40,6 +44,8 @@ class RoomData {
         this.controllerLink = this._getControllerLink(claimRoom);
         this.spawnList = this._getSpawnList(claimRoom);
         this.extensionList = this._getExtensionList(claimRoom);
+        this.mineral = this._getMineral(claimRoom);
+        this.factory = this._getFactory(claimRoom);
         return this;
     }
 
@@ -95,7 +101,7 @@ class RoomData {
         return controllerLink.id;
     }
 
-    _getSpawnList(claimRoom){
+    _getSpawnList(claimRoom) {
         const spawnObjArr = claimRoom.find(FIND_MY_STRUCTURES, {
             filter: (structure) => {
                 return structure.structureType === STRUCTURE_SPAWN;
@@ -108,7 +114,7 @@ class RoomData {
         return spawnIdArr;
     }
 
-    _getExtensionList(claimRoom){
+    _getExtensionList(claimRoom) {
         const extensionObjArr = claimRoom.find(FIND_MY_STRUCTURES, {
             filter: (structure) => {
                 return structure.structureType === STRUCTURE_EXTENSION;
@@ -120,6 +126,25 @@ class RoomData {
         }
         return extensionIdArr;
     }
+
+    _getMineral(claimRoom) {
+        const mineralObj = claimRoom.find(FIND_MINERALS)
+        return mineralObj[0].id;
+    }
+
+    _getFactory(claimRoom) {
+        const factoryObj = claimRoom.find(FIND_MY_STRUCTURES, {
+            filter: (structure) => {
+                return structure.structureType === STRUCTURE_FACTORY;
+            }
+        });
+        if (factoryObj.length) {
+            return factoryObj[0].id;
+        } else {
+            return null;
+        }
+    }
+
 }
 
 module.exports = RoomData;

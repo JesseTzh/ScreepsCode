@@ -18,8 +18,22 @@ const roomExtension = {
     getSpawnList() {
         return global.roomData.get(this.name).spawnList;
     },
+    getFreeSpawn() {
+        for (let spawnId of global.roomData.get(this.name).spawnList){
+            let freeSpawn = Game.getObjectById(spawnId)
+            if(!freeSpawn.spawning){
+                return freeSpawn;
+            }
+        }
+    },
     getExtensionList() {
         return global.roomData.get(this.name).extensionList;
+    },
+    getFactory() {
+        return global.roomData.get(this.name).factory;
+    },
+    getMineral() {
+        return global.roomData.get(this.name).mineral;
     }
 }
 
