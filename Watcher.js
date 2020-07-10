@@ -74,10 +74,10 @@ function storageMonitor() {
     for (let roomName in CONFIG.STORAGE) {
         let storage = Game.getObjectById(CONFIG.STORAGE[roomName]);
         if (storage.store.getFreeCapacity() / STORAGE_CAPACITY < 0.1) {
-            let message = "房间[" + roomName + "]的Storage剩余储量不足10%，请及时处理！";
+            let message = "房间[" + roomName + "]的Storage剩余容量不足10%，请及时处理！";
             logger.info(message);
             //发送邮件通知
-            Game.notify(message);
+            //Game.notify(message);
         }
     }
 }
