@@ -2,7 +2,7 @@ const mountCreepExtension = require('Creep_Extension');
 const mountRoomExtension  = require('Room_Extension');
 const logger = require('utils.log').getLogger("mount");
 const creepConfigs = require('config.creep');
-const Database = require('Database');
+const databaseInit = require('Database_Initialization');
 
 // 挂载所有的额外属性和方法
 function mount() {
@@ -25,16 +25,16 @@ function clearMemory() {
 
 function initDatabase() {
     logger.info("正在初始化数据库...");
-    Database.init();
+    databaseInit.init();
 }
 
 function createOrder() {
     logger.info("正在创建订单...")
     Game.market.createOrder({
         type: ORDER_SELL,
-        resourceType: RESOURCE_BATTERY,
-        price: 2.49,
-        totalAmount: 49400,
+        resourceType: RESOURCE_ZYNTHIUM_BAR,
+        price: 0.55,
+        totalAmount: 22600,
         roomName: "E6S22"
     });
 }
