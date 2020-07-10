@@ -1,5 +1,3 @@
-const creep = require('config.creep');
-const tool = require('utils.tools');
 const logger = require('utils.log').getLogger("Database");
 const CONFIG = require('config');
 const RoomData = require('Room_Data');
