@@ -48,7 +48,7 @@ module.exports = {
      *          upgradeId:房间内升级 Controller 所用 Link id，初期没有可不填写
      *          towerList:所在房间 Tower 列表
      */
-    // Mover_01: mover,
+    Mover_E6S22_1: mover,
     Mover_E6S22_2: mover,
     Mover_02: mover,
     Mover_03: mover,
@@ -99,8 +99,8 @@ module.exports = {
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
     OuterClaimer_E6S22_1: claimer({
-        sourceId: ['5bbcad3a9099fc012e636e4a', '5bbcad3a9099fc012e636e4d'],
-        targetRoomName: ['E5S21', 'E5S22'],
+        sourceId: ['5bbcad3a9099fc012e636e4d'],
+        targetRoomName: ['E5S22'],
         pathFinderPoint: [[25, 25]]
     }),
     OuterClaimer_E6S22_2: claimer({
@@ -218,7 +218,10 @@ module.exports = {
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
     OuterBuilder_E6S22_1: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
-    OuterBuilder_E9S21_1: outbuilder({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E9S23"}),
+    OuterBuilder_E6S22_2: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
+    OuterBuilder_E6S22_3: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
+    OuterBuilder_E6S22_4: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
+    //OuterBuilder_E9S21_1: outbuilder({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E9S24"}),
     //OuterBuilder_E8S23_1: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E9S24"}),
 
     /**
@@ -316,25 +319,25 @@ module.exports = {
      *          targetId:默认矿物储存点，如果为空则会自动设置为当前房间的Storage
      *          backUpTargetId:备用能量储存点，一般为Storage，初期可不填写
      */
-    Miner_01: miner({sourceId: CONFIG.MINE.E6S22[0], targetId: CONFIG.FACTORY.E6S22}),
-    Miner_02: miner({sourceId: CONFIG.MINE.E9S21[0], targetId: CONFIG.TERMINAL.E9S21}),
-    Miner_03: miner({sourceId: CONFIG.MINE.E8S23[0], targetId: CONFIG.TERMINAL.E8S23}),
-    Miner_04: miner({sourceId: CONFIG.MINE.E8S25[0], targetId: CONFIG.STORAGE.E8S25}),
+    Miner_01: miner,
+    Miner_02: miner,
+    Miner_03: miner,
+    Miner_04: miner,
 
     SpecialMover_E9S21: specialMover({
-        sourceId: CONFIG.TERMINAL.E9S21,
+        sourceId: CONFIG.FACTORY.E9S21,
         targetRoomName: "E9S21",
-        targetId: CONFIG.FACTORY.E9S21,
-        resourceType: RESOURCE_OXYGEN,
-        targetAmount: 200000
+        targetId: CONFIG.TERMINAL.E9S21,
+        resourceType: RESOURCE_OXIDANT,
+        targetAmount: 20000
     }),
-    SpecialMover_E6S22: specialMover({
-        sourceId: CONFIG.STORAGE.E6S22,
-        targetRoomName: "E6S22",
-        targetId: CONFIG.FACTORY.E6S22,
-        resourceType: RESOURCE_ENERGY,
-        targetAmount: 2000000
-    }),
+    // SpecialMover_E6S22: specialMover({
+    //     sourceId: CONFIG.FACTORY.E6S22,
+    //     targetRoomName: "E6S22",
+    //     targetId: CONFIG.TERMINAL.E6S22,
+    //     resourceType: RESOURCE_BATTERY,
+    //     targetAmount: 2000000
+    // }),
     // SpecialMover_E8S23: specialMover({
     //     sourceId: "5eb0822b0ae7b647e5b31eac",
     //     targetRoomName: "E8S25",
@@ -342,11 +345,11 @@ module.exports = {
     //     resourceType: RESOURCE_LEMERGIUM
     // }),
     SpecialMover_E8S23_1: specialMover({
-        sourceId: CONFIG.TERMINAL.E8S23,
+        sourceId: CONFIG.FACTORY.E8S23,
         targetRoomName: "E8S23",
-        targetId: CONFIG.FACTORY.E8S23,
-        resourceType: RESOURCE_HYDROGEN,
-        targetAmount: 20000
+        targetId: CONFIG.TERMINAL.E8S23,
+        resourceType: RESOURCE_REDUCTANT,
+        targetAmount: 200000
     }),
 
     RemoteUpgrader: remoteupgrader({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),

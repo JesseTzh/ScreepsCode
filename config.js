@@ -21,35 +21,12 @@ module.exports = {
         E8S25: ['5efb1ab4429aea09ccd7f88a']
     }),
 
-    // 能量矿点 ID
-    ENERGY_SOURCE: ({
-        E6S22: ['5bbcad489099fc012e63708d', '5bbcad489099fc012e63708f'],
-        E9S21: ['5bbcad7a9099fc012e637574', '5bbcad7a9099fc012e637576'],
-        E8S23: ['5bbcad6c9099fc012e6373ee', '5bbcad6c9099fc012e6373f0'],
-        E8S25: ['5bbcad6d9099fc012e6373f6', '5bbcad6d9099fc012e6373f7']
-    }),
-
-    // Tower ID
-    TOWER: ({
-        E6S22: ['5eb7147d7f3603f6f5b2f2ec', '5ebbb74020844551b84bec76', '5ed23a4b3cc45f63d3f43729', '5efb8c6e40f838898cd2b860', '5efb98ea7ad516525f10533c', '5efbad806a61d60a51708e13'],
-        E9S21: ['5ecb7fb8128a03381e973a45', '5ee71adf670478e67209cb83'],
-        E8S23: ['5ed04d90ca6db6205d72ee36', '5ed621afb311b9a6046c2f82', '5efaee44d4e9e0a8bb2e5da6'],
-        E8S25: ['5efc46b61db76d09b102e7f4', '5efddb2a5b2a265debed2103']
-    }),
     // Link ID,二维数组形式储存，LINK[n][0]为发射端，LINK[n][1]为接收端 
     LINK: ({
         E6S22: [['5ebb456dc1f3759ef33fa7f0', '5ebb4f9dc6a35d97ede0467f'], ['5ec09e77a937d085837a82f3', '5ebb4f9dc6a35d97ede0467f']],
         E9S21: [['5ecba12b9eaa953a1bc89164', '5ecb8901ea5a98a5a982daa5'], ['5ed33bf970adb459fb616d55', '5ecb8901ea5a98a5a982daa5']],
         E8S23: [['5ed6288add8bd256838b9422', '5ed63d3287603b660d4ffc39'], ['5edfddc8501aa4c3dbb1272c', '5ed63d3287603b660d4ffc39']],
         E8S25: [['5efde10ecbf160e9834d241b', '5f045af940c8972393458998'], ['5efde7f7d4aecd88ff156de5', '5f045af940c8972393458998']]
-    }),
-
-    // 升级 Controller 所用的能量来源
-    UPGRADE_ENERGY_SOURCE: ({
-        E6S22: '5ebb4f9dc6a35d97ede0467f',
-        E9S21: '5ecb8901ea5a98a5a982daa5',
-        E8S23: '5ed63d3287603b660d4ffc39',
-        E8S25: '5efc865006bba5a999a92940'
     }),
 
     // Storage ID,一般用作冗余能量缓冲池与建筑建造能量来源

@@ -157,15 +157,15 @@ module.exports = {
     /**
      *   Mover模板文件
      */
-    Mover_01: ({
+    Mover_E6S22_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 0], [MOVE, 15], [CARRY, 30]],
+        partsSet: [[WORK, 0], [MOVE, 10], [CARRY, 20]],
         spawnName: "Home",
         roomName: "E6S22"
     }),
     Mover_E6S22_2: ({
         genMode: "Config",
-        partsSet: [[WORK, 0], [MOVE, 16], [CARRY, 32]],
+        partsSet: [[WORK, 0], [MOVE, 17], [CARRY, 33]],
         spawnName: "Home",
         roomName: "E6S22"
     }),
@@ -177,7 +177,7 @@ module.exports = {
     }),
     Mover_03: ({
         genMode: "Config",
-        partsSet: [[WORK, 0], [MOVE, 10], [CARRY, 20]],
+        partsSet: [[WORK, 0], [MOVE, 15], [CARRY, 30]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
@@ -272,7 +272,7 @@ module.exports = {
     }),
     OuterClaimer_E6S22_2: ({
         genMode: "Config",
-        partsSet: [[MOVE, 3], [CLAIM, 3]],
+        partsSet: [[MOVE, 2], [CLAIM, 2]],
         spawnName: "Home-Top",
         roomName: "E6S22"
     }),
@@ -297,8 +297,26 @@ module.exports = {
 
     OuterBuilder_E6S22_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]],
-        spawnName: "Home",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "ControllerCenter",
+        roomName: "E6S22"
+    }),
+    OuterBuilder_E6S22_2: ({
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "ControllerCenter",
+        roomName: "E6S22"
+    }),
+    OuterBuilder_E6S22_3: ({
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "ControllerCenter",
+        roomName: "E6S22"
+    }),
+    OuterBuilder_E6S22_4: ({
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "ControllerCenter",
         roomName: "E6S22"
     }),
     OuterBuilder_E9S21_1: ({
