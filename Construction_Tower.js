@@ -3,12 +3,12 @@ const CONFIG = require('config')
 const SYS_CONFIG = require('config.system.setting');
 
 function towerWork() {
-    if (!CONFIG.TOWER || !CONFIG.SPAWN) {
+    if (!CONFIG.CLAIM_ROOM) {
         logger.info("缺少配置文件信息！")
         return;
     }
-    // 直接遍历房间列表，检测每个房间内是否有需要攻击/维护的目标，避免使用 Tower 反复在同一房间内搜索以提升效率
-    for (let room in CONFIG.TOWER) {
+    // 直接遍历房间列表，检测每个房间内是否有需要攻击/维护的目标，避免使用每个 Tower 反复在同一房间内搜索以提升效率
+    for (let room of CONFIG.CLAIM_ROOM) {
         // 检测是否有敌人
         const enemas = Game.rooms[room].find(FIND_HOSTILE_CREEPS);
         if (enemas.length) {
@@ -36,35 +36,42 @@ function towerWork() {
 
 //检测到进入范围的敌人自动攻击
 function towerAttack(room, targets) {
-    for (let i = 0; i < CONFIG.TOWER[room].length; i++) {
-        let tower = Game.getObjectById(CONFIG.TOWER[room][i]);
+    for (let towerId of Game.rooms[room].getTowerList()) {
+        const tower = Game.getObjectById(towerId);
         if (tower.store[RESOURCE_ENERGY] > 0) {
+            // for(let target of targets){
+            //     for(let bodyPart of target.body){
+            //         if(bodyPart === HEAL){
+            //             break;
+            //         }
+            //     }
+            // }
             tower.attack(targets[0])
         } else {
-            logger.info("Tower[" + room + "][" + i + "]能量为空，无法工作！")
+            logger.info(`房间[${room}]中的Tower[${towerId}]能量储量为空，无法工作！`)
         }
     }
 }
 
 //检测到范围内需要维修、保养的劳工自动进行维护
 function towerRepair(room, targets) {
-    for (let i = 0; i < CONFIG.TOWER[room].length; i++) {
-        let tower = Game.getObjectById(CONFIG.TOWER[room][i]);
+    for (let towerId of Game.rooms[room].getTowerList()) {
+        const tower = Game.getObjectById(towerId);
         if (tower.store[RESOURCE_ENERGY] > 0) {
             tower.repair(targets[0])
         } else {
-            logger.info("Tower[" + room + "][" + i + "]能量为空，无法工作！")
+            logger.info(`房间[${room}]中的Tower[${towerId}]能量储量为空，无法工作！`)
         }
     }
 }
 
 function towerHeal(room, targets) {
-    for (let i = 0; i < CONFIG.TOWER[room].length; i++) {
-        let tower = Game.getObjectById(CONFIG.TOWER[room][i]);
+    for (let towerId of Game.rooms[room].getTowerList()) {
+        const tower = Game.getObjectById(towerId);
         if (tower.store[RESOURCE_ENERGY] > 0) {
             tower.heal(targets[0])
         } else {
-            logger.info("Tower[" + room + "][" + i + "]能量为空，无法工作！")
+            logger.info(`房间[${room}]中的Tower[${towerId}]能量储量为空，无法工作！`)
         }
     }
 }
