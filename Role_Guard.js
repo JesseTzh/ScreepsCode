@@ -1,4 +1,4 @@
-const logger = require('utils.log').getLogger("ResidentDefender");
+const logger = require('utils.log').getLogger("Guard");
 
 module.exports = ({
     //战备状态
@@ -23,7 +23,7 @@ module.exports = ({
                 target = creep.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
             }
             if (target) {
-                logger.info(creep.name + " ：骑兵连，进攻！！！")
+                logger.info(`[${creep.name}]:骑兵连，进攻！！！`)
                 if (creep.attack(target) === ERR_NOT_IN_RANGE) {
                     creep.say("🗡️")
                     creep.moveTo(target);
