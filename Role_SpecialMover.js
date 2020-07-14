@@ -6,7 +6,13 @@ module.exports = config => ({
         // 将身上与当前任务不符的物品类型丢弃
         for (let resourceType in creep.carry) {
             if (resourceType !== config.resourceType) {
-                creep.drop(resourceType)
+                if(creep.room.storage && creep.room.storage.store.getFreeCapacity(resourceType) > 0){
+                    if (creep.transfer(creep.room.storage, resourceType) === ERR_NOT_IN_RANGE) {
+                        creep.moveTo(creep.room.storage);
+                    }
+                }else{
+                    creep.drop(resourceType);
+                }
             }
         }
         // 要去的房间
