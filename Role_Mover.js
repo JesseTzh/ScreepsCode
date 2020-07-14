@@ -73,6 +73,18 @@ function energyCheck(creep) {
     }
 }
 
+function checkTowerEnergy(creep){
+    const towerList = creep.room.getTowerList();
+    if (towerList) {
+        for (let i = 0; i < towerList.length; i++) {
+            let tower = Game.getObjectById(towerList[i]);
+            if (tower.store[RESOURCE_ENERGY] / TOWER_CAPACITY <= SYS_CONFIG.TOWER_ENERGY_NEED) {
+                return true;
+            }
+        }
+    }
+}
+
 module.exports = ({
     // 提取能量矿
     source: creep => {
@@ -84,7 +96,7 @@ module.exports = ({
         }
         const sourceLinkList = creep.room.getSourceLinkList();
         //如果未达房间能量上限
-        if (creep.room.energyAvailable / creep.room.energyCapacityAvailable < 0.9 ) {
+        if (creep.room.energyAvailable / creep.room.energyCapacityAvailable < 0.9 || checkTowerEnergy(creep)) {
             //优先从冗余储能建筑提取能量：只有未达房间能量上限时才从 STORAGE 中提取能量，只有达到房间能量上限才向 STORAGE 储存能量，避免原地举重现象
             source = creep.room.storage;
             if (!source || source.store[RESOURCE_ENERGY] === 0) {
