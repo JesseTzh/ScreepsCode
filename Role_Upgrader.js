@@ -6,7 +6,7 @@ module.exports = ({
     source: creep => {
         var source = Game.getObjectById(creep.room.getControllerLink());
         if (!source || source.store.getUsedCapacity(RESOURCE_ENERGY) < 1) {
-            logger.warn(creep.name + ': 默认取能建筑存量为空或找不到指定的取能建筑！')
+            logger.debug(creep.name + ': 默认取能建筑存量为空或找不到指定的取能建筑！')
             source = null;
         }
         if (!source) {
