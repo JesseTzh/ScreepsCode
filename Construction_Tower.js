@@ -1,10 +1,10 @@
 const logger = require('utils.log').getLogger("Tower");
-const CONFIG = require('config')
+const CONFIG = require('config');
 const SYS_CONFIG = require('config.system.setting');
 
 function towerWork() {
     if (!CONFIG.CLAIM_ROOM) {
-        logger.info("缺少配置文件信息！")
+        logger.info("缺少配置文件信息！");
         return;
     }
     // 直接遍历房间列表，检测每个房间内是否有需要攻击/维护的目标，避免使用每个 Tower 反复在同一房间内搜索以提升效率
@@ -20,14 +20,14 @@ function towerWork() {
                     structure.hits / structure.hitsMax <= SYS_CONFIG.DEFENSE_CONSTRUCTION_HITS_LIMITS)
             });
             if (repairTargets.length) {
-                towerRepair(room, repairTargets)
+                towerRepair(room, repairTargets);
             } else {
                 // 检测是否有受伤 Creep
                 const injuredCreeps = Game.rooms[room].find(FIND_MY_CREEPS, {
                     filter: (creep) => creep.hits < creep.hitsMax
                 });
                 if (injuredCreeps.length) {
-                    towerHeal(room, injuredCreeps)
+                    towerHeal(room, injuredCreeps);
                 }
             }
         }
@@ -57,6 +57,9 @@ function towerAttack(room, targets) {
 function towerRepair(room, targets) {
     for (let towerId of Game.rooms[room].getTowerList()) {
         const tower = Game.getObjectById(towerId);
+        if(tower.store.getUsedCapacity(RESOURCE_ENERGY) / TOWER_CAPACITY <= 0.2){
+            continue;
+        }
         if (tower.store[RESOURCE_ENERGY] > 0) {
             tower.repair(targets[0])
         } else {
