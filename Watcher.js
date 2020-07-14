@@ -3,7 +3,6 @@ const logger = require('utils.log').getLogger("Watcher");
 const Observer = require('Construction_Observer');
 
 function beginWatch() {
-
     // const cpuUsedBefore = Game.cpu.getUsed();
 
     // 监测外矿房间敌人
@@ -19,7 +18,7 @@ function beginWatch() {
     //outerRoomConstructionSiteMonitor();
 
     //监测者探测外界房间
-    observer();
+    //observer();
     // const cpuUsed = Game.cpu.getUsed() - cpuUsedBefore;
     // logger.info("守望者CPU用量：" + cpuUsed)
 }
@@ -67,12 +66,8 @@ function defenseOuterRoom() {
 }
 
 function storageMonitor() {
-    // 检测是否有对应的Storage配置文件
-    if (!CONFIG.STORAGE) {
-        return
-    }
-    for (let roomName in CONFIG.STORAGE) {
-        let storage = Game.getObjectById(CONFIG.STORAGE[roomName]);
+    for (let roomName of CONFIG.CLAIM_ROOM) {
+        let storage = Game.rooms[roomName].storage;
         if (storage.store.getFreeCapacity() / STORAGE_CAPACITY < 0.1) {
             let message = "房间[" + roomName + "]的Storage剩余容量不足10%，请及时处理！";
             logger.info(message);
@@ -83,12 +78,8 @@ function storageMonitor() {
 }
 
 function mineMonitor() {
-    // 检测是否有对应的Mine配置文件
-    if (!CONFIG.MINE) {
-        return
-    }
-    for (let roomName in CONFIG.MINE) {
-        let mine = Game.getObjectById(CONFIG.MINE[roomName][0]);
+    for (let roomName of CONFIG.CLAIM_ROOM) {
+        let mine = Game.getObjectById(Game.rooms[roomName].getMineral());
         if (mine.mineralAmount > 0 || (mine.mineralAmount === 0 && mine.ticksToRegeneration <= 30)) {
             Memory.creeps[CONFIG.MINE[roomName][1]].RebornFlag = "Yes";
         } else {
