@@ -23,7 +23,7 @@ module.exports = config => ({
                 if (creep.reserveController(source) === ERR_NOT_IN_RANGE) {
                     creep.say("🔔");
                     creep.moveTo(source);
-                }else if(creep.reserveController(source) === ERR_INVALID_TARGET){
+                } else if (creep.reserveController(source) === ERR_INVALID_TARGET) {
                     creep.attackController(source)
                 }
             }
