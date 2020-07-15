@@ -50,7 +50,8 @@ const creepExtension = {
         if (this.ticksToLive < 1400) {
             const reNewRoom = Game.rooms[this.getTemplateConfig("roomName")];
             if(reNewRoom.energyAvailable / reNewRoom.energyCapacityAvailable < 0.1){
-                logger.warn(`房间[${reNewRoom.name}]能量不足，已停止Renew[${this.name}]`)
+                logger.warn(`房间[${reNewRoom.name}]能量不足，已停止Renew[${this.name}]`);
+                return;
             }
             if (reNewRoom) {
                 this.say("🐸");
@@ -186,6 +187,29 @@ const creepExtension = {
                 //抵达目标房间
                 return true;
             }
+        }
+    },
+    //清理掉 Creep 身上除 retainReSourceType 之外的所有资源,默认会放在本房间内的Storage,如没有则直接丢弃
+    cleanBag(retainReSourceType){
+        let flag = true;
+        for (let resourceType in this.carry) {
+            if (resourceType !== retainReSourceType) {
+                flag = false;
+                logger.debug(this.name + "正在清理背包");
+                this.say("🧺");
+                let target = this.room.storage;
+                if(target){
+                    if (this.transfer(target, resourceType) === ERR_NOT_IN_RANGE) {
+                        this.moveTo(target);
+                    }
+                }else{
+                    this.drop(resourceType);
+                }
+
+            }
+        }
+        if(flag && this.memory.NeedCleanBag){
+            this.memory.NeedCleanBag  = false;
         }
     }
 }
