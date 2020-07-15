@@ -36,44 +36,7 @@ function freeJob(creep) {
     }
 }
 
-function cleanBag(storageId, creep) {
-    let bagFlag = true;
-    for (let resourceType in creep.carry) {
-        if (resourceType !== RESOURCE_ENERGY) {
-            bagFlag = false;
-            let target = Game.getObjectById(storageId);
-            if (creep.transfer(target, resourceType) === ERR_NOT_IN_RANGE) {
-                logger.debug(creep.name + "正在清理背包");
-                creep.say("🧺");
-                creep.moveTo(target);
-            }
-            ;
-        }
-    }
-    if (bagFlag) {
-        //背包已清理干净
-        creep.memory.NeedCleanBag = false;
-    }
-}
-
-//检查是否是Spawn未满但Extension已满
-function energyCheck(creep) {
-    const spawnCheck = creep.room.find(FIND_MY_SPAWNS, {
-        filter: (structure) => {
-            return structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0
-        }
-    })
-    const extensionCheck = creep.room.find(FIND_MY_STRUCTURES, {
-        filter: (structure) => {
-            return structure.structureType === STRUCTURE_EXTENSION && structure.store[RESOURCE_ENERGY] > 0;
-        }
-    })
-    if (spawnCheck && extensionCheck) {
-        return true;
-    }
-}
-
-function checkTowerEnergy(creep){
+function checkTowerEnergy(creep) {
     const towerList = creep.room.getTowerList();
     if (towerList) {
         for (let i = 0; i < towerList.length; i++) {
@@ -91,13 +54,13 @@ module.exports = ({
         creep.say("🔽");
         let source;
         if (creep.memory.NeedCleanBag) {
-            cleanBag(creep.room.storage.id, creep);
+            creep.cleanBag(RESOURCE_ENERGY);
             return;
         }
         const sourceLinkList = creep.room.getSourceLinkList();
         //如果未达房间能量上限
         if (creep.room.energyAvailable / creep.room.energyCapacityAvailable < 0.9 || checkTowerEnergy(creep)) {
-            //优先从冗余储能建筑提取能量：只有未达房间能量上限时才从 STORAGE 中提取能量，只有达到房间能量上限才向 STORAGE 储存能量，避免原地举重现象
+            //优先从冗余储能建筑提取能量：只有未达房间能量上限时才从 Storage 中提取能量，只有达到房间能量上限才向 STORAGE 储存能量，避免原地举重现象
             source = creep.room.storage;
             if (!source || source.store[RESOURCE_ENERGY] === 0) {
                 //冗余储能建筑消耗完毕，使用Link中的能量
@@ -109,15 +72,6 @@ module.exports = ({
                     }
                 }
             }
-            //以上建筑能量均消耗完毕，考虑将能量倾斜至 SPWAN
-            if (!source && energyCheck(creep)) {
-                logger.info(creep.name + "尝试将 EXTENSION 中的能量优先转移至 SPAWN");
-                source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return structure.structureType === STRUCTURE_EXTENSION && structure.store[RESOURCE_ENERGY] > 0;
-                    }
-                });
-            }
             //如果达到房间能量上限，并且 Link 当前储量超过一半时，直接从 Link 中提取
         } else if (creep.room.energyAvailable / creep.room.energyCapacityAvailable >= 0.9 && SYS_CONFIG.ALLOW_STORE_ENERGY) {
             for (let i = 0; i < sourceLinkList.length; i++) {
@@ -128,7 +82,7 @@ module.exports = ({
             }
         }
         if (!source || source.store[RESOURCE_ENERGY] === 0) {
-            logger.info(creep.name + "找不到可以提取能量的建筑，切换为自由工作");
+            logger.debug(creep.name + "找不到可以提取能量的建筑，切换为自由工作");
             freeJob(creep);
 
         } else {
@@ -141,22 +95,22 @@ module.exports = ({
     target: creep => {
         creep.say("🔼");
         if (creep.memory.NeedCleanBag) {
-            cleanBag(creep.room.storage.id, creep);
+            creep.cleanBag(RESOURCE_ENERGY);
             return;
         }
-        //优先供给 SPAWN
+        //优先供给 Extension
         let target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => {
-                return structure.structureType === STRUCTURE_SPAWN &&
-                    structure.store.getUsedCapacity(RESOURCE_ENERGY) / structure.store.getCapacity(RESOURCE_ENERGY) < 0.9;
+                return structure.structureType === STRUCTURE_EXTENSION &&
+                    structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
             }
         });
         if (!target) {
-            //SPAWN 已满，再向EXTENSION供能
+            //Extension 已满，再向 Spawn 供能
             target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => {
-                    return structure.structureType === STRUCTURE_EXTENSION &&
-                        structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0;
+                    return structure.structureType === STRUCTURE_SPAWN &&
+                        structure.store.getUsedCapacity(RESOURCE_ENERGY) / structure.store.getCapacity(RESOURCE_ENERGY) < 0.9;
                 }
             });
         }
@@ -179,14 +133,14 @@ module.exports = ({
                 target = upgradeId
             }
         }
-        //如果 SPAWN/EXTENSION/TOWER 都已满,根据config文件配置的参数决定是否进一步将能量存入冗余能量存储建筑
+        //如果 Spawn/Extension/Tower 都已满,根据config文件配置的参数决定是否进一步将能量存入冗余能量存储建筑
         if (!target && SYS_CONFIG.ALLOW_STORE_ENERGY) {
             target = creep.room.storage;
             //如果房间内没有Storage或已满，则搜寻其他可以储能的建筑
             if (!target || target.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
                 target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return ((structure.structureType === STRUCTURE_TERMINAL|| structure.structureType === STRUCTURE_FACTORY || structure.structureType === STRUCTURE_CONTAINER) &&
+                        return ((structure.structureType === STRUCTURE_TERMINAL || structure.structureType === STRUCTURE_FACTORY || structure.structureType === STRUCTURE_CONTAINER) &&
                             structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
                     }
                 });
@@ -197,7 +151,7 @@ module.exports = ({
                 creep.moveTo(target);
             }
         } else {
-            logger.info(`[${creep.name}]找不到需要存入能量的建筑，切换为自由工作`);
+            logger.debug(`[${creep.name}]找不到需要存入能量的建筑，切换为自由工作`);
             freeJob(creep);
         }
     },
