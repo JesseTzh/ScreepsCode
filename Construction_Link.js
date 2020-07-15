@@ -14,22 +14,34 @@ const CONFIG = require('config')
 const SYS_CONFIG = require('config.system.setting');
 
 function linkTransfer() {
-    if (!CONFIG.LINK) {
-        logger.debug("配置文件中找不到Link的信息！")
-        return;
-    }
-    for (let room in CONFIG.LINK) {
-        for (let i = 0; i < CONFIG.LINK[room].length; i++) {
-            let send = Game.getObjectById(CONFIG.LINK[room][i][0]);
-            let receive = Game.getObjectById(CONFIG.LINK[room][i][1]);
-            // ①如果接收端能量为零则立即传输
-            // ②如果发送端能量大于50%并且房间可用能量大于 ALLOW_UPGRADER_USE_ENERGY 参数值，则传输
-            if ((send.store.getUsedCapacity(RESOURCE_ENERGY) / LINK_CAPACITY >= 0.5 && send.room.energyAvailable / send.room.energyCapacityAvailable >= SYS_CONFIG.ALLOW_UPGRADER_USE_ENERGY) ||
-                (send.store.getUsedCapacity(RESOURCE_ENERGY) > 0 && receive.store.getUsedCapacity(RESOURCE_ENERGY) === 0)) {
-                send.transferEnergy(receive);
+    for (let roomName of CONFIG.CLAIM_ROOM) {
+        //房间可用能量大于 ALLOW_UPGRADER_USE_ENERGY 参数值
+        if (Game.rooms[roomName].getRatioOfEnergy() <= SYS_CONFIG.ALLOW_UPGRADER_USE_ENERGY) {
+            continue;
+        }
+        let sourceLinkList = Game.rooms[roomName].getSourceLinkList();
+        let receiveLink = Game.getObjectById(Game.rooms[roomName].getControllerLink());
+        for (let i = 0; i < sourceLinkList.length; i++) {
+            let sendLink = Game.getObjectById(sourceLinkList[i]);
+            if (checkEnergyStatus(sendLink)) {
+                //发送端能量储量大于50%，或接收端能量为0,则传输
+                if ((sendLink.store.getUsedCapacity(RESOURCE_ENERGY) / LINK_CAPACITY >= 0.5) || (receiveLink.store.getUsedCapacity(RESOURCE_ENERGY) === 0)) {
+                    sendLink.transferEnergy(receiveLink);
+                }
             }
         }
     }
+}
+
+function checkEnergyStatus(sendLink) {
+    //发送端不在冷却中
+    if (sendLink.cooldown === 0) {
+        //发送端能量大于1
+        if (sendLink.store.getUsedCapacity(RESOURCE_ENERGY) > 1) {
+            return true;
+        }
+    }
+    return false;
 }
 
 module.exports = {
