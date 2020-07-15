@@ -15,6 +15,10 @@ function init() {
     global.roomData = roomDataMap;
 }
 
+function creepDataInit(){
+
+}
+
 module.exports = {
     init: init
 }

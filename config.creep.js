@@ -20,14 +20,6 @@ const remoteHarvester = require('RemoteHarvester')
 
 module.exports = {
 
-    /**
-     *   Harvester配置文件
-     *      参数：
-     *          sourceId:默认能量采集点
-     *          targetId:默认能量储存点，一般为紧邻Source的Link，初期可设置为Spawn
-     *          backUpTargetId:备用能量储存点，一般为Storage，初期可不填写
-     *          towerList:所在房间 Tower 列表
-     */
     Harvester_E6S22_0: harvester,
     Harvester_E6S22_1: harvester,
 
@@ -40,40 +32,22 @@ module.exports = {
     Harvester_E8S25_0: harvester,
     Harvester_E8S25_1: harvester,
 
-    /**
-     *   Mover配置文件
-     *      参数：
-     *          sourceId:数组形式存储允许Mover提取能量的建筑ID
-     *          storageId:冗余资源存放建筑
-     *          upgradeId:房间内升级 Controller 所用 Link id，初期没有可不填写
-     *          towerList:所在房间 Tower 列表
-     */
-    Mover_E6S22_1: mover,
+    //Mover_E6S22_1: mover,
     Mover_E6S22_2: mover,
     Mover_02: mover,
     Mover_03: mover,
     Mover_E8S25: mover,
 
-    /**
-     *   Upgrader配置文件
-     *      参数：
-     *          sourceId:默认取能建筑
-     *          backUpSourceId:备用取能建筑，一般为Storage，初期可不填写
-     */
-    Upgrader_E6S22_1: upgrader,
+    //Upgrader_E6S22_1: upgrader,
     Upgrader_E9S21_1: upgrader,
-    // Upgrader_E9S21_2: upgrader,
+    Upgrader_E9S21_2: upgrader,
+    Upgrader_E9S21_3: upgrader,
     Upgrader_E8S23_1: upgrader,
-    //Upgrader_E8S23_2: upgrader,
+    Upgrader_E8S23_2: upgrader,
+    Upgrader_E8S23_3: upgrader,
     Upgrader_E8S25_1: upgrader,
     Upgrader_E8S25_2: upgrader,
 
-
-    /**
-     *   Builder配置文件
-     *      参数：
-     *          sourceId:默认取能建筑
-     */
     Builder_E6S22: builder,
     Builder_E9S21: builder,
     Builder_E8S23: builder,
@@ -81,12 +55,6 @@ module.exports = {
 
     //Dismantler_01: dismantler({targetId: '5eaec9da0d4bd50b5e5bf8b8', targetRoom: 'E8S25', pathFinderPoint: [[48, 16]]}),
 
-    /**
-     *   ResidentDefender配置文件
-     *
-     *   已实现无参数化
-     *
-     */
     ResidentDefender_E6S22: guard,
     ResidentDefender_E8S23: guard,
     ResidentDefender_E9S21: guard,
@@ -203,12 +171,12 @@ module.exports = {
         targetId: OUTERWORLD_CONFIG.E9S22[1][1],
         pathFinderPoint: [[32, 49]]
     }),
-    OuterHarvester_E9S24: outerharvester({
-        sourceId: OUTERWORLD_CONFIG.E9S24[0][0],
-        targetRoomName: "E9S24",
-        targetId: OUTERWORLD_CONFIG.E9S24[0][1],
-        pathFinderPoint: [[32, 49]]
-    }),
+    // OuterHarvester_E9S24: outerharvester({
+    //     sourceId: OUTERWORLD_CONFIG.E9S24[0][0],
+    //     targetRoomName: "E9S24",
+    //     targetId: OUTERWORLD_CONFIG.E9S24[0][1],
+    //     pathFinderPoint: [[32, 49]]
+    // }),
 
     /**
      *   OuterBuilder配置文件
@@ -266,11 +234,11 @@ module.exports = {
         targetRoomName: "E8S24",
         targetId: CONFIG.STORAGE.E8S23
     }),
-    OuterMover_E9S24: outmover({
-        sourceId: OUTERWORLD_CONFIG.E9S24[0][1],
-        targetRoomName: "E9S24",
-        targetId: CONFIG.STORAGE.E8S23
-    }),
+    // OuterMover_E9S24: outmover({
+    //     sourceId: OUTERWORLD_CONFIG.E9S24[0][1],
+    //     targetRoomName: "E9S24",
+    //     targetId: CONFIG.STORAGE.E8S23
+    // }),
     OuterMover_E7S23: outmover({
         sourceId: OUTERWORLD_CONFIG.E7S23[0][1],
         targetRoomName: "E7S23",
@@ -329,7 +297,7 @@ module.exports = {
         targetRoomName: "E9S21",
         targetId: CONFIG.TERMINAL.E9S21,
         resourceType: RESOURCE_OXIDANT,
-        targetAmount: 20000
+        targetAmount: 0
     }),
     // SpecialMover_E6S22: specialMover({
     //     sourceId: CONFIG.FACTORY.E6S22,
@@ -345,10 +313,10 @@ module.exports = {
     //     resourceType: RESOURCE_LEMERGIUM
     // }),
     SpecialMover_E8S23_1: specialMover({
-        sourceId: CONFIG.FACTORY.E8S23,
+        sourceId: CONFIG.STORAGE.E8S23,
         targetRoomName: "E8S23",
-        targetId: CONFIG.TERMINAL.E8S23,
-        resourceType: RESOURCE_REDUCTANT,
+        targetId: CONFIG.FACTORY.E8S23,
+        resourceType: RESOURCE_LEMERGIUM,
         targetAmount: 200000
     }),
 

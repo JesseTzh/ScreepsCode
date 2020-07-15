@@ -1,32 +1,13 @@
 module.exports = {
+
     //所辖Room(已Claim的房间)
     CLAIM_ROOM: ["E6S22", "E9S21", "E8S23", "E8S25"],
+
     ROOMS_BUILDER: ({
         E6S22: ['Builder_E6S22'],
         E9S21: ['Builder_E9S21'],
         E8S23: ['Builder_E8S23'],
         E8S25: ['Builder_E8S25']
-    }),
-    OUTER_ROOMS_BUILDER: ({
-        E6S22: [["E6S23", "E5S22", "E5S21"], ["ResidentDefender_E6S22"]],
-        E9S21: [["E8S21", "E9S22"], ["ResidentDefender_E9S21"]],
-        E8S23: [["E9S23", "E8S24", "E7S23"], ["ResidentDefender_E8S23"]]
-    }),
-
-    // Spawn ID 
-    SPAWN: ({
-        E6S22: ['5eb569554dac05ff668051db', '5ece9d3da4273f33938ce488'],
-        E9S21: ['5ec7953511de04afe91a376c'],
-        E8S23: ['5ecb8fa0b61e17c73bb11aa8'],
-        E8S25: ['5efb1ab4429aea09ccd7f88a']
-    }),
-
-    // Link ID,二维数组形式储存，LINK[n][0]为发射端，LINK[n][1]为接收端 
-    LINK: ({
-        E6S22: [['5ebb456dc1f3759ef33fa7f0', '5ebb4f9dc6a35d97ede0467f'], ['5ec09e77a937d085837a82f3', '5ebb4f9dc6a35d97ede0467f']],
-        E9S21: [['5ecba12b9eaa953a1bc89164', '5ecb8901ea5a98a5a982daa5'], ['5ed33bf970adb459fb616d55', '5ecb8901ea5a98a5a982daa5']],
-        E8S23: [['5ed6288add8bd256838b9422', '5ed63d3287603b660d4ffc39'], ['5edfddc8501aa4c3dbb1272c', '5ed63d3287603b660d4ffc39']],
-        E8S25: [['5efde10ecbf160e9834d241b', '5f045af940c8972393458998'], ['5efde7f7d4aecd88ff156de5', '5f045af940c8972393458998']]
     }),
 
     // Storage ID,一般用作冗余能量缓冲池与建筑建造能量来源
