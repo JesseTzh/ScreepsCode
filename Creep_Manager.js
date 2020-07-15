@@ -72,6 +72,7 @@ function creepManager() {
     }
 }
 
+//检查 Creep 是否已被暂停重生
 function checkCreepRebornFlag(name) {
     if (Memory.creeps[name] && Memory.creeps[name].RebornFlag && Memory.creeps[name].RebornFlag === "No") {
         logger.debug("[" + name + ']已被暂停重生');
