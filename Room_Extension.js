@@ -34,6 +34,9 @@ const roomExtension = {
     },
     getMineral() {
         return global.roomData.get(this.name).mineral;
+    },
+    getRatioOfEnergy() {
+        return this.energyAvailable / this.energyCapacityAvailable;
     }
 }
 
