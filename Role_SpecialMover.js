@@ -1,39 +1,25 @@
 const logger = require('utils.log').getLogger("SpecialMover");
 
 module.exports = config => ({
-    // 拿去货物逻辑
+    // 拿取货物逻辑
     source: creep => {
-        // 将身上与当前任务不符的物品类型丢弃
-        for (let resourceType in creep.carry) {
-            if (resourceType !== config.resourceType) {
-                if(creep.room.storage && creep.room.storage.store.getFreeCapacity(resourceType) > 0){
-                    if (creep.transfer(creep.room.storage, resourceType) === ERR_NOT_IN_RANGE) {
-                        creep.moveTo(creep.room.storage);
-                    }
-                }else{
-                    creep.drop(resourceType);
+        //将身上与当前任务不符的物品类型放置在当前房间的 Storage 中,如没有则直接丢弃
+        creep.cleanBag(config.resourceType);
+        //移动到指定房间
+        if (creep.moveToOtherRoom(config.transferRoom, config.targetRoomName)) {
+            const source = Game.getObjectById(config.sourceId);
+            if (source) {
+                if (source.store[config.resourceType] === 0) {
+                    creep.memory.working = true;
+                    return;
                 }
+                if (creep.withdraw(source, config.resourceType) === ERR_NOT_IN_RANGE) {
+                    creep.say("🔽");
+                    creep.moveTo(source);
+                }
+            } else {
+                logger.warn(creep.name + "找不到对应的取货建筑！");
             }
-        }
-        // 要去的房间
-        const room = Game.rooms[config.targetRoomName]
-        // 如果该房间不存在就先往房间走
-        if (!room) {
-            creep.moveTo(new RoomPosition(25, 25, config.targetRoomName))
-            return;
-        }
-        const source = Game.getObjectById(config.sourceId);
-        if (source) {
-            if (source.store[config.resourceType] === 0) {
-                creep.memory.working = true;
-                return;
-            }
-            if (creep.withdraw(source, config.resourceType) === ERR_NOT_IN_RANGE) {
-                creep.say("🔽");
-                creep.moveTo(source);
-            }
-        } else {
-            logger.warn(creep.name + "找不到对应的取货建筑！");
         }
     },
     // 存储货物逻辑
