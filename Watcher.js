@@ -21,6 +21,9 @@ function beginWatch() {
     //observer();
     // const cpuUsed = Game.cpu.getUsed() - cpuUsedBefore;
     // logger.info("守望者CPU用量：" + cpuUsed)
+
+    //定时发送邮件报告房间能量情况
+    gameStatusReport();
 }
 
 function defenseOuterRoom() {
@@ -54,9 +57,11 @@ function defenseOuterRoom() {
                 }
                 if (target && target.length) {
                     logger.info("侦测到[" + externalRoomName + "]有敌人入侵！");
-                    Game.notify("侦测到[" + externalRoomName + "]有敌人入侵！");
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].TargetRoom = externalRoomName;
                     Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]].Target = "Yes";
+                    if (target.length > 1) {
+                        Game.notify("侦测到[" + externalRoomName + "]有多个敌人入侵！");
+                    }
                 }
             } else if (!Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]) {
                 logger.info("没有检测到[" + externalRoomName + "]房间对应守卫[" + CONFIG.EXTERNAL_ROOMS[roomName][1][0] + "]");
@@ -144,6 +149,18 @@ function observer() {
             logger.info(message);
             //Game.notify(message);
         }
+    }
+}
+
+function gameStatusReport() {
+    if (Game.time / 5000 === 0) {
+        let message = "Screeps房间状态检测报告：\n";
+        for (let roomName of CONFIG.CLAIM_ROOM) {
+            let energyStatus = Game.rooms[roomName].getRatioOfEnergy();
+            message += `房间[${roomName}]当前能量比例为:${energyStatus}\n`
+        }
+        Game.notify(message);
+        logger.info(message);
     }
 }
 
