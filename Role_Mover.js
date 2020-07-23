@@ -61,16 +61,27 @@ module.exports = ({
         //如果未达房间能量上限
         if (creep.room.energyAvailable / creep.room.energyCapacityAvailable < 0.9 || checkTowerEnergy(creep)) {
             //优先从冗余储能建筑提取能量：只有未达房间能量上限时才从 Storage 中提取能量，只有达到房间能量上限才向 STORAGE 储存能量，避免原地举重现象
-            source = creep.room.storage;
-            if (!source || source.store[RESOURCE_ENERGY] === 0) {
-                //冗余储能建筑消耗完毕，使用Link中的能量
+            if(creep.room.storage.store[RESOURCE_ENERGY] > 0){
+                source = creep.room.storage;
+            }
+            //冗余储能建筑消耗完毕，使用Link中的能量
+            if (!source) {
                 for (let i = 0; i < sourceLinkList.length; i++) {
-                    source = Game.getObjectById(sourceLinkList[i]);
                     //为避免反复去同一Link提取刚刚挖出的那一点能量，故设置为Link能量大于400时再提取，以使Mover优先去能量较多的Link中提取
-                    if (source.store[RESOURCE_ENERGY] > 400) {
+                    if (Game.getObjectById(sourceLinkList[i]).store[RESOURCE_ENERGY] > 400) {
+                        source = Game.getObjectById(sourceLinkList[i]);
                         break;
                     }
                 }
+            }
+            //如果依旧没有可用的储能建筑，则使用 Terminal 或 Factory 中的能量
+            if (!source) {
+                source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType === STRUCTURE_TERMINAL || structure.structureType === STRUCTURE_FACTORY) &&
+                            structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+                    }
+                });
             }
             //如果达到房间能量上限，并且 Link 当前储量超过一半时，直接从 Link 中提取
         } else if (creep.room.energyAvailable / creep.room.energyCapacityAvailable >= 0.9 && SYS_CONFIG.ALLOW_STORE_ENERGY) {
@@ -84,7 +95,6 @@ module.exports = ({
         if (!source || source.store[RESOURCE_ENERGY] === 0) {
             logger.debug(creep.name + "找不到可以提取能量的建筑，切换为自由工作");
             freeJob(creep);
-
         } else {
             if (creep.withdraw(source, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(source);
