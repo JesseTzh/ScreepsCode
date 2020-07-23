@@ -12,7 +12,7 @@ module.exports = ({
             if (SYS_CONFIG.ALLOW_BUILDE_FROM_SE) {
                 source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_LINK || structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
+                        return (structure.structureType === STRUCTURE_TERMINAL || structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_LINK || structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
                             structure.store[RESOURCE_ENERGY] > 0;
                     }
                 });
