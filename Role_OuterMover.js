@@ -31,12 +31,16 @@ module.exports = config => ({
             if (creep.repair(target[0]) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(target[0]);
             }
-        }else{
+        } else {
             target = Game.getObjectById(config.targetId);
             if (target) {
-                if (creep.transfer(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                const result = creep.transfer(target, RESOURCE_ENERGY)
+                if (result === ERR_NOT_IN_RANGE) {
                     creep.say("🔼");
                     creep.moveTo(target);
+                } else if (result === ERR_FULL) {
+                    //目标储存建筑已满，迫不得已丢弃资源以保持外矿运转
+                    creep.drop(RESOURCE_ENERGY);
                 }
             }
         }
