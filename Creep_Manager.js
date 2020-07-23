@@ -60,6 +60,10 @@ function creepManager() {
                         spawnBusyList.add(creepTemplateConfig.spawnName);
                     } else if (result === ERR_BUSY) {
                         logger.info("[" + name + "]重生失败，Spawn[" + creepTemplateConfig.spawnName + "]正忙！");
+                        const freeSpawn = Game.rooms[creepTemplateConfig.roomName].getFreeSpawn();
+                        if(freeSpawn){
+                            Game.spawns[freeSpawn.name].spawnCreep(template, name);
+                        }
                         spawnBusyList.add(creepTemplateConfig.spawnName);
                     } else {
                         logger.warn("[" + name + "]重生失败！错误代码：" + result);
