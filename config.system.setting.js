@@ -23,7 +23,7 @@ module.exports = {
     //日志输出等级
     LOGGER_LEVEL: "INFO",
 
-    //房间可用能量高于多少时允许将Link中的能量传输给 Upgrader
+    //房间可用能量高于多少时允许将 Link 中的能量传输给 Upgrader
     ALLOW_UPGRADER_USE_ENERGY: 0.3,
 
     //房间可用能量低于多少时会被监测函数记录

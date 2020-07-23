@@ -14,8 +14,8 @@ module.exports = {
     }),
     E9S21:({
         WorkFlag: true,
-        Production: RESOURCE_OXIDANT,
-        Interval: 21
+        Production: RESOURCE_BATTERY,
+        Interval: 11
     }),
     E8S23:({
         WorkFlag: true,
