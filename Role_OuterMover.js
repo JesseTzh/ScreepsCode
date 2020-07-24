@@ -23,18 +23,16 @@ module.exports = config => ({
     // 存储能量逻辑
     target: creep => {
         //在外房间沿途修理Road
-        var target = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+        let target = creep.pos.findInRange(FIND_STRUCTURES, 1, {
             filter: (structure) => structure.hits / structure.hitsMax <= 0.9 && structure.structureType === STRUCTURE_ROAD
         });
         if (target.length) {
             logger.debug(creep.name + "正在维护沿途道路！");
-            if (creep.repair(target[0]) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(target[0]);
-            }
+            creep.repair(target[0]);
         } else {
-            target = Game.getObjectById(config.targetId);
+            target = Game.rooms[creep.getTemplateConfig("roomName")].storage;
             if (target) {
-                const result = creep.transfer(target, RESOURCE_ENERGY)
+                const result = creep.transfer(target, RESOURCE_ENERGY);
                 if (result === ERR_NOT_IN_RANGE) {
                     creep.say("🔼");
                     creep.moveTo(target);
@@ -42,6 +40,8 @@ module.exports = config => ({
                     //目标储存建筑已满，迫不得已丢弃资源以保持外矿运转
                     creep.drop(RESOURCE_ENERGY);
                 }
+            }else{
+                logger.warn(`[${creep.name}]所在房间[${creep.getTemplateConfig("roomName")}]Storage尚未建好,不建议开启外矿`);
             }
         }
     },
