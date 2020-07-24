@@ -73,7 +73,7 @@ function defenseOuterRoom() {
 function storageMonitor() {
     for (let roomName of CONFIG.CLAIM_ROOM) {
         let storage = Game.rooms[roomName].storage;
-        if (storage.store.getFreeCapacity() / STORAGE_CAPACITY < 0.1) {
+        if (storage && (storage.store.getFreeCapacity() / STORAGE_CAPACITY < 0.1)) {
             let message = "房间[" + roomName + "]的Storage剩余容量不足10%，请及时处理！";
             logger.info(message);
             //发送邮件通知
@@ -84,6 +84,13 @@ function storageMonitor() {
 
 function mineMonitor() {
     for (let roomName of CONFIG.CLAIM_ROOM) {
+        if (Game.rooms[roomName].controller.level < 6) {
+            logger.debug(`房间[${roomName}]控制等级尚未达到6级,无法挖矿.`)
+            continue;
+        }
+        if (!CONFIG.MINE[roomName]) {
+            logger.info(`房间[${roomName}]尚未配置挖矿者`)
+        }
         let mine = Game.getObjectById(Game.rooms[roomName].getMineral());
         if (mine.mineralAmount > 0 || (mine.mineralAmount === 0 && mine.ticksToRegeneration <= 30)) {
             Memory.creeps[CONFIG.MINE[roomName][1]].RebornFlag = "Yes";
@@ -158,8 +165,13 @@ function gameStatusReport() {
         for (let roomName of CONFIG.CLAIM_ROOM) {
             let room = Game.rooms[roomName];
             let energyStatus = room.getRatioOfEnergy().toFixed(2) * 100;
-            let storageFreeCapacity = room.storage.store.getFreeCapacity();
-            message += `房间[${roomName}]当前能量比例为:${energyStatus}%,Storage剩余容量为[${storageFreeCapacity}]\n`
+            message += `房间[${roomName}]当前能量比例为:${energyStatus}%`
+            if (room.storage) {
+                let storageFreeCapacity = room.storage.store.getFreeCapacity();
+                message += `,Storage剩余容量为[${storageFreeCapacity}]\n`
+            } else {
+                message += `\n`
+            }
         }
         Game.notify(message);
         logger.info(message);

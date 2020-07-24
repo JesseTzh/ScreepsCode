@@ -38,7 +38,6 @@ class RoomData {
         this.sourceLinkList = this._getSourceLinkList();
         if (this.sourceList.length != this.sourceLinkList.length) {
             logger.warn("房间[" + roomName + "]中的Source与Link无法一一对应!");
-            return null;
         }
         this.towerList = this._getTowerList(claimRoom);
         this.controllerLink = this._getControllerLink(claimRoom);
@@ -67,7 +66,7 @@ class RoomData {
                     return structure.structureType === STRUCTURE_LINK;
                 }
             });
-            if (sourceLink.id) {
+            if (sourceLink) {
                 sourceLinkIdArr.push(sourceLink.id);
             } else {
                 logger.error("没有找到[" + sourceId + "]对应的Link!");
@@ -84,6 +83,7 @@ class RoomData {
         });
         if (!towerObjArr.length) {
             logger.warn("房间[" + claimRoom.name + "]未找到Tower!");
+            return null;
         }
         let towerIdArr = new Array();
         for (let towerObj of towerObjArr) {
@@ -98,7 +98,9 @@ class RoomData {
                 return structure.structureType === STRUCTURE_LINK;
             }
         });
-        return controllerLink.id;
+        if(controllerLink){
+            return controllerLink.id;
+        }
     }
 
     _getSpawnList(claimRoom) {
