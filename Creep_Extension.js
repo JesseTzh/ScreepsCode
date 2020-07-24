@@ -38,6 +38,7 @@ const creepExtension = {
         }
         return this.memory.working
     },
+    // 获取当前 Creep 的创建模板，可指定模板具体项目
     getTemplateConfig(configName) {
         const creepTemplateConfig = creepTemplateConfigs[this.name];
         if (!creepTemplateConfig) {
@@ -50,6 +51,7 @@ const creepExtension = {
             return creepTemplateConfig;
         }
     },
+    // Creep 续命
     selfFix() {
         if (this.ticksToLive < 1400) {
             const reNewRoom = Game.rooms[this.getTemplateConfig("roomName")];
@@ -83,6 +85,7 @@ const creepExtension = {
             logger.debug("[" + this.name + "]寿命充足!");
         }
     },
+    // Creep 将自己回收
     selfRecycle() {
         const creepTemplateConfig = creepTemplateConfigs[this.name];
         if (!creepTemplateConfig) {
@@ -186,7 +189,7 @@ const creepExtension = {
             // 前往目标房间
             if (this.room.name !== targetRoomName) {
                 this.say("🚩");
-                this.moveTo(new RoomPosition(25, 25, targetRoomName))
+                this.moveTo(new RoomPosition(25, 25, targetRoomName));
                 return false;
             } else {
                 //抵达目标房间
@@ -216,6 +219,7 @@ const creepExtension = {
             this.memory.NeedCleanBag = false;
         }
     },
+    //Creep死前1 tick 检查当前房间能量是否足够复活，如不够则返回 true
     canNotReborn() {
         if (this.ticksToLive > 1) {
             return false;
