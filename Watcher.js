@@ -153,11 +153,13 @@ function observer() {
 }
 
 function gameStatusReport() {
-    if (Game.time / 5000 === 0) {
+    if (Game.time % 1500 === 0) {
         let message = "Screeps房间状态检测报告：\n";
         for (let roomName of CONFIG.CLAIM_ROOM) {
-            let energyStatus = Game.rooms[roomName].getRatioOfEnergy();
-            message += `房间[${roomName}]当前能量比例为:${energyStatus}\n`
+            let room = Game.rooms[roomName];
+            let energyStatus = room.getRatioOfEnergy().toFixed(2) * 100;
+            let storageFreeCapacity = room.storage.store.getFreeCapacity();
+            message += `房间[${roomName}]当前能量比例为:${energyStatus}%,Storage剩余容量为[${storageFreeCapacity}]\n`
         }
         Game.notify(message);
         logger.info(message);
