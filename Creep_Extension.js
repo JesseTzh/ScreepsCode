@@ -6,6 +6,10 @@ const creepTemplateConfigs = require('config.creep.template');
 // 自定义的 Creep 的拓展
 const creepExtension = {
     work() {
+        if(this.spawning){
+            logger.debug(`${this.name}正在孵化,无法工作`)
+            return;
+        }
         // 检查 creep 内存中的角色是否存在,如不存在则自动回收
         if (!(this.name in creepConfigs)) {
             logger.error(`找不到 ${this.name} 所对应的劳工配置！`);
@@ -49,7 +53,7 @@ const creepExtension = {
     selfFix() {
         if (this.ticksToLive < 1400) {
             const reNewRoom = Game.rooms[this.getTemplateConfig("roomName")];
-            if(reNewRoom.energyAvailable / reNewRoom.energyCapacityAvailable < 0.1){
+            if (reNewRoom.energyAvailable / reNewRoom.energyCapacityAvailable < 0.1) {
                 logger.warn(`房间[${reNewRoom.name}]能量不足，已停止Renew[${this.name}]`);
                 return;
             }
@@ -90,7 +94,8 @@ const creepExtension = {
             logger.info(this.name + "正在将自己回收再利用...");
             this.moveTo(target);
         } else {
-            logger.info(this.name + "无法回收自己");
+            logger.info(this.name + "无法回收自己,直接自杀！");
+            this.suicide();
         }
     },
     //避免Creep在房间边界处进进出出
@@ -190,7 +195,7 @@ const creepExtension = {
         }
     },
     //清理掉 Creep 身上除 retainReSourceType 之外的所有资源,默认会放在本房间内的Storage,如没有则直接丢弃
-    cleanBag(retainReSourceType){
+    cleanBag(retainReSourceType) {
         let flag = true;
         for (let resourceType in this.carry) {
             if (resourceType !== retainReSourceType) {
@@ -198,18 +203,29 @@ const creepExtension = {
                 logger.debug(this.name + "正在清理背包");
                 this.say("🧺");
                 let target = this.room.storage;
-                if(target){
+                if (target) {
                     if (this.transfer(target, resourceType) === ERR_NOT_IN_RANGE) {
                         this.moveTo(target);
                     }
-                }else{
+                } else {
                     this.drop(resourceType);
                 }
-
             }
         }
-        if(flag && this.memory.NeedCleanBag){
-            this.memory.NeedCleanBag  = false;
+        if (flag && this.memory.NeedCleanBag) {
+            this.memory.NeedCleanBag = false;
+        }
+    },
+    canNotReborn() {
+        if (this.ticksToLive > 1) {
+            return false;
+        }
+        const creepTemplate = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName);
+        const creepTemplateConfig = creepTemplateConfigs[this.name];
+        const template = creepTemplate.getTemplateByConfig(creepTemplateConfig);
+        let result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name, {dryRun: true});
+        if (result === ERR_NOT_ENOUGH_ENERGY) {
+            return true;
         }
     }
 }
