@@ -56,6 +56,7 @@ module.exports = {
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
+    // Room 4
     Harvester_E8S25_0: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
@@ -68,6 +69,20 @@ module.exports = {
         spawnName: "Downtown",
         roomName: "E8S25"
     }),
+    // Room 5
+    Harvester_E9S23_0: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "EastGuar",
+        roomName: "E9S23"
+    }),
+    Harvester_E9S23_1: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "EastGuar",
+        roomName: "E9S23"
+    }),
+
 
     /**
      *   Upgrader模板文件
@@ -106,6 +121,13 @@ module.exports = {
     //     spawnName: "Downtown",
     //     roomName: "E8S25"
     // }),
+    // Room5
+    Upgrader_E8S25_1: ({
+        genMode: "Config",
+        partsSet: [[WORK, 20], [MOVE, 16], [CARRY, 12]],
+        spawnName: "Downtown",
+        roomName: "E9S23"
+    }),
 
     /**
      *   Builder模板文件
@@ -133,6 +155,12 @@ module.exports = {
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "Downtown",
         roomName: "E8S25"
+    }),
+    Builder_E9S23: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "EastGuar",
+        roomName: "E9S23"
     }),
 
     Dismantler_01: ({
@@ -227,12 +255,6 @@ module.exports = {
         spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
-    OuterHarvester_E9S24: ({
-        genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
-        spawnName: "ThirdCenter",
-        roomName: "E8S23"
-    }),
     OuterHarvester_E8S21: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
@@ -313,6 +335,12 @@ module.exports = {
         spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
+    OuterBuilder_E8S25: ({
+        genMode: "Config",
+        partsSet: [[WORK, 6], [MOVE, 16], [CARRY, 10]],
+        spawnName: "Downtown",
+        roomName: "E8S25"
+    }),
 
     OuterMover_E5S21_1: ({
         genMode: "Config",
@@ -339,12 +367,6 @@ module.exports = {
         roomName: "E6S22"
     }),
     OuterMover_E8S24: ({
-        genMode: "Config",
-        partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
-        spawnName: "TheThirdWorld",
-        roomName: "E8S23"
-    }),
-    OuterMover_E9S24: ({
         genMode: "Config",
         partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
         spawnName: "TheThirdWorld",
@@ -377,7 +399,7 @@ module.exports = {
 
     Tank_01: ({
         genMode: "Config",
-        partsSet: [[MOVE, 15], [HEAL, 15]],
+        partsSet: [[MOVE, 25], [HEAL, 25]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
@@ -440,17 +462,17 @@ module.exports = {
         spawnName: "ControllerCenter",
         roomName: "E6S22"
     }),
-    SpecialMover_E8S23: ({
-        genMode: "Config",
-        partsSet: [[MOVE, 10], [CARRY, 20]],
-        spawnName: "TheThirdWorld",
-        roomName: "E8S23"
-    }),
     SpecialMover_E8S23_1: ({
         genMode: "Config",
         partsSet: [[MOVE, 5], [CARRY, 5]],
         spawnName: "ThirdCenter",
         roomName: "E8S23"
+    }),
+    SpecialMover_E8S25: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 5], [CARRY, 5]],
+        spawnName: "Downtown",
+        roomName: "E8S25"
     }),
 
     RemoteUpgrader: ({
@@ -464,6 +486,18 @@ module.exports = {
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "ThirdCenter",
         roomName: "E8S23"
+    }),
+    RemoteUpgrader_E8S25_2: ({
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "ThirdCenter",
+        roomName: "E8S23"
+    }),
+    RemoteUpgrader_E8S25: ({
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "Downtown",
+        roomName: "E8S25"
     }),
     RemoteHarvester_E8S23: ({
         genMode: "Config",

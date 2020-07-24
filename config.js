@@ -1,13 +1,14 @@
 module.exports = {
 
     //所辖Room(已Claim的房间)
-    CLAIM_ROOM: ["E6S22", "E9S21", "E8S23", "E8S25"],
+    CLAIM_ROOM: ["E6S22", "E9S21", "E8S23", "E8S25", "E9S23", "E8S26"],
 
     ROOMS_BUILDER: ({
         E6S22: ['Builder_E6S22'],
         E9S21: ['Builder_E9S21'],
         E8S23: ['Builder_E8S23'],
-        E8S25: ['Builder_E8S25']
+        E8S25: ['Builder_E8S25'],
+        E9S23: ['Builder_E9S23']
     }),
 
     // Storage ID,一般用作冗余能量缓冲池与建筑建造能量来源
@@ -37,7 +38,8 @@ module.exports = {
     TERMINAL: ({
         E6S22: '5ec894626cfcf42a53807c7c',
         E9S21: '5ee2225ef1339e9ead43a0df',
-        E8S23: '5ee356fc9902b64ce072c67f'
+        E8S23: '5ee356fc9902b64ce072c67f',
+        E8S25: '5f0d984e03c9fe00e2f840ed'
     }),
 
     // External Rooms 外矿房间列表与对应镇守的 Creeps
