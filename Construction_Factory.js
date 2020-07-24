@@ -18,9 +18,9 @@ function factoryWork() {
             if (produceResult === ERR_NOT_ENOUGH_RESOURCES) {
                 logger.info("房间[" + roomName + "]工厂原料消耗完毕");
             } else if (produceResult === OK) {
-                logger.debug("房间[" + roomName + "]工厂正在生产" + CONFIG_FACTORY[roomName].Production);
+                logger.info(`房间[${roomName}]工厂正在生产：[${CONFIG_FACTORY[roomName].Production}]`)
             } else {
-                logger.error("房间[" + roomName + "]工厂生产出现其他错误，错误代码：" + produceResult);
+                logger.warn("房间[" + roomName + "]工厂生产出现其他错误，错误代码：" + produceResult);
             }
         }
     }
