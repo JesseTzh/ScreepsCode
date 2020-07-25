@@ -98,8 +98,12 @@ class RoomData {
                 return structure.structureType === STRUCTURE_LINK;
             }
         });
-        if(controllerLink){
-            return controllerLink.id;
+        if (controllerLink) {
+            if (this.sourceLinkList.includes(controllerLink.id)) {
+                return;
+            } else {
+                return controllerLink.id;
+            }
         }
     }
 
