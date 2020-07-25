@@ -4,16 +4,29 @@ const SYS_CONFIG = require('config.system.setting');
 module.exports = config => ({
     // 前往目标房间
     source: creep => {
-        creep.moveTo(new RoomPosition(config.pathFinderPoint[0][0], config.pathFinderPoint[0][1], config.targetRoom))
+        creep.moveTo(new RoomPosition(25, 25, config.targetRoom));
     },
     // 拆迁
     target: creep => {
-        const target = Game.getObjectById(config.targetId);
+        let target = Game.getObjectById(config.targetId);
         if (target) {
             let re = creep.dismantle(target)
             if (re === ERR_NOT_IN_RANGE) {
                 creep.say("80!80!");
                 creep.moveTo(target);
+            }
+        } else {
+            target = creep.room.find(FIND_HOSTILE_STRUCTURES,{
+                filter: (structure) => (structure.structureType !== STRUCTURE_RAMPART && structure.structureType !== STRUCTURE_WALL&& structure.structureType !== STRUCTURE_CONTROLLER)
+            });
+            if (target.length) {
+                let re = creep.dismantle(target[0]);
+                if (re === ERR_NOT_IN_RANGE) {
+                    creep.say("80!80!");
+                    creep.moveTo(target[0]);
+                }
+            } else {
+                logger.info(`${creep}: ${creep.room} 已被拆光！`);
             }
         }
     },
