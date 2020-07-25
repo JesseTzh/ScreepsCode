@@ -17,7 +17,7 @@ module.exports = config => ({
         if (creep.avoidGoBackRoom()) {
             return;
         }
-        logger.info(creep.name + "去挨揍")
+        logger.info(`[${creep.name}]正在前往目标地点挨揍！`)
         if (creep.room.name !== config.targetRoomName || creep.pos !== new RoomPosition(config.pathFinderPoint[1][0], config.pathFinderPoint[1][1], config.targetRoomName)) {
             creep.moveTo(new RoomPosition(config.pathFinderPoint[1][0], config.pathFinderPoint[1][1], config.targetRoomName))
         }
@@ -27,7 +27,7 @@ module.exports = config => ({
     // 状态切换条件
     switch: creep => {
         // creep 血量降低到50%以下 && creep 之前的状态为“工作”
-        if (creep.hits / creep.hitsMax < 0.5 && creep.memory.working) {
+        if (creep.hits / creep.hitsMax < 0.8 && creep.memory.working) {
             creep.memory.working = false
         }
         // creep 血量回满 && creep 之前的状态为“不工作”
