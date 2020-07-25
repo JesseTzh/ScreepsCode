@@ -11,20 +11,20 @@ module.exports = config => ({
             creep.memory.claimTargetNum = 0;
         }
         // 要去的房间
-        const room = Game.rooms[config.targetRoomName[creep.memory.claimTargetNum]]
+        const room = Game.rooms[config.targetRoomName[creep.memory.claimTargetNum]];
         // 如果该房间不存在就先往房间走
         if (!room) {
-            creep.moveTo(new RoomPosition(25, 25, config.targetRoomName[creep.memory.claimTargetNum]))
+            creep.moveTo(new RoomPosition(25, 25, config.targetRoomName[creep.memory.claimTargetNum]));
             return;
         }
-        const source = Game.getObjectById(config.sourceId[creep.memory.claimTargetNum]);
+        const source = Game.rooms[config.targetRoomName[creep.memory.claimTargetNum]].controller;
         if (source) {
             if (!source.reservation || source.reservation.ticksToEnd < CONTROLLER_RESERVE_MAX) {
                 if (creep.reserveController(source) === ERR_NOT_IN_RANGE) {
                     creep.say("🔔");
                     creep.moveTo(source);
                 } else if (creep.reserveController(source) === ERR_INVALID_TARGET) {
-                    creep.attackController(source)
+                    creep.attackController(source);
                 }
             }
         }
