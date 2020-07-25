@@ -1,6 +1,7 @@
 const CONFIG = require('config');
 const logger = require('utils.log').getLogger("Watcher");
 const Observer = require('Construction_Observer');
+const CONFIG_FACTORY = require('config.construction.factory')
 
 function beginWatch() {
     // const cpuUsedBefore = Game.cpu.getUsed();
@@ -13,6 +14,8 @@ function beginWatch() {
     mineMonitor();
     // 监测领地房间是否有建筑工地
     constructionSiteMonitor();
+    // 监测房间资源状况并下发生产任务
+    checkIndustryTask();
 
     // 监测外矿房间是否需要OuterBuilder,但考虑CPU消耗等问题，暂放弃
     //outerRoomConstructionSiteMonitor();
@@ -164,7 +167,7 @@ function gameStatusReport() {
         let message = "Screeps房间状态检测报告：\n";
         for (let roomName of CONFIG.CLAIM_ROOM) {
             let room = Game.rooms[roomName];
-            let energyStatus = room.getRatioOfEnergy().toFixed(2) * 100;
+            let energyStatus = (room.getRatioOfEnergy() * 100).toFixed(2);
             message += `房间[${roomName}]当前能量比例为:${energyStatus}%`
             if (room.storage) {
                 let storageFreeCapacity = room.storage.store.getFreeCapacity();
@@ -175,6 +178,19 @@ function gameStatusReport() {
         }
         Game.notify(message);
         logger.info(message);
+    }
+}
+
+function checkIndustryTask() {
+    for (let roomName in CONFIG_FACTORY) {
+        let storageEnergy = Game.rooms[roomName].storage.store.getUsedCapacity(RESOURCE_ENERGY);
+        if(storageEnergy < 100000){
+            logger.debug(`房间[${roomName}] Storage 中所剩能量低于 100000,暂停下发生产任务`)
+            continue;
+        }
+        const room = Game.rooms[roomName];
+        const factory = Game.getObjectById(room.getFactory);
+
     }
 }
 
