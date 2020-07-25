@@ -35,25 +35,28 @@ module.exports = {
     Harvester_E9S23_0: harvester,
     Harvester_E9S23_1: harvester,
 
-    //Mover_E6S22_1: mover,
+    Harvester_E8S26_0: harvester,
+    Harvester_E8S26_1: harvester,
+
     Mover_E6S22_2: mover,
     Mover_02: mover,
     Mover_03: mover,
     Mover_E8S25: mover,
+    Mover_E9S23: mover,
 
     Upgrader_E6S22_1: upgrader,
     Upgrader_E9S21_1: upgrader,
     Upgrader_E8S23_1: upgrader,
     Upgrader_E8S25_1: upgrader,
-    // Upgrader_E8S25_2: upgrader,
 
     Builder_E6S22: builder,
     Builder_E9S21: builder,
     Builder_E8S23: builder,
     Builder_E8S25: builder,
     Builder_E9S23: builder,
+    //Builder_E8S26: builder,
 
-    //Dismantler_01: dismantler({targetId: '5e8411bd472af2673a0b0a00', targetRoom: 'E7S21', pathFinderPoint: [[23, 37]]}),
+    Dismantler_01: dismantler({targetId: '5ee80ec2125ddf483806c850', targetRoom: 'E7S25'}),
 
     ResidentDefender_E6S22: guard,
     ResidentDefender_E8S23: guard,
@@ -119,18 +122,6 @@ module.exports = {
         targetId: OUTERWORLD_CONFIG.E6S23[0][1],
         pathFinderPoint: [[38, 0]]
     }),
-    OuterHarvester_E9S23_1: outerharvester({
-        sourceId: OUTERWORLD_CONFIG.E9S23[0][0],
-        targetRoomName: "E9S23",
-        targetId: OUTERWORLD_CONFIG.E9S23[0][1],
-        pathFinderPoint: [[32, 49]]
-    }),
-    OuterHarvester_E9S23_2: outerharvester({
-        sourceId: OUTERWORLD_CONFIG.E9S23[1][0],
-        targetRoomName: "E9S23",
-        targetId: OUTERWORLD_CONFIG.E9S23[1][1],
-        pathFinderPoint: [[32, 49]]
-    }),
     OuterHarvester_E8S24: outerharvester({
         sourceId: OUTERWORLD_CONFIG.E8S24[0][0],
         targetRoomName: "E8S24",
@@ -174,8 +165,8 @@ module.exports = {
     // OuterBuilder_E6S22_3: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
     // OuterBuilder_E6S22_4: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
     //OuterBuilder_E9S21_1: outbuilder({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E9S24"}),
-    OuterBuilder_E8S23_1: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E9S23"}),
-    OuterBuilder_E8S25: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E8S26"}),
+    //OuterBuilder_E8S23_1: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E9S23"}),
+    OuterBuilder_E8S25: outbuilder({sourceId: CONFIG.STORAGE.E8S25, targetRoomName: "E8S26"}),
 
     /**
      *   OuterMover配置文件
@@ -229,9 +220,9 @@ module.exports = {
      *          pathFinderPoint:辅助寻路点位，pathFinderPoint[0][n]是安全房的坐标，pathFinderPoint[1][n]是挨揍房的坐标
      */
     // Tank_01: tank({
-    //     safeRoomName: 'E7S20',
-    //     targetRoomName: "E7S21",
-    //     pathFinderPoint: [[12, 48], [13, 2]]
+    //     safeRoomName: 'E8S22',
+    //     targetRoomName: "E7S22",
+    //     pathFinderPoint: [[1, 5], [48, 5]]
     // }),
 
     /**
@@ -264,19 +255,19 @@ module.exports = {
         targetAmount: 0
     }),
     SpecialMover_E8S23_1: specialMover({
-        sourceId: CONFIG.STORAGE.E8S23,
+        sourceId: CONFIG.TERMINAL.E8S23,
         targetRoomName: "E8S23",
         targetId: CONFIG.FACTORY.E8S23,
-        resourceType: RESOURCE_ENERGY,
-        targetAmount: 20000
-    }),
-    SpecialMover_E8S25: specialMover({
-        sourceId: CONFIG.TERMINAL.E8S25,
-        targetRoomName: "E8S25",
-        targetId: CONFIG.STORAGE.E8S25,
-        resourceType: RESOURCE_ENERGY,
+        resourceType: RESOURCE_HYDROGEN,
         targetAmount: 0
     }),
+    // SpecialMover_E8S25: specialMover({
+    //     sourceId: CONFIG.TERMINAL.E8S25,
+    //     targetRoomName: "E8S25",
+    //     targetId: CONFIG.STORAGE.E8S25,
+    //     resourceType: RESOURCE_ENERGY,
+    //     targetAmount: 0
+    // }),
 
     //RemoteUpgrader: remoteupgrader({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
     RemoteUpgrader_E8S25_1: remoteupgrader({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E9S23"}),
