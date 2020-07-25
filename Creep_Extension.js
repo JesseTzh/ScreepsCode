@@ -7,7 +7,7 @@ const creepTemplateConfigs = require('config.creep.template');
 const creepExtension = {
     work() {
         if(this.spawning){
-            logger.debug(`${this.name}正在孵化,无法工作`)
+            logger.debug(`${this.name}正在孵化,无法工作`);
             return;
         }
         // 检查 creep 内存中的角色是否存在,如不存在则自动回收
@@ -30,13 +30,13 @@ const creepExtension = {
     updateState() {
         // creep 身上没有能量 && creep 之前的状态为“工作”
         if (this.store[RESOURCE_ENERGY] === 0 && this.memory.working) {
-            this.memory.working = false
+            this.memory.working = false;
         }
         // creep 身上能量满了 && creep 之前的状态为“不工作”
         if (this.store[RESOURCE_ENERGY] === this.store.getCapacity() && !this.memory.working) {
-            this.memory.working = true
+            this.memory.working = true;
         }
-        return this.memory.working
+        return this.memory.working;
     },
     // 获取当前 Creep 的创建模板，可指定模板具体项目
     getTemplateConfig(configName) {
@@ -89,6 +89,7 @@ const creepExtension = {
     selfRecycle() {
         const creepTemplateConfig = creepTemplateConfigs[this.name];
         if (!creepTemplateConfig) {
+            this.suicide();
             return;
         }
         const target = Game.spawns[creepTemplateConfig.spawnName];
@@ -98,7 +99,6 @@ const creepExtension = {
             this.moveTo(target);
         } else {
             logger.info(this.name + "无法回收自己,直接自杀！");
-            this.suicide();
         }
     },
     //避免Creep在房间边界处进进出出
@@ -197,7 +197,7 @@ const creepExtension = {
             }
         }
     },
-    //清理掉 Creep 身上除 retainReSourceType 之外的所有资源,默认会放在本房间内的Storage,如没有则直接丢弃
+    //清理掉 Creep 身上除 retainReSourceType 之外的所有资源,默认会放在本房间内的 Storage ,如没有则直接丢弃
     cleanBag(retainReSourceType) {
         let flag = true;
         for (let resourceType in this.carry) {
