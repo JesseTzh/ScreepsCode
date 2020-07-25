@@ -5,11 +5,11 @@ const mover = require('Role_Mover')
 const miner = require('Role_Miner')
 const guard = require('Role_Guard')
 
-module.exports = {
+module.exports = ({
+
     E6S22: ({
         Harvester_E6S22_0: harvester,
         Harvester_E6S22_1: harvester,
-        Mover_E6S22_1: mover,
         Mover_E6S22_2: mover,
         Upgrader_E6S22_1: upgrader,
         Builder_E6S22: builder,
@@ -46,4 +46,4 @@ module.exports = {
         Builder_E8S25: builder,
         Miner_04: miner,
     }),
-}
+})
