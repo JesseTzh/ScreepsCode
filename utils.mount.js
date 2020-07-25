@@ -32,15 +32,16 @@ function createOrder() {
     logger.info("正在创建订单...")
     Game.market.createOrder({
         type: ORDER_SELL,
-        resourceType: RESOURCE_ZYNTHIUM_BAR,
-        price: 0.55,
-        totalAmount: 22600,
-        roomName: "E6S22"
+        resourceType: RESOURCE_LEMERGIUM_BAR,
+        price: 0.45,
+        totalAmount: 39600,
+        roomName: "E8S23"
     });
 }
 
 function sendJob(){
-    Game.rooms['E6S22'].terminal.send(RESOURCE_ENERGY, 100000, 'E9S21');
+    logger.info("正在执行传输任务...")
+    Game.rooms['E6S22'].terminal.send(RESOURCE_ENERGY, 100000, 'E8S25');
 }
 
 module.exports = function () {
