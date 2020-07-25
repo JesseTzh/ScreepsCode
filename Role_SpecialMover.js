@@ -10,6 +10,7 @@ module.exports = config => ({
             const source = Game.getObjectById(config.sourceId);
             if (source) {
                 if (source.store[config.resourceType] === 0) {
+                    logger.info(`${creep} 取货建筑 ${source}已空`);
                     creep.memory.working = true;
                     return;
                 }
@@ -40,12 +41,12 @@ module.exports = config => ({
     switch: creep => {
         // creep 身上没有矿物 && creep 之前的状态为“工作”
         if (creep.store[config.resourceType] === 0 && creep.memory.working) {
-            creep.memory.working = false
+            creep.memory.working = false;
         }
         // creep 身上矿物满了 && creep 之前的状态为“不工作”
         if (creep.store[config.resourceType] === creep.store.getCapacity() && !creep.memory.working) {
-            creep.memory.working = true
+            creep.memory.working = true;
         }
-        return creep.memory.working
+        return creep.memory.working;
     }
 })
