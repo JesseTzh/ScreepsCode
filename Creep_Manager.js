@@ -72,13 +72,13 @@ function tryAdaptionReborn(name, creepTemplateConfig) {
         //重生失败计数 + 1
         creepMemory.RebornFailTimes === null ? creepMemory.RebornFailTimes = 1 : creepMemory.RebornFailTimes += 1;
         // 200ticks 重生失败则采用自适应模板
-        if (Memory.creeps[name].RebornFailTimes > 200) {
+        if (creepMemory.RebornFailTimes > 200) {
             if (canNotUseSelfAdaptionTemplate(name)) {
                 //不能使用自适应模板生成的Creep
                 logger.warn(name + "不能使用自适应模板生成，跳过重生！");
             }
-            let tempTemplate = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName).getSelfAdaptionTemplate();
-            const result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(tempTemplate, name);
+            let tempTemplate = require('Creep_TemplateGenerate').genTemplate(room.name).getSelfAdaptionTemplate();
+            const result = Game.spawns[room.name].spawnCreep(tempTemplate, name);
             if (result === OK) {
                 let message = name + "长时间重生失败，使用自适应模板......";
                 logger.info(message);
@@ -95,7 +95,7 @@ function tryAdaptionReborn(name, creepTemplateConfig) {
 function isMover(name, creepTemplateConfig) {
     let flag = false;
     if (name.search("Mover") !== -1) {
-        const template = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName).getMoverSelfAdaptionTemplate();
+        let template = require('Creep_TemplateGenerate').genTemplate(creepTemplateConfig.roomName).getMoverSelfAdaptionTemplate();
         const result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name);
         if (result === OK) {
             let message = `[${name}]已使用自适应模板重生！`
