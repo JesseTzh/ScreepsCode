@@ -109,15 +109,19 @@ function constructionSiteMonitor() {
         return
     }
     for (let roomName in CONFIG.ROOMS_BUILDER) {
-        // 内存中是否有对应建造者记录（起码出生过一次）
+        //首先检测内存中是否有对应建造者记录（起码出生过一次）
         if (Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]]) {
-            const constructionSite = Game.rooms[roomName].find(FIND_MY_CONSTRUCTION_SITES);
-            // 房间内有建筑工地，则允许建造者重生
-            if (constructionSite.length > 0) {
-                Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = "Yes";
-            } else {
-                Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = "No";
+            let builderFlag = "No";
+            const roomStorageEnergy = Game.rooms[roomName].storage.store.getUsedCapacity(RESOURCE_ENERGY);
+            // 房间 Storage 中储存有能量
+            if (roomStorageEnergy > 1000) {
+                const constructionSite = Game.rooms[roomName].find(FIND_MY_CONSTRUCTION_SITES);
+                // 房间内有建筑工地，则允许建造者重生
+                if (constructionSite.length > 0) {
+                    builderFlag = "Yes";
+                }
             }
+            Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = builderFlag;
         }
     }
 }
@@ -184,7 +188,7 @@ function gameStatusReport() {
 function checkIndustryTask() {
     for (let roomName in CONFIG_FACTORY) {
         let storageEnergy = Game.rooms[roomName].storage.store.getUsedCapacity(RESOURCE_ENERGY);
-        if(storageEnergy < 100000){
+        if (storageEnergy < 100000) {
             logger.debug(`房间[${roomName}] Storage 中所剩能量低于 100000,暂停下发生产任务`)
             continue;
         }
