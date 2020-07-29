@@ -4,6 +4,7 @@ const creepTemplateConfigs = require('config.creep.template');
 const SYS_CONFIG = require('config.system.setting');
 
 function creepManager() {
+    //存储本 Tick 内正忙的 Spawn
     let spawnBusyList = new Set();
     for (let name in creepConfigs) {
         if (!Game.creeps[name]) {
@@ -26,6 +27,7 @@ function creepManager() {
                     let result = Game.spawns[creepTemplateConfig.spawnName].spawnCreep(template, name);
                     if (result === ERR_NOT_ENOUGH_ENERGY) {
                         spawnBusyList.add(creepTemplateConfig.spawnName);
+                        //尝试使用自适应模板重生
                         tryAdaptionReborn(name, creepTemplateConfig);
                     } else if (result === OK) {
                         logger.info('正在重生 : ' + name);
@@ -92,6 +94,7 @@ function tryAdaptionReborn(name, creepTemplateConfig) {
     }
 }
 
+//判断 Creep 是否为 Mover 并尝试使用自适应模板重生
 function isMover(name, creepTemplateConfig) {
     let flag = false;
     if (name.search("Mover") !== -1) {
@@ -113,6 +116,7 @@ function isMover(name, creepTemplateConfig) {
     return flag;
 }
 
+//判断 Creep 是否能够使用自适应模板重生
 function canNotUseSelfAdaptionTemplate(creepName) {
     for (let name of SYS_CONFIG.CAN_NOT_USE_SELF_ADAPTION_TEMPLATE) {
         if (creepName.search(name) !== -1) {
