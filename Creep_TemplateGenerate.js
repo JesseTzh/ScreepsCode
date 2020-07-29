@@ -51,6 +51,27 @@ class Template {
         return this.templateResult;
     }
 
+    getMoverSelfAdaptionTemplate(config){
+        let roadFlag = false;
+        if (config && config.energyMax) {
+            this.energyRemain = config.energyMax;
+            if (config.roadFlag){
+                roadFlag = config.roadFlag
+            }
+        }
+        while (this.energyRemain > 0) {
+            if (this.break) {
+                break;
+            }
+            if (this.movePoints >= 1) {
+                this._addCarryPart(roadFlag);
+            } else {
+                this._addMovePart();
+            }
+        }
+        return this.templateResult;
+    }
+
     getTemplateByConfig(config) {
         if (config.genMode === "Auto") {
             return this.getSelfAdaptionTemplate(config);
