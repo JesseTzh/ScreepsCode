@@ -9,7 +9,7 @@ function beginWatch() {
     // 监测外矿房间敌人
     defenseOuterRoom();
     // 监测Storage剩余容量
-    storageMonitor();
+    //storageMonitor();
     // 监测Mine是否刷新
     mineMonitor();
     // 监测领地房间是否有建筑工地
@@ -88,11 +88,11 @@ function storageMonitor() {
 function mineMonitor() {
     for (let roomName of CONFIG.CLAIM_ROOM) {
         if (Game.rooms[roomName].controller.level < 6) {
-            logger.debug(`房间[${roomName}]控制等级尚未达到6级,无法挖矿.`)
+            logger.debug(`房间[${roomName}]控制等级尚未达到6级,无法挖矿.`);
             continue;
         }
         if (!CONFIG.MINE[roomName]) {
-            logger.info(`房间[${roomName}]尚未配置挖矿者`)
+            logger.info(`房间[${roomName}]尚未配置挖矿者`);
         }
         let mine = Game.getObjectById(Game.rooms[roomName].getMineral());
         if (mine.mineralAmount > 0 || (mine.mineralAmount === 0 && mine.ticksToRegeneration <= 30)) {
