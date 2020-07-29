@@ -6,7 +6,7 @@ module.exports = config => ({
         if (!creep.memory.claimTargetNum) {
             //从配置文件中的第一个房间控制器开始
             creep.memory.claimTargetNum = 0;
-        } else if (!config.sourceId[creep.memory.claimTargetNum]) {
+        } else if (!config.targetRoomName[creep.memory.claimTargetNum]) {
             //没有更多控制器了，从第一个控制器开始重新预订
             creep.memory.claimTargetNum = 0;
         }
