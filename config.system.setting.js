@@ -33,5 +33,8 @@ module.exports = {
     TOWER_ENERGY_NEED: 0.9,
 
     // Tower 修理 Wall/Rampart 上限
-    DEFENSE_CONSTRUCTION_HITS_LIMITS: 0.001
+    DEFENSE_CONSTRUCTION_HITS_LIMITS: 0.001,
+
+    // 不能使用自适应模板生成的Creep
+    CAN_NOT_USE_SELF_ADAPTION_TEMPLATE: ["Claimer", "Defender", "Guard"]
 }

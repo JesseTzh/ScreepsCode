@@ -70,25 +70,20 @@ module.exports = {
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
     OuterClaimer_E6S22_1: claimer({
-        sourceId: ['5bbcad3a9099fc012e636e4d', '5bbcad3a9099fc012e636e4a'],
         targetRoomName: ['E5S22', 'E5S21'],
-        pathFinderPoint: [[25, 25]]
     }),
     OuterClaimer_E6S22_2: claimer({
-        sourceId: ['5bbcad489099fc012e637091', '5bbcad3a9099fc012e636e4d'],
         targetRoomName: ['E6S23', 'E5S22'],
-        pathFinderPoint: [[25, 25]]
     }),
     OuterClaimer_E9S21_1: claimer({
-        sourceId: ['5bbcad7a9099fc012e637579', '5bbcad6c9099fc012e6373e8'],
         targetRoomName: ['E9S22', 'E8S21'],
-        pathFinderPoint: [[25, 25]]
     }),
     OuterClaimer_E8S23_1: claimer({
-        sourceId: ['5bbcad579099fc012e637263', '5bbcad6c9099fc012e6373f2'],
         targetRoomName: ['E7S23', 'E8S24'],
-        pathFinderPoint: [[25, 25]]
     }),
+    // outerClaimer_E8S25: claimer({
+    //     targetRoomName: ['E7S23', 'E8S24'],
+    // }),
 
     /**
      *   OuterHarvester配置文件
@@ -166,7 +161,7 @@ module.exports = {
     // OuterBuilder_E6S22_4: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
     //OuterBuilder_E9S21_1: outbuilder({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E9S24"}),
     //OuterBuilder_E8S23_1: outbuilder({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E9S23"}),
-    OuterBuilder_E8S25: outbuilder({sourceId: CONFIG.STORAGE.E8S25, targetRoomName: "E8S26"}),
+    //OuterBuilder_E8S25: outbuilder({sourceId: CONFIG.STORAGE.E8S25, targetRoomName: "E8S26"}),
 
     /**
      *   OuterMover配置文件
@@ -241,26 +236,26 @@ module.exports = {
     Miner_04: miner,
 
     SpecialMover_E9S21: specialMover({
-        sourceId: CONFIG.FACTORY.E9S21,
+        sourceId: CONFIG.STORAGE.E9S21,
         targetRoomName: "E9S21",
         targetId: CONFIG.TERMINAL.E9S21,
-        resourceType: RESOURCE_BATTERY,
-        targetAmount: 0
-    }),
-    SpecialMover_E6S22: specialMover({
-        sourceId: CONFIG.STORAGE.E6S22,
-        targetRoomName: "E6S22",
-        targetId: CONFIG.FACTORY.E6S22,
         resourceType: RESOURCE_ENERGY,
-        targetAmount: 0
+        targetAmount: 220000
     }),
-    SpecialMover_E8S23_1: specialMover({
-        sourceId: CONFIG.TERMINAL.E8S23,
-        targetRoomName: "E8S23",
-        targetId: CONFIG.FACTORY.E8S23,
-        resourceType: RESOURCE_HYDROGEN,
-        targetAmount: 0
-    }),
+    // SpecialMover_E6S22: specialMover({
+    //     sourceId: CONFIG.STORAGE.E6S22,
+    //     targetRoomName: "E6S22",
+    //     targetId: CONFIG.TERMINAL.E6S22,
+    //     resourceType: RESOURCE_ENERGY,
+    //     targetAmount: 220000
+    // }),
+    // SpecialMover_E8S23_1: specialMover({
+    //     sourceId: CONFIG.STORAGE.E8S23,
+    //     targetRoomName: "E8S23",
+    //     targetId: CONFIG.FACTORY.E8S23,
+    //     resourceType: RESOURCE_HYDROGEN,
+    //     targetAmount: 20000
+    // }),
     // SpecialMover_E8S25: specialMover({
     //     sourceId: CONFIG.TERMINAL.E8S25,
     //     targetRoomName: "E8S25",
@@ -273,6 +268,7 @@ module.exports = {
     RemoteUpgrader_E8S25_1: remoteupgrader({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E9S23"}),
     RemoteUpgrader_E8S25_2: remoteupgrader({sourceId: CONFIG.STORAGE.E8S23, targetRoomName: "E9S23"}),
     RemoteUpgrader_E8S25: remoteupgrader({sourceId: CONFIG.STORAGE.E8S25, targetRoomName: "E8S26"}),
+    //RemoteUpgrader_E8S25_1: remoteupgrader({sourceId: CONFIG.STORAGE.E8S25, targetRoomName: "E8S26"}),
 
     //RemoteHarvester_E8S23: remoteHarvester({targetRoomName: "E8S23"}),
     //RemoteHarvester_E8S25: remoteHarvester({targetRoomName: "E8S25"}),

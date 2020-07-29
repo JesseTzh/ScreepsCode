@@ -213,7 +213,7 @@ module.exports = {
     }),
     Mover_E9S23: ({
         genMode: "Config",
-        partsSet: [[WORK, 0], [MOVE, 10], [CARRY, 10]],
+        partsSet: [[WORK, 0], [MOVE, 8], [CARRY, 8]],
         spawnName: "EastGuar",
         roomName: "E9S23"
     }),
@@ -300,6 +300,13 @@ module.exports = {
         spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
+    OuterClaimer_E8S25_1: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 2], [CLAIM, 2]],
+        spawnName: "DowntownRight",
+        roomName: "E8S25"
+    }),
+
 
     OuterBuilder_E6S22_1: ({
         genMode: "Config",
@@ -499,6 +506,12 @@ module.exports = {
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "Downtown",
+        roomName: "E8S25"
+    }),
+    RemoteUpgrader_E8S25_1: ({
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "DowntownRight",
         roomName: "E8S25"
     }),
     RemoteHarvester_E8S23: ({
