@@ -95,10 +95,10 @@ const creepExtension = {
         const target = Game.spawns[creepTemplateConfig.spawnName];
         if (creepTemplateConfig && target && target.recycleCreep(this) === ERR_NOT_IN_RANGE) {
             this.say("🌍");
-            logger.info(this.name + "正在将自己回收再利用...");
+            logger.info(`${this.name}正在将自己回收再利用...`);
             this.moveTo(target);
         } else {
-            logger.info(this.name + "无法回收自己,直接自杀！");
+            logger.info(`${this.name}无法回收自己,直接自杀！`);
         }
     },
     //避免Creep在房间边界处进进出出

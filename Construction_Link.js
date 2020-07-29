@@ -21,7 +21,7 @@ function linkTransfer() {
             continue;
         }
         if (!room.getSourceLinkList() || !room.getControllerLink()) {
-            logger.info(`房间[${roomName}] Link 数据库尚未完全`);
+            logger.debug(`房间[${roomName}] Link 数据库尚未完全`);
             continue;
         }
         //房间可用能量大于 ALLOW_UPGRADER_USE_ENERGY 参数值
