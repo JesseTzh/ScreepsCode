@@ -1,7 +1,7 @@
 module.exports = {
 
     //所辖Room(已Claim的房间)
-    CLAIM_ROOM: ["E6S22", "E9S21", "E8S23", "E8S25", "E9S23", "E8S26"],
+    CLAIM_ROOM: ["E6S22", "E9S21", "E8S23", "E8S25", "E9S23", "E8S26", "E7S22"],
 
     ROOMS_BUILDER: ({
         E6S22: ['Builder_E6S22'],

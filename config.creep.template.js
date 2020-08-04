@@ -103,36 +103,35 @@ module.exports = {
     // Room 1
     Upgrader_E6S22_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 15], [MOVE, 12], [CARRY, 4]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
         spawnName: "ControllerCenter",
         roomName: "E6S22"
     }),
     // Room 2
     Upgrader_E9S21_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 15], [MOVE, 12], [CARRY, 4]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
     // Room 3
     Upgrader_E8S23_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 15], [MOVE, 12], [CARRY, 4]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 4]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     // Room 4
     Upgrader_E8S25_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 20], [MOVE, 16], [CARRY, 12]],
+        partsSet: [[WORK, 10], [MOVE, 7], [CARRY, 4]],
         spawnName: "Downtown",
         roomName: "E8S25"
     }),
-
     // Room5
     Upgrader_E9S23_1: ({
-        genMode: "Auto",
-        partsSet: [[WORK, 20], [MOVE, 16], [CARRY, 12]],
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 7], [CARRY, 4]],
         spawnName: "EastGuar",
         roomName: "E9S23"
     }),
@@ -490,17 +489,17 @@ module.exports = {
         spawnName: "Home",
         roomName: "E6S22"
     }),
-    RemoteUpgrader_E8S25_1: ({
+    RemoteUpgrader_E9S21_1: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
-        spawnName: "ThirdCenter",
-        roomName: "E8S23"
+        spawnName: "NewLandController",
+        roomName: "E9S21"
     }),
-    RemoteUpgrader_E8S25_2: ({
+    RemoteUpgrader_E9S21_2: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
-        spawnName: "ThirdCenter",
-        roomName: "E8S23"
+        spawnName: "NewLandController",
+        roomName: "E9S21"
     }),
     RemoteUpgrader_E8S25: ({
         genMode: "Config",

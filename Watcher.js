@@ -7,7 +7,7 @@ function beginWatch() {
     // const cpuUsedBefore = Game.cpu.getUsed();
 
     // 监测外矿房间敌人
-    defenseOuterRoom();
+    //defenseOuterRoom();
     // 监测Storage剩余容量
     //storageMonitor();
     // 监测Mine是否刷新
