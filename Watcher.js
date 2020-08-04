@@ -93,6 +93,7 @@ function mineMonitor() {
         }
         if (!CONFIG.MINE[roomName]) {
             logger.info(`房间[${roomName}]尚未配置挖矿者`);
+            continue;
         }
         let mine = Game.getObjectById(Game.rooms[roomName].getMineral());
         if (mine.mineralAmount > 0 || (mine.mineralAmount === 0 && mine.ticksToRegeneration <= 30)) {
