@@ -16,6 +16,7 @@ const dismantler = require('Role_Dismantler')
 const specialMover = require('Role_SpecialMover')
 const remoteupgrader = require('Role_RemoteUpgrader')
 const remoteHarvester = require('RemoteHarvester')
+const worker = require('Role_Worker')
 
 
 module.exports = {
@@ -43,12 +44,15 @@ module.exports = {
     Mover_03: mover,
     Mover_E8S25: mover,
     Mover_E9S23: mover,
+    Mover_E8S26: mover,
 
     Upgrader_E6S22_1: upgrader,
     Upgrader_E9S21_1: upgrader,
     Upgrader_E8S23_1: upgrader,
     Upgrader_E8S25_1: upgrader,
     Upgrader_E9S23_1: upgrader,
+    Upgrader_E8S26_1: upgrader,
+    Upgrader_E8S26_2: upgrader,
 
     Builder_E6S22: builder,
     Builder_E9S21: builder,
@@ -56,6 +60,11 @@ module.exports = {
     Builder_E8S25: builder,
     Builder_E9S23: builder,
     Builder_E8S26: builder,
+
+    // Worker_E6S22: worker,
+    // Worker_E9S21: worker,
+    // Worker_E8S23: worker,
+    // Worker_E8S25: worker,
 
     //Dismantler_01: dismantler({targetId: '5ee80ec2125ddf483806c850', targetRoom: 'E7S25'}),
 
@@ -235,6 +244,7 @@ module.exports = {
     Miner_02: miner,
     Miner_03: miner,
     Miner_04: miner,
+    Miner_05: miner,
 
     // SpecialMover_E9S21: specialMover({
     //     sourceId: CONFIG.FACTORY.E9S21,
@@ -244,32 +254,32 @@ module.exports = {
     //     targetAmount: 0
     // }),
     // SpecialMover_E6S22: specialMover({
-    //     sourceId: CONFIG.FACTORY.E6S22,
+    //     sourceId: CONFIG.STORAGE.E6S22,
     //     targetRoomName: "E6S22",
-    //     targetId: CONFIG.TERMINAL.E6S22,
-    //     resourceType: RESOURCE_BATTERY,
+    //     targetId: CONFIG.FACTORY.E6S22,
+    //     resourceType: RESOURCE_ZYNTHIUM,
     //     targetAmount: 0
     // }),
     // SpecialMover_E8S23_1: specialMover({
-    //     sourceId: CONFIG.FACTORY.E8S23,
+    //     sourceId: CONFIG.STORAGE.E8S23,
     //     targetRoomName: "E8S23",
-    //     targetId: CONFIG.TERMINAL.E8S23,
-    //     resourceType: RESOURCE_BATTERY,
+    //     targetId: CONFIG.FACTORY.E8S23,
+    //     resourceType: RESOURCE_HYDROGEN,
     //     targetAmount: 0
     // }),
     // SpecialMover_E8S25: specialMover({
-    //     sourceId: CONFIG.TERMINAL.E8S25,
+    //     sourceId: CONFIG.STORAGE.E8S25,
     //     targetRoomName: "E8S25",
-    //     targetId: CONFIG.STORAGE.E8S25,
-    //     resourceType: RESOURCE_ENERGY,
+    //     targetId: CONFIG.FACTORY.E8S25,
+    //     resourceType: RESOURCE_LEMERGIUM,
     //     targetAmount: 0
     // }),
 
-    //RemoteUpgrader: remoteupgrader({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
-    RemoteUpgrader_E9S21_1: remoteupgrader({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E7S22"}),
-    RemoteUpgrader_E9S21_2: remoteupgrader({sourceId: CONFIG.STORAGE.E9S21, targetRoomName: "E7S22"}),
-    RemoteUpgrader_E8S25: remoteupgrader({sourceId: CONFIG.STORAGE.E8S25, targetRoomName: "E8S26"}),
-    //RemoteUpgrader_E8S25_1: remoteupgrader({sourceId: CONFIG.STORAGE.E8S25, targetRoomName: "E8S26"}),
+    //RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
+    // RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E7S22"}),
+    // RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E7S22"}),
+    RemoteUpgrader_E8S25: remoteupgrader({targetRoomName: "E8S26"}),
+    //RemoteUpgrader_E8S25_1: remoteupgrader({targetRoomName: "E8S26"}),
 
     //RemoteHarvester_E8S23: remoteHarvester({targetRoomName: "E8S23"}),
     //RemoteHarvester_E8S25: remoteHarvester({targetRoomName: "E8S25"}),

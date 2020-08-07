@@ -8,9 +8,9 @@
  */
 module.exports = {
     E6S22:({
-        WorkFlag: false,
-        Production: RESOURCE_BATTERY,
-        Interval: 11
+        WorkFlag: true,
+        Production: RESOURCE_ZYNTHIUM_BAR,
+        Interval: 21
     }),
     E9S21:({
         WorkFlag: false,
@@ -18,8 +18,13 @@ module.exports = {
         Interval: 11
     }),
     E8S23:({
-        WorkFlag: false,
-        Production: RESOURCE_BATTERY,
-        Interval: 11
+        WorkFlag: true,
+        Production: RESOURCE_REDUCTANT,
+        Interval: 21
+    }),
+    E8S25:({
+        WorkFlag: true,
+        Production: RESOURCE_LEMERGIUM_BAR,
+        Interval: 21
     })
 }
