@@ -36,7 +36,9 @@ module.exports.loop = function () {
     const result = Game.cpu.generatePixel();
     logger.debug(result);
 
-    //Game.market.changeOrderPrice('5f028c760de21e2368f00c31', 0.65)
+    //Game.market.changeOrderPrice('5f028c760de21e2368f00c31', 0.65);
+
+    //Game.market.cancelOrder('5f1fc4e464b6561cae9fb6a5');
 
     logger.info("---------------------------------------------- 游戏时间: " + Game.time + " | 所用CPU: " + Game.cpu.getUsed().toFixed(2) + "----------------------------------------------")
 }
