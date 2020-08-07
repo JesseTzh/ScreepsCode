@@ -5,7 +5,7 @@ module.exports = config => ({
     // 从出生点拿去矿物或者去目标房间就地取材
     source: creep => {
         const creepTemplateConfig = creepTemplateConfigs[creep.name];
-        let source = Game.getObjectById(config.sourceId);
+        let source = creep.room.storage;
         // 如果不在出生房间或默认取能建筑无法取能
         if (!(creep.room.name === creepTemplateConfig.roomName) || !source || source.store[RESOURCE_ENERGY] === 0) {
             creep.pickEnergy();
