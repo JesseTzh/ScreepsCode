@@ -218,6 +218,7 @@ const creepExtension = {
         if (flag && this.memory.NeedCleanBag) {
             this.memory.NeedCleanBag = false;
         }
+        return flag;
     },
     //Creep死前1 tick 检查当前房间能量是否足够复活，如不够则返回 true
     canNotReborn() {

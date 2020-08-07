@@ -168,7 +168,7 @@ function observer() {
 }
 
 function gameStatusReport() {
-    if (Game.time % 1500 === 0) {
+    if (Game.time % 3000 === 0) {
         let message = "Screeps房间状态检测报告：\n";
         for (let roomName of CONFIG.CLAIM_ROOM) {
             let room = Game.rooms[roomName];
@@ -188,14 +188,56 @@ function gameStatusReport() {
 
 function checkIndustryTask() {
     for (let roomName in CONFIG_FACTORY) {
-        let storageEnergy = Game.rooms[roomName].storage.store.getUsedCapacity(RESOURCE_ENERGY);
+        const room = Game.rooms[roomName];
+        let storageEnergy = room.storage.store.getUsedCapacity(RESOURCE_ENERGY);
         if (storageEnergy < 100000) {
-            logger.debug(`房间[${roomName}] Storage 中所剩能量低于 100000,暂停下发生产任务`)
+            logger.debug(`房间[${roomName}] Storage 中所剩能量低于 100000,暂停下发生产任务`);
+            room.memory.production = null;
             continue;
         }
-        const room = Game.rooms[roomName];
-        const factory = Game.getObjectById(room.getFactory);
+        //房间 Storage 存储能力大于50W，则生产 Battery
+        if (storageEnergy > 500000) {
+            room.memory.production = RESOURCE_BATTERY;
+        } else {
+            //否则生产配置文件中的默认产品
+            room.memory.production = CONFIG.DEFAULT_PRODUCTION[roomName];
+        }
+        //检测当前需要搬运什么样的物资
+        checkWhatResourceNeedMove(room);
+    }
+}
 
+function checkWhatResourceNeedMove(room) {
+    const factory = Game.getObjectById(room.getFactory());
+    if (!room.memory.moveResource) {
+        //工厂当前生产成品超过 5000 则搬运出去
+        if (factory.store.getUsedCapacity(room.memory.production) > 5000) {
+            room.memory.moveResource = room.memory.production;
+            room.memory.direction = "Out"
+        }
+        //工厂当前能量少于 20000 则搬运进来
+        else if (factory.store.getUsedCapacity(RESOURCE_ENERGY) < 20000) {
+            room.memory.moveResource = RESOURCE_ENERGY;
+            room.memory.direction = "In"
+        }
+        //工厂当前生产原材料低于 20000 则搬运进来
+        else if (factory.store.getUsedCapacity(Game.getObjectById(room.getMineral()).mineralType) < 20000) {
+            room.memory.moveResource = Game.getObjectById(room.getMineral()).mineralType;
+            room.memory.direction = "In"
+        }
+    } else {
+        if (room.memory.moveResource === room.memory.production && factory.store.getUsedCapacity(room.memory.production) == 0) {
+            room.memory.moveResource = null;
+        } else if (room.memory.moveResource === RESOURCE_ENERGY && factory.store.getUsedCapacity(RESOURCE_ENERGY) >= 20000) {
+            room.memory.moveResource = null;
+        } else if (room.memory.moveResource === Game.getObjectById(room.getMineral()).mineralType && factory.store.getUsedCapacity(Game.getObjectById(room.getMineral()).mineralType) >= 20000) {
+            room.memory.moveResource = null;
+        }
+        //如生产产品在工厂储量超过 10000 则强制优先将产品运出
+        if (factory.store.getUsedCapacity(room.memory.production) >= 10000) {
+            room.memory.moveResource = room.memory.production;
+            room.memory.direction = "Out"
+        }
     }
 }
 

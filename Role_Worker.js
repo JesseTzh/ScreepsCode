@@ -1,56 +1,70 @@
 const logger = require('utils.log').getLogger("Worker");
+const defaultResourceAmount = 20000;
 
 module.exports = ({
     // 拿取货物逻辑
     source: creep => {
-        if (creep.memory.sourceId) {
-            const source = Game.getObjectById(creep.memory.sourceId);
-            if (source) {
-                creep.say("🔽");
-                if (source.store[creep.memory.resourceType] === 0) {
-                    creep.memory.working = true;
-                    return;
-                }
-                if (creep.withdraw(source, creep.memory.resourceType) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(source);
-                }
-            } else {
-                logger.info(`[${creep.name}]缺失提取货物目标：[${creep.memory.sourceId}]`);
+        //首先检测身上有没有上次任务剩余资源
+        if (!creep.cleanBag(creep.room.memory.moveResource)) {
+            return;
+        }
+        let source = null;
+        if (creep.room.memory.direction === "Out") {
+            source = Game.getObjectById(creep.room.getFactory());
+        } else if (creep.room.memory.direction === "In") {
+            source = creep.room.storage;
+        }
+        if (source) {
+            creep.say("🔽");
+            if (source.store[creep.room.memory.moveResource] === 0) {
+                creep.memory.working = true;
+                return;
+            }
+            const actionResult = creep.withdraw(source, creep.room.memory.moveResource);
+            if (actionResult === ERR_NOT_IN_RANGE) {
+                creep.moveTo(source);
+            } else if (actionResult != OK) {
+                logger.debug(`\n当前运输物品：${creep.room.memory.moveResource}\n当前Creep携带量：${creep.store.getUsedCapacity(creep.room.memory.moveResource)}\n当前总空间:${creep.store.getCapacity(creep.room.memory.moveResource)}`)
+                logger.info(`${creep}拿取结果出错：${actionResult}`);
             }
         } else {
-            logger.info(`未向[${creep.name}]指派 Source`)
+            logger.info(`[${creep.name}]缺失提取货物目标`);
         }
     },
     // 存储货物逻辑
     target: creep => {
-        if (creep.memory.targetId) {
-            const target = Game.getObjectById(creep.memory.targetId);
-            // if (config.targetAmount && target.store[config.resourceType] >= config.targetAmount) {
-            //     logger.info("[" + creep.name + "]目标完成！");
-            //     return;
-            // }
-            if (target) {
-                creep.say("🔼");
-                if (creep.transfer(target, creep.memory.resourceType) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
-                }
-            } else {
-                logger.info(`[${creep.name}]缺失存储货物目标：[${creep.memory.targetId}]`);
+        let target = null;
+        if (creep.room.memory.direction === "Out") {
+            target = creep.room.terminal;
+        } else if (creep.room.memory.direction === "In") {
+            target = Game.getObjectById(creep.room.getFactory());
+        }
+        if (target) {
+            creep.say("🔼");
+            const actionResult = creep.transfer(target, creep.room.memory.moveResource);
+            if (actionResult === ERR_NOT_IN_RANGE) {
+                creep.moveTo(target);
+            } else if (actionResult === ERR_FULL) {
+                //当工厂存储满后，直接重新筛选要搬运的资源
+                creep.room.memory.moveResource = null;
+            } else if (actionResult != OK) {
+                logger.info(`[${creep}]存储结果出错：${actionResult}`);
+                logger.info(`[${creep.name}]当前目标：${creep.room.memory.moveResource}`);
             }
         } else {
-            logger.info(`未向[${creep.name}]指派 Target`)
+            logger.info(`[${creep.name}]缺失存储货物目标`);
         }
     },
     // 状态切换条件
     switch: creep => {
         // creep 身上没有矿物 && creep 之前的状态为“工作”
-        if (creep.store[creep.memory.resourceType] === 0 && creep.memory.working) {
-            creep.memory.working = false
+        if (creep.store[creep.room.memory.moveResource] === 0 && creep.memory.working) {
+            creep.memory.working = false;
         }
         // creep 身上矿物满了 && creep 之前的状态为“不工作”
-        if (creep.store[creep.memory.resourceType] === creep.store.getCapacity() && !creep.memory.working) {
-            creep.memory.working = true
+        if (creep.store.getUsedCapacity(creep.room.memory.moveResource) === creep.store.getCapacity(creep.room.memory.moveResource) && !creep.memory.working) {
+            creep.memory.working = true;
         }
-        return creep.memory.working
+        return creep.memory.working;
     }
 })
