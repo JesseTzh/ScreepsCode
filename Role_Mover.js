@@ -96,7 +96,8 @@ module.exports = ({
             logger.debug(creep.name + "找不到可以提取能量的建筑，切换为自由工作");
             freeJob(creep);
         } else {
-            if (creep.withdraw(source, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+            const result = creep.withdraw(source, RESOURCE_ENERGY);
+            if (result === ERR_NOT_IN_RANGE) {
                 creep.moveTo(source);
             }
         }
