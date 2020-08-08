@@ -24,7 +24,7 @@ module.exports = {
     LOGGER_LEVEL: "INFO",
 
     //房间可用能量高于多少时允许将 Link 中的能量传输给 Upgrader
-    ALLOW_UPGRADER_USE_ENERGY: 0.3,
+    ALLOW_UPGRADER_USE_ENERGY: 0.5,
 
     //房间可用能量低于多少时会被监测函数记录
     ENERGY_ALERT_RATIO: 0.5,

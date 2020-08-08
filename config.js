@@ -15,7 +15,8 @@ module.exports = {
         E8S23: ['Builder_E8S23'],
         E8S25: ['Builder_E8S25'],
         E9S23: ['Builder_E9S23'],
-        E8S26: ['Builder_E8S26']
+        E8S26: ['Builder_E8S26'],
+        E7S22: ['Builder_E7S22']
     }),
 
     // Mine 矿物 ID

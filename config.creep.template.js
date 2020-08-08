@@ -95,6 +95,19 @@ module.exports = {
         spawnName: "SouthGuard",
         roomName: "E8S26"
     }),
+    // Room 7
+    Harvester_E7S22_0: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "CenterRoom",
+        roomName: "E7S22"
+    }),
+    Harvester_E7S22_1: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "CenterRoom",
+        roomName: "E7S22"
+    }),
 
 
     /**
@@ -148,6 +161,12 @@ module.exports = {
         spawnName: "SouthGuard",
         roomName: "E8S26"
     }),
+    Upgrader_E7S22_2: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 7], [CARRY, 4]],
+        spawnName: "CenterRoom",
+        roomName: "E7S22"
+    }),
 
     /**
      *   Builder模板文件
@@ -187,6 +206,12 @@ module.exports = {
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "SouthGuard",
         roomName: "E8S26"
+    }),
+    Builder_E7S22: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "CenterRoom",
+        roomName: "E7S22"
     }),
 
     Dismantler_01: ({
@@ -504,8 +529,8 @@ module.exports = {
     Miner_05: ({
         genMode: "Config",
         partsSet: [[WORK, 5], [MOVE, 10], [CARRY, 5]],
-        spawnName: "TheThirdWorld",
-        roomName: "E8S23"
+        spawnName: "EastGuar",
+        roomName: "E9S23"
     }),
 
     SpecialMover_E9S21: ({

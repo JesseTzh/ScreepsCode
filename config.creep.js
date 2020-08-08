@@ -39,6 +39,9 @@ module.exports = {
     Harvester_E8S26_0: harvester,
     Harvester_E8S26_1: harvester,
 
+    Harvester_E7S22_0: harvester,
+    Harvester_E7S22_1: harvester,
+
     Mover_E6S22_2: mover,
     Mover_02: mover,
     Mover_03: mover,
@@ -47,12 +50,13 @@ module.exports = {
     Mover_E8S26: mover,
 
     Upgrader_E6S22_1: upgrader,
-    Upgrader_E9S21_1: upgrader,
+    //Upgrader_E9S21_1: upgrader,
     Upgrader_E8S23_1: upgrader,
     Upgrader_E8S25_1: upgrader,
     Upgrader_E9S23_1: upgrader,
     Upgrader_E8S26_1: upgrader,
     Upgrader_E8S26_2: upgrader,
+    Upgrader_E7S22_2: upgrader,
 
     Builder_E6S22: builder,
     Builder_E9S21: builder,
@@ -60,11 +64,21 @@ module.exports = {
     Builder_E8S25: builder,
     Builder_E9S23: builder,
     Builder_E8S26: builder,
+    Builder_E7S22: builder,
 
     // Worker_E6S22: worker,
     // Worker_E9S21: worker,
     // Worker_E8S23: worker,
     // Worker_E8S25: worker,
+
+    /**
+     *   Miner配置文件
+     */
+    Miner_01: miner,
+    Miner_02: miner,
+    Miner_03: miner,
+    Miner_04: miner,
+    Miner_05: miner,
 
     //Dismantler_01: dismantler({targetId: '5ee80ec2125ddf483806c850', targetRoom: 'E7S25'}),
 
@@ -237,14 +251,7 @@ module.exports = {
      */
     //Colonist: colonist({ targetRoomName: "E7S22"}),
 
-    /**
-     *   Miner配置文件
-     */
-    Miner_01: miner,
-    Miner_02: miner,
-    Miner_03: miner,
-    Miner_04: miner,
-    Miner_05: miner,
+
 
     // SpecialMover_E9S21: specialMover({
     //     sourceId: CONFIG.FACTORY.E9S21,
@@ -254,10 +261,10 @@ module.exports = {
     //     targetAmount: 0
     // }),
     // SpecialMover_E6S22: specialMover({
-    //     sourceId: CONFIG.STORAGE.E6S22,
+    //     sourceId: "5ecf025a177943db1cb47e1e",
     //     targetRoomName: "E6S22",
-    //     targetId: CONFIG.FACTORY.E6S22,
-    //     resourceType: RESOURCE_ZYNTHIUM,
+    //     targetId: "5ec894626cfcf42a53807c7c",
+    //     resourceType: RESOURCE_ENERGY,
     //     targetAmount: 0
     // }),
     // SpecialMover_E8S23_1: specialMover({
@@ -278,7 +285,7 @@ module.exports = {
     //RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
     // RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E7S22"}),
     // RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E7S22"}),
-    RemoteUpgrader_E8S25: remoteupgrader({targetRoomName: "E8S26"}),
+    //RemoteUpgrader_E8S25: remoteupgrader({targetRoomName: "E8S26"}),
     //RemoteUpgrader_E8S25_1: remoteupgrader({targetRoomName: "E8S26"}),
 
     //RemoteHarvester_E8S23: remoteHarvester({targetRoomName: "E8S23"}),
