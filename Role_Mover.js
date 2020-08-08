@@ -64,6 +64,15 @@ module.exports = ({
             if(creep.room.storage.store[RESOURCE_ENERGY] > 0){
                 source = creep.room.storage;
             }
+            //如果依旧没有可用的储能建筑，则使用 Terminal 或 Factory 中的能量
+            if (!source) {
+                source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (structure.structureType === STRUCTURE_TERMINAL || structure.structureType === STRUCTURE_FACTORY) &&
+                            structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
+                    }
+                });
+            }
             //冗余储能建筑消耗完毕，使用Link中的能量
             if (!source) {
                 for (let i = 0; i < sourceLinkList.length; i++) {
@@ -73,15 +82,6 @@ module.exports = ({
                         break;
                     }
                 }
-            }
-            //如果依旧没有可用的储能建筑，则使用 Terminal 或 Factory 中的能量
-            if (!source) {
-                source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType === STRUCTURE_TERMINAL || structure.structureType === STRUCTURE_FACTORY) &&
-                            structure.store.getUsedCapacity(RESOURCE_ENERGY) > 0;
-                    }
-                });
             }
             //如果达到房间能量上限，并且 Link 当前储量超过一半时，直接从 Link 中提取
         } else if (creep.room.energyAvailable / creep.room.energyCapacityAvailable >= 0.9 && SYS_CONFIG.ALLOW_STORE_ENERGY) {
