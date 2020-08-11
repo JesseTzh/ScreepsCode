@@ -8,11 +8,18 @@ module.exports = ({
         //如果当前房间没有Storage或者Storage能量储量为空
         if (!source || (source && source.store.getUsedCapacity(RESOURCE_ENERGY) < 1)) {
             logger.debug(creep.name + "默认取能建筑存量为空！")
+            //从冗余建筑中提取能量
+            source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (structure.structureType === STRUCTURE_TERMINAL || structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_FACTORY) &&
+                        structure.store[RESOURCE_ENERGY] > 0;
+                }
+            });
             //根据config文件的参数看是否允许从默认能量提取建筑之外的建筑提取能量
             if (SYS_CONFIG.ALLOW_BUILDE_FROM_SE) {
                 source = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
-                        return (structure.structureType === STRUCTURE_TERMINAL || structure.structureType === STRUCTURE_CONTAINER || structure.structureType === STRUCTURE_LINK || structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
+                        return (structure.structureType === STRUCTURE_LINK || structure.structureType === STRUCTURE_EXTENSION || structure.structureType === STRUCTURE_SPAWN) &&
                             structure.store[RESOURCE_ENERGY] > 0;
                     }
                 });
