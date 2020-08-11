@@ -20,7 +20,7 @@ const roomExtension = {
     },
     getFreeSpawn() {
         for (let spawnId of global.roomData.get(this.name).spawnList){
-            let freeSpawn = Game.getObjectById(spawnId)
+            let freeSpawn = Game.getObjectById(spawnId);
             if(!freeSpawn.spawning){
                 return freeSpawn;
             }

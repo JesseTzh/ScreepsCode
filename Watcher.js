@@ -7,18 +7,13 @@ function beginWatch() {
     // const cpuUsedBefore = Game.cpu.getUsed();
 
     // 监测外矿房间敌人
-    //defenseOuterRoom();
-    // 监测Storage剩余容量
-    //storageMonitor();
+    defenseOuterRoom();
     // 监测Mine是否刷新
     mineMonitor();
     // 监测领地房间是否有建筑工地
     constructionSiteMonitor();
     // 监测房间资源状况并下发生产任务
     checkIndustryTask();
-
-    // 监测外矿房间是否需要OuterBuilder,但考虑CPU消耗等问题，暂放弃
-    //outerRoomConstructionSiteMonitor();
 
     //监测者探测外界房间
     //observer();
@@ -66,21 +61,7 @@ function defenseOuterRoom() {
                         Game.notify("侦测到[" + externalRoomName + "]有多个敌人入侵！");
                     }
                 }
-            } else if (!Memory.creeps[CONFIG.EXTERNAL_ROOMS[roomName][1][0]]) {
-                logger.info("没有检测到[" + externalRoomName + "]房间对应守卫[" + CONFIG.EXTERNAL_ROOMS[roomName][1][0] + "]");
             }
-        }
-    }
-}
-
-function storageMonitor() {
-    for (let roomName of CONFIG.CLAIM_ROOM) {
-        let storage = Game.rooms[roomName].storage;
-        if (storage && (storage.store.getFreeCapacity() / STORAGE_CAPACITY < 0.1)) {
-            let message = "房间[" + roomName + "]的Storage剩余容量不足10%，请及时处理！";
-            logger.info(message);
-            //发送邮件通知
-            //Game.notify(message);
         }
     }
 }
@@ -110,31 +91,23 @@ function constructionSiteMonitor() {
         return
     }
     for (let roomName in CONFIG.ROOMS_BUILDER) {
+
         //首先检测内存中是否有对应建造者记录（起码出生过一次）
         if (Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]]) {
             let builderFlag = "No";
-            const roomStorageEnergy = Game.rooms[roomName].storage.store.getUsedCapacity(RESOURCE_ENERGY);
-            // 房间 Storage 中储存有能量
-            if (roomStorageEnergy > 1000) {
-                const constructionSite = Game.rooms[roomName].find(FIND_MY_CONSTRUCTION_SITES);
-                // 房间内有建筑工地，则允许建造者重生
-                if (constructionSite.length > 0) {
-                    builderFlag = "Yes";
+            if (Game.rooms[roomName].storage) {
+                const roomStorageEnergy = Game.rooms[roomName].storage.store.getUsedCapacity(RESOURCE_ENERGY);
+                // 房间 Storage 中储存有能量
+                if (roomStorageEnergy > 1000) {
+                    const constructionSite = Game.rooms[roomName].find(FIND_MY_CONSTRUCTION_SITES);
+                    // 房间内有建筑工地，则允许建造者重生
+                    if (constructionSite.length > 0) {
+                        builderFlag = "Yes";
+                    }
                 }
             }
             Memory.creeps[CONFIG.ROOMS_BUILDER[roomName][0]].RebornFlag = builderFlag;
         }
-    }
-}
-
-function outerRoomConstructionSiteMonitor() {
-    // 检测是否有对应的配置文件
-    if (!CONFIG.OUTER_ROOMS_BUILDER) {
-        return
-    }
-    // 遍历控制的房间列表（非外矿房间）
-    for (let roomName in CONFIG.OUTER_ROOMS_BUILDER) {
-
     }
 }
 
@@ -173,13 +146,17 @@ function gameStatusReport() {
         for (let roomName of CONFIG.CLAIM_ROOM) {
             let room = Game.rooms[roomName];
             let energyStatus = (room.getRatioOfEnergy() * 100).toFixed(2);
-            message += `房间[${roomName}]当前能量比例为:${energyStatus}%`
+            message += `房间[${roomName}]当前能量比例为:${energyStatus}%`;
             if (room.storage) {
                 let storageFreeCapacity = room.storage.store.getFreeCapacity();
-                message += `,Storage剩余容量为[${storageFreeCapacity}]\n`
+                message += `,Storage剩余容量为[${storageFreeCapacity}]\n`;
+                for (let resource in room.storage.store) {
+                    message += `  ${resource}储量：${room.storage.store.getUsedCapacity(resource)}\n`;
+                }
             } else {
-                message += `\n`
+                message += `\n`;
             }
+            message += `----------------------------------------------------------\n`;
         }
         Game.notify(message);
         logger.info(message);
@@ -190,18 +167,17 @@ function checkIndustryTask() {
     for (let roomName in CONFIG_FACTORY) {
         const room = Game.rooms[roomName];
         let storageEnergy = room.storage.store.getUsedCapacity(RESOURCE_ENERGY);
+        let production = null;
         if (storageEnergy < 100000) {
             logger.debug(`房间[${roomName}] Storage 中所剩能量低于 100000,暂停下发生产任务`);
-            room.memory.production = null;
-            continue;
+        } else if (storageEnergy > 500000) {
+            //房间 Storage 存储能力大于50W，则生产 Battery
+            production = RESOURCE_BATTERY;
+        } else if (room.storage.store.getUsedCapacity(Game.getObjectById(room.getMineral()).mineralType) > 0) {
+            //如 Storage 中还有原材料则生产默认产品
+            production = CONFIG.DEFAULT_PRODUCTION[roomName];
         }
-        //房间 Storage 存储能力大于50W，则生产 Battery
-        if (storageEnergy > 500000) {
-            room.memory.production = RESOURCE_BATTERY;
-        } else {
-            //否则生产配置文件中的默认产品
-            room.memory.production = CONFIG.DEFAULT_PRODUCTION[roomName];
-        }
+        room.memory.production = production;
         //检测当前需要搬运什么样的物资
         checkWhatResourceNeedMove(room);
     }

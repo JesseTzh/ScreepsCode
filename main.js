@@ -3,10 +3,10 @@ const mount = require('utils.mount');
 const logger = require('utils.log').getLogger("main");
 const constructionLink = require('Construction_Link');
 const constructionTower = require('Construction_Tower');
-const constructionFactory = require('Construction_Factory')
-const constructionTerminal = require('Construction_Terminal')
+const constructionFactory = require('Construction_Factory');
+const constructionTerminal = require('Construction_Terminal');
 const creepManager = require('Creep_Manager');
-const watcher = require('Watcher')
+const watcher = require('Watcher');
 
 module.exports.loop = function () {
 
@@ -34,7 +34,6 @@ module.exports.loop = function () {
     tools.cleanMemory();
 
     const result = Game.cpu.generatePixel();
-    logger.debug(result);
 
     //Game.market.changeOrderPrice('5f028c760de21e2368f00c31', 0.65);
 

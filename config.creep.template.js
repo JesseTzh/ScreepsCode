@@ -85,26 +85,26 @@ module.exports = {
     // Room 6
     Harvester_E8S26_0: ({
         genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        partsSet: [[WORK, 8], [MOVE, 8], [CARRY, 8]],
         spawnName: "SouthGuard",
         roomName: "E8S26"
     }),
     Harvester_E8S26_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        partsSet: [[WORK, 8], [MOVE, 8], [CARRY, 8]],
         spawnName: "SouthGuard",
         roomName: "E8S26"
     }),
     // Room 7
     Harvester_E7S22_0: ({
-        genMode: "Auto",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        genMode: "Config",
+        partsSet: [[WORK, 8], [MOVE, 8], [CARRY, 8]],
         spawnName: "CenterRoom",
         roomName: "E7S22"
     }),
     Harvester_E7S22_1: ({
-        genMode: "Auto",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        genMode: "Config",
+        partsSet: [[WORK, 8], [MOVE, 8], [CARRY, 8]],
         spawnName: "CenterRoom",
         roomName: "E7S22"
     }),
@@ -116,28 +116,28 @@ module.exports = {
     // Room 1
     Upgrader_E6S22_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
         spawnName: "ControllerCenter",
         roomName: "E6S22"
     }),
     // Room 2
     Upgrader_E9S21_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
     // Room 3
     Upgrader_E8S23_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 4]],
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     // Room 4
     Upgrader_E8S25_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 7], [CARRY, 4]],
+        partsSet: [[WORK, 14], [MOVE, 9], [CARRY, 4]],
         spawnName: "Downtown",
         roomName: "E8S25"
     }),
@@ -151,7 +151,7 @@ module.exports = {
     // Room6
     Upgrader_E8S26_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 7], [CARRY, 4]],
+        partsSet: [[WORK, 8], [MOVE, 8], [CARRY, 8]],
         spawnName: "EastGuar",
         roomName: "E9S23"
     }),
@@ -162,8 +162,8 @@ module.exports = {
         roomName: "E8S26"
     }),
     Upgrader_E7S22_2: ({
-        genMode: "Auto",
-        partsSet: [[WORK, 10], [MOVE, 7], [CARRY, 4]],
+        genMode: "Config",
+        partsSet: [[WORK, 8], [MOVE, 8], [CARRY, 8]],
         spawnName: "CenterRoom",
         roomName: "E7S22"
     }),
@@ -325,6 +325,12 @@ module.exports = {
         spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
+    OuterHarvester_E9S24: ({
+        genMode: "Config",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "ThirdCenter",
+        roomName: "E8S23"
+    }),
     OuterHarvester_E8S21: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
@@ -364,7 +370,7 @@ module.exports = {
     }),
     OuterClaimer_E8S23_1: ({
         genMode: "Config",
-        partsSet: [[MOVE, 2], [CLAIM, 2]],
+        partsSet: [[MOVE, 4], [CLAIM, 4]],
         spawnName: "ThirdCenter",
         roomName: "E8S23"
     }),
@@ -444,6 +450,12 @@ module.exports = {
         roomName: "E6S22"
     }),
     OuterMover_E8S24: ({
+        genMode: "Config",
+        partsSet: [[WORK, 1], [MOVE, 16], [CARRY, 31]],
+        spawnName: "TheThirdWorld",
+        roomName: "E8S23"
+    }),
+    OuterMover_E9S24: ({
         genMode: "Config",
         partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
         spawnName: "TheThirdWorld",
