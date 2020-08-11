@@ -10,7 +10,7 @@ module.exports = config => ({
             creep.moveTo(new RoomPosition(25, 25, config.targetRoomName))
             return;
         }
-        var source = Game.getObjectById(config.sourceId)
+        const source = Game.getObjectById(config.sourceId);
         if (source) {
             if (creep.withdraw(source, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 creep.say("🔽");
@@ -22,15 +22,22 @@ module.exports = config => ({
     },
     // 存储能量逻辑
     target: creep => {
-        //在外房间沿途修理Road
-        let target = creep.pos.findInRange(FIND_STRUCTURES, 1, {
-            filter: (structure) => structure.hits / structure.hitsMax <= 0.9 && structure.structureType === STRUCTURE_ROAD
-        });
-        if (target.length) {
-            logger.debug(creep.name + "正在维护沿途道路！");
-            creep.repair(target[0]);
-        } else {
-            target = Game.rooms[creep.getTemplateConfig("roomName")].storage;
+        let fixFlag = false;
+        const roomName = creep.getTemplateConfig("roomName");
+        if (creep.room.name !== roomName) {
+            //在非出生房间寻找沿途需要修理的 Road
+            const fixTarget = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+                filter: (structure) => structure.hits / structure.hitsMax <= 0.9 && structure.structureType === STRUCTURE_ROAD
+            });
+            if (fixTarget.length) {
+                logger.debug(creep.name + "正在维护沿途道路！");
+                creep.repair(fixTarget[0]);
+                fixFlag = true;
+            }
+        }
+        //如沿途没有需要维修的 Road，则将能量运回出生房间 Storage
+        if (!fixFlag) {
+            const target = Game.rooms[roomName].storage;
             if (target) {
                 const result = creep.transfer(target, RESOURCE_ENERGY);
                 if (result === ERR_NOT_IN_RANGE) {
@@ -40,7 +47,7 @@ module.exports = config => ({
                     //目标储存建筑已满，迫不得已丢弃资源以保持外矿运转
                     creep.drop(RESOURCE_ENERGY);
                 }
-            }else{
+            } else {
                 logger.warn(`[${creep.name}]所在房间[${creep.getTemplateConfig("roomName")}]Storage尚未建好,不建议开启外矿`);
             }
         }
