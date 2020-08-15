@@ -1,4 +1,3 @@
-// 引入 creep 配置项
 const logger = require('utils.log').getLogger("Room_Extension");
 
 //自定义的 Room 的拓展
@@ -37,6 +36,9 @@ const roomExtension = {
     },
     getRatioOfEnergy() {
         return this.energyAvailable / this.energyCapacityAvailable;
+    },
+    factory: function (){
+        return global.roomData.get(this.name).factory;
     }
 }
 

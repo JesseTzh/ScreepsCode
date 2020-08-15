@@ -49,7 +49,7 @@ module.exports = ({
                 creep.room.memory.moveResource = null;
             } else if (actionResult != OK) {
                 logger.info(`[${creep}]存储结果出错：${actionResult}`);
-                logger.info(`[${creep.name}]当前目标：${creep.room.memory.moveResource}`);
+                logger.info(`[${creep.name}]当前被指派搬运物品：${creep.room.memory.moveResource}`);
             }
         } else {
             logger.info(`[${creep.name}]缺失存储货物目标`);
