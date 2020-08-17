@@ -1,5 +1,24 @@
 const logger = require('utils.log').getLogger("Worker");
-const defaultResourceAmount = 20000;
+
+function getSource(creep) {
+    let source = null;
+    if (creep.room.memory.direction === "Out") {
+        source = Game.getObjectById(creep.room.getFactory());
+    } else if (creep.room.memory.direction === "In") {
+        source = creep.room.storage;
+    }
+    return source;
+}
+
+function getTarget(creep){
+    let target = null;
+    if (creep.room.memory.direction === "Out") {
+        target = creep.room.terminal;
+    } else if (creep.room.memory.direction === "In") {
+        target = Game.getObjectById(creep.room.getFactory());
+    }
+    return target;
+}
 
 module.exports = ({
     // 拿取货物逻辑
@@ -8,12 +27,7 @@ module.exports = ({
         if (!creep.cleanBag(creep.room.memory.moveResource)) {
             return;
         }
-        let source = null;
-        if (creep.room.memory.direction === "Out") {
-            source = Game.getObjectById(creep.room.getFactory());
-        } else if (creep.room.memory.direction === "In") {
-            source = creep.room.storage;
-        }
+        const source = getSource(creep);
         if (source) {
             creep.say("🔽");
             if (source.store[creep.room.memory.moveResource] === 0) {
@@ -23,22 +37,19 @@ module.exports = ({
             const actionResult = creep.withdraw(source, creep.room.memory.moveResource);
             if (actionResult === ERR_NOT_IN_RANGE) {
                 creep.moveTo(source);
+            } else if (actionResult === ERR_NOT_ENOUGH_RESOURCES) {
+                creep.room.memory.moveResource = null;
             } else if (actionResult != OK) {
                 logger.debug(`\n当前运输物品：${creep.room.memory.moveResource}\n当前Creep携带量：${creep.store.getUsedCapacity(creep.room.memory.moveResource)}\n当前总空间:${creep.store.getCapacity(creep.room.memory.moveResource)}`)
                 logger.info(`${creep}拿取结果出错：${actionResult}`);
             }
         } else {
-            logger.info(`[${creep.name}]缺失提取货物目标`);
+            logger.info(`[${creep.name}]没有被指派工作目标！`);
         }
     },
     // 存储货物逻辑
     target: creep => {
-        let target = null;
-        if (creep.room.memory.direction === "Out") {
-            target = creep.room.terminal;
-        } else if (creep.room.memory.direction === "In") {
-            target = Game.getObjectById(creep.room.getFactory());
-        }
+        const target = getTarget(creep);
         if (target) {
             creep.say("🔼");
             const actionResult = creep.transfer(target, creep.room.memory.moveResource);

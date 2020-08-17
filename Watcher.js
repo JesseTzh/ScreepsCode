@@ -151,7 +151,7 @@ function gameStatusReport() {
                 let storageFreeCapacity = room.storage.store.getFreeCapacity();
                 message += `,Storage剩余容量为[${storageFreeCapacity}]\n`;
                 for (let resource in room.storage.store) {
-                    if(room.storage.store.getUsedCapacity(resource) > 10000){
+                    if (room.storage.store.getUsedCapacity(resource) > 10000) {
                         message += `  ${resource}储量：${room.storage.store.getUsedCapacity(resource)}\n`;
                     }
                 }
@@ -168,46 +168,37 @@ function gameStatusReport() {
 function checkIndustryTask() {
     for (let roomName in CONFIG_FACTORY) {
         const room = Game.rooms[roomName];
-        //logger.info(room.factory)
         let storageEnergy = room.storage.store.getUsedCapacity(RESOURCE_ENERGY);
-        let production = null;
-        if (storageEnergy < 100000) {
-            logger.debug(`房间[${roomName}] Storage 中所剩能量低于 100000,暂停下发生产任务`);
-        } else if (storageEnergy > 500000) {
-            //房间 Storage 存储能力大于50W，则生产 Battery
-            production = RESOURCE_BATTERY;
-        } else if (room.storage.store.getUsedCapacity(Game.getObjectById(room.getMineral()).mineralType) > 0) {
-            //如 Storage 中还有原材料则生产默认产品
-            production = CONFIG.DEFAULT_PRODUCTION[roomName];
+        //冗余能量大于 10000
+        if (storageEnergy > 10000) {
+            //检测当前需要搬运什么样的物资
+            checkWhatResourceNeedMove(room);
         }
-        room.memory.production = production;
-        //检测当前需要搬运什么样的物资
-        checkWhatResourceNeedMove(room);
     }
 }
 
 function checkWhatResourceNeedMove(room) {
     const factory = Game.getObjectById(room.getFactory());
     if (!room.memory.moveResource) {
-        //工厂当前生产成品超过 5000 则搬运出去
-        if (factory.store.getUsedCapacity(room.memory.production) >= 100) {
-            room.memory.moveResource = room.memory.production;
-            room.memory.direction = "Out"
+        //工厂当前生产成品超过 100 则搬运出去
+        if (factory.store.getUsedCapacity(CONFIG.DEFAULT_PRODUCTION[room.name]) >= 100) {
+            room.memory.moveResource = CONFIG.DEFAULT_PRODUCTION[room.name];
+            room.memory.direction = "Out";
         }
         //有电池则先搬电池出去，防止后期堆积
         else if (factory.store.getUsedCapacity(RESOURCE_BATTERY) >= 100) {
             room.memory.moveResource = RESOURCE_BATTERY;
-            room.memory.direction = "Out"
+            room.memory.direction = "Out";
         }
         //工厂当前能量少于 20000 则搬运进来
         else if (factory.store.getUsedCapacity(RESOURCE_ENERGY) < 20000) {
             room.memory.moveResource = RESOURCE_ENERGY;
-            room.memory.direction = "In"
+            room.memory.direction = "In";
         }
         //工厂当前生产原材料低于 20000 则搬运进来
         else if (factory.store.getUsedCapacity(Game.getObjectById(room.getMineral()).mineralType) < 20000) {
             room.memory.moveResource = Game.getObjectById(room.getMineral()).mineralType;
-            room.memory.direction = "In"
+            room.memory.direction = "In";
         }
     } else {
         if (room.memory.moveResource === room.memory.production && factory.store.getUsedCapacity(room.memory.production) == 0) {
@@ -216,11 +207,6 @@ function checkWhatResourceNeedMove(room) {
             room.memory.moveResource = null;
         } else if (room.memory.moveResource === Game.getObjectById(room.getMineral()).mineralType && factory.store.getUsedCapacity(Game.getObjectById(room.getMineral()).mineralType) >= 20000) {
             room.memory.moveResource = null;
-        }
-        //如生产产品在工厂储量超过 10000 则强制优先将产品运出
-        if (factory.store.getUsedCapacity(room.memory.production) >= 10000) {
-            room.memory.moveResource = room.memory.production;
-            room.memory.direction = "Out"
         }
     }
 }
