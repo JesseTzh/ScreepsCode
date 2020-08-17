@@ -56,10 +56,12 @@ module.exports = {
     Upgrader_E8S25_1: upgrader,
     Upgrader_E9S23_1: upgrader,
     Upgrader_E9S23_2: upgrader,
+    Upgrader_E9S23_3: upgrader,
     Upgrader_E8S26_1: upgrader,
     Upgrader_E8S26_2: upgrader,
+    Upgrader_E8S26_3: upgrader,
     Upgrader_E7S22_1: upgrader,
-    //Upgrader_E7S22_2: upgrader,
+    Upgrader_E7S22_2: upgrader,
 
     Builder_E6S22: builder,
     Builder_E9S21: builder,
@@ -271,19 +273,19 @@ module.exports = {
     //     targetAmount: 0
     // }),
     // SpecialMover_E6S22: specialMover({
-    //     sourceId: "5ecf025a177943db1cb47e1e",
+    //     sourceId: "5eb929deb5f373e902a1d7d7",
     //     targetRoomName: "E6S22",
     //     targetId: "5ec894626cfcf42a53807c7c",
     //     resourceType: RESOURCE_ENERGY,
     //     targetAmount: 0
     // }),
-    SpecialMover_E8S23_1: specialMover({
-        sourceId: "5ed350c046178209ed85ec18",
-        targetRoomName: "E8S23",
-        targetId: "5ee356fc9902b64ce072c67f",
-        resourceType: RESOURCE_ENERGY,
-        targetAmount: 300000
-    }),
+    // SpecialMover_E8S23_1: specialMover({
+    //     sourceId: "5ed350c046178209ed85ec18",
+    //     targetRoomName: "E8S23",
+    //     targetId: "5ee356fc9902b64ce072c67f",
+    //     resourceType: RESOURCE_ENERGY,
+    //     targetAmount: 300000
+    // }),
     // SpecialMover_E8S25: specialMover({
     //     sourceId: "5f06846679f58420cb17ed04",
     //     targetRoomName: "E8S25",
@@ -291,13 +293,13 @@ module.exports = {
     //     resourceType: RESOURCE_ENERGY,
     //     targetAmount: 240000
     // }),
-    SpecialMover_E8S26: specialMover({
-        sourceId: "5f34ad65f66708bbb31ab441",
-        targetRoomName: "E8S26",
-        targetId: "5f1ef584fa4dc302abc139f7",
-        resourceType: RESOURCE_ENERGY,
-        targetAmount: 0
-    }),
+    // SpecialMover_E8S26: specialMover({
+    //     sourceId: "5f34ad65f66708bbb31ab441",
+    //     targetRoomName: "E8S26",
+    //     targetId: "5f1ef584fa4dc302abc139f7",
+    //     resourceType: RESOURCE_ENERGY,
+    //     targetAmount: 0
+    // }),
 
     //RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
     // RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E7S22"}),
