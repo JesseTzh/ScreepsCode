@@ -32,7 +32,7 @@ function factoryWork() {
                 logger.info("房间[" + roomName + "]工厂原料消耗完毕");
                 room.memory.production = null;
             } else if (produceResult === OK) {
-                logger.info(`房间[${roomName}]工厂正在生产：[${CONFIG_FACTORY[roomName].Production}]`)
+                logger.info(`房间[${roomName}]工厂正在生产：[${Game.rooms[roomName].memory.production}]`)
             } else {
                 logger.warn("房间[" + roomName + "]工厂生产出现其他错误，错误代码：" + produceResult);
             }
