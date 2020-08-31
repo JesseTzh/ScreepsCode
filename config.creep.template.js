@@ -270,6 +270,12 @@ module.exports = {
         spawnName: "Downtown",
         roomName: "E8S25"
     }),
+    Worker_E9S23: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 1], [CARRY, 2]],
+        spawnName: "EastGuar",
+        roomName: "E9S23"
+    }),
 
     /**
      *   Mover模板文件
@@ -580,6 +586,12 @@ module.exports = {
         partsSet: [[WORK, 5], [MOVE, 10], [CARRY, 5]],
         spawnName: "SouthGuard",
         roomName: "E8S26"
+    }),
+    Miner_07: ({
+        genMode: "Config",
+        partsSet: [[WORK, 5], [MOVE, 10], [CARRY, 5]],
+        spawnName: "CenterRoom",
+        roomName: "E7S22"
     }),
 
     SpecialMover_E9S21: ({

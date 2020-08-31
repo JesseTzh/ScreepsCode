@@ -55,13 +55,13 @@ module.exports = {
     Upgrader_E8S23_1: upgrader,
     Upgrader_E8S25_1: upgrader,
     Upgrader_E9S23_1: upgrader,
-    Upgrader_E9S23_2: upgrader,
-    Upgrader_E9S23_3: upgrader,
+    //Upgrader_E9S23_2: upgrader,
+    //Upgrader_E9S23_3: upgrader,
     Upgrader_E8S26_1: upgrader,
-    Upgrader_E8S26_2: upgrader,
-    Upgrader_E8S26_3: upgrader,
+    //Upgrader_E8S26_2: upgrader,
+    //Upgrader_E8S26_3: upgrader,
     Upgrader_E7S22_1: upgrader,
-    Upgrader_E7S22_2: upgrader,
+    //Upgrader_E7S22_2: upgrader,
 
     Builder_E6S22: builder,
     Builder_E9S21: builder,
@@ -75,6 +75,8 @@ module.exports = {
     Worker_E9S21: worker,
     Worker_E8S23: worker,
     Worker_E8S25: worker,
+    Worker_E9S23: worker,
+    //Worker_E8S26: worker,
 
     /**
      *   Miner配置文件
@@ -85,6 +87,7 @@ module.exports = {
     Miner_04: miner,
     Miner_05: miner,
     Miner_06: miner,
+    Miner_07: miner,
 
     //Dismantler_01: dismantler({targetId: '5ee80ec2125ddf483806c850', targetRoom: 'E7S25'}),
 

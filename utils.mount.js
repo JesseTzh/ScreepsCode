@@ -33,8 +33,8 @@ function createOrder() {
     Game.market.createOrder({
         type: ORDER_SELL,
         resourceType: RESOURCE_BATTERY,
-        price: 1.29,
-        totalAmount: 100000,
+        price: 1.50,
+        totalAmount: 200000,
         roomName: "E6S22"
     });
 }

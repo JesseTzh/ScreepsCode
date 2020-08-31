@@ -27,6 +27,7 @@ module.exports = {
         E8S25: [['5bbcb31940062e4259e940b7'], ['Miner_04']],
         E9S23: [['5bbcb32440062e4259e94121'], ['Miner_05']],
         E8S26: [['5bbcb31940062e4259e940b8'], ['Miner_06']],
+        E7S22: [['5bbcb30d40062e4259e94048'], ['Miner_07']],
     }),
 
     // External Rooms 外矿房间列表与对应镇守的 Creeps
@@ -47,5 +48,6 @@ module.exports = {
         E9S21: RESOURCE_OXIDANT,
         E8S23: RESOURCE_REDUCTANT,
         E8S25: RESOURCE_LEMERGIUM_BAR,
+        E9S23: RESOURCE_OXIDANT,
     }),
 }

@@ -26,5 +26,10 @@ module.exports = {
         WorkFlag: true,
         Production: RESOURCE_LEMERGIUM_BAR,
         Interval: 21
-    })
+    }),
+    E9S23:({
+        WorkFlag: true,
+        Production: RESOURCE_LEMERGIUM_BAR,
+        Interval: 21
+    }),
 }
