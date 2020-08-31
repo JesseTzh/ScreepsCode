@@ -166,13 +166,18 @@ function gameStatusReport() {
 }
 
 function checkIndustryTask() {
-    for (let roomName in CONFIG_FACTORY) {
+    for (let roomName in CONFIG.DEFAULT_PRODUCTION) {
         const room = Game.rooms[roomName];
+        if(!global.roomData.get(roomName).factory || !room.storage){
+            return;
+        }
         let storageEnergy = room.storage.store.getUsedCapacity(RESOURCE_ENERGY);
         //冗余能量大于 10000
-        if (storageEnergy > 10000) {
+        if (storageEnergy > 100000) {
             //检测当前需要搬运什么样的物资
             checkWhatResourceNeedMove(room);
+        } else {
+            room.memory.moveResource = null;
         }
     }
 }
@@ -201,7 +206,7 @@ function checkWhatResourceNeedMove(room) {
             room.memory.direction = "In";
         }
     } else {
-        if (room.memory.moveResource === room.memory.production && factory.store.getUsedCapacity(room.memory.production) == 0) {
+        if (factory.store.getUsedCapacity(room.memory.moveResource) == 0 && room.memory.direction === "Out") {
             room.memory.moveResource = null;
         } else if (room.memory.moveResource === RESOURCE_ENERGY && factory.store.getUsedCapacity(RESOURCE_ENERGY) >= 20000) {
             room.memory.moveResource = null;
