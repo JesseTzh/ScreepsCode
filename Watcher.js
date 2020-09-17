@@ -103,6 +103,17 @@ function constructionSiteMonitor() {
                     // 房间内有建筑工地，则允许建造者重生
                     if (constructionSite.length > 0) {
                         builderFlag = "Yes";
+                    } else {
+                        //如果有待修建的城墙等等，也允许重生
+                        const repairConstruction = Game.rooms[roomName].find(FIND_STRUCTURES, {
+                            filter: (structure) => {
+                                return (structure.structureType === STRUCTURE_WALL || structure.structureType === STRUCTURE_RAMPART) &&
+                                    structure.hits / structure.hitsMax <= 0.01;
+                            }
+                        })
+                        if (repairConstruction.length > 0) {
+                            builderFlag = "Yes";
+                        }
                     }
                 }
             }
@@ -150,11 +161,11 @@ function gameStatusReport() {
             if (room.storage) {
                 let storageFreeCapacity = room.storage.store.getFreeCapacity();
                 message += `,Storage剩余容量为[${storageFreeCapacity}]\n`;
-                for (let resource in room.storage.store) {
-                    if (room.storage.store.getUsedCapacity(resource) > 10000) {
-                        message += `  ${resource}储量：${room.storage.store.getUsedCapacity(resource)}\n`;
-                    }
-                }
+                // for (let resource in room.storage.store) {
+                //     if (room.storage.store.getUsedCapacity(resource) > 10000) {
+                //         message += `  ${resource}储量：${room.storage.store.getUsedCapacity(resource)}\n`;
+                //     }
+                // }
             } else {
                 message += `\n`;
             }
@@ -168,7 +179,7 @@ function gameStatusReport() {
 function checkIndustryTask() {
     for (let roomName in CONFIG.DEFAULT_PRODUCTION) {
         const room = Game.rooms[roomName];
-        if(!global.roomData.get(roomName).factory || !room.storage){
+        if (!global.roomData.get(roomName).factory || !room.storage) {
             return;
         }
         let storageEnergy = room.storage.store.getUsedCapacity(RESOURCE_ENERGY);
@@ -195,14 +206,14 @@ function checkWhatResourceNeedMove(room) {
             room.memory.moveResource = RESOURCE_BATTERY;
             room.memory.direction = "Out";
         }
-        //工厂当前能量少于 20000 则搬运进来
-        else if (factory.store.getUsedCapacity(RESOURCE_ENERGY) < 20000) {
-            room.memory.moveResource = RESOURCE_ENERGY;
-            room.memory.direction = "In";
-        }
         //工厂当前生产原材料低于 20000 则搬运进来
         else if (factory.store.getUsedCapacity(Game.getObjectById(room.getMineral()).mineralType) < 20000) {
             room.memory.moveResource = Game.getObjectById(room.getMineral()).mineralType;
+            room.memory.direction = "In";
+        }
+        //工厂当前能量少于 20000 则搬运进来
+        else if (factory.store.getUsedCapacity(RESOURCE_ENERGY) < 20000) {
+            room.memory.moveResource = RESOURCE_ENERGY;
             room.memory.direction = "In";
         }
     } else {
