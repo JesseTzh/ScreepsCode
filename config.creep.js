@@ -61,7 +61,7 @@ module.exports = {
     //Upgrader_E8S26_2: upgrader,
     //Upgrader_E8S26_3: upgrader,
     Upgrader_E7S22_1: upgrader,
-    //Upgrader_E7S22_2: upgrader,
+    Upgrader_E7S22_2: upgrader,
 
     Builder_E6S22: builder,
     Builder_E9S21: builder,

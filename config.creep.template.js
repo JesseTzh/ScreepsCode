@@ -137,7 +137,7 @@ module.exports = {
     // Room 4
     Upgrader_E8S25_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 16], [MOVE, 10], [CARRY, 4]],
+        partsSet: [[WORK, 15], [MOVE, 10], [CARRY, 4]],
         spawnName: "Downtown",
         roomName: "E8S25"
     }),
@@ -188,7 +188,7 @@ module.exports = {
     }),
     Upgrader_E7S22_2: ({
         genMode: "Config",
-        partsSet: [[WORK, 8], [MOVE, 8], [CARRY, 8]],
+        partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]],
         spawnName: "CenterRoom",
         roomName: "E7S22"
     }),
@@ -221,19 +221,19 @@ module.exports = {
         roomName: "E8S25"
     }),
     Builder_E9S23: ({
-        genMode: "Auto",
+        genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "EastGuar",
         roomName: "E9S23"
     }),
     Builder_E8S26: ({
-        genMode: "Auto",
+        genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "SouthGuard",
         roomName: "E8S26"
     }),
     Builder_E7S22: ({
-        genMode: "Auto",
+        genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
         spawnName: "CenterRoom",
         roomName: "E7S22"

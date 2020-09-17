@@ -33,12 +33,12 @@ module.exports.loop = function () {
     //清理内存
     tools.cleanMemory();
 
-    const result = Game.cpu.generatePixel();
+    Game.cpu.generatePixel();
 
-    //logger.info(Game.market.changeOrderPrice('5f316d477e0cdd524ac85843', 0.99))
+    //logger.info(Game.market.changeOrderPrice('5f3d46874e36383791f8bef3', 0.99))
 
 
-    Game.market.cancelOrder('5f3ec6bd6a5bf820303a93f1');
+    Game.market.cancelOrder('5f54deff4b10721584203ceb');
 
     logger.info("---------------------------------------------- 游戏时间: " + Game.time + " | 所用CPU: " + Game.cpu.getUsed().toFixed(2) + "----------------------------------------------")
 }
