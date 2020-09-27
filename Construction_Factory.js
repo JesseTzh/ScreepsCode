@@ -22,14 +22,14 @@ function factoryWork() {
                     production = RESOURCE_BATTERY;
                 }
             } else {
-                logger.info("房间[" + roomName + "]工厂没有足够能量开展生产");
+                logger.debug("房间[" + roomName + "]工厂没有足够能量开展生产");
             }
             room.memory.production = production;
         }
         if (room.memory.production && ((room.memory.production === RESOURCE_BATTERY && Game.time % 11 === 0) || (room.memory.production !== RESOURCE_BATTERY && Game.time % 21 === 0))) {
             const produceResult = factory.produce(Game.rooms[roomName].memory.production);
             if (produceResult === ERR_NOT_ENOUGH_RESOURCES) {
-                logger.info("房间[" + roomName + "]工厂原料消耗完毕");
+                logger.debug("房间[" + roomName + "]工厂原料消耗完毕");
                 room.memory.production = null;
             } else if (produceResult === OK) {
                 logger.info(`房间[${roomName}]工厂正在生产：[${Game.rooms[roomName].memory.production}]`)

@@ -44,7 +44,7 @@ module.exports = ({
                 logger.info(`${creep}拿取结果出错：${actionResult}`);
             }
         } else {
-            logger.info(`[${creep.name}]没有被指派工作目标！`);
+            logger.debug(`[${creep.name}]没有被指派工作目标！`);
         }
     },
     // 存储货物逻辑
@@ -63,7 +63,7 @@ module.exports = ({
                 logger.info(`[${creep.name}]当前被指派搬运物品：${creep.room.memory.moveResource}`);
             }
         } else {
-            logger.info(`[${creep.name}]缺失存储货物目标`);
+            logger.debug(`[${creep.name}]缺失存储货物目标`);
         }
     },
     // 状态切换条件

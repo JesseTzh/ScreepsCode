@@ -1,7 +1,6 @@
 const CONFIG = require('config');
 const logger = require('utils.log').getLogger("Watcher");
 const Observer = require('Construction_Observer');
-const CONFIG_FACTORY = require('config.construction.factory')
 
 function beginWatch() {
     // const cpuUsedBefore = Game.cpu.getUsed();
@@ -169,7 +168,7 @@ function gameStatusReport() {
             } else {
                 message += `\n`;
             }
-            message += `----------------------------------------------------------\n`;
+            //message += `----------------------------------------------------------\n`;
         }
         Game.notify(message);
         logger.info(message);
