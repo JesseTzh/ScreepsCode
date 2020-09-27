@@ -116,79 +116,49 @@ module.exports = {
     // Room 1
     Upgrader_E6S22_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
         spawnName: "ControllerCenter",
         roomName: "E6S22"
     }),
     // Room 2
     Upgrader_E9S21_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
     // Room 3
     Upgrader_E8S23_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
         spawnName: "TheThirdWorld",
         roomName: "E8S23"
     }),
     // Room 4
     Upgrader_E8S25_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 15], [MOVE, 10], [CARRY, 4]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
         spawnName: "Downtown",
         roomName: "E8S25"
     }),
     // Room5
     Upgrader_E9S23_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 12], [MOVE, 8], [CARRY, 4]],
-        spawnName: "EastGuar",
-        roomName: "E9S23"
-    }),
-    Upgrader_E9S23_2: ({
-        genMode: "Config",
-        partsSet: [[WORK, 12], [MOVE, 8], [CARRY, 4]],
-        spawnName: "EastGuar",
-        roomName: "E9S23"
-    }),
-    Upgrader_E9S23_3: ({
-        genMode: "Config",
-        partsSet: [[WORK, 15], [MOVE, 15], [CARRY, 15]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
         spawnName: "EastGuar",
         roomName: "E9S23"
     }),
     // Room6
     Upgrader_E8S26_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 12], [MOVE, 8], [CARRY, 4]],
-        spawnName: "SouthGuard",
-        roomName: "E8S26"
-    }),
-    Upgrader_E8S26_2: ({
-        genMode: "Config",
-        partsSet: [[WORK, 12], [MOVE, 8], [CARRY, 4]],
-        spawnName: "SouthGuard",
-        roomName: "E8S26"
-    }),
-    Upgrader_E8S26_3: ({
-        genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 10], [CARRY, 10]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
         spawnName: "SouthGuard",
         roomName: "E8S26"
     }),
     // Room7
     Upgrader_E7S22_1: ({
         genMode: "Config",
-        partsSet: [[WORK, 8], [MOVE, 8], [CARRY, 8]],
-        spawnName: "CenterRoom",
-        roomName: "E7S22"
-    }),
-    Upgrader_E7S22_2: ({
-        genMode: "Config",
-        partsSet: [[WORK, 6], [MOVE, 6], [CARRY, 6]],
+        partsSet: [[WORK, 15], [MOVE, 9], [CARRY, 3]],
         spawnName: "CenterRoom",
         roomName: "E7S22"
     }),

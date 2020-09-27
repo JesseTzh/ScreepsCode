@@ -1,5 +1,4 @@
 const OUTERWORLD_CONFIG = require('config.outerworld')
-const CONFIG = require('config')
 const harvester = require('Role_Harvester')
 const upgrader = require('Role_Upgrader')
 const builder = require('Role_Builder')
@@ -55,13 +54,8 @@ module.exports = {
     Upgrader_E8S23_1: upgrader,
     Upgrader_E8S25_1: upgrader,
     Upgrader_E9S23_1: upgrader,
-    //Upgrader_E9S23_2: upgrader,
-    //Upgrader_E9S23_3: upgrader,
     Upgrader_E8S26_1: upgrader,
-    //Upgrader_E8S26_2: upgrader,
-    //Upgrader_E8S26_3: upgrader,
     Upgrader_E7S22_1: upgrader,
-    Upgrader_E7S22_2: upgrader,
 
     Builder_E6S22: builder,
     Builder_E9S21: builder,
