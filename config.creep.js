@@ -83,7 +83,7 @@ module.exports = {
     Miner_06: miner,
     Miner_07: miner,
 
-    //Dismantler_01: dismantler({targetId: '5ee80ec2125ddf483806c850', targetRoom: 'E7S25'}),
+    Dismantler_01: dismantler({targetId: '5e958f5d88e08c20c6e180f9', targetRoom: 'E7S21'}),
 
     ResidentDefender_E6S22: guard,
     ResidentDefender_E8S23: guard,
@@ -259,7 +259,7 @@ module.exports = {
      *      参数：
      *          targetRoomName:所要去占领的房间名称
      */
-    //Colonist: colonist({ targetRoomName: "E7S22"}),
+    Colonist: colonist({ targetRoomName: "E7S21"}),
 
 
     // SpecialMover_E9S21: specialMover({

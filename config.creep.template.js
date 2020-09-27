@@ -211,7 +211,7 @@ module.exports = {
 
     Dismantler_01: ({
         genMode: "Config",
-        partsSet: [[TOUGH, 5], [WORK, 20], [MOVE, 25]],
+        partsSet: [[WORK, 20], [MOVE, 20]],
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
@@ -519,7 +519,7 @@ module.exports = {
         roomName: "E9S21"
     }),
 
-    Colonist: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "ThirdCenter", roomName: "E8S23"}),
+    //Colonist: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "ThirdCenter", roomName: "E8S23"}),
 
     Miner_01: ({
         genMode: "Config",
