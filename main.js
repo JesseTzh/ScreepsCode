@@ -35,7 +35,7 @@ module.exports.loop = function () {
 
     Game.cpu.generatePixel();
 
-    //logger.info(Game.market.changeOrderPrice('5f3d46874e36383791f8bef3', 0.99))
+    //logger.info(Game.market.changeOrderPrice('5f7150f28e1216023e8a218b', 0.399))
 
 
     //Game.market.cancelOrder('5f714c748e121681e388bd75');

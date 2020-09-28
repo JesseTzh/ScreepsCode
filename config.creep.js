@@ -41,6 +41,12 @@ module.exports = {
     Harvester_E7S22_0: harvester,
     Harvester_E7S22_1: harvester,
 
+    // Harvester_E5S21_0: harvester,
+    // Harvester_E5S21_1: harvester,
+    //
+    // Harvester_E7S21_0: harvester,
+    // Harvester_E7S21_1: harvester,
+
     Mover_E6S22_2: mover,
     Mover_02: mover,
     Mover_03: mover,
@@ -83,7 +89,7 @@ module.exports = {
     Miner_06: miner,
     Miner_07: miner,
 
-    Dismantler_01: dismantler({targetId: '5e958f5d88e08c20c6e180f9', targetRoom: 'E7S21'}),
+    Dismantler_01: dismantler({targetId: '5e95870f33fce1aad4e62420', targetRoom: 'E7S21'}),
 
     ResidentDefender_E6S22: guard,
     ResidentDefender_E8S23: guard,
@@ -97,7 +103,7 @@ module.exports = {
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
     OuterClaimer_E6S22_1: claimer({
-        targetRoomName: ['E5S22', 'E5S21', 'E6S23'],
+        targetRoomName: ['E5S22', 'E6S23'],
     }),
     // OuterClaimer_E9S21_1: claimer({
     //     targetRoomName: ['E9S22', 'E8S21'],
@@ -174,10 +180,10 @@ module.exports = {
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
     //OuterBuilder_E6S22_1: outbuilder({sourceId: "5eb929deb5f373e902a1d7d7", targetRoomName: "E6S23"}),
-    //OuterBuilder_E6S22_2: outbuilder({sourceId: "5eb929deb5f373e902a1d7d7", targetRoomName: "E5S21"}),
+    OuterBuilder_E6S22_2: outbuilder({sourceId: "5eb929deb5f373e902a1d7d7", targetRoomName: "E5S21"}),
     // OuterBuilder_E6S22_3: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
     // OuterBuilder_E6S22_4: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
-    //OuterBuilder_E9S21_1: outbuilder({sourceId: "", targetRoomName: "E7S22"}),
+    OuterBuilder_E9S21_1: outbuilder({sourceId: "", targetRoomName: "E7S21"}),
     //OuterBuilder_E8S23_1: outbuilder({sourceId: "5ed350c046178209ed85ec18", targetRoomName: "E9S24"}),
     //OuterBuilder_E8S25: outbuilder({sourceId: CONFIG.STORAGE.E8S25, targetRoomName: "E8S26"}),
 
@@ -239,7 +245,7 @@ module.exports = {
      *      参数：
      *          targetRoomName:所要去占领的房间名称
      */
-    //Colonist: colonist({ targetRoomName: "E5S21"}),
+    //Colonist: colonist({ targetRoomName: "E7S21"}),
 
 
     // SpecialMover_E9S21: specialMover({
@@ -278,9 +284,9 @@ module.exports = {
     //     targetAmount: 0
     // }),
 
-    RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
-    RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E5S21"}),
-    RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E5S21"}),
+    //RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
+    //RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E5S21"}),
+    //RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E5S21"}),
     //RemoteUpgrader_E8S25: remoteupgrader({targetRoomName: "E8S26"}),
     //RemoteUpgrader_E8S25_1: remoteupgrader({targetRoomName: "E8S26"}),
 

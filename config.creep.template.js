@@ -108,6 +108,32 @@ module.exports = {
         spawnName: "CenterRoom",
         roomName: "E7S22"
     }),
+    // Room 8
+    Harvester_E5S21_0: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "WildNorth",
+        roomName: "E5S21"
+    }),
+    Harvester_E5S21_1: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "WildNorth",
+        roomName: "E5S21"
+    }),
+    // Room 9
+    Harvester_E7S21_0: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "CenterRoom",
+        roomName: "E7S22"
+    }),
+    Harvester_E7S21_1: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
+        spawnName: "CenterRoom",
+        roomName: "E7S22"
+    }),
 
 
     /**
@@ -347,12 +373,6 @@ module.exports = {
 
     OuterClaimer_E6S22_1: ({
         genMode: "Config",
-        partsSet: [[MOVE, 4], [CLAIM, 4]],
-        spawnName: "Home-Top",
-        roomName: "E6S22"
-    }),
-    OuterClaimer_E6S22_2: ({
-        genMode: "Config",
         partsSet: [[MOVE, 2], [CLAIM, 2]],
         spawnName: "Home-Top",
         roomName: "E6S22"
@@ -404,7 +424,7 @@ module.exports = {
     OuterBuilder_E9S21_1: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
-        spawnName: "NewLand",
+        spawnName: "NewLandController",
         roomName: "E9S21"
     }),
     OuterBuilder_E8S23_1: ({
@@ -495,7 +515,7 @@ module.exports = {
         roomName: "E9S21"
     }),
 
-    Colonist: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "Home", roomName: "E6S22"}),
+    Colonist: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "NewLandController", roomName: "E9S21"}),
 
     Miner_01: ({
         genMode: "Config",

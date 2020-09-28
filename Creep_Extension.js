@@ -157,13 +157,13 @@ const creepExtension = {
             //都没有，则就地采矿
             const target = this.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
             if (target) {
-                logger.info(this.name + "尝试就地取材");
+                logger.debug(this.name + "尝试就地取材");
                 if (this.harvest(target) === ERR_NOT_IN_RANGE) {
                     this.moveTo(target);
                 }
                 return true;
             } else {
-                logger.info(this.name + "在本房间内没有获取能量的方法！");
+                logger.warn(this.name + "在本房间内没有获取能量的方法！");
                 return false;
             }
         }
