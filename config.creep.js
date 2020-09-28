@@ -117,18 +117,6 @@ module.exports = {
      *          targetId:能量储存点
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterHarvester_E5S21_01: outerharvester({
-        sourceId: OUTERWORLD_CONFIG.E5S21[0][0],
-        targetRoomName: "E5S21",
-        targetId: OUTERWORLD_CONFIG.E5S21[0][1],
-        pathFinderPoint: [[49, 21]]
-    }),
-    OuterHarvester_E5S21_02: outerharvester({
-        sourceId: OUTERWORLD_CONFIG.E5S21[1][0],
-        targetRoomName: "E5S21",
-        targetId: OUTERWORLD_CONFIG.E5S21[1][1],
-        pathFinderPoint: [[38, 0]]
-    }),
     OuterHarvester_E5S22: outerharvester({
         sourceId: OUTERWORLD_CONFIG.E5S22[0][0],
         targetRoomName: "E5S22",
@@ -200,14 +188,6 @@ module.exports = {
      *          targetRoomName:所要去的外矿房间名称
      *          targetId:能量存储目标建筑
      */
-    OuterMover_E5S21_1: outmover({
-        sourceId: OUTERWORLD_CONFIG.E5S21[0][1],
-        targetRoomName: "E5S21",
-    }),
-    OuterMover_E5S21_2: outmover({
-        sourceId: OUTERWORLD_CONFIG.E5S21[1][1],
-        targetRoomName: "E5S21",
-    }),
     OuterMover_E5S22: outmover({
         sourceId: OUTERWORLD_CONFIG.E5S22[0][1],
         targetRoomName: "E5S22",
@@ -259,7 +239,7 @@ module.exports = {
      *      参数：
      *          targetRoomName:所要去占领的房间名称
      */
-    Colonist: colonist({ targetRoomName: "E7S21"}),
+    //Colonist: colonist({ targetRoomName: "E5S21"}),
 
 
     // SpecialMover_E9S21: specialMover({
@@ -298,9 +278,9 @@ module.exports = {
     //     targetAmount: 0
     // }),
 
-    //RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
-    // RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E7S22"}),
-    // RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E7S22"}),
+    RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
+    RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E5S21"}),
+    RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E5S21"}),
     //RemoteUpgrader_E8S25: remoteupgrader({targetRoomName: "E8S26"}),
     //RemoteUpgrader_E8S25_1: remoteupgrader({targetRoomName: "E8S26"}),
 

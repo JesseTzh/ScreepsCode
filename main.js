@@ -38,7 +38,7 @@ module.exports.loop = function () {
     //logger.info(Game.market.changeOrderPrice('5f3d46874e36383791f8bef3', 0.99))
 
 
-    Game.market.cancelOrder('5f54deff4b10721584203ceb');
+    //Game.market.cancelOrder('5f714c748e121681e388bd75');
 
     logger.info("---------------------------------------------- 游戏时间: " + Game.time + " | 所用CPU: " + Game.cpu.getUsed().toFixed(2) + "----------------------------------------------")
 }

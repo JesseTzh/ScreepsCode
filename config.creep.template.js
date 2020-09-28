@@ -296,18 +296,6 @@ module.exports = {
     /**
      *   OuterHarvester模板文件
      */
-    OuterHarvester_E5S21_01: ({
-        genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
-        spawnName: "Home-Top",
-        roomName: "E6S22"
-    }),
-    OuterHarvester_E5S21_02: ({
-        genMode: "Config",
-        partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
-        spawnName: "Home-Top",
-        roomName: "E6S22"
-    }),
     OuterHarvester_E5S22: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
@@ -432,18 +420,6 @@ module.exports = {
         roomName: "E8S25"
     }),
 
-    OuterMover_E5S21_1: ({
-        genMode: "Config",
-        partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
-        spawnName: "Home-Top",
-        roomName: "E6S22"
-    }),
-    OuterMover_E5S21_2: ({
-        genMode: "Config",
-        partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
-        spawnName: "Home-Top",
-        roomName: "E6S22"
-    }),
     OuterMover_E5S22: ({
         genMode: "Config",
         partsSet: [[WORK, 1], [MOVE, 11], [CARRY, 21]],
@@ -519,7 +495,7 @@ module.exports = {
         roomName: "E9S21"
     }),
 
-    //Colonist: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "ThirdCenter", roomName: "E8S23"}),
+    Colonist: ({genMode: "Config", partsSet: [[MOVE, 2], [CLAIM, 1]], spawnName: "Home", roomName: "E6S22"}),
 
     Miner_01: ({
         genMode: "Config",
@@ -597,21 +573,21 @@ module.exports = {
 
     RemoteUpgrader: ({
         genMode: "Config",
-        partsSet: [[WORK, 1], [MOVE, 2], [CARRY, 1]],
-        spawnName: "Home",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "Home-Top",
         roomName: "E6S22"
     }),
     RemoteUpgrader_E9S21_1: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
-        spawnName: "NewLandController",
-        roomName: "E9S21"
+        spawnName: "Home-Top",
+        roomName: "E6S22"
     }),
     RemoteUpgrader_E9S21_2: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
-        spawnName: "NewLandController",
-        roomName: "E9S21"
+        spawnName: "Home-Top",
+        roomName: "E6S22"
     }),
     RemoteUpgrader_E8S25: ({
         genMode: "Config",

@@ -157,7 +157,7 @@ const creepExtension = {
             //都没有，则就地采矿
             const target = this.pos.findClosestByRange(FIND_SOURCES_ACTIVE);
             if (target) {
-                logger.debug(this.name + "尝试就地取材");
+                logger.info(this.name + "尝试就地取材");
                 if (this.harvest(target) === ERR_NOT_IN_RANGE) {
                     this.moveTo(target);
                 }
