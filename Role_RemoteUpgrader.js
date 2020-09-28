@@ -16,13 +16,14 @@ module.exports = config => ({
             }
         }
     },
-    // 建造或维修
     target: creep => {
         if (creep.moveToOtherRoom(config.transferRoom, config.targetRoomName)) {
             const controller = creep.room.controller;
-            if (creep.upgradeController(controller) == ERR_NOT_IN_RANGE) {
-                creep.say("💡");
+            const result = creep.upgradeController(controller);
+            if (result === ERR_NOT_IN_RANGE) {
                 creep.moveTo(controller);
+            } else if (result !== OK) {
+                logger.warn(`[${creep.name}]升级控制器失败！错误代码[${result}]`);
             }
         }
     },
