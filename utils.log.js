@@ -30,7 +30,7 @@ class Logger {
 
     _canLog(levelNum) {
         if (levelNum == null) return false;
-        return this.forceControl == true || levelNum >= this.logSettingNum && this.forceControl == null
+        return this.forceControl === true || levelNum >= this.logSettingNum && this.forceControl == null;
     }
 
     _log(level, messages) {
@@ -55,19 +55,24 @@ class Logger {
     }
 
     debug(...message) {
-        this._log("DEBUG", message)
+        this._log("DEBUG", message);
     }
 
     info(...message) {
-        this._log("INFO ", message)
+        this._log("INFO ", message);
     }
 
     warn(...message) {
-        this._log("WARN ", message)
+        this._log("WARN ", message);
     }
 
     error(...message) {
-        this._log("ERROR", message)
+        this._log("ERROR", message);
+    }
+
+    creepLog(creep, action, code) {
+        const message = `${creep}在${creep.room}执行任务[${action}]时出错,错误代码:[${code}]`;
+        this._log("INFO ", message);
     }
 }
 

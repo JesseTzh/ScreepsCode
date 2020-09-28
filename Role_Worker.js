@@ -39,9 +39,9 @@ module.exports = ({
                 creep.moveTo(source);
             } else if (actionResult === ERR_NOT_ENOUGH_RESOURCES) {
                 creep.room.memory.moveResource = null;
-            } else if (actionResult != OK) {
+            } else if (actionResult !== OK) {
                 logger.debug(`\n当前运输物品：${creep.room.memory.moveResource}\n当前Creep携带量：${creep.store.getUsedCapacity(creep.room.memory.moveResource)}\n当前总空间:${creep.store.getCapacity(creep.room.memory.moveResource)}`)
-                logger.info(`${creep}拿取结果出错：${actionResult}`);
+                logger.creepLog(creep, "拿取资源", actionResult);
             }
         } else {
             logger.debug(`[${creep.name}]没有被指派工作目标！`);
@@ -58,7 +58,7 @@ module.exports = ({
             } else if (actionResult === ERR_FULL) {
                 //当工厂存储满后，直接重新筛选要搬运的资源
                 creep.room.memory.moveResource = null;
-            } else if (actionResult != OK) {
+            } else if (actionResult !== OK) {
                 logger.info(`[${creep}]存储结果出错：${actionResult}`);
                 logger.info(`[${creep.name}]当前被指派搬运物品：${creep.room.memory.moveResource}`);
             }
