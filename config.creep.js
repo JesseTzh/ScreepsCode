@@ -41,11 +41,11 @@ module.exports = {
     Harvester_E7S22_0: harvester,
     Harvester_E7S22_1: harvester,
 
-    // Harvester_E5S21_0: harvester,
-    // Harvester_E5S21_1: harvester,
-    //
-    // Harvester_E7S21_0: harvester,
-    // Harvester_E7S21_1: harvester,
+    Harvester_E5S21_0: harvester,
+    Harvester_E5S21_1: harvester,
+
+    Harvester_E7S21_0: harvester,
+    Harvester_E7S21_1: harvester,
 
     Mover_E6S22_2: mover,
     Mover_02: mover,
@@ -72,7 +72,7 @@ module.exports = {
     Builder_E7S22: builder,
 
     Worker_E6S22: worker,
-    Worker_E9S21: worker,
+    //Worker_E9S21: worker,
     Worker_E8S23: worker,
     Worker_E8S25: worker,
     Worker_E9S23: worker,
@@ -89,7 +89,7 @@ module.exports = {
     Miner_06: miner,
     Miner_07: miner,
 
-    Dismantler_01: dismantler({targetId: '5e95870f33fce1aad4e62420', targetRoom: 'E7S21'}),
+    //Dismantler_01: dismantler({targetId: '5e95870f33fce1aad4e62420', targetRoom: 'E7S21'}),
 
     ResidentDefender_E6S22: guard,
     ResidentDefender_E8S23: guard,
@@ -284,11 +284,11 @@ module.exports = {
     //     targetAmount: 0
     // }),
 
-    //RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
-    //RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E5S21"}),
-    //RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E5S21"}),
-    //RemoteUpgrader_E8S25: remoteupgrader({targetRoomName: "E8S26"}),
-    //RemoteUpgrader_E8S25_1: remoteupgrader({targetRoomName: "E8S26"}),
+    RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
+    RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E5S21"}),
+    RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E5S21"}),
+    RemoteUpgrader_E8S25: remoteupgrader({targetRoomName: "E7S21"}),
+    RemoteUpgrader_E8S25_1: remoteupgrader({targetRoomName: "E7S21"}),
 
     //RemoteHarvester_E8S23: remoteHarvester({targetRoomName: "E8S23"}),
     //RemoteHarvester_E8S25: remoteHarvester({targetRoomName: "E8S25"}),

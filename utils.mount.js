@@ -41,7 +41,7 @@ function createOrder() {
 
 function sendJob(){
     logger.info("正在执行传输任务...")
-    Game.rooms['E8S26'].terminal.send(RESOURCE_ENERGY, 50000, 'E9S21');
+    Game.rooms['E6S22'].terminal.send(RESOURCE_ENERGY, 50000, 'E9S21');
 }
 
 module.exports = function () {

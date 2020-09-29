@@ -612,14 +612,14 @@ module.exports = {
     RemoteUpgrader_E8S25: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
-        spawnName: "Downtown",
-        roomName: "E8S25"
+        spawnName: "NewLandController",
+        roomName: "E9S21"
     }),
     RemoteUpgrader_E8S25_1: ({
         genMode: "Config",
         partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
-        spawnName: "DowntownRight",
-        roomName: "E8S25"
+        spawnName: "NewLandController",
+        roomName: "E9S21"
     }),
     RemoteHarvester_E8S23: ({
         genMode: "Config",
