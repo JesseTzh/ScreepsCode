@@ -125,14 +125,14 @@ module.exports = {
     Harvester_E7S21_0: ({
         genMode: "Auto",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
-        spawnName: "CenterRoom",
-        roomName: "E7S22"
+        spawnName: "Spawn1",
+        roomName: "E7S21"
     }),
     Harvester_E7S21_1: ({
         genMode: "Auto",
         partsSet: [[WORK, 10], [MOVE, 6], [CARRY, 2]],
-        spawnName: "CenterRoom",
-        roomName: "E7S22"
+        spawnName: "Spawn1",
+        roomName: "E7S21"
     }),
 
 
@@ -234,6 +234,18 @@ module.exports = {
         spawnName: "CenterRoom",
         roomName: "E7S22"
     }),
+    Builder_E5S21: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "WildNorth",
+        roomName: "E5S21"
+    }),
+    Builder_E7S21: ({
+        genMode: "Auto",
+        partsSet: [[WORK, 10], [MOVE, 20], [CARRY, 10]],
+        spawnName: "Spawn1",
+        roomName: "E7S21"
+    }),
 
     Dismantler_01: ({
         genMode: "Config",
@@ -266,11 +278,23 @@ module.exports = {
         spawnName: "Downtown",
         roomName: "E8S25"
     }),
+    Worker_E8S26: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 1], [CARRY, 2]],
+        spawnName: "SouthGuard",
+        roomName: "E8S26"
+    }),
     Worker_E9S23: ({
         genMode: "Config",
         partsSet: [[MOVE, 1], [CARRY, 2]],
         spawnName: "EastGuar",
         roomName: "E9S23"
+    }),
+    Worker_E7S22: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 1], [CARRY, 2]],
+        spawnName: "CenterRoom",
+        roomName: "E7S22"
     }),
 
     /**

@@ -97,7 +97,7 @@ function constructionSiteMonitor() {
             if (Game.rooms[roomName].storage) {
                 const roomStorageEnergy = Game.rooms[roomName].storage.store.getUsedCapacity(RESOURCE_ENERGY);
                 // 房间 Storage 中储存有能量
-                if (roomStorageEnergy > 1000) {
+                if (roomStorageEnergy > 10000) {
                     const constructionSite = Game.rooms[roomName].find(FIND_MY_CONSTRUCTION_SITES);
                     // 房间内有建筑工地，则允许建造者重生
                     if (constructionSite.length > 0) {
@@ -111,7 +111,7 @@ function constructionSiteMonitor() {
                             }
                         })
                         if (repairConstruction.length > 0) {
-                            builderFlag = "Yes";
+                            //builderFlag = "Yes";
                         }
                     }
                 }
@@ -206,7 +206,7 @@ function checkWhatResourceNeedMove(room) {
             room.memory.direction = "Out";
         }
         //工厂当前生产原材料低于 20000 则搬运进来
-        else if (factory.store.getUsedCapacity(Game.getObjectById(room.getMineral()).mineralType) < 20000) {
+        else if (factory.store.getUsedCapacity(Game.getObjectById(room.getMineral()).mineralType) < 20000 && room.storage.store.getUsedCapacity((Game.getObjectById(room.getMineral()).mineralType)) > 0) {
             room.memory.moveResource = Game.getObjectById(room.getMineral()).mineralType;
             room.memory.direction = "In";
         }

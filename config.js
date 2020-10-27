@@ -3,12 +3,6 @@ module.exports = {
     //所辖Room(已Claim的房间)
     CLAIM_ROOM: ["E6S22", "E9S21", "E8S23", "E8S25", "E9S23", "E8S26", "E7S22", "E7S21", "E5S21"],
 
-    E6S22: ({
-        BUILDER: ['Builder_E6S22'],
-        STORAGE: ['']
-    }),
-
-
     ROOMS_BUILDER: ({
         E6S22: ['Builder_E6S22'],
         E9S21: ['Builder_E9S21'],
@@ -49,5 +43,6 @@ module.exports = {
         E8S23: RESOURCE_REDUCTANT,
         E8S25: RESOURCE_LEMERGIUM_BAR,
         E9S23: RESOURCE_OXIDANT,
+        E7S22: RESOURCE_REDUCTANT,
     }),
 }

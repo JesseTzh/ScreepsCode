@@ -41,7 +41,7 @@ module.exports = ({
                 creep.room.memory.moveResource = null;
             } else if (actionResult !== OK) {
                 logger.debug(`\n当前运输物品：${creep.room.memory.moveResource}\n当前Creep携带量：${creep.store.getUsedCapacity(creep.room.memory.moveResource)}\n当前总空间:${creep.store.getCapacity(creep.room.memory.moveResource)}`)
-                logger.creepLog(creep, "拿取资源", actionResult);
+                //logger.creepLog(creep, "拿取资源", actionResult);
             }
         } else {
             logger.debug(`[${creep.name}]没有被指派工作目标！`);

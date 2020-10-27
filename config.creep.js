@@ -71,12 +71,13 @@ module.exports = {
     Builder_E8S26: builder,
     Builder_E7S22: builder,
 
-    Worker_E6S22: worker,
+    //Worker_E6S22: worker,
     //Worker_E9S21: worker,
     Worker_E8S23: worker,
     Worker_E8S25: worker,
-    Worker_E9S23: worker,
-    //Worker_E8S26: worker,
+    //Worker_E9S23: worker,
+    Worker_E8S26: worker,
+    Worker_E7S22: worker,
 
     /**
      *   Miner配置文件
@@ -91,7 +92,7 @@ module.exports = {
 
     //Dismantler_01: dismantler({targetId: '5e95870f33fce1aad4e62420', targetRoom: 'E7S21'}),
 
-    ResidentDefender_E6S22: guard,
+    //ResidentDefender_E6S22: guard,
     ResidentDefender_E8S23: guard,
     // ResidentDefender_E9S21: guard,
 
@@ -102,9 +103,9 @@ module.exports = {
      *          targetRoomName:Controller所对应房间名称
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterClaimer_E6S22_1: claimer({
-        targetRoomName: ['E5S22', 'E6S23'],
-    }),
+    // OuterClaimer_E6S22_1: claimer({
+    //     targetRoomName: ['E5S22', 'E6S23'],
+    // }),
     // OuterClaimer_E9S21_1: claimer({
     //     targetRoomName: ['E9S22', 'E8S21'],
     // }),
@@ -123,18 +124,18 @@ module.exports = {
      *          targetId:能量储存点
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
-    OuterHarvester_E5S22: outerharvester({
-        sourceId: OUTERWORLD_CONFIG.E5S22[0][0],
-        targetRoomName: "E5S22",
-        targetId: OUTERWORLD_CONFIG.E5S22[0][1],
-        pathFinderPoint: [[38, 0]]
-    }),
-    OuterHarvester_E6S23: outerharvester({
-        sourceId: OUTERWORLD_CONFIG.E6S23[0][0],
-        targetRoomName: "E6S23",
-        targetId: OUTERWORLD_CONFIG.E6S23[0][1],
-        pathFinderPoint: [[38, 0]]
-    }),
+    // OuterHarvester_E5S22: outerharvester({
+    //     sourceId: OUTERWORLD_CONFIG.E5S22[0][0],
+    //     targetRoomName: "E5S22",
+    //     targetId: OUTERWORLD_CONFIG.E5S22[0][1],
+    //     pathFinderPoint: [[38, 0]]
+    // }),
+    // OuterHarvester_E6S23: outerharvester({
+    //     sourceId: OUTERWORLD_CONFIG.E6S23[0][0],
+    //     targetRoomName: "E6S23",
+    //     targetId: OUTERWORLD_CONFIG.E6S23[0][1],
+    //     pathFinderPoint: [[38, 0]]
+    // }),
     OuterHarvester_E8S24: outerharvester({
         sourceId: OUTERWORLD_CONFIG.E8S24[0][0],
         targetRoomName: "E8S24",
@@ -180,10 +181,10 @@ module.exports = {
      *          pathFinderPoint:辅助寻路点位，尚在开发功能
      */
     //OuterBuilder_E6S22_1: outbuilder({sourceId: "5eb929deb5f373e902a1d7d7", targetRoomName: "E6S23"}),
-    OuterBuilder_E6S22_2: outbuilder({sourceId: "5eb929deb5f373e902a1d7d7", targetRoomName: "E5S21"}),
+    //OuterBuilder_E6S22_2: outbuilder({sourceId: "5eb929deb5f373e902a1d7d7", targetRoomName: "E5S21"}),
     // OuterBuilder_E6S22_3: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
     // OuterBuilder_E6S22_4: outbuilder({sourceId: CONFIG.STORAGE.E6S22, targetRoomName: "E5S21"}),
-    OuterBuilder_E9S21_1: outbuilder({sourceId: "", targetRoomName: "E7S21"}),
+    //OuterBuilder_E9S21_1: outbuilder({sourceId: "", targetRoomName: "E7S21"}),
     //OuterBuilder_E8S23_1: outbuilder({sourceId: "5ed350c046178209ed85ec18", targetRoomName: "E9S24"}),
     //OuterBuilder_E8S25: outbuilder({sourceId: CONFIG.STORAGE.E8S25, targetRoomName: "E8S26"}),
 
@@ -194,14 +195,14 @@ module.exports = {
      *          targetRoomName:所要去的外矿房间名称
      *          targetId:能量存储目标建筑
      */
-    OuterMover_E5S22: outmover({
-        sourceId: OUTERWORLD_CONFIG.E5S22[0][1],
-        targetRoomName: "E5S22",
-    }),
-    OuterMover_E6S23: outmover({
-        sourceId: OUTERWORLD_CONFIG.E6S23[0][1],
-        targetRoomName: "E6S23",
-    }),
+    // OuterMover_E5S22: outmover({
+    //     sourceId: OUTERWORLD_CONFIG.E5S22[0][1],
+    //     targetRoomName: "E5S22",
+    // }),
+    // OuterMover_E6S23: outmover({
+    //     sourceId: OUTERWORLD_CONFIG.E6S23[0][1],
+    //     targetRoomName: "E6S23",
+    // }),
     OuterMover_E9S24: outmover({
         sourceId: OUTERWORLD_CONFIG.E9S24[0][1],
         targetRoomName: "E9S24",
@@ -284,11 +285,11 @@ module.exports = {
     //     targetAmount: 0
     // }),
 
-    RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
-    RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E5S21"}),
-    RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E5S21"}),
-    RemoteUpgrader_E8S25: remoteupgrader({targetRoomName: "E7S21"}),
-    RemoteUpgrader_E8S25_1: remoteupgrader({targetRoomName: "E7S21"}),
+    // RemoteUpgrader: remoteupgrader({targetRoomName: "E5S21"}),
+    // RemoteUpgrader_E9S21_1: remoteupgrader({targetRoomName: "E5S21"}),
+    // RemoteUpgrader_E9S21_2: remoteupgrader({targetRoomName: "E5S21"}),
+    // RemoteUpgrader_E8S25: remoteupgrader({targetRoomName: "E7S21"}),
+    // RemoteUpgrader_E8S25_1: remoteupgrader({targetRoomName: "E7S21"}),
 
     //RemoteHarvester_E8S23: remoteHarvester({targetRoomName: "E8S23"}),
     //RemoteHarvester_E8S25: remoteHarvester({targetRoomName: "E8S25"}),

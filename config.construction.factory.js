@@ -27,9 +27,19 @@ module.exports = {
         Production: RESOURCE_LEMERGIUM_BAR,
         Interval: 21
     }),
+    E8S26:({
+        WorkFlag: true,
+        Production: RESOURCE_LEMERGIUM_BAR,
+        Interval: 21
+    }),
     E9S23:({
         WorkFlag: true,
         Production: RESOURCE_LEMERGIUM_BAR,
+        Interval: 21
+    }),
+    E7S22:({
+        WorkFlag: true,
+        Production: RESOURCE_REDUCTANT,
         Interval: 21
     }),
 }

@@ -24,8 +24,7 @@ function towerWork() {
         } else {
             // 检测是否有建筑需要维护
             const repairTargets = Game.rooms[room].find(FIND_STRUCTURES, {
-                filter: (structure) => (structure.hits < structure.hitsMax - 200 && structure.structureType !== STRUCTURE_RAMPART && structure.structureType !== STRUCTURE_WALL) || (structure.structureType === STRUCTURE_RAMPART &&
-                    structure.hits / structure.hitsMax <= SYS_CONFIG.DEFENSE_CONSTRUCTION_HITS_LIMITS)
+                filter: (structure) => (structure.hits < structure.hitsMax - 200 && structure.structureType !== STRUCTURE_RAMPART && structure.structureType !== STRUCTURE_WALL)
             });
             if (repairTargets.length) {
                 towerRepair(room, repairTargets);
