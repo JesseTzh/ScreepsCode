@@ -66,7 +66,7 @@ function defenseOuterRoom() {
 }
 
 function mineMonitor() {
-    for (let roomName of CONFIG.CLAIM_ROOM) {
+    for (let roomName of global.roomArray) {
         if (Game.rooms[roomName].controller.level < 6) {
             logger.debug(`房间[${roomName}]控制等级尚未达到6级,无法挖矿.`);
             continue;
@@ -153,7 +153,7 @@ function observer() {
 function gameStatusReport() {
     if (Game.time % 3000 === 0) {
         let message = "Screeps房间状态检测报告：\n";
-        for (let roomName of CONFIG.CLAIM_ROOM) {
+        for (let roomName of global.roomArray) {
             let room = Game.rooms[roomName];
             let energyStatus = (room.getRatioOfEnergy() * 100).toFixed(2);
             message += `房间[${roomName}]当前能量比例为:${energyStatus}%`;

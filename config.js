@@ -1,8 +1,5 @@
 module.exports = {
 
-    //所辖Room(已Claim的房间)
-    CLAIM_ROOM: ["E6S22", "E9S21", "E8S23", "E8S25", "E9S23", "E8S26", "E7S22", "E7S21", "E5S21"],
-
     ROOMS_BUILDER: ({
         E6S22: ['Builder_E6S22'],
         E9S21: ['Builder_E9S21'],

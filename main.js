@@ -17,7 +17,6 @@ module.exports.loop = function () {
     constructionTower.towerWork();
     constructionLink.linkTransfer();
     constructionFactory.factoryWork();
-    //constructionTerminal.terminalWork();
 
     //Creeps 工作
     for (let name in Game.creeps) {

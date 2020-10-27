@@ -14,7 +14,7 @@ const CONFIG = require('config')
 const SYS_CONFIG = require('config.system.setting');
 
 function linkTransfer() {
-    for (let roomName of CONFIG.CLAIM_ROOM) {
+    for (let roomName of global.roomArray) {
         let room = Game.rooms[roomName];
         if (room.controller.level < 5) {
             logger.debug(`房间[${roomName}]控制等级尚未达到5级,跳过 Link 工作`);

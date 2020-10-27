@@ -3,12 +3,8 @@ const CONFIG = require('config');
 const SYS_CONFIG = require('config.system.setting');
 
 function towerWork() {
-    if (!CONFIG.CLAIM_ROOM) {
-        logger.info("缺少配置文件信息！");
-        return;
-    }
     // 直接遍历房间列表，检测每个房间内是否有需要攻击/维护的目标，避免使用每个 Tower 反复在同一房间内搜索以提升效率
-    for (let room of CONFIG.CLAIM_ROOM) {
+    for (let room of global.roomArray) {
         if (Game.rooms[room].controller.level < 3) {
             logger.debug(`房间[${room}] Controller 等级未达3级，无法建造 Tower`);
             continue;
