@@ -614,6 +614,12 @@ module.exports = {
         spawnName: "SouthGuard",
         roomName: "E8S26"
     }),
+    SpecialMover_E7S22: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 3], [CARRY, 6]],
+        spawnName: "CenterRoom",
+        roomName: "E7S22"
+    }),
 
     RemoteUpgrader: ({
         genMode: "Config",

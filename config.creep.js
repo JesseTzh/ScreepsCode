@@ -72,12 +72,12 @@ module.exports = {
     Builder_E7S22: builder,
 
     //Worker_E6S22: worker,
-    //Worker_E9S21: worker,
+    Worker_E9S21: worker,
     Worker_E8S23: worker,
     Worker_E8S25: worker,
-    //Worker_E9S23: worker,
+    Worker_E9S23: worker,
     Worker_E8S26: worker,
-    Worker_E7S22: worker,
+    //Worker_E7S22: worker,
 
     /**
      *   Miner配置文件
@@ -268,7 +268,7 @@ module.exports = {
     //     targetRoomName: "E8S23",
     //     targetId: "5ee356fc9902b64ce072c67f",
     //     resourceType: RESOURCE_ENERGY,
-    //     targetAmount: 300000
+    //     targetAmount: 200000
     // }),
     // SpecialMover_E8S25: specialMover({
     //     sourceId: "5f06846679f58420cb17ed04",
@@ -281,6 +281,13 @@ module.exports = {
     //     sourceId: "5f34ad65f66708bbb31ab441",
     //     targetRoomName: "E8S26",
     //     targetId: "5f1ef584fa4dc302abc139f7",
+    //     resourceType: RESOURCE_ENERGY,
+    //     targetAmount: 0
+    // }),
+    // SpecialMover_E7S22: specialMover({
+    //     sourceId: "5f396938686881d948e07057",
+    //     targetRoomName: "E7S22",
+    //     targetId: "5f2f37a56d48102379c2d0ee",
     //     resourceType: RESOURCE_ENERGY,
     //     targetAmount: 0
     // }),
