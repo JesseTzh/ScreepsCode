@@ -14,32 +14,4 @@
 
 ### 使用说明
 
-1. 修改 [config.js](./config.js) 文件中为自己的建筑、矿点ID，请注意同时填入自己的房间名。例如
-
-   ```
-   //能量矿点 ID
-   ENERGY_SOURCE: ({
-           房间名: ['矿点ID', '矿点ID']
-       }),
-   ```
-   如是开局状态，仅修改 ENERGY_SOURCE 、SPAWN 、 UPGRADE_ENERGY_SOURCE 即可
-
-2. 在 [config.creep.template.js](./config.creep.template.js) 中将Creep模板配置为适合当前Rcl等级的模板，如刚开局可配置为：
-
-   ```
-   Harvester_01: ({
-           genMode: "Config", 
-           partsSet: [[WORK, 1], [MOVE, 2], [CARRY, 1]],
-           spawnName: "首个基地名称",
-           roomName: "房间名"
-       }),
-   ```
-    开局状态下仅配置 Harvester 以及 Upgrader 即可，Mover 一般在 RCL 4级有 Link 之后再行配置
-
-3. 在 [config.creep.js](./config.creep.js) 文件中根据自己房间的情况调配各Creep工种与工作目标
-
-4. 即刻开始！
-
-### 最后
-
-[Log](./utils.log.js) 模块来自 [PY](https://github.com/zhpjy/screeps)
+本项目已全面转向： [ScreepsBoot](https://github.com/JesseTzh/ScreepsBoot)
