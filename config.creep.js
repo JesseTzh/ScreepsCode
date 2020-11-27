@@ -71,13 +71,13 @@ module.exports = {
     Builder_E8S26: builder,
     Builder_E7S22: builder,
 
-    //Worker_E6S22: worker,
+    Worker_E6S22: worker,
     Worker_E9S21: worker,
     Worker_E8S23: worker,
     Worker_E8S25: worker,
-    Worker_E9S23: worker,
+    //Worker_E9S23: worker,
     Worker_E8S26: worker,
-    //Worker_E7S22: worker,
+    Worker_E7S22: worker,
 
     /**
      *   Miner配置文件
@@ -256,13 +256,13 @@ module.exports = {
     //     resourceType: RESOURCE_BATTERY,
     //     targetAmount: 0
     // }),
-    // SpecialMover_E6S22: specialMover({
-    //     sourceId: "5eb929deb5f373e902a1d7d7",
-    //     targetRoomName: "E6S22",
-    //     targetId: "5ec894626cfcf42a53807c7c",
-    //     resourceType: RESOURCE_ENERGY,
-    //     targetAmount: 0
-    // }),
+    SpecialMover_E6S22: specialMover({
+        sourceId: "5ec894626cfcf42a53807c7c",
+        targetRoomName: "E6S22",
+        targetId: "5eb929deb5f373e902a1d7d7",
+        resourceType: RESOURCE_ENERGY,
+        targetAmount: 0
+    }),
     // SpecialMover_E8S23_1: specialMover({
     //     sourceId: "5ed350c046178209ed85ec18",
     //     targetRoomName: "E8S23",
