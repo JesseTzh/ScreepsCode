@@ -37,18 +37,24 @@ module.exports = config => ({
         }
         //如沿途没有需要维修的 Road，则将能量运回出生房间 Storage
         if (!fixFlag) {
-            const target = Game.rooms[roomName].storage;
-            if (target) {
-                const result = creep.transfer(target, RESOURCE_ENERGY);
-                if (result === ERR_NOT_IN_RANGE) {
-                    creep.say("🔼");
-                    creep.moveTo(target);
-                } else if (result === ERR_FULL) {
-                    //目标储存建筑已满，迫不得已丢弃资源以保持外矿运转
-                    creep.drop(RESOURCE_ENERGY);
-                }
-            } else {
+            let target = Game.rooms[roomName].storage;
+            if (!target) {
                 logger.warn(`[${creep.name}]所在房间[${creep.getTemplateConfig("roomName")}]Storage尚未建好,不建议开启外矿`);
+            } else if (target.store.getFreeCapacity(RESOURCE_ENERGY) === 0) {
+                target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return ((structure.structureType === STRUCTURE_TERMINAL || structure.structureType === STRUCTURE_FACTORY || structure.structureType === STRUCTURE_CONTAINER) &&
+                            structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0);
+                    }
+                });
+            }
+            const result = creep.transfer(target, RESOURCE_ENERGY);
+            if (result === ERR_NOT_IN_RANGE) {
+                creep.say("🔼");
+                creep.moveTo(target);
+            } else if (result === ERR_FULL) {
+                //目标储存建筑已满，迫不得已丢弃资源以保持外矿运转
+                creep.drop(RESOURCE_ENERGY);
             }
         }
     },
