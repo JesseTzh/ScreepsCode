@@ -250,25 +250,25 @@ module.exports = {
 
 
     // SpecialMover_E9S21: specialMover({
-    //     sourceId: CONFIG.FACTORY.E9S21,
+    //     sourceId: "5ee2225ef1339e9ead43a0df",
     //     targetRoomName: "E9S21",
-    //     targetId: CONFIG.TERMINAL.E9S21,
-    //     resourceType: RESOURCE_BATTERY,
+    //     targetId: "5ee892c3288a156cdc35d70c",
+    //     resourceType: RESOURCE_ENERGY,
     //     targetAmount: 0
     // }),
-    SpecialMover_E6S22: specialMover({
-        sourceId: "5ec894626cfcf42a53807c7c",
-        targetRoomName: "E6S22",
-        targetId: "5eb929deb5f373e902a1d7d7",
-        resourceType: RESOURCE_ENERGY,
-        targetAmount: 0
-    }),
+    // SpecialMover_E6S22: specialMover({
+    //     sourceId: "5ec894626cfcf42a53807c7c",
+    //     targetRoomName: "E6S22",
+    //     targetId: "5eb929deb5f373e902a1d7d7",
+    //     resourceType: RESOURCE_ENERGY,
+    //     targetAmount: 0
+    // }),
     // SpecialMover_E8S23_1: specialMover({
     //     sourceId: "5ed350c046178209ed85ec18",
     //     targetRoomName: "E8S23",
     //     targetId: "5ee356fc9902b64ce072c67f",
     //     resourceType: RESOURCE_ENERGY,
-    //     targetAmount: 200000
+    //     targetAmount: 0
     // }),
     // SpecialMover_E8S25: specialMover({
     //     sourceId: "5f06846679f58420cb17ed04",
@@ -278,10 +278,10 @@ module.exports = {
     //     targetAmount: 240000
     // }),
     // SpecialMover_E8S26: specialMover({
-    //     sourceId: "5f34ad65f66708bbb31ab441",
+    //     sourceId: "5f42b7a0f79f66fc9d267fbc",
     //     targetRoomName: "E8S26",
-    //     targetId: "5f1ef584fa4dc302abc139f7",
-    //     resourceType: RESOURCE_ENERGY,
+    //     targetId: "5f34ad65f66708bbb31ab441",
+    //     resourceType: RESOURCE_BATTERY,
     //     targetAmount: 0
     // }),
     // SpecialMover_E7S22: specialMover({
