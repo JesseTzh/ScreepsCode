@@ -590,6 +590,12 @@ module.exports = {
         spawnName: "NewLand",
         roomName: "E9S21"
     }),
+    SpecialMover_E9S23: ({
+        genMode: "Config",
+        partsSet: [[MOVE, 3], [CARRY, 6]],
+        spawnName: "EastGuar",
+        roomName: "E9S23"
+    }),
     SpecialMover_E6S22: ({
         genMode: "Config",
         partsSet: [[MOVE, 3], [CARRY, 6]],

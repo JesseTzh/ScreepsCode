@@ -34,10 +34,10 @@ module.exports.loop = function () {
 
     Game.cpu.generatePixel();
 
-    //Game.market.changeOrderPrice('5f9ea667beecc71d15929aa9', 1.599)
+    //Game.market.changeOrderPrice('5fc11be3282c4d14cf3eacf8', 0.399)
 
 
-    Game.market.cancelOrder('5fc11c38282c4dad9a3ec6fe');
+    //Game.market.cancelOrder('5fc11c38282c4dad9a3ec6fe');
 
     logger.info("---------------------------------------------- 游戏时间: " + Game.time + " | 所用CPU: " + Game.cpu.getUsed().toFixed(2) + "----------------------------------------------")
 }

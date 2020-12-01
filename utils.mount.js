@@ -32,10 +32,10 @@ function createOrder() {
     logger.info("正在创建订单...")
     Game.market.createOrder({
         type: ORDER_SELL,
-        resourceType: RESOURCE_BATTERY,
-        price: 0.999,
-        totalAmount: 118300,
-        roomName: "E9S23"
+        resourceType: RESOURCE_REDUCTANT,
+        price: 2.999,
+        totalAmount: 49246,
+        roomName: "E8S23"
     });
 }
 

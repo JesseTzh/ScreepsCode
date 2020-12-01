@@ -183,7 +183,7 @@ function checkIndustryTask() {
         }
         let storageEnergy = room.storage.store.getUsedCapacity(RESOURCE_ENERGY);
         //冗余能量大于 10000
-        if (storageEnergy > 100000) {
+        if (storageEnergy > 10000) {
             //检测当前需要搬运什么样的物资
             checkWhatResourceNeedMove(room);
         } else {

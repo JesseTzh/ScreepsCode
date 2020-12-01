@@ -71,13 +71,13 @@ module.exports = {
     Builder_E8S26: builder,
     Builder_E7S22: builder,
 
-    Worker_E6S22: worker,
+    //Worker_E6S22: worker,
     Worker_E9S21: worker,
     Worker_E8S23: worker,
-    Worker_E8S25: worker,
+    //Worker_E8S25: worker,
     //Worker_E9S23: worker,
     Worker_E8S26: worker,
-    Worker_E7S22: worker,
+    //Worker_E7S22: worker,
 
     /**
      *   Miner配置文件
@@ -249,11 +249,18 @@ module.exports = {
     //Colonist: colonist({ targetRoomName: "E7S21"}),
 
 
-    // SpecialMover_E9S21: specialMover({
-    //     sourceId: "5ee2225ef1339e9ead43a0df",
-    //     targetRoomName: "E9S21",
-    //     targetId: "5ee892c3288a156cdc35d70c",
-    //     resourceType: RESOURCE_ENERGY,
+    SpecialMover_E9S21: specialMover({
+        sourceId: "5ecb7790b025b52113eef9a2",
+        targetRoomName: "E9S21",
+        targetId: "5ee892c3288a156cdc35d70c",
+        resourceType: RESOURCE_OXYGEN,
+        targetAmount: 0
+    }),
+    // SpecialMover_E9S23: specialMover({
+    //     sourceId: "5f1ab59336cfe1a74a04dffe",
+    //     targetRoomName: "E9S23",
+    //     targetId: "5f28de56d47e0ff987103a24",
+    //     resourceType: RESOURCE_OXIDANT,
     //     targetAmount: 0
     // }),
     // SpecialMover_E6S22: specialMover({
